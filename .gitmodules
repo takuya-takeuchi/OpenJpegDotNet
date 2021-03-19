@@ -1,0 +1,4 @@
+[submodule "src/openjpeg"]
+	path = src/openjpeg
+	url = https://github.com/uclouvain/openjpeg
+        ignore = dirty
