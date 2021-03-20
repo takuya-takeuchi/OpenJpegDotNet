@@ -17,6 +17,39 @@ namespace OpenJpegDotNet
 
         #region Structs
 
+        #region opj_image
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_image_get_x0(IntPtr image);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_image_get_y0(IntPtr image);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_image_get_x1(IntPtr image);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_image_get_y1(IntPtr image);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_image_get_numcomps(IntPtr image);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern ColorSpace openjpeg_openjp2_opj_image_get_color_space(IntPtr image);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern IntPtr openjpeg_openjp2_opj_image_get_comps(IntPtr image);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern IntPtr openjpeg_openjp2_opj_image_get_icc_profile_buf(IntPtr image);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_image_get_icc_profile_len(IntPtr image);
+        
+        #endregion
+
+        #region opj_dparameters_t
+
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern uint openjpeg_openjp2_opj_dparameters_t_get_cp_layer(IntPtr parameters);
 
@@ -108,6 +141,8 @@ namespace OpenJpegDotNet
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern void openjpeg_openjp2_opj_dparameters_t_set_flags(IntPtr parameters, uint value);
+
+        #endregion
 
         #endregion
 
