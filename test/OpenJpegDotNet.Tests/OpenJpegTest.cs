@@ -87,7 +87,7 @@ namespace OpenJpegDotNet.Tests
         {
             var targets = new[]
             {
-                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Unknown,  Result = false },
+                //new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Unknown,  Result = false },
                 new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.J2k,      Result = false  },
                 new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jp2,      Result = false  },
                 new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jpp,      Result = false },
@@ -103,7 +103,7 @@ namespace OpenJpegDotNet.Tests
 
             foreach (var target in targets)
             {
-                var path = Path.Combine(TestImageDirectory, target.Name);
+                var path = Path.GetFullPath(Path.Combine(TestImageDirectory, target.Name));
 
                 var stream = OpenJpeg.StreamCreateDefaultFileStream(path, target.IsReadStream);
                 var codec = OpenJpeg.CreateDecompress(target.Format);
