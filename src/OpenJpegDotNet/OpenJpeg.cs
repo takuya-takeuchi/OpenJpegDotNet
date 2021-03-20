@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
 
 namespace OpenJpegDotNet
@@ -9,7 +8,7 @@ namespace OpenJpegDotNet
     /// <summary>
     /// Provides the methods of OpenJpeg.
     /// </summary>
-    public static partial class OpenJpeg
+    public static class OpenJpeg
     {
 
         #region Methods
@@ -41,17 +40,48 @@ namespace OpenJpegDotNet
 
         #region Codec
 
-        public static Codec CreateCompress(CodecFormat format)
-        {
-            var ptr = NativeMethods.openjpeg_openjp2_opj_create_compress(format);
-            return new Codec(ptr);
-        }
+        #region Decompress
 
         public static Codec CreateDecompress(CodecFormat format)
         {
             var ptr = NativeMethods.openjpeg_openjp2_opj_create_decompress(format);
             return new Codec(ptr);
         }
+
+        public static void SetDefaultDecoderParameters(DecompressionParameters parameters)
+        {
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+            
+            parameters.ThrowIfDisposed();
+
+            NativeMethods.openjpeg_openjp2_opj_set_default_decoder_parameters(parameters.NativePtr);
+        }
+
+        public static bool SetupDecoder(Codec codec, DecompressionParameters parameters)
+        {
+            if (codec == null)
+                throw new ArgumentNullException(nameof(codec));
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
+            codec.ThrowIfDisposed();
+            parameters.ThrowIfDisposed();
+
+            return NativeMethods.openjpeg_openjp2_opj_setup_decoder(codec.NativePtr, parameters.NativePtr);
+        }
+
+        #endregion
+
+        #region Compress
+
+        public static Codec CreateCompress(CodecFormat format)
+        {
+            var ptr = NativeMethods.openjpeg_openjp2_opj_create_compress(format);
+            return new Codec(ptr);
+        }
+
+        #endregion
 
         #endregion
 

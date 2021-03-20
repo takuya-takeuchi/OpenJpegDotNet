@@ -76,6 +76,25 @@ namespace OpenJpegDotNet.Tests
             }
         }
 
+        [Fact]
+        public void SetDefaultDecoderParameters()
+        {
+            var decompressionParameters = new DecompressionParameters();
+            OpenJpeg.SetDefaultDecoderParameters(decompressionParameters);
+            this.DisposeAndCheckDisposedState(decompressionParameters);
+        }
+
+        #endregion
+
+        #region Not Official
+
+        [Fact]
+        public void DecompressionParameters()
+        {
+            var decompressionParameters = new DecompressionParameters();
+            this.DisposeAndCheckDisposedState(decompressionParameters);
+        }
+
         #endregion
 
         [Fact]

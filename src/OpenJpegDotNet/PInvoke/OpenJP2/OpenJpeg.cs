@@ -33,11 +33,39 @@ namespace OpenJpegDotNet
 
         #region Codec
 
+        #region Decompress
+
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern IntPtr openjpeg_openjp2_opj_create_decompress(CodecFormat format);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_destroy_codec(IntPtr p_codec);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_set_default_decoder_parameters(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        [return: MarshalAs(UnmanagedType.U1)]
+        public static extern bool openjpeg_openjp2_opj_setup_decoder(IntPtr p_codec, IntPtr parameters);
+
+        #endregion
+
+        #region Compress
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern IntPtr openjpeg_openjp2_opj_create_compress(CodecFormat format);
+
+        #endregion
+
+        #endregion
+
+        #region Not Official
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern IntPtr openjpeg_openjp2_opj_opj_dparameters_t_new();
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_opj_dparameters_t_delete(IntPtr parameters);
 
         #endregion
 

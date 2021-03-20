@@ -45,9 +45,38 @@ DLLEXPORT const opj_codec_t* openjpeg_openjp2_opj_create_decompress(const CODEC_
     return ::opj_create_decompress(format);
 }
 
+DLLEXPORT void openjpeg_openjp2_opj_destroy_codec(opj_codec_t* p_codec)
+{
+    ::opj_destroy_codec(p_codec);
+}
+
+DLLEXPORT void openjpeg_openjp2_opj_set_default_decoder_parameters(opj_dparameters_t* parameters)
+{
+    ::opj_set_default_decoder_parameters(parameters);
+}
+
+DLLEXPORT const bool openjpeg_openjp2_opj_setup_decoder(opj_codec_t* p_codec,
+                                                        opj_dparameters_t *parameters)
+{
+    return ::opj_setup_decoder(p_codec, parameters) == OPJ_TRUE;
+}
+
+/* COMPRESSION FUNCTIONS*/
+
 DLLEXPORT const opj_codec_t* openjpeg_openjp2_opj_create_compress(const CODEC_FORMAT format)
 {
     return ::opj_create_compress(format);
+}
+
+/* NOT OFFICIAL FUNCTIONS */
+DLLEXPORT const opj_dparameters_t* openjpeg_openjp2_opj_opj_dparameters_t_new()
+{
+    return new opj_dparameters_t();
+}
+
+DLLEXPORT void openjpeg_openjp2_opj_opj_dparameters_t_delete(opj_dparameters_t* parameters)
+{
+    delete parameters;
 }
 
 #endif // _CPP_OPENJPEG_OPENJP2_OPENJPEG_H_
