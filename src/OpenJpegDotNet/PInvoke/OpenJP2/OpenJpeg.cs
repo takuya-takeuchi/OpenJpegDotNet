@@ -15,6 +15,102 @@ namespace OpenJpegDotNet
     internal sealed partial class NativeMethods
     {
 
+        #region Structs
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_cp_layer(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_cp_layer(IntPtr parameters, uint value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_cp_reduce(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_cp_reduce(IntPtr parameters, uint value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern int openjpeg_openjp2_opj_dparameters_t_get_cod_format(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_cod_format(IntPtr parameters, int value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern int openjpeg_openjp2_opj_dparameters_t_get_decod_format(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_decod_format(IntPtr parameters, int value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern int openjpeg_openjp2_opj_dparameters_t_get_jpwl_exp_comps(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_jpwl_exp_comps(IntPtr parameters, int value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern int openjpeg_openjp2_opj_dparameters_t_get_jpwl_max_tiles(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_jpwl_max_tiles(IntPtr parameters, int value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        [return: MarshalAs(UnmanagedType.U1)]
+        public static extern bool openjpeg_openjp2_opj_dparameters_t_get_jpwl_correct(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_jpwl_correct(IntPtr parameters, bool value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        [return: MarshalAs(UnmanagedType.U1)]
+        public static extern bool openjpeg_openjp2_opj_dparameters_t_get_m_verbose(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_m_verbose(IntPtr parameters, bool value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_DA_x0(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_DA_x0(IntPtr parameters, uint value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_DA_x1(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_DA_x1(IntPtr parameters, uint value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_DA_y0(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_DA_y0(IntPtr parameters, uint value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_DA_y1(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_DA_y1(IntPtr parameters, uint value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_nb_tile_to_decode(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_nb_tile_to_decode(IntPtr parameters, uint value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_tile_index(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_tile_index(IntPtr parameters, uint value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_flags(IntPtr parameters);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_flags(IntPtr parameters, uint value);
+
+        #endregion
+
         #region Version
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]

@@ -26,13 +26,15 @@ namespace OpenJpegDotNet
 
             GeneralFileIOError      = -(GeneralError | 0x00000001),
 
-            GeneralFileImageLoad    = -(GeneralError | 0x00000002),
+            #endregion
 
-            GeneralSerialization    = -(GeneralError | 0x00000003),
+            #region Image
 
-            GeneralInvalidParameter = -(GeneralError | 0x00000004),
+            ImageError = 0x77000000,
 
-            GeneralNotSupport       = -(GeneralError | 0x00000005),
+            ImageFileInvalid        = -(ImageError | 0x00000001),
+
+            ImageFileWrongExtension = -(ImageError | 0x00000002)
 
             #endregion
 

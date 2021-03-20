@@ -87,12 +87,12 @@ namespace OpenJpegDotNet.Tests
         {
             var targets = new[]
             {
-                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Unknown, Result = false },
-                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.J2k,     Result = false  },
-                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jp2,     Result = false  },
-                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jpp,     Result = false },
-                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jpt,     Result = false },
-                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jpx,     Result = false },
+                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Unknown,  Result = false },
+                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.J2k,      Result = false  },
+                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jp2,      Result = false  },
+                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jpp,      Result = false },
+                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jpt,      Result = false },
+                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jpx,      Result = false },
                 new { Name = "Bretagne1_0.j2k", IsReadStream = false, Format = CodecFormat.Unknown, Result = false },
                 new { Name = "Bretagne1_0.j2k", IsReadStream = false, Format = CodecFormat.J2k,     Result = false  },
                 new { Name = "Bretagne1_0.j2k", IsReadStream = false, Format = CodecFormat.Jp2,     Result = false  },
@@ -105,11 +105,11 @@ namespace OpenJpegDotNet.Tests
             {
                 var path = Path.Combine(TestImageDirectory, target.Name);
 
+                var stream = OpenJpeg.StreamCreateDefaultFileStream(path, target.IsReadStream);
                 var codec = OpenJpeg.CreateDecompress(target.Format);
                 var decompressionParameters = new DecompressionParameters();
                 OpenJpeg.SetDefaultDecoderParameters(decompressionParameters);
-                var stream = OpenJpeg.StreamCreateDefaultFileStream(path, target.IsReadStream);
-                OpenJpeg.SetupDecoder(codec, decompressionParameters);
+                var ret = OpenJpeg.SetupDecoder(codec, decompressionParameters);
                 Assert.True(OpenJpeg.ReadHeader(stream, codec, out var image) == target.Result, $"Failed to invoke {nameof(OpenJpeg.ReadHeader)} for {target.Format} and {target.IsReadStream}");
                 
                 this.DisposeAndCheckDisposedState(image);
