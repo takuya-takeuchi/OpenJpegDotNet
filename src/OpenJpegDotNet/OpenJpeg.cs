@@ -48,6 +48,35 @@ namespace OpenJpegDotNet
             return new Codec(ptr);
         }
 
+        public static bool Decode(Codec codec, Stream stream, Image image)
+        {
+            if (codec == null)
+                throw new ArgumentNullException(nameof(codec));
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
+            if (image == null)
+                throw new ArgumentNullException(nameof(image));
+
+            codec.ThrowIfDisposed();
+            stream.ThrowIfDisposed();
+            image.ThrowIfDisposed();
+
+            return NativeMethods.openjpeg_openjp2_opj_decode(codec.NativePtr, stream.NativePtr, image.NativePtr);
+        }
+
+        public static bool EndDecompress(Codec codec, Stream stream)
+        {
+            if (codec == null)
+                throw new ArgumentNullException(nameof(codec));
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
+
+            codec.ThrowIfDisposed();
+            stream.ThrowIfDisposed();
+
+            return NativeMethods.openjpeg_openjp2_opj_end_decompress(codec.NativePtr, stream.NativePtr);
+        }
+
         public static bool ReadHeader(Stream stream, Codec codec, out Image image)
         {
             if (stream == null)
@@ -61,6 +90,24 @@ namespace OpenJpegDotNet
             var ret = NativeMethods.openjpeg_openjp2_opj_read_header(stream.NativePtr, codec.NativePtr, out var pImage);
             image = ret ? new Image(pImage) : null;
             return ret;
+        }
+
+        public static bool SetDecodeArea(Codec codec, Image image, uint left, uint top, uint right, uint bottom)
+        {
+            if (codec == null)
+                throw new ArgumentNullException(nameof(codec));
+            if (image == null)
+                throw new ArgumentNullException(nameof(image));
+
+            codec.ThrowIfDisposed();
+            image.ThrowIfDisposed();
+
+            return NativeMethods.openjpeg_openjp2_opj_set_decode_area(codec.NativePtr,
+                                                                      image.NativePtr,
+                                                                      left,
+                                                                      top,
+                                                                      right,
+                                                                      bottom);
         }
 
         public static void SetDefaultDecoderParameters(DecompressionParameters parameters)

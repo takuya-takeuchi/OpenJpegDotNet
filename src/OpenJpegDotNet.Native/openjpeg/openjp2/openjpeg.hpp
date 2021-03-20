@@ -258,6 +258,12 @@ DLLEXPORT void openjpeg_openjp2_opj_destroy_codec(opj_codec_t* p_codec)
     ::opj_destroy_codec(p_codec);
 }
 
+DLLEXPORT const bool openjpeg_openjp2_opj_end_decompress(opj_codec_t *p_codec,
+                                                         opj_stream_t *p_stream)
+{
+    return ::opj_end_decompress(p_codec, p_stream) == OPJ_TRUE;
+}
+
 DLLEXPORT void openjpeg_openjp2_opj_set_default_decoder_parameters(opj_dparameters_t* parameters)
 {
     ::opj_set_default_decoder_parameters(parameters);
@@ -274,6 +280,23 @@ DLLEXPORT const bool openjpeg_openjp2_opj_read_header(opj_stream_t *p_stream,
                                                       opj_image_t **p_image)
 {
     return ::opj_read_header(p_stream, p_codec, p_image) == OPJ_TRUE;
+}
+
+DLLEXPORT const bool openjpeg_openjp2_opj_set_decode_area(opj_codec_t *p_codec,
+                                                          opj_image_t *p_image,
+                                                          OPJ_INT32 p_start_x,
+                                                          OPJ_INT32 p_start_y,
+                                                          OPJ_INT32 p_end_x,
+                                                          OPJ_INT32 p_end_y)
+{
+    return ::opj_set_decode_area(p_codec, p_image, p_start_x, p_start_y, p_end_x, p_end_y) == OPJ_TRUE;
+}
+
+DLLEXPORT const bool openjpeg_openjp2_opj_decode(opj_codec_t *p_codec,
+                                                 opj_stream_t *p_stream,
+                                                 opj_image_t *p_image)
+{
+    return ::opj_decode(p_codec, p_stream, p_image) == OPJ_TRUE;
 }
 
 /* COMPRESSION FUNCTIONS*/

@@ -183,6 +183,10 @@ namespace OpenJpegDotNet
         public static extern void openjpeg_openjp2_opj_destroy_codec(IntPtr p_codec);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        [return: MarshalAs(UnmanagedType.U1)]
+        public static extern bool openjpeg_openjp2_opj_end_decompress(IntPtr p_codec, IntPtr p_stream);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern void openjpeg_openjp2_opj_set_default_decoder_parameters(IntPtr parameters);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
@@ -192,7 +196,22 @@ namespace OpenJpegDotNet
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         [return: MarshalAs(UnmanagedType.U1)]
         public static extern bool openjpeg_openjp2_opj_read_header(IntPtr p_stream, IntPtr p_codec, out IntPtr p_image);
-        
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        [return: MarshalAs(UnmanagedType.U1)]
+        public static extern bool openjpeg_openjp2_opj_set_decode_area(IntPtr p_codec,
+                                                                       IntPtr p_image,
+                                                                       uint p_start_x,
+                                                                       uint p_start_y,
+                                                                       uint p_end_x,
+                                                                       uint p_end_y);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        [return: MarshalAs(UnmanagedType.U1)]
+        public static extern bool openjpeg_openjp2_opj_decode(IntPtr p_codec,
+                                                              IntPtr p_stream,
+                                                              IntPtr p_image);
+
         #endregion
 
         #region Compress

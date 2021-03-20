@@ -408,6 +408,7 @@ class ThirdPartyBuilder
          -D CMAKE_INSTALL_PREFIX:path=`"${installDir}`" `
          -D CMAKE_LIBRARY_PATH:path=`"${installDir}`" `
          -D CMAKE_INCLUDE_PATH:path=`"${installDir}/include`" `
+         -D BUILD_THIRDPARTY:bool=on `
          `"$openjpegDir`"" -ForegroundColor Yellow
             cmake -G "${VS}" -A ${VSARC} -T host=x64 `
                   -D BUILD_SHARED_LIBS:bool=off `
@@ -415,6 +416,7 @@ class ThirdPartyBuilder
                   -D CMAKE_INSTALL_PREFIX:path="${installDir}" `
                   -D CMAKE_LIBRARY_PATH:path="${installDir}" `
                   -D CMAKE_INCLUDE_PATH:path="${installDir}/include" `
+                  -D BUILD_THIRDPARTY:bool=on `
                   "${openjpegDir}"
             Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
             cmake --build . --config ${buildConfig}
@@ -430,6 +432,7 @@ class ThirdPartyBuilder
             -D CMAKE_LIBRARY_PATH:path=`"${installDir}`" `
             -D CMAKE_INCLUDE_PATH:path=`"${installDir}/include`" `
             -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=true `
+            -D BUILD_THIRDPARTY:bool=on `
             `"$openjpegDir`"" -ForegroundColor Yellow
                cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
                      -D BUILD_SHARED_LIBS:bool=off `
@@ -438,6 +441,7 @@ class ThirdPartyBuilder
                      -D CMAKE_LIBRARY_PATH:path="${installDir}" `
                      -D CMAKE_INCLUDE_PATH:path="${installDir}/include" `
                      -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=true `
+                     -D BUILD_THIRDPARTY:bool=on `
                      "${openjpegDir}"
                Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
                cmake --build . --config ${buildConfig}
