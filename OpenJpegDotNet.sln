@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.6.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1A80AC75-26EA-45C0-995E-70CD82BD6621}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CB5A1093-2B9F-4195-941D-1BBAC686886A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenJpegDotNet", "src\OpenJpegDotNet\OpenJpegDotNet.csproj", "{2892CB9C-FDFA-48B9-B330-9A4FA3AAA475}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenJpegDotNet.Tests", "test\OpenJpegDotNet.Tests\OpenJpegDotNet.Tests.csproj", "{282805A8-0D69-48F1-91BC-471F88B331BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2892CB9C-FDFA-48B9-B330-9A4FA3AAA475}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{2892CB9C-FDFA-48B9-B330-9A4FA3AAA475}.Debug|x64.ActiveCfg = Debug|x64
+		{2892CB9C-FDFA-48B9-B330-9A4FA3AAA475}.Debug|x64.Build.0 = Debug|x64
+		{2892CB9C-FDFA-48B9-B330-9A4FA3AAA475}.Debug|x86.ActiveCfg = Debug|x86
+		{2892CB9C-FDFA-48B9-B330-9A4FA3AAA475}.Debug|x86.Build.0 = Debug|x86
+		{2892CB9C-FDFA-48B9-B330-9A4FA3AAA475}.Release|Any CPU.ActiveCfg = Release|x86
+		{2892CB9C-FDFA-48B9-B330-9A4FA3AAA475}.Release|x64.ActiveCfg = Release|x64
+		{2892CB9C-FDFA-48B9-B330-9A4FA3AAA475}.Release|x64.Build.0 = Release|x64
+		{2892CB9C-FDFA-48B9-B330-9A4FA3AAA475}.Release|x86.ActiveCfg = Release|x86
+		{2892CB9C-FDFA-48B9-B330-9A4FA3AAA475}.Release|x86.Build.0 = Release|x86
+		{282805A8-0D69-48F1-91BC-471F88B331BB}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{282805A8-0D69-48F1-91BC-471F88B331BB}.Debug|x64.ActiveCfg = Debug|x64
+		{282805A8-0D69-48F1-91BC-471F88B331BB}.Debug|x64.Build.0 = Debug|x64
+		{282805A8-0D69-48F1-91BC-471F88B331BB}.Debug|x86.ActiveCfg = Debug|x86
+		{282805A8-0D69-48F1-91BC-471F88B331BB}.Debug|x86.Build.0 = Debug|x86
+		{282805A8-0D69-48F1-91BC-471F88B331BB}.Release|Any CPU.ActiveCfg = Release|x86
+		{282805A8-0D69-48F1-91BC-471F88B331BB}.Release|x64.ActiveCfg = Release|x64
+		{282805A8-0D69-48F1-91BC-471F88B331BB}.Release|x64.Build.0 = Release|x64
+		{282805A8-0D69-48F1-91BC-471F88B331BB}.Release|x86.ActiveCfg = Release|x86
+		{282805A8-0D69-48F1-91BC-471F88B331BB}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2892CB9C-FDFA-48B9-B330-9A4FA3AAA475} = {1A80AC75-26EA-45C0-995E-70CD82BD6621}
+		{282805A8-0D69-48F1-91BC-471F88B331BB} = {CB5A1093-2B9F-4195-941D-1BBAC686886A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D4D2EA27-AAFB-4E11-AA69-F87632AE26C1}
+	EndGlobalSection
+EndGlobal

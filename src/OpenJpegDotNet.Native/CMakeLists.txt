@@ -1,10 +1,8 @@
-cmake_minimum_required(VERSION 3.12.2)
+cmake_minimum_required(VERSION 3.0.0)
 cmake_policy(SET CMP0053 NEW)
 cmake_policy(SET CMP0054 NEW)
 
 set(PROJ_NAME OpenJpegDotNetNative)
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # It means that CMakeLists.txt version rather than library version
 project(${PROJ_NAME} VERSION 1.0.0)
@@ -27,7 +25,7 @@ message("-------------------------------------------------------")
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 0)
 set(VERSION_PATCH 1)
-set(VERSION_DATE 20210212)
+set(VERSION_DATE 20210302)
 
 # Only GCC requires -fPIC
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
@@ -69,20 +67,22 @@ if (${CMAKE_GENERATOR} MATCHES "Visual Studio")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
 endif()
 
-
-# openjij project submodule 
-set(OPENJIJ_IN_PROJECT_BUILD True)
-
-include(${PROJECT_SOURCE_DIR}/../openjpeg/external/eigen.cmake)
-include(${PROJECT_SOURCE_DIR}/../openjpeg/external/json.cmake)
+# openjpeg project submodule
+find_package (OpenJPEG REQUIRED)
 
 # create config file
 configure_file(
-    ${PROJECT_SOURCE_DIR}/openjij/config.hpp.in
-    ${PROJECT_SOURCE_DIR}/openjij/config.hpp
+    ${PROJECT_SOURCE_DIR}/openjpeg/config.hpp.in
+    ${PROJECT_SOURCE_DIR}/openjpeg/config.hpp
     @ONLY)
 
-FILE(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/openjij/*.cpp)
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/version.rc.in
+    ${CMAKE_CURRENT_BINARY_DIR}/version.rc
+    @ONLY)
+
+FILE(GLOB_RECURSE HEADERS ${PROJECT_SOURCE_DIR}/openjpeg/*.h)
+FILE(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/openjpeg/*.cpp)
 
 OPTION(ENABLE_NEON "Enable ARM NEON" OFF)
 if (${ENABLE_NEON})
@@ -92,57 +92,33 @@ if (${ENABLE_NEON})
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fprofile-use -D ENABLE_NEON")
 endif()
 
-if (${OPENJIJ_USE_CUDA})
-    configure_file(
-        ${CMAKE_CURRENT_SOURCE_DIR}/version-cuda.rc.in
-        ${CMAKE_CURRENT_BINARY_DIR}/version-cuda.rc
-        @ONLY)
-
-    # disable cuda static link
-    set(CUDA_USE_STATIC_CUDA_RUNTIME OFF)
-
-    # include CUDA Runtime Library
-    if (MSVC OR MSYS OR MINGW)
-        include_directories("$ENV{CUDA_PATH}/include"
-                            ${PROJECT_SOURCE_DIR}/../openjpeg/src
-                            ${CMAKE_CURRENT_BINARY_DIR}/_deps/eigen-src
-                            ${PROJECT_SOURCE_DIR}/../openjpeg/external/nlohmann_json)
-    elseif(APPLE)
-        include_directories("$ENV{CUDA_PATH}/include"
-                            ${PROJECT_SOURCE_DIR}/../openjpeg/src
-                            ${CMAKE_CURRENT_BINARY_DIR}/_deps/eigen-src
-                            ${PROJECT_SOURCE_DIR}/../openjpeg/external/nlohmann_json)
-    elseif(UNIX AND NOT APPLE)
-        include_directories("$ENV{CUDA_PATH}/include"
-                            ${PROJECT_SOURCE_DIR}/../openjpeg/src
-                            ${CMAKE_CURRENT_BINARY_DIR}/_deps/eigen-src
-                            ${PROJECT_SOURCE_DIR}/../openjpeg/external/nlohmann_json)
-    else()
-        message(FATAL_ERROR "Failed to link CUDA Runtime Library")
-    endif()
-
-    add_library(${PROJ_NAME} SHARED ${SOURCES}
-                                    ${CMAKE_CURRENT_BINARY_DIR}/version-cuda.rc)
+if ("${CMAKE_SYSTEM_NAME}" STREQUAL "iOS")
+    add_library(${PROJ_NAME} ${HEADERS}
+                             ${SOURCES}
+                             ${CMAKE_CURRENT_BINARY_DIR}/version.rc)
 else()
-    configure_file(
-        ${CMAKE_CURRENT_SOURCE_DIR}/version.rc.in
-        ${CMAKE_CURRENT_BINARY_DIR}/version.rc
-        @ONLY)
-
-    include_directories(${PROJECT_SOURCE_DIR}/../openjpeg/src
-                        ${CMAKE_CURRENT_BINARY_DIR}/_deps/eigen-src
-                        ${PROJECT_SOURCE_DIR}/../openjpeg/external/nlohmann_json)
-
-    if ("${CMAKE_SYSTEM_NAME}" STREQUAL "iOS")
-        add_library(${PROJ_NAME} ${SOURCES}
-                                 ${CMAKE_CURRENT_BINARY_DIR}/version.rc)
-    else()
-        add_library(${PROJ_NAME} SHARED ${SOURCES}
-                                        ${CMAKE_CURRENT_BINARY_DIR}/version.rc)
-    endif()
+    add_library(${PROJ_NAME} SHARED ${HEADERS}
+                                    ${SOURCES}
+                                    ${CMAKE_CURRENT_BINARY_DIR}/version.rc)
 endif()
 
-target_link_libraries(${PROJ_NAME})
+include_directories("$ENV{OpenJPEG_DIR}/include")
+
+if (MSVC OR MSYS OR MINGW)
+    list(APPEND STATIC_LIBRARIES
+        $ENV{OpenJPEG_DIR}/lib/openjp2.lib
+    )
+elseif(APPLE)
+    list(APPEND STATIC_LIBRARIES
+        $ENV{OpenJPEG_DIR}/lib/libopenjp2.a
+    )
+elseif(UNIX AND NOT APPLE)
+    list(APPEND STATIC_LIBRARIES
+        $ENV{OpenJPEG_DIR}/lib/libopenjp2.a
+    )
+endif()
+
+target_link_libraries(${PROJ_NAME} ${STATIC_LIBRARIES})
 
 set(CompilerFlags
     CMAKE_CXX_FLAGS

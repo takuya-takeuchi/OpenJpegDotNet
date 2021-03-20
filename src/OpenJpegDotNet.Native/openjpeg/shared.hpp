@@ -1,6 +1,9 @@
 #ifndef _CPP_SHARED_H_
 #define _CPP_SHARED_H_
 
+#define OPJ_STATIC
+#include <openjpeg-2.4/openjpeg.h>
+
 #include <cstdint>
 
 enum struct float_types : int32_t
@@ -8,33 +11,6 @@ enum struct float_types : int32_t
     Float = 0,
     Double,
 };
-
-enum struct graph_types : int32_t
-{
-    Dense = 0,
-    Sparse,
-};
-
-enum struct ising_types : int32_t
-{
-    Classical = 0,
-    ContinuousTime,
-    Transverse
-};
-
-enum struct schedule_list_types : int32_t
-{
-    Classical = 0,
-    Transverse
-};
-
-enum struct updater_types : int32_t
-{
-    SingleSpinFlip = 0,
-    SwendsenWang,
-    ContinuousTimeSwendsenWang,
-};
-
 
 #define ERR_OK                                                            0x00000000
 

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>OpenJpegDotNet</id>
+    <version>0.0.1.20210212</version>
+    <title>OpenJpegDotNet</title>
+    <authors>Takuya Takeuchi</authors>
+    <owners>Takuya Takeuchi</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="file">LICENSE.txt</license>
+    <projectUrl>https://github.com/takuya-takeuchi/OpenJpegDotNet</projectUrl>
+    <icon>images\jpeg128.png</icon>
+    <description>openjpeg wrapper library written in C++ and C# for Windows, MacOS and Linux</description>
+    <releaseNotes></releaseNotes>
+    <copyright>© Takuya Takeuchi 2021</copyright>
+    <tags>openjpeg .net jpeg2000</tags>
+    <serviceable>true</serviceable>
+  </metadata>
+  
+  <files>
+    <file src="..\jpeg128.png" target="images\" />
+    <file src="build\OpenJpegDotNet.Native.props" target="build\OpenJpegDotNet.props" />
+    <!-- allows the 'OpenJpegDotNet' package to read runtimes\** folder -->
+    <file src="build\OpenJpegDotNet.targets" target="build\OpenJpegDotNet.targets" />
+    <!-- cross-targetting via compile-time references -->
+    <file src="ref\**\*" target="ref" />
+    <file src="..\artifacts\cpu\runtimes\**\*" target="runtimes" />
+
+    <file src="..\..\src\OpenJpegDotNet\bin\Release\netstandard2.0\OpenJpegDotNet.dll" target="lib\netstandard2.0" />
+
+    <file src="..\artifacts\cpu\runtimes\win-x64\native\OpenJpegDotNetNative.dll" target="runtimes\win-x64\native\OpenJpegDotNetNative.dll" />
+    <file src="..\artifacts\cpu\runtimes\win-x86\native\OpenJpegDotNetNative.dll" target="runtimes\win-x86\native\OpenJpegDotNetNative.dll" />
+    <file src="..\artifacts\cpu\runtimes\linux-x64\native\libOpenJpegDotNetNative.so" target="runtimes\linux-x64\native\libOpenJpegDotNetNative.so" />
+    <file src="..\artifacts\cpu\runtimes\osx-x64\native\libOpenJpegDotNetNative.dylib" target="runtimes\osx-x64\native\libOpenJpegDotNetNative.dylib" />
+
+    <!-- license -->
+    <file src="..\..\LICENSE.txt" target="" />
+    <file src="..\..\licenses\openjpeg" target="licenses\OpenJpeg" />
+  </files>
+
+</package>

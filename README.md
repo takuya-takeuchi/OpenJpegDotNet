@@ -1,21 +1,21 @@
-# ![Alt text](nuget/quantum48.png "OpenJijDotNet") OpenJijDotNet [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
+# ![Alt text](nuget/jpeg48.png "OpenJpegDotNet") OpenJpegDotNet [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
-OpenJij wrapper written in C++ and C# for Windows, MacOS and Linux
+OpenJpeg wrapper written in C++ and C# for Windows, MacOS and Linux
 
-#### OpenJijDotNet
+#### OpenJpegDotNet
 
 |Package|OS|x86|x64|ARM|ARM64|Nuget|
 |---|---|---|---|---|---|---|
-|OpenJijDotNet (CPU)|Windows|✓|✓|-|-|[![NuGet version](https://img.shields.io/nuget/v/OpenJijDotNet.svg)](https://www.nuget.org/packages/OpenJijDotNet)|
-||Linux|-|✓|-|-|[![NuGet version](https://img.shields.io/nuget/v/OpenJijDotNet.svg)](https://www.nuget.org/packages/OpenJijDotNet)|
-||OSX|-|✓|-|-|[![NuGet version](https://img.shields.io/nuget/v/OpenJijDotNet.svg)](https://www.nuget.org/packages/OpenJijDotNet)|
+|OpenJpegDotNet|Windows|✓|✓|-|-|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.svg)](https://www.nuget.org/packages/OpenJpegDotNet)|
+||Linux|-|✓|-|-|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.svg)](https://www.nuget.org/packages/OpenJpegDotNet)|
+||OSX|-|✓|-|-|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.svg)](https://www.nuget.org/packages/OpenJpegDotNet)|
  
 ## Dependencies Libraries and Products
 
-#### [OpenJij](https://github.com/OpenJij/OpenJij)
+#### [OpenJpeg](https://github.com/OpenJpeg/OpenJpeg)
 
-> **License:** Apache-2.0 License
+> **License:** BSD 2-clause "Simplified" License
 >
-> **Author:** OpenJij
+> **Author:** Université de Louvain
 > 
-> **Principal Use:** Framework for the Ising model and QUBO. Main goal of OpenJijDotNet is what wraps OpenJij by C#.
+> **Principal Use:** An open-source JPEG 2000 codec written in C language. Main goal of OpenJpegDotNet is what wraps OpenJpeg by C#.

@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Takuya Takeuchi</Authors>
+    <Description>.NET wrapper for OpenJpeg written in C#</Description>
+    <Company />
+    <Copyright>© Takuya Takeuchi 2021</Copyright>
+    <Configurations>Debug;Release</Configurations>
+    <Version>0.0.1</Version>
+    <RepositoryUrl>https://github.com/takuya-takeuchi/OpenJpegDotNet</RepositoryUrl>
+    <PackageTags>openjpeg .net quantum-mechanics quantum-computing simulated-annealing quantum-annealing</PackageTags>
+    <PackageLicenseUrl></PackageLicenseUrl>
+  
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  
+    <Platforms>x64;x86</Platforms>
+  </PropertyGroup>
+
+
+  <!-- define $(PlatformId) and compile-time constants for NativeMethods.cs  -->
+  <Import Project="RuntimeId.props" />
+
+  <PropertyGroup>
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <Optimize>true</Optimize>
+    <DocumentationFile>docs\OpenJpegDotNet.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="docs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.assert" Version="2.4.0" />
+  </ItemGroup>
+
+
+</Project>

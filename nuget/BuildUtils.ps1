@@ -10,7 +10,6 @@ class Config
    $TargetArray =
    @(
       "cpu",
-      "cuda",
       "arm"
    )
 
@@ -28,50 +27,28 @@ class Config
       64
    )
 
-   $CudaVersionArray =
-   @(
-      90,
-      91,
-      92,
-      100,
-      101,
-      102,
-      110,
-      111
-   )
-
-   $CudaVersionHash =
-   @{
-      90 = "CUDA_PATH_V9_0";
-      91 = "CUDA_PATH_V9_1";
-      92 = "CUDA_PATH_V9_2";
-      100 = "CUDA_PATH_V10_0";
-      101 = "CUDA_PATH_V10_1";
-      102 = "CUDA_PATH_V10_2";
-      110 = "CUDA_PATH_V11_0";
-      111 = "CUDA_PATH_V11_1";
-   }
-
    $VisualStudio = "Visual Studio 16 2019"
+
+   $VisualStudioConsole = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
    
    static $BuildLibraryWindowsHash = 
    @{
-      "OpenJijDotNet.Native"     = "OpenJijDotNetNative.dll";
+      "OpenJpegDotNet.Native"     = "OpenJpegDotNetNative.dll";
    }
    
    static $BuildLibraryLinuxHash = 
    @{
-      "OpenJijDotNet.Native"     = "libOpenJijDotNetNative.so";
+      "OpenJpegDotNet.Native"     = "libOpenJpegDotNetNative.so";
    }
    
    static $BuildLibraryOSXHash = 
    @{
-      "OpenJijDotNet.Native"     = "libOpenJijDotNetNative.dylib";
+      "OpenJpegDotNet.Native"     = "libOpenJpegDotNetNative.dylib";
    }
    
    static $BuildLibraryIOSHash = 
    @{
-      "OpenJijDotNet.Native"     = "libOpenJijDotNetNative.a";
+      "OpenJpegDotNet.Native"     = "libOpenJpegDotNetNative.a";
    }
 
    [string]   $_Root
@@ -80,19 +57,17 @@ class Config
    [string]   $_Target
    [string]   $_Platform
    [string]   $_MklDirectory
-   [int]      $_CudaVersion
    [string]   $_AndroidABI
    [string]   $_AndroidNativeAPILevel
 
    #***************************************
    # Arguments
-   #  %1: Root directory of OpenJijDotNet
+   #  %1: Root directory of OpenJpegDotNet
    #  %2: Build Configuration (Release/Debug)
-   #  %3: Target (cpu/cuda/arm)
+   #  %3: Target (cpu/arm)
    #  %4: Architecture (32/64)
    #  %5: Platform (desktop/android/ios/uwp)
    #  %6: Optional Argument
-   #    if Target is cuda, CUDA version if Target is cuda [90/91/92/100/101/102/110]
    #***************************************
    Config(  [string]$Root,
             [string]$Configuration,
@@ -128,20 +103,6 @@ class Config
          $candidate = $this.PlatformArray -join "/"
          Write-Host "Error: Specify Platform [${candidate}]" -ForegroundColor Red
          exit -1
-      }
-
-      switch ($Target)
-      {
-         "cuda"
-         {
-            $this._CudaVersion = [int]$Option
-            if ($this.CudaVersionArray.Contains($this._CudaVersion) -ne $True)
-            {
-               $candidate = $this.CudaVersionArray -join "/"
-               Write-Host "Error: Specify CUDA version [${candidate}]" -ForegroundColor Red
-               exit -1
-            }
-         }
       }
 
       switch ($Platform)
@@ -199,10 +160,10 @@ class Config
       return $this._Root
    }
 
-   [string] GetOpenJijRootDir()
+   [string] GetOpenJpegRootDir()
    {
       return   Join-Path $this.GetRootDir() src |
-               Join-Path -ChildPath OpenJij
+               Join-Path -ChildPath openjpeg
    }
 
    [string] GetNugetDir()
@@ -240,15 +201,7 @@ class Config
       {
          "desktop"
          {
-            if ($target -eq "cuda")
-            {
-               $cudaVersion = $this._CudaVersion
-               $name = "${target}-${cudaVersion}"
-            }
-            else
-            {
-               $name = $target
-            }
+            $name = $target
          }
          "android"
          {
@@ -358,20 +311,17 @@ class Config
       $platform = $this._Platform
       $architecture = $this.GetArchitectureName()
 
-      if ($target -eq "cuda")
-      {
-         $version = $this._CudaVersion
-         return "build_${osname}_${platform}_cuda-${version}_${architecture}"
-      }
-      else
-      {
-         return "build_${osname}_${platform}_${target}_${architecture}"
-      }
+      return "build_${osname}_${platform}_${target}_${architecture}"
    }
 
    [string] GetVisualStudio()
    {
       return $this.VisualStudio
+   }
+
+   [string] GetVisualStudioConsole()
+   {
+      return $this.VisualStudioConsole
    }
 
    [string] GetVisualStudioArchitecture()
@@ -406,69 +356,139 @@ class Config
       exit -1
    }
 
-   [string] GetCUDAPath()
+}
+
+function CallVisualStudioDeveloperConsole([Config]$Config)
+{
+   $console = $Config.GetVisualStudioConsole()
+   cmd.exe /c "call `"${console}`" && set > %temp%\vcvars.txt"
+
+   Get-Content "${env:temp}\vcvars.txt" | Foreach-Object {
+      if ($_ -match "^(.*?)=(.*)$") {
+        Set-Content "env:\$($matches[1])" $matches[2]
+      }
+    }
+}
+
+class ThirdPartyBuilder
+{
+
+   [Config]   $_Config
+
+   ThirdPartyBuilder( [Config]$Config )
    {
-      # CUDA_PATH_V10_0=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0
-      # CUDA_PATH_V10_1=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1
-      # CUDA_PATH_V10_2=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2
-      # CUDA_PATH_V11_0=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.0
-      # CUDA_PATH_V9_0=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0
-      # CUDA_PATH_V9_1=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1
-      # CUDA_PATH_V9_2=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2
-      $version = $this.CudaVersionHash[$this._CudaVersion]      
-      return [environment]::GetEnvironmentVariable($version, 'Machine')
+      $this._Config = $Config
    }
 
+   [string] BuildOpenJpeg()
+   {
+      $ret = ""
+      $current = Get-Location
+
+      try
+      {
+         Write-Host "Start Build OpenJpeg" -ForegroundColor Green
+
+         $openjpegDir = $this._Config.GetOpenJpegRootDir()
+         $openjpegTarget = Join-Path $current openjpeg
+         New-Item $openjpegTarget -Force -ItemType Directory
+         Set-Location $openjpegTarget
+         $current2 = Get-Location
+         $installDir = (Join-Path $current2 install).Replace("`\", "/")
+         $ret = $installDir
+
+         if ($global:IsWindows)
+         {
+            $VS = $this._Config.GetVisualStudio()
+            $VSARC = $this._Config.GetVisualStudioArchitecture()
+            Write-Host "   cmake -G `"${VS}`" -A ${VSARC} -T host=x64 `
+         -D BUILD_SHARED_LIBS:bool=off `
+         -D CMAKE_BUILD_TYPE:string=Release `
+         -D CMAKE_INSTALL_PREFIX:path=`"${installDir}`" `
+         -D CMAKE_LIBRARY_PATH:path=`"${installDir}`" `
+         -D CMAKE_INCLUDE_PATH:path=`"${installDir}/include`" `
+         `"$openjpegDir`"" -ForegroundColor Yellow
+            cmake -G "${VS}" -A ${VSARC} -T host=x64 `
+                  -D BUILD_SHARED_LIBS:bool=off `
+                  -D CMAKE_BUILD_TYPE:string=Release `
+                  -D CMAKE_INSTALL_PREFIX:path="${installDir}" `
+                  -D CMAKE_LIBRARY_PATH:path="${installDir}" `
+                  -D CMAKE_INCLUDE_PATH:path="${installDir}/include" `
+                  "${openjpegDir}"
+            Write-Host "   cmake --build . --config Release" -ForegroundColor Yellow
+            cmake --build . --config Release
+            Write-Host "   cmake --install ." -ForegroundColor Yellow
+            cmake --install .
+         }
+         else
+         {
+            Write-Host "   cmake -D CMAKE_BUILD_TYPE=Release `
+            -D BUILD_SHARED_LIBS:bool=off `
+            -D CMAKE_BUILD_TYPE:string=Release `
+            -D CMAKE_INSTALL_PREFIX:path=`"${installDir}`" `
+            -D CMAKE_LIBRARY_PATH:path=`"${installDir}`" `
+            -D CMAKE_INCLUDE_PATH:path=`"${installDir}/include`" `
+            -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=true `
+            `"$openjpegDir`"" -ForegroundColor Yellow
+               cmake -D CMAKE_BUILD_TYPE=Release `
+                     -D BUILD_SHARED_LIBS:bool=off `
+                     -D CMAKE_BUILD_TYPE:string=Release `
+                     -D CMAKE_INSTALL_PREFIX:path="${installDir}" `
+                     -D CMAKE_LIBRARY_PATH:path="${installDir}" `
+                     -D CMAKE_INCLUDE_PATH:path="${installDir}/include" `
+                     -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=true `
+                     "${openjpegDir}"
+               Write-Host "   cmake --build . --config Release" -ForegroundColor Yellow
+               cmake --build . --config Release
+               Write-Host "   cmake --install ." -ForegroundColor Yellow
+               cmake --install .
+         }
+      }
+      finally
+      {
+         Set-Location $current
+         Write-Host "End Build OpenJpeg" -ForegroundColor Green
+      }
+
+      return $ret
+   }
 }
 
 function ConfigCPU([Config]$Config)
 {
    if ($IsWindows)
    {
-      cmake -G $Config.GetVisualStudio() -A $Config.GetVisualStudioArchitecture() -T host=x64 `
-            -D USE_CUDA=OFF `
+      CallVisualStudioDeveloperConsole($Config)
+   }
+
+   $Builder = [ThirdPartyBuilder]::new($Config)
+      
+   # Build opnejpeg
+   $installOpenJpegDir = $Builder.BuildOpenJpeg()
+
+   if ($IsWindows)
+   {
+      $VS = $Config.GetVisualStudio()
+      $VSARC = $Config.GetVisualStudioArchitecture()
+
+      $env:OpenJPEG_DIR = $installOpenJpegDir
+      Write-Host "   cmake -G `"${VS}`" -A ${VSARC} -T host=x64 `
+         -D OpenJPEG_DIR=`"${installOpenJpegDir}`" `
+         .." -ForegroundColor Yellow
+      cmake -G "${VS}" -A ${VSARC} -T host=x64 `
+            -D OpenJPEG_DIR="${installOpenJpegDir}" `
             ..
    }
    else
    {
       $arch_type = $Config.GetArchitecture()
+
+      $env:OpenJPEG_DIR = $installOpenJpegDir
+      Write-Host "   cmake -D ARCH_TYPE=`"${arch_type}`" `
+         -D OpenJPEG_DIR=`"${installOpenJpegDir}`" `
+         .." -ForegroundColor Yellow
       cmake -D ARCH_TYPE="$arch_type" `
-            -D USE_CUDA=OFF `
-            ..
-   }
-}
-
-function ConfigCUDA([Config]$Config)
-{
-   if ($IsWindows)
-   {
-      $cudaPath = $Config.GetCUDAPath()
-      if (!(Test-Path $cudaPath))
-      {
-         Write-Host "Error: '${cudaPath}' does not found" -ForegroundColor Red
-         exit -1
-      }
-
-      $env:CUDA_PATH="${cudaPath}"
-      $env:PATH="$env:CUDA_PATH\bin;$env:CUDA_PATH\libnvvp;$ENV:PATH"
-      Write-Host "Info: CUDA_PATH: ${env:CUDA_PATH}" -ForegroundColor Green
-
-      cmake -G $Config.GetVisualStudio() -A $Config.GetVisualStudioArchitecture() -T host=x64 `
-            -D DLIB_USE_CUDA=ON `
-            -D DLIB_USE_BLAS=OFF `
-            -D DLIB_USE_LAPACK=OFF `
-            ..
-   }
-   else
-   {
-      cmake -D DLIB_USE_CUDA=ON `
-            -D DLIB_USE_BLAS=OFF `
-            -D DLIB_USE_LAPACK=OFF `
-            -D LIBPNG_IS_GOOD=OFF  `
-            -D PNG_FOUND=OFF `
-            -D PNG_LIBRARY_RELEASE="" `
-            -D PNG_LIBRARY_DEBUG="" `
-            -D PNG_PNG_INCLUDE_DIR="" `
+            -D OpenJPEG_DIR="${installOpenJpegDir}" `
             ..
    }
 }
@@ -514,11 +534,11 @@ function ConfigUWP([Config]$Config)
       # apply patch
       $patch = "uwp.patch"
       $nugetDir = $Config.GetNugetDir()
-      $openjijDir = $Config.GetOpenJijRootDir()
+      $openjpegDir = $Config.GetOpenJpegRootDir()
       $patchFullPath = Join-Path $nugetDir $patch
       $current = Get-Location
-      Set-Location -Path $openjijDir
-      Write-Host "Apply ${patch} to ${openjijDir}" -ForegroundColor Yellow
+      Set-Location -Path $openjpegDir
+      Write-Host "Apply ${patch} to ${openjpegDir}" -ForegroundColor Yellow
       Write-Host "git apply ""${patchFullPath}""" -ForegroundColor Yellow
       git apply """${patchFullPath}"""
       Set-Location -Path $current
@@ -634,11 +654,11 @@ function ConfigIOS([Config]$Config)
    }
 }
 
-function Reset-OpenJij-Modification([Config]$Config, [string]$currentDir)
+function Reset-OpenJpeg-Modification([Config]$Config, [string]$currentDir)
 {
-   $openjijDir = $Config.GetOpenJijRootDir()
-   Set-Location -Path $openjijDir
-   Write-Host "Reset modification of ${openjijDir}" -ForegroundColor Yellow
+   $openjpegDir = $Config.GetOpenJpegRootDir()
+   Set-Location -Path $openjpegDir
+   Write-Host "Reset modification of ${openjpegDir}" -ForegroundColor Yellow
    git checkout .
    Set-Location -Path $currentDir
 }
@@ -658,8 +678,8 @@ function Build([Config]$Config)
    $Target = $Config.GetTarget()
    $Platform = $Config.GetPlatform()
 
-   # revert openjij
-   Reset-OpenJij-Modification $Config (Join-Path $Current $Output)
+   # revert openjpeg
+   Reset-OpenJpeg-Modification $Config (Join-Path $Current $Output)
 
    switch ($Platform)
    {
@@ -670,10 +690,6 @@ function Build([Config]$Config)
             "cpu"
             {
                ConfigCPU $Config
-            }
-            "cuda"
-            {
-               ConfigCUDA $Config
             }
             "arm"
             {

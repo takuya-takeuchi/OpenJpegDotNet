@@ -306,8 +306,8 @@ __pycache__/
 *.xsd.cs
 
 # Custom
-src/OpenJijDotNet.Native/*.bat
-src/OpenJijDotNet.Native/build*
+src/OpenJpegDotNet.Native/*.bat
+src/OpenJpegDotNet.Native/build*
 
 # native nuget package
 !nuget/*

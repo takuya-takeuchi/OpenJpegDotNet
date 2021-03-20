@@ -2,8 +2,8 @@ Param()
 
 # import class and function
 $ScriptPath = $PSScriptRoot
-$OpenJijDotNetRoot = Split-Path $ScriptPath -Parent
-$NugetPath = Join-Path $OpenJijDotNetRoot "nuget" | `
+$OpenJpegDotNetRoot = Split-Path $ScriptPath -Parent
+$NugetPath = Join-Path $OpenJpegDotNetRoot "nuget" | `
              Join-Path -ChildPath "BuildUtils.ps1"
 import-module $NugetPath -function *
 
@@ -11,8 +11,8 @@ $OperatingSystem="win"
 
 # Store current directory
 $Current = Get-Location
-$OpenJijDotNetRoot = (Split-Path (Get-Location) -Parent)
-$OpenJijDotNetSourceRoot = Join-Path $OpenJijDotNetRoot src
+$OpenJpegDotNetRoot = (Split-Path (Get-Location) -Parent)
+$OpenJpegDotNetSourceRoot = Join-Path $OpenJpegDotNetRoot src
 
 $BuildSourceHash = [Config]::GetBinaryLibraryWindowsHash()
 
@@ -31,13 +31,13 @@ foreach ($BuildTarget in $BuildTargets)
       $option = ""
    }
 
-   $Config = [Config]::new($OpenJijDotNetRoot, "Release", $target, $architecture, "desktop", $option)
+   $Config = [Config]::new($OpenJpegDotNetRoot, "Release", $target, $architecture, "desktop", $option)
    $libraryDir = Join-Path "artifacts" $Config.GetArtifactDirectoryName()
    $build = $Config.GetBuildDirectoryName($OperatingSystem)
 
    foreach ($key in $BuildSourceHash.keys)
    {
-      $srcDir = Join-Path $OpenJijDotNetSourceRoot $key
+      $srcDir = Join-Path $OpenJpegDotNetSourceRoot $key
 
       # Move to build target directory
       Set-Location -Path $srcDir
@@ -56,7 +56,7 @@ foreach ($BuildTarget in $BuildTargets)
    # Copy output binary
    foreach ($key in $BuildSourceHash.keys)
    {
-      $srcDir = Join-Path $OpenJijDotNetSourceRoot $key
+      $srcDir = Join-Path $OpenJpegDotNetSourceRoot $key
       $dll = $BuildSourceHash[$key]
       $dstDir = Join-Path $Current $libraryDir
 

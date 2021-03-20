@@ -19,13 +19,4 @@ DLLEXPORT std::string* get_version()
     return new std::string(ss.str());
 }
 
-DLLEXPORT bool is_support_cuda()
-{
-#ifdef DLIB_USE_CUDA
-    return true;
-#else
-    return false;
-#endif
-}
-
 #endif

@@ -46,10 +46,10 @@ $ScriptPath = $PSScriptRoot
 Write-Host "Build"(Split-Path $ScriptPath -Leaf) -ForegroundColor Green
 
 $SrcPath = Split-Path $ScriptPath -Parent
-$OpenJijDotNetRoot = Split-Path $SrcPath -Parent
-$NugetPath = Join-Path $OpenJijDotNetRoot "nuget" | `
+$OpenJpegDotNetRoot = Split-Path $SrcPath -Parent
+$NugetPath = Join-Path $OpenJpegDotNetRoot "nuget" | `
              Join-Path -ChildPath "BuildUtils.ps1"
 import-module $NugetPath -function *
 
-$Config = [Config]::new($OpenJijDotNetRoot, $Configuration, $Target, $Architecture, $Platform, $Option)
+$Config = [Config]::new($OpenJpegDotNetRoot, $Configuration, $Target, $Architecture, $Platform, $Option)
 Build -Config $Config
