@@ -18,12 +18,13 @@ namespace OpenJpegDotNet
         #region Version
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern ErrorType openjpeg_openjp2_convertbmp_imagetobmp(IntPtr image,
+        public static extern ErrorType openjpeg_openjp2_extensions_imagetobmp(IntPtr image,
                                                                               bool big_endian,
                                                                               out IntPtr planes,
                                                                               out uint out_w,
                                                                               out uint out_h,
-                                                                              out uint out_c);
+                                                                              out uint out_c,
+                                                                              out uint out_p);
 
         #endregion
 

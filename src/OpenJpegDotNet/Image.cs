@@ -1,4 +1,6 @@
 using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
 namespace OpenJpegDotNet
@@ -131,6 +133,110 @@ namespace OpenJpegDotNet
 
                 return icc;
             }
+        }
+
+        #endregion
+
+        #region Methods
+
+        public Bitmap ToBitmap()
+        {
+            this.ThrowIfDisposed();
+
+            var ret = NativeMethods.openjpeg_openjp2_extensions_imagetobmp(this.NativePtr,
+                                                                           false,
+                                                                           out var planes,
+                                                                           out var width,
+                                                                           out var height,
+                                                                           out var channel,
+                                                                           out var pixel);
+            if (ret != NativeMethods.ErrorType.OK)
+            {
+                throw new Exception();
+            }
+
+            if (channel != 3 && channel != 1)
+                throw new NotSupportedException();
+
+            Bitmap bitmap = null;
+            BitmapData bitmapData = null;
+
+            try
+            {
+
+                switch (pixel)
+                {
+                    case 8:
+                        switch (channel)
+                        {
+                            case 1:
+                                {
+                                    bitmap = new Bitmap((int)width, (int)height, PixelFormat.Format8bppIndexed);
+                                    var rect = new Rectangle(0, 0, (int)width, (int)height);
+                                    bitmapData = bitmap.LockBits(rect, ImageLockMode.WriteOnly, bitmap.PixelFormat);
+                                    var scan0 = bitmapData.Scan0;
+                                    var stride = bitmapData.Stride;
+                                    for (var y = 0; y < height; y++)
+                                    {
+                                        var src = IntPtr.Add(planes, (int)(y * width));
+                                        var dest = IntPtr.Add(scan0, y * stride);
+                                        NativeMethods.cstd_memcpy(dest, src, (int)width);
+                                    }
+                                }
+                                break;
+                            case 3:
+                                {
+                                    bitmap = new Bitmap((int)width, (int)height, PixelFormat.Format24bppRgb);
+                                    var rect = new Rectangle(0, 0, (int)width, (int)height);
+                                    bitmapData = bitmap.LockBits(rect, ImageLockMode.WriteOnly, bitmap.PixelFormat);
+                                    var scan0 = bitmapData.Scan0;
+                                    var stride = bitmapData.Stride;
+
+                                    unsafe
+                                    {
+                                        var pSrc = (byte*)planes;
+                                        var pDest = (byte*)scan0;
+                                        var gap = stride - width * channel;
+                                        var size = width * height;
+                                        for (var y = 0; y < height; y++)
+                                        {
+                                            for (var x = 0; x < width; x++)
+                                            {
+                                                pDest[2] = pSrc[0];
+                                                pDest[1] = pSrc[0 + size];
+                                                pDest[0] = pSrc[0 + size * 2];
+
+                                                pSrc += 1;
+                                                pDest += channel;
+                                            }
+
+                                            pDest += gap;
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+
+                        break;
+                    default:
+                        throw new NotSupportedException();
+                }
+            }
+            catch
+            {
+                if (bitmap != null && bitmapData != null)
+                    bitmap.UnlockBits(bitmapData);
+                bitmap?.Dispose();
+                bitmap = null;
+                bitmapData = null;
+            }
+            finally
+            {
+                if (bitmap != null && bitmapData != null)
+                    bitmap.UnlockBits(bitmapData);
+            }
+
+            return bitmap;
         }
 
         #endregion

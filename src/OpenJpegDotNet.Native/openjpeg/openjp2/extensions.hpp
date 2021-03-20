@@ -7,15 +7,16 @@
 #include <string>
 
 // https://github.com/uclouvain/openjpeg/blob/v2.4.0/src/bin/jp2/convert.c
-DLLEXPORT int32_t openjpeg_openjp2_convertbmp_imagetobmp(opj_image_t * image,
+DLLEXPORT int32_t openjpeg_openjp2_extensions_imagetobmp(opj_image_t * image,
                                                          bool big_endian,
                                                          uint8_t** planes,
                                                          uint32_t* out_w,
                                                          uint32_t* out_h,
-                                                         uint32_t* out_c)
+                                                         uint32_t* out_c,
+                                                         uint32_t* out_p)
 {
     // FILE *rawFile = NULL;
-    size_t res;
+    // size_t res;
     unsigned int compno, numcomps;
     int w, h, fails;
     int line, row, curr, mask;
@@ -67,13 +68,15 @@ DLLEXPORT int32_t openjpeg_openjp2_convertbmp_imagetobmp(opj_image_t * image,
     {
         *out_w = image->comps[0].w;
         *out_h = image->comps[0].h;
-        *out_c = 1;
+        *out_c = compno;
+        *out_p = 8;
     }
     else if (image->comps[compno].prec <= 16)
     {
         *out_w = image->comps[0].w;
         *out_h = image->comps[0].h;
-        *out_c = 2;
+        *out_c = compno;
+        *out_p = 16;
     }
     else
     {
@@ -126,11 +129,11 @@ DLLEXPORT int32_t openjpeg_openjp2_convertbmp_imagetobmp(opj_image_t * image,
                         uc = (unsigned char)(curr & mask);
                         // res = fwrite(&uc, 1, 1, rawFile);
                         buf[cur_buf++] = uc;
-                        if (res < 1)
-                        {
-                            // fprintf(stderr, "failed to write 1 byte for %s\n", outfile);
-                            goto fin;
-                        }
+                        // if (res < 1)
+                        // {
+                        //     fprintf(stderr, "failed to write 1 byte for %s\n", outfile);
+                        //     goto fin;
+                        // }
                         ptr++;
                     }
                 }
@@ -155,11 +158,11 @@ DLLEXPORT int32_t openjpeg_openjp2_convertbmp_imagetobmp(opj_image_t * image,
                         uc = (unsigned char)(curr & mask);
                         buf[cur_buf++] = uc;
                         // res = fwrite(&uc, 1, 1, rawFile);
-                        if (res < 1)
-                        {
-                            // fprintf(stderr, "failed to write 1 byte for %s\n", outfile);
-                            goto fin;
-                        }
+                        // if (res < 1)
+                        // {
+                        //     fprintf(stderr, "failed to write 1 byte for %s\n", outfile);
+                        //     goto fin;
+                        // }
                         ptr++;
                     }
                 }
@@ -192,11 +195,11 @@ DLLEXPORT int32_t openjpeg_openjp2_convertbmp_imagetobmp(opj_image_t * image,
                         // res = fwrite(uc16.vals, 1, 2, rawFile);
                         buf[cur_buf++] = uc16.vals[0];
                         buf[cur_buf++] = uc16.vals[1];
-                        if (res < 2)
-                        {
-                            // fprintf(stderr, "failed to write 2 byte for %s\n", outfile);
-                            goto fin;
-                        }
+                        // if (res < 2)
+                        // {
+                        //     fprintf(stderr, "failed to write 2 byte for %s\n", outfile);
+                        //     goto fin;
+                        // }
                         ptr++;
                     }
                 }
@@ -226,11 +229,11 @@ DLLEXPORT int32_t openjpeg_openjp2_convertbmp_imagetobmp(opj_image_t * image,
                         // res = fwrite(uc16.vals, 1, 2, rawFile);
                         buf[cur_buf++] = uc16.vals[0];
                         buf[cur_buf++] = uc16.vals[1];
-                        if (res < 2)
-                        {
-                            // fprintf(stderr, "failed to write 2 byte for %s\n", outfile);
-                            goto fin;
-                        }
+                        // if (res < 2)
+                        // {
+                        //     fprintf(stderr, "failed to write 2 byte for %s\n", outfile);
+                        //     goto fin;
+                        // }
                         ptr++;
                     }
                 }
