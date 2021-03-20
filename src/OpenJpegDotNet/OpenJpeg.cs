@@ -1,5 +1,5 @@
-﻿using System.Text;
-using OpenJpegDotNet;
+﻿using System.Runtime.InteropServices;
+using System.Text;
 
 namespace OpenJpegDotNet
 {
@@ -19,7 +19,9 @@ namespace OpenJpegDotNet
 
         public static string GetVersion()
         {
-            return StringHelper.FromStdString(NativeMethods.get_version(), true);
+            var ptr = NativeMethods.openjpeg_openjp2_opj_version();
+            var str = NativeMethods.string_c_str(ptr);
+            return Marshal.PtrToStringAnsi(str);
         }
 
         #endregion
