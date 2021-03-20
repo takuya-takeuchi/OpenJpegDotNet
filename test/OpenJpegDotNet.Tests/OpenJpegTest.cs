@@ -84,6 +84,30 @@ namespace OpenJpegDotNet.Tests
             this.DisposeAndCheckDisposedState(decompressionParameters);
         }
 
+        [Fact]
+        public void SetupDecoder()
+        {
+            var targets = new[]
+            {
+                new { Format = CodecFormat.Unknown, Result = false },
+                new { Format = CodecFormat.J2k,     Result = true  },
+                new { Format = CodecFormat.Jp2,     Result = true  },
+                new { Format = CodecFormat.Jpp,     Result = false },
+                new { Format = CodecFormat.Jpt,     Result = false },
+                new { Format = CodecFormat.Jpx,     Result = false },
+            };
+            
+            foreach (var target in targets)
+            {
+                var codec = OpenJpeg.CreateDecompress(target.Format);
+                var decompressionParameters = new DecompressionParameters();
+                OpenJpeg.SetDefaultDecoderParameters(decompressionParameters);
+                Assert.True(OpenJpeg.SetupDecoder(codec, decompressionParameters) == target.Result, $"Failed to invoke {nameof(OpenJpeg.SetupDecoder)} for {target.Format}");
+                this.DisposeAndCheckDisposedState(decompressionParameters);
+                this.DisposeAndCheckDisposedState(codec);
+            }
+        }
+
         #endregion
 
         #region Not Official
