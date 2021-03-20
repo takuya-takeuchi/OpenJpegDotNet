@@ -48,11 +48,26 @@ namespace OpenJpegDotNet
             return new Codec(ptr);
         }
 
+        public static bool ReadHeader(Stream stream, Codec codec, out Image image)
+        {
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
+            if (codec == null)
+                throw new ArgumentNullException(nameof(codec));
+
+            stream.ThrowIfDisposed();
+            codec.ThrowIfDisposed();
+
+            var ret = NativeMethods.openjpeg_openjp2_opj_read_header(stream.NativePtr, codec.NativePtr, out var pImage);
+            image = ret ? new Image(pImage) : null;
+            return ret;
+        }
+
         public static void SetDefaultDecoderParameters(DecompressionParameters parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
-            
+
             parameters.ThrowIfDisposed();
 
             NativeMethods.openjpeg_openjp2_opj_set_default_decoder_parameters(parameters.NativePtr);

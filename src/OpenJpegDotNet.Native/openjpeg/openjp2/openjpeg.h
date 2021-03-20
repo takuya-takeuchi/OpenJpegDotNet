@@ -18,6 +18,17 @@ DLLEXPORT std::string* openjpeg_openjp2_opj_version()
 
 /*
 ==========================================================
+   image functions definitions
+==========================================================
+*/
+
+DLLEXPORT void openjpeg_openjp2_opj_image_destroy(opj_image_t* image)
+{
+    ::opj_image_destroy(image);
+}
+
+/*
+==========================================================
    stream functions definitions
 ==========================================================
 */
@@ -61,6 +72,13 @@ DLLEXPORT const bool openjpeg_openjp2_opj_setup_decoder(opj_codec_t* p_codec,
                                                         opj_dparameters_t *parameters)
 {
     return ::opj_setup_decoder(p_codec, parameters) == OPJ_TRUE;
+}
+
+DLLEXPORT const bool openjpeg_openjp2_opj_read_header(opj_stream_t *p_stream,
+                                                      opj_codec_t *p_codec,
+                                                      opj_image_t **p_image)
+{
+    return ::opj_read_header(p_stream, p_codec, p_image) == OPJ_TRUE;
 }
 
 /* COMPRESSION FUNCTIONS*/

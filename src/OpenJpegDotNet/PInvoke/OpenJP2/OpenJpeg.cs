@@ -22,6 +22,13 @@ namespace OpenJpegDotNet
 
         #endregion
 
+        #region Image
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_image_destroy(IntPtr image);
+
+        #endregion
+
         #region Steram
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
@@ -51,6 +58,10 @@ namespace OpenJpegDotNet
         [return: MarshalAs(UnmanagedType.U1)]
         public static extern bool openjpeg_openjp2_opj_setup_decoder(IntPtr p_codec, IntPtr parameters);
 
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        [return: MarshalAs(UnmanagedType.U1)]
+        public static extern bool openjpeg_openjp2_opj_read_header(IntPtr p_stream, IntPtr p_codec, out IntPtr p_image);
+        
         #endregion
 
         #region Compress
