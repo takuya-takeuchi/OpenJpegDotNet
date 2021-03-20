@@ -37,4 +37,10 @@
     <ProjectReference Include="..\..\src\OpenJpegDotNet\OpenJpegDotNet.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestImages\Bretagne1_0.j2k">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

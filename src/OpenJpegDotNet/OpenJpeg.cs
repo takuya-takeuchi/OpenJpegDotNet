@@ -1,4 +1,6 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace OpenJpegDotNet
@@ -12,6 +14,33 @@ namespace OpenJpegDotNet
 
         #region Methods
 
+        #region Version
+
+        public static string GetVersion()
+        {
+            return StringHelper.FromStdString(NativeMethods.openjpeg_openjp2_opj_version(), true);
+        }
+
+        #endregion
+
+        #region Image
+
+        public static Codec StreamCreateDefaultFileStream(string filepath, bool isReadStream)
+        {
+            if (filepath == null)
+                throw new ArgumentNullException(nameof(filepath));
+            if (!File.Exists(filepath))
+                throw new FileNotFoundException($"The specified {nameof(filepath)} does not exist.", filepath);
+
+            var str = Encoding.GetBytes(filepath);
+            var ret = NativeMethods.openjpeg_openjp2_opj_stream_create_default_file_stream(str, (uint)str.Length, isReadStream);
+            return new Codec(ret);
+        }
+
+        #endregion
+
+        #region Codec
+
         public static Codec CreateCompress(CodecFormat format)
         {
             var ptr = NativeMethods.openjpeg_openjp2_opj_create_compress(format);
@@ -24,14 +53,11 @@ namespace OpenJpegDotNet
             return new Codec(ptr);
         }
 
+        #endregion
+
         public static string GetNativeVersion()
         {
             return StringHelper.FromStdString(NativeMethods.get_version(), true);
-        }
-
-        public static string GetVersion()
-        {
-            return StringHelper.FromStdString(NativeMethods.openjpeg_openjp2_opj_version(), true);
         }
 
         #endregion

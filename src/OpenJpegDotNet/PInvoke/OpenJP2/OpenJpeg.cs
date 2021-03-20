@@ -14,16 +14,32 @@ namespace OpenJpegDotNet
 
     internal sealed partial class NativeMethods
     {
-        
+
+        #region Version
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern IntPtr openjpeg_openjp2_opj_version();
+
+        #endregion
+
+        #region Image
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern IntPtr openjpeg_openjp2_opj_stream_create_default_file_stream(byte[] fname,
+                                                                                           uint fname_len,
+                                                                                           bool p_is_read_stream);
+
+        #endregion
+
+        #region Codec
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern IntPtr openjpeg_openjp2_opj_create_decompress(CodecFormat format);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern IntPtr openjpeg_openjp2_opj_create_compress(CodecFormat format);
+
+        #endregion
 
     }
 
