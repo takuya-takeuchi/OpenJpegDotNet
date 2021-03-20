@@ -19,6 +19,12 @@ namespace OpenJpegDotNet
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern IntPtr openjpeg_openjp2_opj_version();
 
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern IntPtr openjpeg_openjp2_opj_create_decompress(CodecFormat format);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern IntPtr openjpeg_openjp2_opj_create_compress(CodecFormat format);
+
     }
 
 }

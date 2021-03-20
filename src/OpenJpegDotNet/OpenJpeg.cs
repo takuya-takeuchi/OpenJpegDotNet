@@ -12,6 +12,18 @@ namespace OpenJpegDotNet
 
         #region Methods
 
+        public static Codec CreateCompress(CodecFormat format)
+        {
+            var ptr = NativeMethods.openjpeg_openjp2_opj_create_compress(format);
+            return new Codec(ptr);
+        }
+
+        public static Codec CreateDecompress(CodecFormat format)
+        {
+            var ptr = NativeMethods.openjpeg_openjp2_opj_create_decompress(format);
+            return new Codec(ptr);
+        }
+
         public static string GetNativeVersion()
         {
             return StringHelper.FromStdString(NativeMethods.get_version(), true);
@@ -19,9 +31,7 @@ namespace OpenJpegDotNet
 
         public static string GetVersion()
         {
-            var ptr = NativeMethods.openjpeg_openjp2_opj_version();
-            var str = NativeMethods.string_c_str(ptr);
-            return Marshal.PtrToStringAnsi(str);
+            return StringHelper.FromStdString(NativeMethods.openjpeg_openjp2_opj_version(), true);
         }
 
         #endregion
