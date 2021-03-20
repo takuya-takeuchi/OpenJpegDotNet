@@ -24,7 +24,7 @@ namespace OpenJpegDotNet
 
         #region Image
 
-        public static Codec StreamCreateDefaultFileStream(string filepath, bool isReadStream)
+        public static Stream StreamCreateDefaultFileStream(string filepath, bool isReadStream)
         {
             if (filepath == null)
                 throw new ArgumentNullException(nameof(filepath));
@@ -33,7 +33,7 @@ namespace OpenJpegDotNet
 
             var str = Encoding.GetBytes(filepath);
             var ret = NativeMethods.openjpeg_openjp2_opj_stream_create_default_file_stream(str, (uint)str.Length, isReadStream);
-            return new Codec(ret);
+            return new Stream(ret);
         }
 
         #endregion

@@ -31,7 +31,7 @@ namespace OpenJpegDotNet.Tests
 
         #endregion
 
-        #region Image
+        #region Stream
 
         [Fact]
         public void StreamCreateDefaultFileStream()

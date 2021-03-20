@@ -22,7 +22,10 @@ namespace OpenJpegDotNet
 
         #endregion
 
-        #region Image
+        #region Steram
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_stream_destroy(IntPtr p_stream);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern IntPtr openjpeg_openjp2_opj_stream_create_default_file_stream(byte[] fname,
