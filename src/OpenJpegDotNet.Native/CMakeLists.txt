@@ -3,6 +3,8 @@ cmake_policy(SET CMP0053 NEW)
 cmake_policy(SET CMP0054 NEW)
 
 set(PROJ_NAME OpenJpegDotNetNative)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # It means that CMakeLists.txt version rather than library version
 project(${PROJ_NAME} VERSION 1.0.0)

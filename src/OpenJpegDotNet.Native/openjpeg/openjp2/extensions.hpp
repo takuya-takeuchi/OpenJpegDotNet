@@ -23,6 +23,8 @@ DLLEXPORT int32_t openjpeg_openjp2_extensions_imagetobmp(opj_image_t * image,
     int *ptr;
     unsigned char uc;
     (void)big_endian;
+    size_t cur_buf = 0;
+    uint8_t* buf = nullptr;
 
     if ((image->numcomps * image->x1 * image->y1) == 0)
     {
@@ -83,9 +85,8 @@ DLLEXPORT int32_t openjpeg_openjp2_extensions_imagetobmp(opj_image_t * image,
         goto fin;
     }
 
-    auto buf = (uint8_t*)calloc(*out_c, *out_w * *out_h * compno);
+    buf = (uint8_t*)calloc(*out_c, *out_w * *out_h * compno);
     *planes = buf;
-    size_t cur_buf = 0;
 
     // rawFile = fopen(outfile, "wb");
     // if (!rawFile)
