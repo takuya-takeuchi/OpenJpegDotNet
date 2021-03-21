@@ -144,7 +144,7 @@ namespace OpenJpegDotNet
         /// </summary>
         /// <returns>A <see cref="Bitmap"/> that represents the converted <see cref="Image"/>.</returns>
         /// <exception cref="ObjectDisposedException">This object is disposed.</exception>
-        /// <exception cref="NotSupportedException">A Greyscale image is not supported.</exception>
+        /// <exception cref="NotSupportedException">This object is not supported.</exception>
         public Bitmap ToBitmap()
         {
             this.ThrowIfDisposed();
@@ -161,7 +161,7 @@ namespace OpenJpegDotNet
                 if (planes != IntPtr.Zero)
                     NativeMethods.stdlib_free(planes);
 
-                throw new NotSupportedException();
+                throw new NotSupportedException("This object is not supported.");
             }
 
             if (channel != 3 && channel != 1)
@@ -169,7 +169,7 @@ namespace OpenJpegDotNet
                 if (planes != IntPtr.Zero)
                     NativeMethods.stdlib_free(planes);
 
-                throw new NotSupportedException();
+                throw new NotSupportedException("This object is not supported.");
             }
 
             Bitmap bitmap = null;
@@ -233,7 +233,7 @@ namespace OpenJpegDotNet
 
                         break;
                     default:
-                        throw new NotSupportedException();
+                        throw new NotSupportedException("This object is not supported.");
                 }
             }
             catch

@@ -1,0 +1,503 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OpenJpegDotNet</name>
+    </assembly>
+    <members>
+        <member name="T:OpenJpegDotNet.Codec">
+            <summary>
+            Defines the JPEG 2000 codec V2. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="M:OpenJpegDotNet.Codec.DisposeUnmanaged">
+            <summary>
+            Releases all unmanaged resources.
+            </summary>
+        </member>
+        <member name="T:OpenJpegDotNet.CodecFormat">
+            <summary>
+            Specifies the supported codec.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.CodecFormat.Unknown">
+            <summary>
+            Specifies that the place-holder. 
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.CodecFormat.J2k">
+            <summary>
+            Specifies that the JPEG 2000 codestream.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.CodecFormat.Jpt">
+            <summary>
+            Specifies that the JPT-stream (JPEG 2000, JPIP).
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.CodecFormat.Jp2">
+            <summary>
+            Specifies that the JP2 file format.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.CodecFormat.Jpp">
+            <summary>
+            Specifies that the JPP-stream (JPEG 2000, JPIP).
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.CodecFormat.Jpx">
+            <summary>
+            Specifies that the JPX file format(JPEG 2000 Part-2).
+            </summary>
+        </member>
+        <member name="T:OpenJpegDotNet.ColorSpace">
+            <summary>
+            Specifies the Supported image color spaces.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.ColorSpace.Unknown">
+            <summary>
+            Specifies that not supported by the library. 
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.ColorSpace.Unspecified">
+            <summary>
+            Specifies that not specified in the codestream.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.ColorSpace.Srgb">
+            <summary>
+            Specifies that the sRGB.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.ColorSpace.Gray">
+            <summary>
+            Specifies that the Grayscale.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.ColorSpace.Sycc">
+            <summary>
+            Specifies that the sYCC.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.ColorSpace.Eycc">
+            <summary>
+            Specifies that the e-YCC.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.ColorSpace.Cmyk">
+            <summary>
+            Specifies that the CMYK.
+            </summary>
+        </member>
+        <member name="T:OpenJpegDotNet.DecompressionParameters">
+            <summary>
+            Defines the decompression parameters. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="M:OpenJpegDotNet.DecompressionParameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenJpegDotNet.DecompressionParameters"/> class.
+            </summary>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.CodingFormat">
+            <summary>
+            Sets or get the output file format.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.CodingParameterLayer">
+            <summary>
+            Sets or get the maximum number of quality layers to decode.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.CodingParameterReduce">
+            <summary>
+            Sets or get the number of highest resolution levels to be discarded.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.DecodingFormat">
+            <summary>
+            Sets or get the input file format.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.DecodingAreaX0">
+            <summary>
+            Sets or get the decoding area left boundary.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.DecodingAreaX1">
+            <summary>
+            Sets or get the decoding area right boundary.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.DecodingAreaY0">
+            <summary>
+            Sets or get the decoding area up boundary.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.DecodingAreaY1">
+            <summary>
+            Sets or get the decoding area bottom boundary.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.Flags">
+            <summary>
+            Sets or get the flags.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.JpwlCorrect">
+            <summary>
+            Sets or get whether activates the JPWL correction capabilities for JPWL (wireless applications).
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.JpwlExpectedComponents">
+            <summary>
+            Sets or get the expected number of components for JPWL (wireless applications).
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.JpwlMaxTiles">
+            <summary>
+            Sets or get the maximum number of tiles for JPWL (wireless applications).
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.NumberBlockTileToDecide">
+            <summary>
+            Sets or get the number of blocks of tile to decode.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.TileIndex">
+            <summary>
+            Sets or get the tile number of the decoded tile.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.DecompressionParameters.VerboseMode">
+            <summary>
+            Sets or get whether enables verbose mode.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="M:OpenJpegDotNet.DecompressionParameters.DisposeUnmanaged">
+            <summary>
+            Releases all unmanaged resources.
+            </summary>
+        </member>
+        <member name="T:OpenJpegDotNet.FileFormat">
+            <summary>
+            Specifies the supported codec.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.FileFormat.Unknown">
+            <summary>
+            Specifies that the place-holder. 
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.FileFormat.J2kCompressedFormat">
+            <summary>
+            Specifies that the JPEG 2000 codestream.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.FileFormat.Jp2CompressedFormat">
+            <summary>
+            Specifies that the JP2 file format.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.FileFormat.JptCompressedFormat">
+            <summary>
+            Specifies that the JPT-stream (JPEG 2000, JPIP).
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.FileFormat.PxmDecompressedFormat">
+            <summary>
+            Specifies that the Pixelmator file format.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.FileFormat.PgxDecompressedFormat">
+            <summary>
+            Specifies that the PGX (JPEG 2000) file format.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.FileFormat.BmpDecompressedFormat">
+            <summary>
+            Specifies that the Bitmap file format.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.FileFormat.YuvDecompressedFormat">
+            <summary>
+            Specifies that the YUV file format.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.FileFormat.TifDecompressedFormat">
+            <summary>
+            Specifies that the Tagged Image file format.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.FileFormat.RawDecompressedFormat">
+            <summary>
+            Specifies that the Raw (big endian) Image file format.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.FileFormat.TgaDecompressedFormat">
+            <summary>
+            Specifies that the Truevision Graphics Adapter file format.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.FileFormat.PngDecompressedFormat">
+            <summary>
+            Specifies that the Portable Network Graphics file format.
+            </summary>
+        </member>
+        <member name="F:OpenJpegDotNet.FileFormat.RawLDecompressedFormat">
+            <summary>
+            Specifies that the Raw (little endian) Image file format.
+            </summary>
+        </member>
+        <member name="T:OpenJpegDotNet.Image">
+            <summary>
+            Defines the image data and characteristics. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="P:OpenJpegDotNet.Image.X0">
+            <summary>
+            Gets the horizontal offset from the origin of the reference grid to the left side of the image area.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.Image.X1">
+            <summary>
+            Gets the width of the reference grid.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.Image.Y0">
+            <summary>
+            Gets the vertical offset from the origin of the reference grid to the top side of the image area.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.Image.Y1">
+            <summary>
+            Gets the height of the reference grid.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.Image.NumberOfComponents">
+            <summary>
+            Gets the number of components in the image.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.Image.ColorSpace">
+            <summary>
+            Gets the color space.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.Image.Components">
+            <summary>
+            Gets the image components.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="P:OpenJpegDotNet.Image.IccProfile">
+            <summary>
+            Gets the 'restricted' ICC profile.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+        </member>
+        <member name="M:OpenJpegDotNet.Image.ToBitmap">
+            <summary>
+            Converts this <see cref="T:OpenJpegDotNet.Image"/> to a GDI+ <see cref="T:System.Drawing.Bitmap"/>.
+            </summary>
+            <returns>A <see cref="T:System.Drawing.Bitmap"/> that represents the converted <see cref="T:OpenJpegDotNet.Image"/>.</returns>
+            <exception cref="T:System.ObjectDisposedException">This object is disposed.</exception>
+            <exception cref="T:System.NotSupportedException">This object is not supported.</exception>
+        </member>
+        <member name="M:OpenJpegDotNet.Image.DisposeUnmanaged">
+            <summary>
+            Releases all unmanaged resources.
+            </summary>
+        </member>
+        <member name="T:OpenJpegDotNet.OpenJpeg">
+            <summary>
+            Provides the methods of OpenJpeg.
+            </summary>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpeg.GetVersion">
+            <summary>
+            Get the string representation of the OpenJpeg version.
+            </summary>
+            <returns>The string representation of the OpenJpeg version.</returns>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpeg.StreamCreateDefaultFileStream(System.String,System.Boolean)">
+            <summary>
+            Create a stream from a file identified with its filename with default parameters.
+            </summary>
+            <param name="filepath">The filename of the file to input to stream.</param>
+            <param name="isReadStream">The value whether the stream is a read stream.</param>
+            <returns>The <see cref="T:OpenJpegDotNet.Stream"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="filepath"/> is null.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">The specified path does not exist.</exception>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpeg.CreateDecompress(OpenJpegDotNet.CodecFormat)">
+            <summary>
+            Creates a J2K/JP2 decompression structure.
+            </summary>
+            <param name="format">The codec format to create.</param>
+            <returns>The <see cref="T:OpenJpegDotNet.Codec"/>.</returns>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpeg.Decode(OpenJpegDotNet.Codec,OpenJpegDotNet.Stream,OpenJpegDotNet.Image)">
+            <summary>
+            Decode an image from a JPEG 2000 codestream.
+            </summary>
+            <param name="codec">the Jpeg 2000 codec to read.</param>
+            <param name="stream">The Jpeg 2000 stream.</param>
+            <param name="image">The image that receives decoded datum.</param>
+            <returns><code>true</code> if success; otherwise, <code>false</code>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="codec"/>, <paramref name="stream"/> or <paramref name="image"/> is null.</exception>
+            <exception cref="T:System.ObjectDisposedException"><paramref name="codec"/>, <paramref name="stream"/> or <paramref name="image"/>.</exception>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpeg.EndDecompress(OpenJpegDotNet.Codec,OpenJpegDotNet.Stream)">
+            <summary>
+            Read after the codestream if necessary.
+            </summary>
+            <param name="codec">the Jpeg 2000 codec to read.</param>
+            <param name="stream">The Jpeg 2000 stream.</param>
+            <returns><code>true</code> if success; otherwise, <code>false</code>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="codec"/> or <paramref name="stream"/> is null.</exception>
+            <exception cref="T:System.ObjectDisposedException"><paramref name="codec"/> or <paramref name="stream"/>.</exception>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpeg.ReadHeader(OpenJpegDotNet.Stream,OpenJpegDotNet.Codec,OpenJpegDotNet.Image@)">
+            <summary>
+            Decodes an image header.
+            </summary>
+            <param name="stream">The Jpeg 2000 stream.</param>
+            <param name="codec">the Jpeg 2000 codec to read.</param>
+            <param name="image">When this method returns, contains the <see cref="T:OpenJpegDotNet.Image"/> read from stream. This parameter is passed uninitialized.</param>
+            <returns><code>true</code> if the main header of the codestream and the JP2 header is correctly read; otherwise, <code>false</code>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="stream"/> or <paramref name="codec"/> is null.</exception>
+            <exception cref="T:System.ObjectDisposedException"><paramref name="stream"/> or <paramref name="codec"/>.</exception>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpeg.SetDecodeArea(OpenJpegDotNet.Codec,OpenJpegDotNet.Image,System.UInt32,System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            Sets the given area to be decoded.
+            </summary>
+            <param name="codec">The Jpeg 2000 codec.</param>
+            <param name="image">The decoded <see cref="T:OpenJpegDotNet.Image"/> previously set by <see cref="M:OpenJpegDotNet.OpenJpeg.ReadHeader(OpenJpegDotNet.Stream,OpenJpegDotNet.Codec,OpenJpegDotNet.Image@)"/>.</param>
+            <param name="left">The left position of the rectangle to decode in image.</param>
+            <param name="top">The top position of the rectangle to decode in image.</param>
+            <param name="right">The right position of the rectangle to decode in image.</param>
+            <param name="bottom">The bottom position of the rectangle to decode in image.</param>
+            <returns><code>true</code> if the area is correctly set; otherwise, <code>false</code>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="codec"/> or <paramref name="image"/> is null.</exception>
+            <exception cref="T:System.ObjectDisposedException"><paramref name="codec"/> or <paramref name="image"/>.</exception>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpeg.SetDefaultDecoderParameters(OpenJpegDotNet.DecompressionParameters)">
+            <summary>
+            Set decoding parameters to default values.
+            </summary>
+            <param name="parameters">The <see cref="T:OpenJpegDotNet.DecompressionParameters"/> to decompress image.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="parameters"/> is null.</exception>
+            <exception cref="T:System.ObjectDisposedException"><paramref name="parameters"/>.</exception>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpeg.SetupDecoder(OpenJpegDotNet.Codec,OpenJpegDotNet.DecompressionParameters)">
+            <summary>
+            Setup the decoder with decompression parameters provided by the user and with the message handler provided by the user.
+            </summary>
+            <param name="codec">The <see cref="T:OpenJpegDotNet.Codec"/> to decompress image.</param>
+            <param name="parameters">The <see cref="T:OpenJpegDotNet.DecompressionParameters"/> to decompress image.</param>
+            <returns><code>true</code> if the decoder is correctly set; otherwise, <code>false</code>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="codec"/> or <paramref name="parameters"/> is null.</exception>
+            <exception cref="T:System.ObjectDisposedException"><paramref name="codec"/> or <paramref name="parameters"/>.</exception>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpeg.CreateCompress(OpenJpegDotNet.CodecFormat)">
+            <summary>
+            Creates a J2K/JP2 compression structure.
+            </summary>
+            <param name="format">The codec format to create.</param>
+            <returns>The <see cref="T:OpenJpegDotNet.Codec"/>.</returns>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpeg.GetNativeVersion">
+            <summary>
+            Get the string representation of the version of wrapper library of OpenJpeg.
+            </summary>
+            <returns>The string representation of the version of wrapper library of OpenJpeg.</returns>
+        </member>
+        <member name="T:OpenJpegDotNet.OpenJpegObject">
+            <summary>
+            A class which has a pointer of native structure.
+            </summary>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpegObject.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenJpegDotNet.OpenJpegObject"/> class with the specified value indicating whether this instance is disposable.
+            </summary>
+            <param name="isEnabledDispose">true if this instance is disposable; otherwise, false.</param>
+        </member>
+        <member name="P:OpenJpegDotNet.OpenJpegObject.IsDisposed">
+            <summary>
+            Gets a value indicating whether this instance has been disposed.
+            </summary>
+            <returns>true if this instance has been disposed; otherwise, false.</returns>
+        </member>
+        <member name="P:OpenJpegDotNet.OpenJpegObject.IsEnableDispose">
+            <summary>
+            Gets a value indicating whether this instance is disposable.
+            </summary>
+            <returns>true if this instance is disposable; otherwise, false.</returns>
+        </member>
+        <member name="P:OpenJpegDotNet.OpenJpegObject.NativePtr">
+            <summary>
+            Gets a pointer of native structure.
+            </summary>>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpegObject.ThrowIfDisposed">
+            <summary>
+            If this object is disposed, then <see cref="T:System.ObjectDisposedException"/> is thrown.
+            </summary>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpegObject.DisposeManaged">
+            <summary>
+            Releases all managed resources.
+            </summary>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpegObject.DisposeUnmanaged">
+            <summary>
+            Releases all unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpegObject.Dispose">
+            <summary>
+            Releases all resources used by this <see cref="T:OpenJpegDotNet.OpenJpegObject"/>.
+            </summary>
+        </member>
+        <member name="M:OpenJpegDotNet.OpenJpegObject.Dispose(System.Boolean)">
+            <summary>
+            Releases all resources used by this <see cref="T:OpenJpegDotNet.OpenJpegObject"/>.
+            </summary>
+            <param name="disposing">Indicate value whether <see cref="M:System.IDisposable.Dispose"/> method was called.</param>
+        </member>
+        <member name="T:OpenJpegDotNet.Stream">
+            <summary>
+            A stream that represents a JPEG 2000. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="M:OpenJpegDotNet.Stream.DisposeUnmanaged">
+            <summary>
+            Releases all unmanaged resources.
+            </summary>
+        </member>
+    </members>
+</doc>

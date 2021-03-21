@@ -4,7 +4,7 @@ namespace OpenJpegDotNet
 {
 
     /// <summary>
-    /// Describes the JPEG2000 Stream. This class cannot be inherited.
+    /// A stream that represents a JPEG 2000. This class cannot be inherited.
     /// </summary>
     public sealed class Stream : OpenJpegObject
     {

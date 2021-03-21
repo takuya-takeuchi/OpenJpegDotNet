@@ -13,7 +13,7 @@
         Unknown = -1,
 
         /// <summary>
-        /// Specifies that the JPEG-2000 codestream.
+        /// Specifies that the JPEG 2000 codestream.
         /// </summary>
         J2k = 0,
 

@@ -6,38 +6,40 @@
     <Description>.NET wrapper for OpenJpeg written in C#</Description>
     <Company />
     <Copyright>© Takuya Takeuchi 2021</Copyright>
-    <Configurations>Debug;Release</Configurations>
-    <Version>0.0.1</Version>
+    <Version>2.4.0</Version>
     <RepositoryUrl>https://github.com/takuya-takeuchi/OpenJpegDotNet</RepositoryUrl>
-    <PackageTags>openjpeg .net quantum-mechanics quantum-computing simulated-annealing quantum-annealing</PackageTags>
-    <PackageLicenseUrl></PackageLicenseUrl>
-  
+    <PackageTags>openjpeg .net jpeg2000</PackageTags>
+    <PackageLicenseUrl></PackageLicenseUrl>  
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-  
-    <Platforms>x64;x86</Platforms>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
-
-  <!-- define $(PlatformId) and compile-time constants for NativeMethods.cs  -->
-  <Import Project="RuntimeId.props" />
-
-  <PropertyGroup>
-      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-      <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
-    <DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\OpenJpegDotNet.xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <Optimize>true</Optimize>
-    <DocumentationFile>docs\OpenJpegDotNet.xml</DocumentationFile>
+  <ItemGroup>
+    <Folder Include="docs\" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.Contains('netstandard')) Or $(TargetFramework.Contains('netcoreapp')) ">
+    <DefineConstants>$(DefineConstants);DOTNETCORE</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
+  <ItemGroup Condition="!$(TargetFramework.Contains('netstandard')) And !$(TargetFramework.Contains('netcoreapp')) ">
+    <Reference Include="System.Drawing" />
+    <Reference Include="System" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.Contains('netstandard')) Or $(TargetFramework.Contains('netcoreapp')) ">
+    <PackageReference Include="System.Drawing.Common">
+      <Version>5.0.2</Version>
+    </PackageReference>
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\LICENSE.txt">
@@ -47,13 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="docs\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
-    <PackageReference Include="xunit.assert" Version="2.4.0" />
   </ItemGroup>
-
 
 </Project>
