@@ -18,5 +18,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     dotnet-sdk-${DOTNET_SDK_VERSION} \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Install sudo apt-get install -y libgdiplus
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgdiplus \
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # Trigger first run experience by running arbitrary cmd to populate local package cache
 RUN dotnet help

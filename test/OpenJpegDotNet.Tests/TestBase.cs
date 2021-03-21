@@ -12,6 +12,9 @@ namespace OpenJpegDotNet.Tests
 
         public void DisposeAndCheckDisposedState(OpenJpegObject obj)
         {
+            if (obj == null)
+                return;
+
             obj.Dispose();
             Assert.True(obj.IsDisposed);
             Assert.True(obj.NativePtr == IntPtr.Zero);

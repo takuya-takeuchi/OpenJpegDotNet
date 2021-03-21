@@ -384,6 +384,7 @@ class ThirdPartyBuilder
    {
       $ret = ""
       $current = Get-Location
+      $buildConfig = $this._Config.GetConfigurationName()
 
       try
       {
@@ -397,51 +398,58 @@ class ThirdPartyBuilder
          $installDir = (Join-Path $current2 install).Replace("`\", "/")
          $ret = $installDir
 
+         # OSX failed to build due to zlib
+         $BUILD_THIRDPARTY="OFF"
+
          if ($global:IsWindows)
          {
             $VS = $this._Config.GetVisualStudio()
             $VSARC = $this._Config.GetVisualStudioArchitecture()
             Write-Host "   cmake -G `"${VS}`" -A ${VSARC} -T host=x64 `
-         -D BUILD_SHARED_LIBS:bool=off `
-         -D CMAKE_BUILD_TYPE:string=Release `
-         -D CMAKE_INSTALL_PREFIX:path=`"${installDir}`" `
-         -D CMAKE_LIBRARY_PATH:path=`"${installDir}`" `
-         -D CMAKE_INCLUDE_PATH:path=`"${installDir}/include`" `
+         -D BUILD_SHARED_LIBS:BOOL=OFF `
+         -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
+         -D CMAKE_INSTALL_PREFIX:PATH=`"${installDir}`" `
+         -D CMAKE_LIBRARY_PATH:PATH=`"${installDir}`" `
+         -D CMAKE_INCLUDE_PATH:PATH=`"${installDir}/include`" `
+         -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
          `"$openjpegDir`"" -ForegroundColor Yellow
             cmake -G "${VS}" -A ${VSARC} -T host=x64 `
-                  -D BUILD_SHARED_LIBS:bool=off `
-                  -D CMAKE_BUILD_TYPE:string=Release `
-                  -D CMAKE_INSTALL_PREFIX:path="${installDir}" `
-                  -D CMAKE_LIBRARY_PATH:path="${installDir}" `
-                  -D CMAKE_INCLUDE_PATH:path="${installDir}/include" `
+                  -D BUILD_SHARED_LIBS:BOOL=OFF `
+                  -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
+                  -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
+                  -D CMAKE_LIBRARY_PATH:PATH="${installDir}" `
+                  -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
+                  -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
                   "${openjpegDir}"
-            Write-Host "   cmake --build . --config Release" -ForegroundColor Yellow
-            cmake --build . --config Release
-            Write-Host "   cmake --install ." -ForegroundColor Yellow
-            cmake --install .
+            Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
+            cmake --build . --config ${buildConfig}
+            Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
+            cmake --install . --config ${buildConfig}
          }
          else
          {
-            Write-Host "   cmake -D CMAKE_BUILD_TYPE=Release `
-            -D BUILD_SHARED_LIBS:bool=off `
-            -D CMAKE_BUILD_TYPE:string=Release `
-            -D CMAKE_INSTALL_PREFIX:path=`"${installDir}`" `
-            -D CMAKE_LIBRARY_PATH:path=`"${installDir}`" `
-            -D CMAKE_INCLUDE_PATH:path=`"${installDir}/include`" `
-            -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=true `
+            Write-Host "   cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
+            -D BUILD_SHARED_LIBS:BOOL=OFF `
+            -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
+            -D CMAKE_INSTALL_PREFIX:PATH=`"${installDir}`" `
+            -D CMAKE_LIBRARY_PATH:PATH=`"${installDir}`" `
+            -D CMAKE_INCLUDE_PATH:PATH=`"${installDir}/include`" `
+            -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
+            -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
             `"$openjpegDir`"" -ForegroundColor Yellow
-               cmake -D CMAKE_BUILD_TYPE=Release `
-                     -D BUILD_SHARED_LIBS:bool=off `
-                     -D CMAKE_BUILD_TYPE:string=Release `
-                     -D CMAKE_INSTALL_PREFIX:path="${installDir}" `
-                     -D CMAKE_LIBRARY_PATH:path="${installDir}" `
-                     -D CMAKE_INCLUDE_PATH:path="${installDir}/include" `
-                     -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=true `
+               cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
+                     -D BUILD_SHARED_LIBS:BOOL=OFF `
+                     -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
+                     -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
+                     -D CMAKE_LIBRARY_PATH:PATH="${installDir}" `
+                     -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
+                     -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
+                     -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
                      "${openjpegDir}"
-               Write-Host "   cmake --build . --config Release" -ForegroundColor Yellow
-               cmake --build . --config Release
-               Write-Host "   cmake --install ." -ForegroundColor Yellow
-               cmake --install .
+               Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
+               cmake --build . --config ${buildConfig}
+               Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
+               cmake --install . --config ${buildConfig}
          }
       }
       finally
