@@ -139,6 +139,12 @@ namespace OpenJpegDotNet
 
         #region Methods
 
+        /// <summary>
+        /// Converts this <see cref="Image"/> to a GDI+ <see cref="Bitmap"/>.
+        /// </summary>
+        /// <returns>A <see cref="Bitmap"/> that represents the converted <see cref="Image"/>.</returns>
+        /// <exception cref="ObjectDisposedException">This object is disposed.</exception>
+        /// <exception cref="NotSupportedException">A Greyscale image is not supported.</exception>
         public Bitmap ToBitmap()
         {
             this.ThrowIfDisposed();
@@ -152,11 +158,19 @@ namespace OpenJpegDotNet
                                                                            out var pixel);
             if (ret != NativeMethods.ErrorType.OK)
             {
-                throw new Exception();
+                if (planes != IntPtr.Zero)
+                    NativeMethods.stdlib_free(planes);
+
+                throw new NotSupportedException();
             }
 
             if (channel != 3 && channel != 1)
+            {
+                if (planes != IntPtr.Zero)
+                    NativeMethods.stdlib_free(planes);
+
                 throw new NotSupportedException();
+            }
 
             Bitmap bitmap = null;
             BitmapData bitmapData = null;
@@ -232,6 +246,9 @@ namespace OpenJpegDotNet
             }
             finally
             {
+                if (planes != IntPtr.Zero)
+                    NativeMethods.stdlib_free(planes);
+
                 if (bitmap != null && bitmapData != null)
                     bitmap.UnlockBits(bitmapData);
             }
