@@ -10,8 +10,6 @@ namespace OpenJpegDotNet
     public static partial class OpenJpeg
     {
 
-        #region Image
-
         /// <summary>
         /// Create a stream from a file identified with its filename with default parameters.
         /// </summary>
@@ -31,8 +29,6 @@ namespace OpenJpegDotNet
             var ret = NativeMethods.openjpeg_openjp2_opj_stream_create_default_file_stream(str, (uint)str.Length, isReadStream);
             return new Stream(ret);
         }
-
-        #endregion
 
     }
 
