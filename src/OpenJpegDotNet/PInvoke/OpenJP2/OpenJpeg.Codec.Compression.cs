@@ -355,6 +355,9 @@ namespace OpenJpegDotNet
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern IntPtr openjpeg_openjp2_opj_create_compress(CodecFormat format);
 
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_set_default_encoder_parameters(IntPtr parameters);
+
         #endregion
 
         #region Not Native Functions

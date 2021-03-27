@@ -102,11 +102,21 @@ namespace OpenJpegDotNet
 
         #region Overrides
 
-        protected bool Equals(OpenJpegObject other)
+        /// <summary>
+        /// Determines whether this instance and another specified <see cref="OpenJpegObject"/> object have the same value.
+        /// </summary>
+        /// <param name="obj">The <see cref="OpenJpegObject"/> to compare to this instance.</param>
+        /// <returns><code>true</code> if the value of the <paramref name="obj"/> parameter is the same as the value of this instance; otherwise, false. If <paramref name="obj"/> is <code>null</code>, the method returns <code>false</code>.</returns>
+        protected bool Equals(OpenJpegObject obj)
         {
-            return this.NativePtr.Equals(other.NativePtr);
+            return this.NativePtr.Equals(obj.NativePtr);
         }
 
+        /// <summary>
+        /// Determines whether this instance and a specified object, which must also be a <see cref="OpenJpegObject"/> object, have the same value.
+        /// </summary>
+        /// <param name="obj">The <see cref="OpenJpegObject"/> to compare to this instance.</param>
+        /// <returns><code>true</code> if <paramref name="obj"/> is a <see cref="OpenJpegObject"/> and its value is the same as this instance; otherwise, false. If <paramref name="obj"/> is <code>null</code>, the method returns <code>false</code>.</returns>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
@@ -115,6 +125,10 @@ namespace OpenJpegDotNet
             return this.Equals((OpenJpegObject) obj);
         }
 
+        /// <summary>
+        /// Returns the hash code for this string.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
             return this.NativePtr.GetHashCode();
@@ -128,20 +142,10 @@ namespace OpenJpegDotNet
 
         }
 
-        protected virtual void DisposingManaged()
-        {
-
-        }
-
         /// <summary>
         /// Releases all unmanaged resources.
         /// </summary>
         protected virtual void DisposeUnmanaged()
-        {
-
-        }
-
-        protected virtual void DisposingUnmanaged()
         {
 
         }
@@ -170,18 +174,6 @@ namespace OpenJpegDotNet
             if (this.IsDisposed)
             {
                 return;
-            }
-
-            // pre-disposing
-            {
-                if (disposing)
-                {
-                    if (this.IsEnableDispose)
-                        this.DisposingManaged();
-                }
-
-                if (this.IsEnableDispose)
-                    this.DisposingUnmanaged();
             }
 
             this.IsDisposed = true;

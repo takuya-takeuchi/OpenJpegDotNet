@@ -664,6 +664,14 @@ namespace OpenJpegDotNet.Tests
             this.DisposeAndCheckDisposedState(compressionParameters);
         }
 
+        [Fact]
+        public void SetDefaultEncoderParameters()
+        {
+            var compressionParameters = new CompressionParameters();
+            OpenJpeg.SetDefaultEncoderParameters(compressionParameters);
+            this.DisposeAndCheckDisposedState(compressionParameters);
+        }
+
         #endregion
 
     }

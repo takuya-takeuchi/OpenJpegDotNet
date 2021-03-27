@@ -634,7 +634,6 @@ DLLEXPORT void openjpeg_openjp2_opj_cparameters_t_set_tp_on(opj_cparameters_t* p
 
 #pragma endregion opj_cparameters_t
 
-
 #pragma region functions
 
 DLLEXPORT const opj_codec_t* openjpeg_openjp2_opj_create_compress(const CODEC_FORMAT format)
