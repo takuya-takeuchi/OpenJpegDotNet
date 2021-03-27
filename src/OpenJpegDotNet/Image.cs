@@ -32,7 +32,7 @@ namespace OpenJpegDotNet
             get
             {
                 this.ThrowIfDisposed();
-                return NativeMethods.openjpeg_openjp2_opj_image_get_x0(this.NativePtr);
+                return NativeMethods.openjpeg_openjp2_opj_image_t_get_x0(this.NativePtr);
             }
         }
 
@@ -45,7 +45,7 @@ namespace OpenJpegDotNet
             get
             {
                 this.ThrowIfDisposed();
-                return NativeMethods.openjpeg_openjp2_opj_image_get_x1(this.NativePtr);
+                return NativeMethods.openjpeg_openjp2_opj_image_t_get_x1(this.NativePtr);
             }
         }
 
@@ -58,7 +58,7 @@ namespace OpenJpegDotNet
             get
             {
                 this.ThrowIfDisposed();
-                return NativeMethods.openjpeg_openjp2_opj_image_get_y0(this.NativePtr);
+                return NativeMethods.openjpeg_openjp2_opj_image_t_get_y0(this.NativePtr);
             }
         }
 
@@ -71,7 +71,7 @@ namespace OpenJpegDotNet
             get
             {
                 this.ThrowIfDisposed();
-                return NativeMethods.openjpeg_openjp2_opj_image_get_y1(this.NativePtr);
+                return NativeMethods.openjpeg_openjp2_opj_image_t_get_y1(this.NativePtr);
             }
         }
 
@@ -84,7 +84,7 @@ namespace OpenJpegDotNet
             get
             {
                 this.ThrowIfDisposed();
-                return NativeMethods.openjpeg_openjp2_opj_image_get_numcomps(this.NativePtr);
+                return NativeMethods.openjpeg_openjp2_opj_image_t_get_numcomps(this.NativePtr);
             }
         }
 
@@ -97,7 +97,7 @@ namespace OpenJpegDotNet
             get
             {
                 this.ThrowIfDisposed();
-                return NativeMethods.openjpeg_openjp2_opj_image_get_color_space(this.NativePtr);
+                return NativeMethods.openjpeg_openjp2_opj_image_t_get_color_space(this.NativePtr);
             }
         }
 
@@ -110,7 +110,7 @@ namespace OpenJpegDotNet
             get
             {
                 this.ThrowIfDisposed();
-                return NativeMethods.openjpeg_openjp2_opj_image_get_comps(this.NativePtr);
+                return NativeMethods.openjpeg_openjp2_opj_image_t_get_comps(this.NativePtr);
             }
         }
 
@@ -123,8 +123,8 @@ namespace OpenJpegDotNet
             get
             {
                 this.ThrowIfDisposed();
-                var length = NativeMethods.openjpeg_openjp2_opj_image_get_icc_profile_len(this.NativePtr);
-                var buffer = NativeMethods.openjpeg_openjp2_opj_image_get_icc_profile_buf(this.NativePtr);
+                var length = NativeMethods.openjpeg_openjp2_opj_image_t_get_icc_profile_len(this.NativePtr);
+                var buffer = NativeMethods.openjpeg_openjp2_opj_image_t_get_icc_profile_buf(this.NativePtr);
                 if (buffer == IntPtr.Zero || length == 0)
                     return null;
 
@@ -270,7 +270,7 @@ namespace OpenJpegDotNet
             if (this.NativePtr == IntPtr.Zero)
                 return;
 
-            NativeMethods.openjpeg_openjp2_opj_image_destroy(this.NativePtr);
+            NativeMethods.openjpeg_openjp2_opj_image_t_destroy(this.NativePtr);
         }
 
         #endregion

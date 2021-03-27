@@ -9,6 +9,109 @@ namespace OpenJpegDotNet.Tests
     public sealed partial class OpenJpegTest
     {
 
+        #region ImageComponentParameters
+
+        [Fact]
+        public void ImageComponentParametersSigned()
+        {
+            using var parameter = new ImageComponentParameters();
+            foreach (var value in new[] { true, false })
+            {
+                parameter.Signed = value;
+                Assert.Equal(value, parameter.Signed);
+            }
+        }
+
+        [Fact]
+        public void ImageComponentParametersBpp()
+        {
+            using var parameter = new ImageComponentParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.Bpp = value;
+                Assert.Equal(value, parameter.Bpp);
+            }
+        }
+
+        [Fact]
+        public void ImageComponentParametersDx()
+        {
+            using var parameter = new ImageComponentParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.Dx = value;
+                Assert.Equal(value, parameter.Dx);
+            }
+        }
+
+        [Fact]
+        public void ImageComponentParametersDy()
+        {
+            using var parameter = new ImageComponentParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.Dy = value;
+                Assert.Equal(value, parameter.Dy);
+            }
+        }
+
+        [Fact]
+        public void ImageComponentParametersHeight()
+        {
+            using var parameter = new ImageComponentParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.Height = value;
+                Assert.Equal(value, parameter.Height);
+            }
+        }
+
+        [Fact]
+        public void ImageComponentParametersPrecision()
+        {
+            using var parameter = new ImageComponentParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.Precision = value;
+                Assert.Equal(value, parameter.Precision);
+            }
+        }
+
+        [Fact]
+        public void ImageComponentParametersWidth()
+        {
+            using var parameter = new ImageComponentParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.Width = value;
+                Assert.Equal(value, parameter.Width);
+            }
+        }
+
+        [Fact]
+        public void ImageComponentParametersX0()
+        {
+            using var parameter = new ImageComponentParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.X0 = value;
+                Assert.Equal(value, parameter.X0);
+            }
+        }
+
+        [Fact]
+        public void ImageComponentParametersY0()
+        {
+            using var parameter = new ImageComponentParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.Y0 = value;
+                Assert.Equal(value, parameter.Y0);
+            }
+        }
+
+        #endregion
+
         #region Not Native Functions
 
         [Fact]

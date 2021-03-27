@@ -9,7 +9,7 @@ namespace OpenJpegDotNet.Tests
     public sealed partial class OpenJpegTest
     {
 
-        #region Structs
+        #region CompressionParameters
 
         [Fact]
         public void CompressionParametersCodeBlockHeightInitial()
@@ -202,7 +202,7 @@ namespace OpenJpegDotNet.Tests
         public void CompressionParametersIrreversible()
         {
             using var parameter = new CompressionParameters();
-            foreach (var value in new[] { 0, 1, 10 })
+            foreach (var value in new[] { true, false })
             {
                 parameter.Irreversible = value;
                 Assert.Equal(value, parameter.Irreversible);

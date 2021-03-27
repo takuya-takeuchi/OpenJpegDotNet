@@ -691,19 +691,19 @@ namespace OpenJpegDotNet
         /// <summary>
         /// Sets or get the value to indicate whether irreversible or not for compression.
         /// </summary>
-        /// <remarks>1: use the irreversible DWT 9-7, 0: use lossless compression.</remarks>
+        /// <remarks><code>true</code> if use the irreversible DWT 9-7; otherwise, use lossless compression is <code>false</code>.</remarks>
         /// <exception cref="ObjectDisposedException">This object is disposed.</exception>
-        public int Irreversible
+        public bool Irreversible
         {
             get
             {
                 this.ThrowIfDisposed();
-                return NativeMethods.openjpeg_openjp2_opj_cparameters_t_get_irreversible(this.NativePtr);
+                return NativeMethods.openjpeg_openjp2_opj_cparameters_t_get_irreversible(this.NativePtr) == 1;
             }
             set
             {
                 this.ThrowIfDisposed();
-                NativeMethods.openjpeg_openjp2_opj_cparameters_t_set_irreversible(this.NativePtr, value);
+                NativeMethods.openjpeg_openjp2_opj_cparameters_t_set_irreversible(this.NativePtr, value ? 1 : 0);
             }
         }
 

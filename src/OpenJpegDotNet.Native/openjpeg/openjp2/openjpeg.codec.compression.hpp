@@ -641,6 +641,13 @@ DLLEXPORT const opj_codec_t* openjpeg_openjp2_opj_create_compress(const CODEC_FO
     return ::opj_create_compress(format);
 }
 
+DLLEXPORT const bool openjpeg_openjp2_opj_setup_encoder(opj_codec_t* p_codec,
+                                                        opj_cparameters_t *parameters,
+                                                        opj_image_t* image)
+{
+    return ::opj_setup_encoder(p_codec, parameters, image) == OPJ_TRUE;
+}
+
 DLLEXPORT void openjpeg_openjp2_opj_set_default_encoder_parameters(opj_cparameters_t* parameters)
 {
     ::opj_set_default_encoder_parameters(parameters);

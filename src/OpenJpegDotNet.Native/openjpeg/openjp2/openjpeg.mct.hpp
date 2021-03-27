@@ -7,9 +7,9 @@
 #include <string>
 
 DLLEXPORT bool openjpeg_openjp2_opj_set_MCT(opj_cparameters_t* parameters,
-                                            OPJ_FLOAT32* pEncodingMatrix,
-                                            OPJ_INT32* p_dc_shift,
-                                            const OPJ_UINT32 pNbComp)
+                                            float* pEncodingMatrix,
+                                            int32_t* p_dc_shift,
+                                            const uint32_t pNbComp)
 {
     return ::opj_set_MCT(parameters, pEncodingMatrix, p_dc_shift, pNbComp);
 }

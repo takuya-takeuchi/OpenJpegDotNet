@@ -10,7 +10,7 @@ namespace OpenJpegDotNet.Tests
     public sealed partial class OpenJpegTest
     {
 
-        #region Structs
+        #region DecompressionParameters
 
         [Fact]
         public void DecompressionParametersCodingFormat()
