@@ -10,6 +10,175 @@ namespace OpenJpegDotNet.Tests
     public sealed partial class OpenJpegTest
     {
 
+        #region Structs
+
+        [Fact]
+        public void DecompressionParametersCodingFormat()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { 0, 1, 10 })
+            {
+                parameter.CodingFormat = value;
+                Assert.Equal(value, parameter.CodingFormat);
+            }
+        }
+
+        [Fact]
+        public void DecompressionParametersCodingParameterLayer()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.CodingParameterLayer = value;
+                Assert.Equal(value, parameter.CodingParameterLayer);
+            }
+        }
+
+        [Fact]
+        public void DecompressionParametersCodingParameterReduce()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.CodingParameterReduce = value;
+                Assert.Equal(value, parameter.CodingParameterReduce);
+            }
+        }
+
+        [Fact]
+        public void DecompressionParametersDecodingAreaX0()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.DecodingAreaX0 = value;
+                Assert.Equal(value, parameter.DecodingAreaX0);
+            }
+        }
+
+        [Fact]
+        public void DecompressionParametersDecodingAreaX1()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.DecodingAreaX1 = value;
+                Assert.Equal(value, parameter.DecodingAreaX1);
+            }
+        }
+
+        [Fact]
+        public void DecompressionParametersDecodingAreaY0()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.DecodingAreaY0 = value;
+                Assert.Equal(value, parameter.DecodingAreaY0);
+            }
+        }
+
+        [Fact]
+        public void DecompressionParametersDecodingAreaY1()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.DecodingAreaY1 = value;
+                Assert.Equal(value, parameter.DecodingAreaY1);
+            }
+        }
+
+        [Fact]
+        public void DecompressionParametersDecodingFormat()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { 0, 1, 10 })
+            {
+                parameter.DecodingFormat = value;
+                Assert.Equal(value, parameter.DecodingFormat);
+            }
+        }
+
+        [Fact]
+        public void DecompressionParametersFlags()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.Flags = value;
+                Assert.Equal(value, parameter.Flags);
+            }
+        }
+
+        [Fact]
+        public void DecompressionParametersJpwlCorrect()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { true, false })
+            {
+                parameter.JpwlCorrect = value;
+                Assert.Equal(value, parameter.JpwlCorrect);
+            }
+        }
+
+        [Fact]
+        public void DecompressionParametersJpwlExpectedComponents()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { 0, 1, 10 })
+            {
+                parameter.JpwlExpectedComponents = value;
+                Assert.Equal(value, parameter.JpwlExpectedComponents);
+            }
+        }
+
+        [Fact]
+        public void DecompressionParametersJpwlMaxTiles()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { 0, 1, 10 })
+            {
+                parameter.JpwlMaxTiles = value;
+                Assert.Equal(value, parameter.JpwlMaxTiles);
+            }
+        }
+
+        [Fact]
+        public void DecompressionParametersNumberBlockTileToDecide()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.NumberBlockTileToDecide = value;
+                Assert.Equal(value, parameter.NumberBlockTileToDecide);
+            }
+        }
+
+        [Fact]
+        public void DecompressionParametersTileIndex()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                parameter.TileIndex = value;
+                Assert.Equal(value, parameter.TileIndex);
+            }
+        }
+
+        [Fact]
+        public void DecompressionParametersVerboseMode()
+        {
+            using var parameter = new DecompressionParameters();
+            foreach (var value in new[] { true, false })
+            {
+                parameter.VerboseMode = value;
+                Assert.Equal(value, parameter.VerboseMode);
+            }
+        }
+
+        #endregion
+
         #region Functions
 
         [Fact]
