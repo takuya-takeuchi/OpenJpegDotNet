@@ -644,35 +644,16 @@ namespace OpenJpegDotNet.Tests
         #region Functions
 
         [Fact]
-        public void CreateCompress()
-        {
-            var formats = Enum.GetValues(typeof(CodecFormat)).Cast<CodecFormat>();
-            foreach (var format in formats)
-            {
-                var codec = OpenJpeg.CreateCompress(format);
-                this.DisposeAndCheckDisposedState(codec);
-            }
-        }
-
-        [Fact]
-        public void SetDefaultEncoderParameters()
-        {
-            var compressionParameters = new CompressionParameters();
-            OpenJpeg.SetDefaultEncoderParameters(compressionParameters);
-            this.DisposeAndCheckDisposedState(compressionParameters);
-        }
-
-        [Fact]
-        public void SetupEncoder()
+        public void Encode()
         {
             var targets = new[]
             {
-                new { Format = CodecFormat.Unknown, FileName = $"{nameof(this.SetupEncoder)}.ukn", Result = false },
-                new { Format = CodecFormat.J2k,     FileName = $"{nameof(this.SetupEncoder)}.j2k", Result = true  },
-                new { Format = CodecFormat.Jp2,     FileName = $"{nameof(this.SetupEncoder)}.jp2", Result = true  },
-                new { Format = CodecFormat.Jpp,     FileName = $"{nameof(this.SetupEncoder)}.jpp", Result = false },
-                new { Format = CodecFormat.Jpt,     FileName = $"{nameof(this.SetupEncoder)}.jpt", Result = false },
-                new { Format = CodecFormat.Jpx,     FileName = $"{nameof(this.SetupEncoder)}.jpx", Result = false },
+                new { Format = CodecFormat.Unknown, FileName = $"{nameof(this.Encode)}.ukn", Result = false },
+                new { Format = CodecFormat.J2k,     FileName = $"{nameof(this.Encode)}.j2k", Result = true  },
+                new { Format = CodecFormat.Jp2,     FileName = $"{nameof(this.Encode)}.jp2", Result = true  },
+                new { Format = CodecFormat.Jpp,     FileName = $"{nameof(this.Encode)}.jpp", Result = false },
+                new { Format = CodecFormat.Jpt,     FileName = $"{nameof(this.Encode)}.jpt", Result = false },
+                new { Format = CodecFormat.Jpx,     FileName = $"{nameof(this.Encode)}.jpx", Result = false },
             };
 
             const int numCompsMax = 4;
@@ -739,8 +720,8 @@ namespace OpenJpegDotNet.Tests
                 image.ColorSpace = ColorSpace.Srgb;
 
                 Directory.CreateDirectory(ResultDirectory);
-                Directory.CreateDirectory(Path.Combine(ResultDirectory, nameof(this.SetupEncoder)));
-                var path = Path.Combine(ResultDirectory, nameof(this.SetupEncoder), target.FileName);
+                Directory.CreateDirectory(Path.Combine(ResultDirectory, nameof(this.Encode)));
+                var path = Path.Combine(ResultDirectory, nameof(this.Encode), target.FileName);
 
                 Assert.True(OpenJpeg.SetupEncoder(codec, compressionParameters, image) == target.Result, $"Failed to invoke {nameof(OpenJpeg.SetupDecoder)} for {target.Format}");
                 if (!target.Result)
