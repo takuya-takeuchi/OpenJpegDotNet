@@ -26,7 +26,7 @@ namespace OpenJpegDotNet
 
         #endregion
 
-        #region Not Official
+        #region Not Native Functions
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern IntPtr openjpeg_openjp2_opj_cparameters_t_new();
