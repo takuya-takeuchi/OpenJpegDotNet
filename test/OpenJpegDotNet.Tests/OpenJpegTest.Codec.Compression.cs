@@ -254,10 +254,7 @@ namespace OpenJpegDotNet.Tests
             array = parameter.JpwlHeaderProtectionTilePartHeader;
 
             for (var index = 0; index < expectArray.Length; index++)
-            {
-                var value = expectArray[index];
                 Assert.Equal(expectArray[index], array[index]);
-            }
         }
 
         [Fact]
@@ -272,10 +269,7 @@ namespace OpenJpegDotNet.Tests
             array = parameter.JpwlHeaderProtectionTilePartHeaderTileNumber;
 
             for (var index = 0; index < expectArray.Length; index++)
-            {
-                var value = expectArray[index];
                 Assert.Equal(expectArray[index], array[index]);
-            }
         }
 
         [Fact]
@@ -290,10 +284,7 @@ namespace OpenJpegDotNet.Tests
             array = parameter.JpwlPacketProtection;
 
             for (var index = 0; index < expectArray.Length; index++)
-            {
-                var value = expectArray[index];
                 Assert.Equal(expectArray[index], array[index]);
-            }
         }
 
         [Fact]
@@ -308,10 +299,7 @@ namespace OpenJpegDotNet.Tests
             array = parameter.JpwlPacketProtectionPacketNumber;
 
             for (var index = 0; index < expectArray.Length; index++)
-            {
-                var value = expectArray[index];
                 Assert.Equal(expectArray[index], array[index]);
-            }
         }
 
         [Fact]
@@ -326,10 +314,7 @@ namespace OpenJpegDotNet.Tests
             array = parameter.JpwlPacketProtectionTileNumber;
 
             for (var index = 0; index < expectArray.Length; index++)
-            {
-                var value = expectArray[index];
                 Assert.Equal(expectArray[index], array[index]);
-            }
         }
 
         [Fact]
@@ -388,10 +373,7 @@ namespace OpenJpegDotNet.Tests
             array = parameter.JpwlSensitivityTilePartHeader;
 
             for (var index = 0; index < expectArray.Length; index++)
-            {
-                var value = expectArray[index];
                 Assert.Equal(expectArray[index], array[index]);
-            }
         }
 
         [Fact]
@@ -406,10 +388,7 @@ namespace OpenJpegDotNet.Tests
             array = parameter.JpwlSensitivityTilePartHeaderTileNo;
 
             for (var index = 0; index < expectArray.Length; index++)
-            {
-                var value = expectArray[index];
                 Assert.Equal(expectArray[index], array[index]);
-            }
         }
 
         [Fact]
@@ -479,10 +458,7 @@ namespace OpenJpegDotNet.Tests
             array = parameter.PrecinctHeightInitial;
 
             for (var index = 0; index < expectArray.Length; index++)
-            {
-                var value = expectArray[index];
                 Assert.Equal(expectArray[index], array[index]);
-            }
         }
 
         [Fact]
@@ -497,10 +473,7 @@ namespace OpenJpegDotNet.Tests
             array = parameter.PrecinctWidthInitial;
 
             for (var index = 0; index < expectArray.Length; index++)
-            {
-                var value = expectArray[index];
                 Assert.Equal(expectArray[index], array[index]);
-            }
         }
 
         [Fact]
@@ -592,10 +565,7 @@ namespace OpenJpegDotNet.Tests
             array = parameter.TcpDistoratio;
 
             for (var index = 0; index < expectArray.Length; index++)
-            {
-                var value = expectArray[index];
                 Assert.Equal(expectArray[index], array[index]);
-            }
         }
 
         [Fact]
@@ -632,10 +602,7 @@ namespace OpenJpegDotNet.Tests
             array = parameter.TcpRates;
 
             for (var index = 0; index < expectArray.Length; index++)
-            {
-                var value = expectArray[index];
                 Assert.Equal(expectArray[index], array[index]);
-            }
         }
 
         [Fact]
