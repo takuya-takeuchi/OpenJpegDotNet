@@ -15,10 +15,24 @@ namespace OpenJpegDotNet
     internal sealed partial class NativeMethods
     {
 
+        #region Structs
+
+        #endregion
+
         #region Functions
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern IntPtr openjpeg_openjp2_opj_version();
+        public static extern IntPtr openjpeg_openjp2_opj_create_compress(CodecFormat format);
+
+        #endregion
+
+        #region Not Official
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern IntPtr openjpeg_openjp2_opj_cparameters_t_new();
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_cparameters_t_delete(IntPtr parameters);
 
         #endregion
 

@@ -217,12 +217,12 @@ DLLEXPORT const bool openjpeg_openjp2_opj_decode(opj_codec_t *p_codec,
 
 #pragma region non-openjp2 functions
 
-DLLEXPORT const opj_dparameters_t* openjpeg_openjp2_opj_opj_dparameters_t_new()
+DLLEXPORT const opj_dparameters_t* openjpeg_openjp2_opj_dparameters_t_new()
 {
     return new opj_dparameters_t();
 }
 
-DLLEXPORT void openjpeg_openjp2_opj_opj_dparameters_t_delete(opj_dparameters_t* parameters)
+DLLEXPORT void openjpeg_openjp2_opj_dparameters_t_delete(opj_dparameters_t* parameters)
 {
     delete parameters;
 }
