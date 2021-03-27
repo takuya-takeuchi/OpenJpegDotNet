@@ -20,16 +20,16 @@ namespace OpenJpegDotNet
         #region opj_dparameters_t
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_cp_layer(IntPtr parameters);
+        public static extern uint32_t openjpeg_openjp2_opj_dparameters_t_get_cp_layer(IntPtr parameters);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern void openjpeg_openjp2_opj_dparameters_t_set_cp_layer(IntPtr parameters, uint value);
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_cp_layer(IntPtr parameters, uint32_t value);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_cp_reduce(IntPtr parameters);
+        public static extern uint32_t openjpeg_openjp2_opj_dparameters_t_get_cp_reduce(IntPtr parameters);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern void openjpeg_openjp2_opj_dparameters_t_set_cp_reduce(IntPtr parameters, uint value);
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_cp_reduce(IntPtr parameters, uint32_t value);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern int openjpeg_openjp2_opj_dparameters_t_get_cod_format(IntPtr parameters);
@@ -70,46 +70,46 @@ namespace OpenJpegDotNet
         public static extern void openjpeg_openjp2_opj_dparameters_t_set_m_verbose(IntPtr parameters, bool value);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_DA_x0(IntPtr parameters);
+        public static extern uint32_t openjpeg_openjp2_opj_dparameters_t_get_DA_x0(IntPtr parameters);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern void openjpeg_openjp2_opj_dparameters_t_set_DA_x0(IntPtr parameters, uint value);
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_DA_x0(IntPtr parameters, uint32_t value);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_DA_x1(IntPtr parameters);
+        public static extern uint32_t openjpeg_openjp2_opj_dparameters_t_get_DA_x1(IntPtr parameters);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern void openjpeg_openjp2_opj_dparameters_t_set_DA_x1(IntPtr parameters, uint value);
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_DA_x1(IntPtr parameters, uint32_t value);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_DA_y0(IntPtr parameters);
+        public static extern uint32_t openjpeg_openjp2_opj_dparameters_t_get_DA_y0(IntPtr parameters);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern void openjpeg_openjp2_opj_dparameters_t_set_DA_y0(IntPtr parameters, uint value);
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_DA_y0(IntPtr parameters, uint32_t value);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_DA_y1(IntPtr parameters);
+        public static extern uint32_t openjpeg_openjp2_opj_dparameters_t_get_DA_y1(IntPtr parameters);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern void openjpeg_openjp2_opj_dparameters_t_set_DA_y1(IntPtr parameters, uint value);
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_DA_y1(IntPtr parameters, uint32_t value);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_nb_tile_to_decode(IntPtr parameters);
+        public static extern uint32_t openjpeg_openjp2_opj_dparameters_t_get_nb_tile_to_decode(IntPtr parameters);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern void openjpeg_openjp2_opj_dparameters_t_set_nb_tile_to_decode(IntPtr parameters, uint value);
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_nb_tile_to_decode(IntPtr parameters, uint32_t value);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_tile_index(IntPtr parameters);
+        public static extern uint32_t openjpeg_openjp2_opj_dparameters_t_get_tile_index(IntPtr parameters);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern void openjpeg_openjp2_opj_dparameters_t_set_tile_index(IntPtr parameters, uint value);
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_tile_index(IntPtr parameters, uint32_t value);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern uint openjpeg_openjp2_opj_dparameters_t_get_flags(IntPtr parameters);
+        public static extern uint32_t openjpeg_openjp2_opj_dparameters_t_get_flags(IntPtr parameters);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern void openjpeg_openjp2_opj_dparameters_t_set_flags(IntPtr parameters, uint value);
+        public static extern void openjpeg_openjp2_opj_dparameters_t_set_flags(IntPtr parameters, uint32_t value);
 
         #endregion
 
@@ -142,10 +142,10 @@ namespace OpenJpegDotNet
         [return: MarshalAs(UnmanagedType.U1)]
         public static extern bool openjpeg_openjp2_opj_set_decode_area(IntPtr p_codec,
                                                                        IntPtr p_image,
-                                                                       uint p_start_x,
-                                                                       uint p_start_y,
-                                                                       uint p_end_x,
-                                                                       uint p_end_y);
+                                                                       uint32_t p_start_x,
+                                                                       uint32_t p_start_y,
+                                                                       uint32_t p_end_x,
+                                                                       uint32_t p_end_y);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         [return: MarshalAs(UnmanagedType.U1)]
@@ -153,6 +153,13 @@ namespace OpenJpegDotNet
                                                               IntPtr p_stream,
                                                               IntPtr p_image);
 
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        [return: MarshalAs(UnmanagedType.U1)]
+        public static extern bool openjpeg_openjp2_opj_write_tile(IntPtr p_codec,
+                                                                  uint32_t p_tile_index,
+                                                                  byte[] p_data,
+                                                                  uint32_t p_data_size,
+                                                                  IntPtr p_stream);
         #endregion
 
         #region Not Native Functions

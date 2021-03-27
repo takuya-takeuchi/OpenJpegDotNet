@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using Xunit;
 
@@ -653,23 +654,126 @@ namespace OpenJpegDotNet.Tests
             }
         }
 
-        #endregion
-
-        #region Not Native Functions
-
-        [Fact]
-        public void CompressionParameters()
-        {
-            var compressionParameters = new CompressionParameters();
-            this.DisposeAndCheckDisposedState(compressionParameters);
-        }
-
         [Fact]
         public void SetDefaultEncoderParameters()
         {
             var compressionParameters = new CompressionParameters();
             OpenJpeg.SetDefaultEncoderParameters(compressionParameters);
             this.DisposeAndCheckDisposedState(compressionParameters);
+        }
+
+        [Fact]
+        public void SetupEncoder()
+        {
+            var targets = new[]
+            {
+                new { Format = CodecFormat.Unknown, FileName = $"{nameof(this.SetupEncoder)}.ukn", Result = false },
+                new { Format = CodecFormat.J2k,     FileName = $"{nameof(this.SetupEncoder)}.j2k", Result = true  },
+                new { Format = CodecFormat.Jp2,     FileName = $"{nameof(this.SetupEncoder)}.jp2", Result = true  },
+                new { Format = CodecFormat.Jpp,     FileName = $"{nameof(this.SetupEncoder)}.jpp", Result = false },
+                new { Format = CodecFormat.Jpt,     FileName = $"{nameof(this.SetupEncoder)}.jpt", Result = false },
+                new { Format = CodecFormat.Jpx,     FileName = $"{nameof(this.SetupEncoder)}.jpx", Result = false },
+            };
+
+            const int numCompsMax = 4;
+            const int codeBlockWidthInitial = 64;
+            const int codeBlockHeightInitial = 64;
+            const int numComps = 3;
+            const int imageWidth = 2000;
+            const int imageHeight = 2000;
+            const int tileWidth = 1000;
+            const int tileHeight = 1000;
+            const uint compPrec = 8;
+            const bool irreversible = false;
+            const uint offsetX = 0;
+            const uint offsetY = 0;
+
+            var tilesWidth = (offsetX + imageWidth + tileWidth - 1) / tileWidth;
+            var tilesHeight = (offsetY + imageHeight + tileHeight - 1) / tileHeight;
+            var tiles = tilesWidth * tilesHeight;
+            var dataSize = tileWidth * tileHeight * numComps * (compPrec / 8);
+
+            var data = new byte[dataSize];
+            for (var index = 0; index < data.Length; index++)
+                data[index] = (byte)(index % byte.MaxValue);
+
+            foreach (var target in targets)
+            {
+                var codec = OpenJpeg.CreateCompress(target.Format);
+                var compressionParameters = new CompressionParameters();
+                OpenJpeg.SetDefaultEncoderParameters(compressionParameters);
+
+                compressionParameters.TcpNumLayers = 1;
+                compressionParameters.CodingParameterFixedQuality = 1;
+                compressionParameters.TcpDistoratio[0] = 20;
+                compressionParameters.CodingParameterTx0 = 0;
+                compressionParameters.CodingParameterTy0 = 0;
+                compressionParameters.TileSizeOn = true;
+                compressionParameters.CodingParameterTdx = tileWidth;
+                compressionParameters.CodingParameterTdy = tileHeight;
+                compressionParameters.CodeBlockWidthInitial = codeBlockWidthInitial;
+                compressionParameters.CodeBlockHeightInitial = codeBlockHeightInitial;
+                compressionParameters.Irreversible = irreversible;
+
+                var parameters = new ImageComponentParameters[numCompsMax];
+                for (var index = 0; index < parameters.Length; index++)
+                {
+                    parameters[index] = new ImageComponentParameters
+                    {
+                        Dx = 1,
+                        Dy = 1,
+                        Height = imageHeight,
+                        Width = imageWidth,
+                        Signed = false,
+                        Precision = compPrec,
+                        X0 = offsetX,
+                        Y0 = offsetY
+                    };
+                }
+
+                var image = OpenJpeg.ImageTileCreate(numComps, parameters, ColorSpace.Srgb);
+                image.X0 = offsetX;
+                image.Y0 = offsetY;
+                image.X1 = offsetX + imageWidth;
+                image.Y1 = offsetY + imageHeight;
+                image.ColorSpace = ColorSpace.Srgb;
+
+                Directory.CreateDirectory(ResultDirectory);
+                Directory.CreateDirectory(Path.Combine(ResultDirectory, nameof(this.SetupEncoder)));
+                var path = Path.Combine(ResultDirectory, nameof(this.SetupEncoder), target.FileName);
+
+                Assert.True(OpenJpeg.SetupEncoder(codec, compressionParameters, image) == target.Result, $"Failed to invoke {nameof(OpenJpeg.SetupDecoder)} for {target.Format}");
+                if (!target.Result)
+                {
+                    this.DisposeAndCheckDisposedState(image);
+                    this.DisposeAndCheckDisposedState(compressionParameters);
+                    this.DisposeAndCheckDisposedState(codec);
+                    continue;
+                }
+
+                var stream = OpenJpeg.StreamCreateDefaultFileStream(path, false);
+
+                OpenJpeg.StartCompress(codec, image, stream);
+
+                for (var i = 0; i < tiles; ++i)
+                {
+                    var tileY = (uint)(i / tilesWidth);
+                    var tileX = (uint)(i % tilesHeight);
+                    var tileX0 = Math.Max(image.X0, tileX * tileWidth);
+                    var tileY0 = Math.Max(image.Y0, tileY * tileHeight);
+                    var tileX1 = Math.Min(image.X1, (tileX + 1) * tileWidth);
+                    var tileY1 = Math.Min(image.Y1, (tileY + 1) * tileHeight);
+                    var tilesize = (tileX1 - tileX0) * (tileY1 - tileY0) * numComps * (compPrec / 8);
+                    Assert.True(OpenJpeg.WriteTile(codec, i, data, tilesize, stream), $"Failed to invoke {nameof(OpenJpeg.WriteTile)}");
+                }
+
+                OpenJpeg.EndCompress(codec, stream);
+
+                this.DisposeAndCheckDisposedState(stream);
+                this.DisposeAndCheckDisposedState(image);
+                this.DisposeAndCheckDisposedState(compressionParameters);
+                this.DisposeAndCheckDisposedState(codec);
+            }
         }
 
         #endregion

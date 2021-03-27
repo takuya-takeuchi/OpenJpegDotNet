@@ -12,8 +12,8 @@ DLLEXPORT const void openjpeg_openjp2_opj_cparameters_t_get_tcp_distoratio(opj_c
                                                                            float** value,
                                                                            uint32_t* len)
 {
-    *value = &parameters->tcp_distoratio[0];
-    *len = 100;
+   * value = &parameters->tcp_distoratio[0];
+   * len = 100;
 }
 
 DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_tcp_distoratio(opj_cparameters_t* parameters,
@@ -21,7 +21,7 @@ DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_tcp_distoratio(opj_cpar
                                                                         const uint32_t len)
 {
     if (len != 100) return ERR_GENERAL_OUT_OF_RANGE;
-    memcpy(parameters->tcp_distoratio, value, sizeof(float) * 100);
+    memcpy(parameters->tcp_distoratio, value, sizeof(float)*  100);
     return ERR_OK;
 }
 
@@ -29,8 +29,8 @@ DLLEXPORT const void openjpeg_openjp2_opj_cparameters_t_get_tcp_rates(opj_cparam
                                                                       float** value,
                                                                       uint32_t* len)
 {
-    *value = &parameters->tcp_rates[0];
-    *len = 100;
+   * value = &parameters->tcp_rates[0];
+   * len = 100;
 }
 
 DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_tcp_rates(opj_cparameters_t* parameters,
@@ -38,7 +38,7 @@ DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_tcp_rates(opj_cparamete
                                                                    const uint32_t len)
 {
     if (len != 100) return ERR_GENERAL_OUT_OF_RANGE;
-    memcpy(parameters->tcp_rates, value, sizeof(float) * 100);
+    memcpy(parameters->tcp_rates, value, sizeof(float)*  100);
     return ERR_OK;
 }
 
@@ -46,8 +46,8 @@ DLLEXPORT const void openjpeg_openjp2_opj_cparameters_t_get_POC(opj_cparameters_
                                                                 opj_poc_t** value,
                                                                 uint32_t* len)
 {
-    *value = &parameters->POC[0];
-    *len = 32;
+   * value = &parameters->POC[0];
+   * len = 32;
 }
 
 DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_POC(opj_cparameters_t* parameters,
@@ -55,7 +55,7 @@ DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_POC(opj_cparameters_t* 
                                                              const uint32_t len)
 {
     if (len != 32) return ERR_GENERAL_OUT_OF_RANGE;
-    memcpy(parameters->POC, value, sizeof(opj_poc_t) * 32);
+    memcpy(parameters->POC, value, sizeof(opj_poc_t)*  32);
     return ERR_OK;
 }
 
@@ -63,8 +63,8 @@ DLLEXPORT const void openjpeg_openjp2_opj_cparameters_t_get_jpwl_hprot_TPH(opj_c
                                                                            int** value,
                                                                            uint32_t* len)
 {
-    *value = &parameters->jpwl_hprot_TPH[0];
-    *len = JPWL_MAX_NO_TILESPECS;
+   * value = &parameters->jpwl_hprot_TPH[0];
+   * len = JPWL_MAX_NO_TILESPECS;
 }
 
 DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_jpwl_hprot_TPH(opj_cparameters_t* parameters,
@@ -72,7 +72,7 @@ DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_jpwl_hprot_TPH(opj_cpar
                                                                         const uint32_t len)
 {
     if (len != JPWL_MAX_NO_TILESPECS) return ERR_GENERAL_OUT_OF_RANGE;
-    memcpy(parameters->jpwl_hprot_TPH, value, sizeof(int) * JPWL_MAX_NO_TILESPECS);
+    memcpy(parameters->jpwl_hprot_TPH, value, sizeof(int)*  JPWL_MAX_NO_TILESPECS);
     return ERR_OK;
 }
 
@@ -80,8 +80,8 @@ DLLEXPORT const void openjpeg_openjp2_opj_cparameters_t_get_jpwl_hprot_TPH_tilen
                                                                                   int** value,
                                                                                   uint32_t* len)
 {
-    *value = &parameters->jpwl_hprot_TPH_tileno[0];
-    *len = JPWL_MAX_NO_TILESPECS;
+   * value = &parameters->jpwl_hprot_TPH_tileno[0];
+   * len = JPWL_MAX_NO_TILESPECS;
 }
 
 DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_jpwl_hprot_TPH_tileno(opj_cparameters_t* parameters,
@@ -89,7 +89,7 @@ DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_jpwl_hprot_TPH_tileno(o
                                                                                const uint32_t len)
 {
     if (len != JPWL_MAX_NO_TILESPECS) return ERR_GENERAL_OUT_OF_RANGE;
-    memcpy(parameters->jpwl_hprot_TPH_tileno, value, sizeof(int) * JPWL_MAX_NO_TILESPECS);
+    memcpy(parameters->jpwl_hprot_TPH_tileno, value, sizeof(int)*  JPWL_MAX_NO_TILESPECS);
     return ERR_OK;
 }
 
@@ -97,8 +97,8 @@ DLLEXPORT const void openjpeg_openjp2_opj_cparameters_t_get_jpwl_sens_TPH(opj_cp
                                                                           int** value,
                                                                           uint32_t* len)
 {
-    *value = &parameters->jpwl_sens_TPH[0];
-    *len = JPWL_MAX_NO_TILESPECS;
+   * value = &parameters->jpwl_sens_TPH[0];
+   * len = JPWL_MAX_NO_TILESPECS;
 }
 
 DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_jpwl_sens_TPH(opj_cparameters_t* parameters,
@@ -106,7 +106,7 @@ DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_jpwl_sens_TPH(opj_cpara
                                                                        const uint32_t len)
 {
     if (len != JPWL_MAX_NO_TILESPECS) return ERR_GENERAL_OUT_OF_RANGE;
-    memcpy(parameters->jpwl_sens_TPH, value, sizeof(int) * JPWL_MAX_NO_TILESPECS);
+    memcpy(parameters->jpwl_sens_TPH, value, sizeof(int)*  JPWL_MAX_NO_TILESPECS);
     return ERR_OK;
 }
 
@@ -114,8 +114,8 @@ DLLEXPORT const void openjpeg_openjp2_opj_cparameters_t_get_jpwl_sens_TPH_tileno
                                                                                  int** value,
                                                                                  uint32_t* len)
 {
-    *value = &parameters->jpwl_sens_TPH_tileno[0];
-    *len = JPWL_MAX_NO_TILESPECS;
+   * value = &parameters->jpwl_sens_TPH_tileno[0];
+   * len = JPWL_MAX_NO_TILESPECS;
 }
 
 DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_jpwl_sens_TPH_tileno(opj_cparameters_t* parameters,
@@ -123,7 +123,7 @@ DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_jpwl_sens_TPH_tileno(op
                                                                               const uint32_t len)
 {
     if (len != JPWL_MAX_NO_TILESPECS) return ERR_GENERAL_OUT_OF_RANGE;
-    memcpy(parameters->jpwl_sens_TPH_tileno, value, sizeof(int) * JPWL_MAX_NO_TILESPECS);
+    memcpy(parameters->jpwl_sens_TPH_tileno, value, sizeof(int)*  JPWL_MAX_NO_TILESPECS);
     return ERR_OK;
 }
 
@@ -131,8 +131,8 @@ DLLEXPORT const void openjpeg_openjp2_opj_cparameters_t_get_jpwl_pprot(opj_cpara
                                                                        int** value,
                                                                        uint32_t* len)
 {
-    *value = &parameters->jpwl_pprot[0];
-    *len = JPWL_MAX_NO_PACKSPECS;
+   * value = &parameters->jpwl_pprot[0];
+   * len = JPWL_MAX_NO_PACKSPECS;
 }
 
 DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_jpwl_pprot(opj_cparameters_t* parameters,
@@ -140,7 +140,7 @@ DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_jpwl_pprot(opj_cparamet
                                                                     const uint32_t len)
 {
     if (len != JPWL_MAX_NO_PACKSPECS) return ERR_GENERAL_OUT_OF_RANGE;
-    memcpy(parameters->jpwl_pprot, value, sizeof(int) * JPWL_MAX_NO_PACKSPECS);
+    memcpy(parameters->jpwl_pprot, value, sizeof(int)*  JPWL_MAX_NO_PACKSPECS);
     return ERR_OK;
 }
 
@@ -148,8 +148,8 @@ DLLEXPORT const void openjpeg_openjp2_opj_cparameters_t_get_jpwl_pprot_packno(op
                                                                               int** value,
                                                                               uint32_t* len)
 {
-    *value = &parameters->jpwl_pprot_packno[0];
-    *len = JPWL_MAX_NO_PACKSPECS;
+   * value = &parameters->jpwl_pprot_packno[0];
+   * len = JPWL_MAX_NO_PACKSPECS;
 }
 
 DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_jpwl_pprot_packno(opj_cparameters_t* parameters,
@@ -157,7 +157,7 @@ DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_jpwl_pprot_packno(opj_c
                                                                            const uint32_t len)
 {
     if (len != JPWL_MAX_NO_PACKSPECS) return ERR_GENERAL_OUT_OF_RANGE;
-    memcpy(parameters->jpwl_pprot_packno, value, sizeof(int) * JPWL_MAX_NO_PACKSPECS);
+    memcpy(parameters->jpwl_pprot_packno, value, sizeof(int)*  JPWL_MAX_NO_PACKSPECS);
     return ERR_OK;
 }
 
@@ -165,8 +165,8 @@ DLLEXPORT const void openjpeg_openjp2_opj_cparameters_t_get_jpwl_pprot_tileno(op
                                                                               int** value,
                                                                               uint32_t* len)
 {
-    *value = &parameters->jpwl_pprot_tileno[0];
-    *len = JPWL_MAX_NO_PACKSPECS;
+   * value = &parameters->jpwl_pprot_tileno[0];
+   * len = JPWL_MAX_NO_PACKSPECS;
 }
 
 DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_jpwl_pprot_tileno(opj_cparameters_t* parameters,
@@ -174,7 +174,7 @@ DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_jpwl_pprot_tileno(opj_c
                                                                            const uint32_t len)
 {
     if (len != JPWL_MAX_NO_PACKSPECS) return ERR_GENERAL_OUT_OF_RANGE;
-    memcpy(parameters->jpwl_pprot_tileno, value, sizeof(int) * JPWL_MAX_NO_PACKSPECS);
+    memcpy(parameters->jpwl_pprot_tileno, value, sizeof(int)*  JPWL_MAX_NO_PACKSPECS);
     return ERR_OK;
 }
 
@@ -182,8 +182,8 @@ DLLEXPORT const void openjpeg_openjp2_opj_cparameters_t_get_prch_init(opj_cparam
                                                                       int** value,
                                                                       uint32_t* len)
 {
-    *value = &parameters->prch_init[0];
-    *len = OPJ_J2K_MAXRLVLS;
+   * value = &parameters->prch_init[0];
+   * len = OPJ_J2K_MAXRLVLS;
 }
 
 DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_prch_init(opj_cparameters_t* parameters,
@@ -191,7 +191,7 @@ DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_prch_init(opj_cparamete
                                                                    const uint32_t len)
 {
     if (len != OPJ_J2K_MAXRLVLS) return ERR_GENERAL_OUT_OF_RANGE;
-    memcpy(parameters->prch_init, value, sizeof(int) * OPJ_J2K_MAXRLVLS);
+    memcpy(parameters->prch_init, value, sizeof(int)*  OPJ_J2K_MAXRLVLS);
     return ERR_OK;
 }
 
@@ -199,8 +199,8 @@ DLLEXPORT const void openjpeg_openjp2_opj_cparameters_t_get_prcw_init(opj_cparam
                                                                       int** value,
                                                                       uint32_t* len)
 {
-    *value = &parameters->prcw_init[0];
-    *len = OPJ_J2K_MAXRLVLS;
+   * value = &parameters->prcw_init[0];
+   * len = OPJ_J2K_MAXRLVLS;
 }
 
 DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_prcw_init(opj_cparameters_t* parameters,
@@ -208,7 +208,7 @@ DLLEXPORT int32_t openjpeg_openjp2_opj_cparameters_t_set_prcw_init(opj_cparamete
                                                                    const uint32_t len)
 {
     if (len != OPJ_J2K_MAXRLVLS) return ERR_GENERAL_OUT_OF_RANGE;
-    memcpy(parameters->prcw_init, value, sizeof(int) * OPJ_J2K_MAXRLVLS);
+    memcpy(parameters->prcw_init, value, sizeof(int)*  OPJ_J2K_MAXRLVLS);
     return ERR_OK;
 }
 
@@ -642,10 +642,23 @@ DLLEXPORT const opj_codec_t* openjpeg_openjp2_opj_create_compress(const CODEC_FO
 }
 
 DLLEXPORT const bool openjpeg_openjp2_opj_setup_encoder(opj_codec_t* p_codec,
-                                                        opj_cparameters_t *parameters,
+                                                        opj_cparameters_t* parameters,
                                                         opj_image_t* image)
 {
     return ::opj_setup_encoder(p_codec, parameters, image) == OPJ_TRUE;
+}
+
+DLLEXPORT const bool openjpeg_openjp2_opj_start_compress(opj_codec_t* p_codec,
+                                                         opj_image_t* p_image,
+                                                         opj_stream_t* p_stream)
+{
+    return ::opj_start_compress(p_codec, p_image, p_stream) == OPJ_TRUE;
+}
+
+DLLEXPORT const bool openjpeg_openjp2_opj_end_compress(opj_codec_t* p_codec,
+                                                       opj_stream_t* p_stream)
+{
+    return ::opj_end_compress(p_codec, p_stream) == OPJ_TRUE;
 }
 
 DLLEXPORT void openjpeg_openjp2_opj_set_default_encoder_parameters(opj_cparameters_t* parameters)

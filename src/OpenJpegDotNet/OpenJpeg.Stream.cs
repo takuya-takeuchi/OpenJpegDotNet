@@ -22,7 +22,7 @@ namespace OpenJpegDotNet
         {
             if (filepath == null)
                 throw new ArgumentNullException(nameof(filepath));
-            if (!File.Exists(filepath))
+            if (isReadStream && !File.Exists(filepath))
                 throw new FileNotFoundException($"The specified {nameof(filepath)} does not exist.", filepath);
 
             var str = Encoding.GetBytes(filepath);

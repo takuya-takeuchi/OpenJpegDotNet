@@ -24,7 +24,7 @@ namespace OpenJpegDotNet
         #region Properties
 
         /// <summary>
-        /// Gets the horizontal offset from the origin of the reference grid to the left side of the image area.
+        /// Gets or sets the horizontal offset from the origin of the reference grid to the left side of the image area.
         /// </summary>
         /// <exception cref="ObjectDisposedException">This object is disposed.</exception>
         public uint X0
@@ -34,10 +34,15 @@ namespace OpenJpegDotNet
                 this.ThrowIfDisposed();
                 return NativeMethods.openjpeg_openjp2_opj_image_t_get_x0(this.NativePtr);
             }
+            set
+            {
+                this.ThrowIfDisposed();
+                NativeMethods.openjpeg_openjp2_opj_image_t_set_x0(this.NativePtr, value);
+            }
         }
 
         /// <summary>
-        /// Gets the width of the reference grid.
+        /// Gets or sets the width of the reference grid.
         /// </summary>
         /// <exception cref="ObjectDisposedException">This object is disposed.</exception>
         public uint X1
@@ -46,6 +51,11 @@ namespace OpenJpegDotNet
             {
                 this.ThrowIfDisposed();
                 return NativeMethods.openjpeg_openjp2_opj_image_t_get_x1(this.NativePtr);
+            }
+            set
+            {
+                this.ThrowIfDisposed();
+                NativeMethods.openjpeg_openjp2_opj_image_t_set_x1(this.NativePtr, value);
             }
         }
 
@@ -60,10 +70,15 @@ namespace OpenJpegDotNet
                 this.ThrowIfDisposed();
                 return NativeMethods.openjpeg_openjp2_opj_image_t_get_y0(this.NativePtr);
             }
+            set
+            {
+                this.ThrowIfDisposed();
+                NativeMethods.openjpeg_openjp2_opj_image_t_set_y0(this.NativePtr, value);
+            }
         }
 
         /// <summary>
-        /// Gets the height of the reference grid.
+        /// Gets or sets the height of the reference grid.
         /// </summary>
         /// <exception cref="ObjectDisposedException">This object is disposed.</exception>
         public uint Y1
@@ -72,6 +87,11 @@ namespace OpenJpegDotNet
             {
                 this.ThrowIfDisposed();
                 return NativeMethods.openjpeg_openjp2_opj_image_t_get_y1(this.NativePtr);
+            }
+            set
+            {
+                this.ThrowIfDisposed();
+                NativeMethods.openjpeg_openjp2_opj_image_t_set_y1(this.NativePtr, value);
             }
         }
 
@@ -86,10 +106,15 @@ namespace OpenJpegDotNet
                 this.ThrowIfDisposed();
                 return NativeMethods.openjpeg_openjp2_opj_image_t_get_numcomps(this.NativePtr);
             }
+            //set
+            //{
+            //    this.ThrowIfDisposed();
+            //    NativeMethods.openjpeg_openjp2_opj_image_t_set_numcomps(this.NativePtr, value);
+            //}
         }
 
         /// <summary>
-        /// Gets the color space.
+        /// Gets or sets the color space.
         /// </summary>
         /// <exception cref="ObjectDisposedException">This object is disposed.</exception>
         public ColorSpace ColorSpace
@@ -98,6 +123,11 @@ namespace OpenJpegDotNet
             {
                 this.ThrowIfDisposed();
                 return NativeMethods.openjpeg_openjp2_opj_image_t_get_color_space(this.NativePtr);
+            }
+            set
+            {
+                this.ThrowIfDisposed();
+                NativeMethods.openjpeg_openjp2_opj_image_t_set_color_space(this.NativePtr, value);
             }
         }
 

@@ -5,36 +5,68 @@
 #include "../shared.hpp"
 
 #include <string>
+#include <vector>
 
 #pragma region opj_image_t
 
-DLLEXPORT const OPJ_UINT32 openjpeg_openjp2_opj_image_t_get_x0(opj_image_t* image)
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_t_get_x0(opj_image_t* image)
 {
     return image->x0;
 }
 
-DLLEXPORT const OPJ_UINT32 openjpeg_openjp2_opj_image_t_get_y0(opj_image_t* image)
+DLLEXPORT void openjpeg_openjp2_opj_image_t_set_x0(opj_image_t* image, const uint32_t value)
+{
+    image->x0 = value;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_t_get_y0(opj_image_t* image)
 {
     return image->y0;
 }
 
-DLLEXPORT const OPJ_UINT32 openjpeg_openjp2_opj_image_t_get_x1(opj_image_t* image)
+DLLEXPORT void openjpeg_openjp2_opj_image_t_set_y0(opj_image_t* image, const uint32_t value)
+{
+    image->y0 = value;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_t_get_x1(opj_image_t* image)
 {
     return image->x1;
 }
 
-DLLEXPORT const OPJ_UINT32 openjpeg_openjp2_opj_image_t_get_y1(opj_image_t* image)
+DLLEXPORT void openjpeg_openjp2_opj_image_t_set_x1(opj_image_t* image, const uint32_t value)
+{
+    image->x1 = value;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_t_get_y1(opj_image_t* image)
 {
     return image->y1;
 }
 
-DLLEXPORT const OPJ_UINT32 openjpeg_openjp2_opj_image_t_get_numcomps(opj_image_t* image)
+DLLEXPORT void openjpeg_openjp2_opj_image_t_set_y1(opj_image_t* image, const uint32_t value)
+{
+    image->y1 = value;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_t_get_numcomps(opj_image_t* image)
 {
     return image->numcomps;
 }
+
+DLLEXPORT void openjpeg_openjp2_opj_image_t_set_numcomps(opj_image_t* image, const uint32_t value)
+{
+    image->numcomps = value;
+}
+
 DLLEXPORT const OPJ_COLOR_SPACE openjpeg_openjp2_opj_image_t_get_color_space(opj_image_t* image)
 {
     return image->color_space;
+}
+
+DLLEXPORT void openjpeg_openjp2_opj_image_t_set_color_space(opj_image_t* image, const OPJ_COLOR_SPACE value)
+{
+    image->color_space = value;
 }
 
 DLLEXPORT const opj_image_comp_t* openjpeg_openjp2_opj_image_t_get_comps(opj_image_t* image)
@@ -47,7 +79,7 @@ DLLEXPORT const OPJ_BYTE* openjpeg_openjp2_opj_image_t_get_icc_profile_buf(opj_i
     return image->icc_profile_buf;
 }
 
-DLLEXPORT const OPJ_UINT32 openjpeg_openjp2_opj_image_t_get_icc_profile_len(opj_image_t* image)
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_t_get_icc_profile_len(opj_image_t* image)
 {
     return image->icc_profile_len;
 }
@@ -154,10 +186,14 @@ DLLEXPORT void openjpeg_openjp2_opj_image_t_destroy(opj_image_t* image)
 }
 
 DLLEXPORT const opj_image_t* openjpeg_openjp2_opj_image_tile_create(const uint32_t numcmpts,
-                                                                    opj_image_cmptparm_t* cmptparms,
+                                                                    opj_image_cmptparm_t** cmptparms,
+                                                                    const uint32_t cmptparms_len,
                                                                     const OPJ_COLOR_SPACE clrspc)
 {
-    return ::opj_image_tile_create(numcmpts, cmptparms, clrspc);
+    auto tmp = std::vector<opj_image_cmptparm_t>(cmptparms_len);
+    for (auto index = 0; index < cmptparms_len; index++) tmp[index] = (*cmptparms[index]);
+    const auto ret = ::opj_image_tile_create(numcmpts, tmp.data(), clrspc);
+    return ret;
 }
 
 #pragma region non-openjp2 functions

@@ -1,5 +1,7 @@
-﻿using System.Drawing.Imaging;
+﻿using System;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using Xunit;
 
 // ReSharper disable once CheckNamespace
@@ -8,6 +10,73 @@ namespace OpenJpegDotNet.Tests
 
     public sealed partial class OpenJpegTest
     {
+
+        #region Image
+
+        [Fact]
+        public void ImageColorSpace()
+        {
+            using var image = CreateImage();
+            foreach (var value in Enum.GetValues(typeof(ColorSpace)).Cast<ColorSpace>())
+            {
+                image.ColorSpace = value;
+                Assert.Equal(value, image.ColorSpace);
+            }
+        }
+
+        [Fact]
+        public void ImageNumberOfComponents()
+        {
+            const uint numComps = 3;
+            using var image = CreateImage(numComps);
+            Assert.Equal(numComps, image.NumberOfComponents);
+        }
+
+        [Fact]
+        public void ImageX0()
+        {
+            using var image = CreateImage();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                image.X0 = value;
+                Assert.Equal(value, image.X0);
+            }
+        }
+
+        [Fact]
+        public void ImageX1()
+        {
+            using var image = CreateImage();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                image.X1 = value;
+                Assert.Equal(value, image.X1);
+            }
+        }
+
+        [Fact]
+        public void ImageY0()
+        {
+            using var image = CreateImage();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                image.Y0 = value;
+                Assert.Equal(value, image.Y0);
+            }
+        }
+
+        [Fact]
+        public void ImageY1()
+        {
+            using var image = CreateImage();
+            foreach (var value in new[] { 0u, 1u, 10u })
+            {
+                image.Y1 = value;
+                Assert.Equal(value, image.Y1);
+            }
+        }
+
+        #endregion
 
         #region ImageComponentParameters
 
@@ -152,6 +221,68 @@ namespace OpenJpegDotNet.Tests
                 this.DisposeAndCheckDisposedState(decompressionParameters);
                 this.DisposeAndCheckDisposedState(codec);
             }
+        }
+
+        #endregion
+
+        #region Helpers
+
+        private static Image CreateImage(uint numComps = 3)
+        {
+            const int numCompsMax = 4;
+            const int codeBlockWidthInitial = 64;
+            const int codeBlockHeightInitial = 64;
+            const int imageWidth = 2000;
+            const int imageHeight = 2000;
+            const int tileWidth = 1000;
+            const int tileHeight = 1000;
+            const uint compPrec = 8;
+            const bool irreversible = false;
+            const uint offsetX = 0;
+            const uint offsetY = 0;
+
+            using var codec = OpenJpeg.CreateCompress(CodecFormat.Jp2);
+            using var compressionParameters = new CompressionParameters();
+            OpenJpeg.SetDefaultEncoderParameters(compressionParameters);
+
+            compressionParameters.TcpNumLayers = 1;
+            compressionParameters.CodingParameterFixedQuality = 1;
+            compressionParameters.TcpDistoratio[0] = 20;
+            compressionParameters.CodingParameterTx0 = 0;
+            compressionParameters.CodingParameterTy0 = 0;
+            compressionParameters.TileSizeOn = true;
+            compressionParameters.CodingParameterTdx = tileWidth;
+            compressionParameters.CodingParameterTdy = tileHeight;
+            compressionParameters.CodeBlockWidthInitial = codeBlockWidthInitial;
+            compressionParameters.CodeBlockHeightInitial = codeBlockHeightInitial;
+            compressionParameters.Irreversible = irreversible;
+
+            var parameters = new ImageComponentParameters[numCompsMax];
+            for (var index = 0; index < parameters.Length; index++)
+            {
+                parameters[index] = new ImageComponentParameters
+                {
+                    Dx = 1,
+                    Dy = 1,
+                    Height = imageHeight,
+                    Width = imageWidth,
+                    Signed = false,
+                    Precision = compPrec,
+                    X0 = offsetX,
+                    Y0 = offsetY
+                };
+            }
+
+            var data = new byte[imageWidth * imageHeight];
+            for (var index = 0; index < data.Length; index++)
+                data[index] = (byte)(index % byte.MaxValue);
+
+            var image = OpenJpeg.ImageTileCreate(numComps, parameters, ColorSpace.Srgb);
+
+            foreach (var parameter in parameters)
+                parameter.Dispose();
+
+            return image;
         }
 
         #endregion

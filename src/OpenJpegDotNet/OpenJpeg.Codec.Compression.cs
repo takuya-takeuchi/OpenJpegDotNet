@@ -21,6 +21,52 @@ namespace OpenJpegDotNet
         }
 
         /// <summary>
+        /// Start to compress the current image.
+        /// </summary>
+        /// <param name="codec">the Jpeg 2000 codec to compress.</param>
+        /// <param name="image">The image that receives encoded datum.</param>
+        /// <param name="stream">The Jpeg 2000 stream.</param>
+        /// <returns><code>true</code> if the start to compress is correctly set; otherwise, <code>false</code>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="codec"/>, <paramref name="image"/> or <paramref name="stream"/> is null.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/>, <paramref name="image"/> or <paramref name="stream"/>.</exception>
+        public static bool StartCompress(Codec codec, Image image, Stream stream)
+        {
+            if (codec == null)
+                throw new ArgumentNullException(nameof(codec));
+            if (image == null)
+                throw new ArgumentNullException(nameof(image));
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
+
+            codec.ThrowIfDisposed();
+            image.ThrowIfDisposed();
+            stream.ThrowIfDisposed();
+
+            return NativeMethods.openjpeg_openjp2_opj_start_compress(codec.NativePtr, image.NativePtr, stream.NativePtr);
+        }
+
+        /// <summary>
+        /// End to compress the current image.
+        /// </summary>
+        /// <param name="codec">the Jpeg 2000 codec to compress.</param>
+        /// <param name="stream">The Jpeg 2000 stream.</param>
+        /// <returns><code>true</code> if the end to compress is correctly set; otherwise, <code>false</code>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="codec"/> or <paramref name="stream"/> is null.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="stream"/>.</exception>
+        public static bool EndCompress(Codec codec, Stream stream)
+        {
+            if (codec == null)
+                throw new ArgumentNullException(nameof(codec));
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
+
+            codec.ThrowIfDisposed();
+            stream.ThrowIfDisposed();
+
+            return NativeMethods.openjpeg_openjp2_opj_end_compress(codec.NativePtr, stream.NativePtr);
+        }
+
+        /// <summary>
         /// Set encoding parameters to default values.
         /// </summary>
         /// <param name="parameters">The <see cref="CompressionParameters"/> to compress image.</param>

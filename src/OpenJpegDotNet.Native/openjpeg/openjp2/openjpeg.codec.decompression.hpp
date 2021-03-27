@@ -213,6 +213,15 @@ DLLEXPORT const bool openjpeg_openjp2_opj_decode(opj_codec_t *p_codec,
     return ::opj_decode(p_codec, p_stream, p_image) == OPJ_TRUE;
 }
 
+DLLEXPORT const bool openjpeg_openjp2_opj_write_tile(opj_codec_t *p_codec,
+                                                     uint32_t p_tile_index,
+                                                     uint8_t * p_data,
+                                                     uint32_t p_data_size,
+                                                     opj_stream_t *p_stream)
+{
+    return ::opj_write_tile(p_codec, p_tile_index, p_data, p_data_size, p_stream) == OPJ_TRUE;
+}
+
 #pragma endregion functions
 
 #pragma region non-openjp2 functions

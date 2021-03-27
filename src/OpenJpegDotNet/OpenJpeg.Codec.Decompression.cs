@@ -157,6 +157,30 @@ namespace OpenJpegDotNet
             return NativeMethods.openjpeg_openjp2_opj_setup_decoder(codec.NativePtr, parameters.NativePtr);
         }
 
+        /// <summary>
+        /// Writes a tile with the given data.
+        /// </summary>
+        /// <param name="codec">The <see cref="Codec"/> to write tile.</param>
+        /// <param name="tileIndex">The index of the tile to write.</param>
+        /// <param name="data">The buffer to the data to write.</param>
+        /// <param name="dataSize">The length of datum to write. This value os used to make sure the data being written is correct.</param>
+        /// <param name="stream">The stream to write data to.</param>
+        /// <returns><code>true</code> if the data could be written; otherwise, <code>false</code>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="codec"/> or <paramref name="stream"/> is null.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="stream"/>.</exception>
+        public static bool WriteTile(Codec codec, int tileIndex, byte[] data, uint dataSize, Stream stream)
+        {
+            if (codec == null)
+                throw new ArgumentNullException(nameof(codec));
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
+
+            codec.ThrowIfDisposed();
+            stream.ThrowIfDisposed();
+
+            return NativeMethods.openjpeg_openjp2_opj_write_tile(codec.NativePtr, (uint)tileIndex, data, dataSize, stream.NativePtr);
+        }
+
     }
 
 }

@@ -23,19 +23,37 @@ namespace OpenJpegDotNet
         public static extern uint openjpeg_openjp2_opj_image_t_get_x0(IntPtr image);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_image_t_set_x0(IntPtr image, uint value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern uint openjpeg_openjp2_opj_image_t_get_y0(IntPtr image);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_image_t_set_y0(IntPtr image, uint value);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern uint openjpeg_openjp2_opj_image_t_get_x1(IntPtr image);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_image_t_set_x1(IntPtr image, uint value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern uint openjpeg_openjp2_opj_image_t_get_y1(IntPtr image);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_image_t_set_y1(IntPtr image, uint value);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern uint openjpeg_openjp2_opj_image_t_get_numcomps(IntPtr image);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_image_t_set_numcomps(IntPtr image, uint value);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern ColorSpace openjpeg_openjp2_opj_image_t_get_color_space(IntPtr image);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_image_t_set_color_space(IntPtr image, ColorSpace value);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern IntPtr openjpeg_openjp2_opj_image_t_get_comps(IntPtr image);
@@ -115,7 +133,7 @@ namespace OpenJpegDotNet
         public static extern void openjpeg_openjp2_opj_image_t_destroy(IntPtr image);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern void openjpeg_openjp2_opj_image_tile_create(uint numcmpts, IntPtr cmptparms, ColorSpace clrspc);
+        public static extern IntPtr openjpeg_openjp2_opj_image_tile_create(uint numcmpts, IntPtr[] cmptparms, uint cmptparms_len, ColorSpace clrspc);
 
         #endregion
 
