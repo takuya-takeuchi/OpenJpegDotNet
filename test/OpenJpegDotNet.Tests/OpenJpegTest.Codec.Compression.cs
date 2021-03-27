@@ -24,6 +24,17 @@ namespace OpenJpegDotNet.Tests
 
         #endregion
 
+        #region Not Native Functions
+
+        [Fact]
+        public void CompressionParameters()
+        {
+            var compressionParameters = new CompressionParameters();
+            this.DisposeAndCheckDisposedState(compressionParameters);
+        }
+
+        #endregion
+
     }
 
 }
