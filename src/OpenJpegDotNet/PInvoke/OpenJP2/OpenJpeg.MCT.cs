@@ -18,7 +18,11 @@ namespace OpenJpegDotNet
         #region Functions
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern IntPtr openjpeg_openjp2_opj_version();
+        [return: MarshalAs(UnmanagedType.U1)]
+        public static extern bool openjpeg_openjp2_opj_set_MCT(IntPtr parameters,
+                                                               float[] pEncodingMatrix,
+                                                               int[] p_dc_shift,
+                                                               uint pNbComp);
 
         #endregion
 

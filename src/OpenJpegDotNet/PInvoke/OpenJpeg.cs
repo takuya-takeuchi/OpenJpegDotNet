@@ -26,6 +26,8 @@ namespace OpenJpegDotNet
 
             GeneralFileIOError      = -(GeneralError | 0x00000001),
 
+            GeneralOutOfRange       = -(GeneralError | 0x00000002),
+
             #endregion
 
             #region Image
