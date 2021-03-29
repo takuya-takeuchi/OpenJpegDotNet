@@ -18,7 +18,12 @@ namespace OpenJpegDotNet
         #region Functions
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern IntPtr openjpeg_openjp2_opj_version();
+        public static extern void openjpeg_openjp2_opj_stream_destroy(IntPtr p_stream);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern IntPtr openjpeg_openjp2_opj_stream_create_default_file_stream(byte[] fname,
+                                                                                           uint fname_len,
+                                                                                           bool p_is_read_stream);
 
         #endregion
 

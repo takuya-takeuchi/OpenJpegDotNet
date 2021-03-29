@@ -16,7 +16,7 @@ namespace OpenJpegDotNet
         /// </summary>
         public DecompressionParameters()
         {
-            this.NativePtr = NativeMethods.openjpeg_openjp2_opj_opj_dparameters_t_new();
+            this.NativePtr = NativeMethods.openjpeg_openjp2_opj_dparameters_t_new();
         }
 
         #endregion
@@ -307,7 +307,7 @@ namespace OpenJpegDotNet
             if (this.NativePtr == IntPtr.Zero)
                 return;
 
-            NativeMethods.openjpeg_openjp2_opj_opj_dparameters_t_delete(this.NativePtr);
+            NativeMethods.openjpeg_openjp2_opj_dparameters_t_delete(this.NativePtr);
         }
 
         #endregion
