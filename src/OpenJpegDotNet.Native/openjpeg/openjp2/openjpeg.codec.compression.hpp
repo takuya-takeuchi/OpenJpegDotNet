@@ -4,8 +4,6 @@
 #include "../export.hpp"
 #include "../shared.hpp"
 
-#include <string>
-
 #pragma region opj_cparameters_t
 
 DLLEXPORT const void openjpeg_openjp2_opj_cparameters_t_get_tcp_distoratio(opj_cparameters_t* parameters,

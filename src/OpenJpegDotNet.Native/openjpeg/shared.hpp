@@ -5,6 +5,9 @@
 #include <openjpeg-2.4/openjpeg.h>
 
 #include <cstdint>
+#include <string>
+#include <string.h>
+#include <vector>
 
 #define ERR_OK                                                            0x00000000
 
