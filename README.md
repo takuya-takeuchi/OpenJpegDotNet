@@ -12,7 +12,7 @@ OpenJpeg wrapper written in C++ and C# for Windows, MacOS and Linux
  
 ## Dependencies Libraries and Products
 
-#### [OpenJpeg](https://github.com/OpenJpeg/OpenJpeg)
+#### [OpenJpeg](https://github.com/uclouvain/openjpeg)
 
 > **License:** BSD 2-clause "Simplified" License
 >

@@ -4,8 +4,6 @@
 #include "../export.hpp"
 #include "../shared.hpp"
 
-#include <string>
-
 #ifdef _WIN32
 #include <windows.h>
 #define strcasecmp _stricmp
