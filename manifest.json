@@ -1,0 +1,290 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/a/OpenJpegDotNet/OpenJpegDotNet/docfx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.CinemaMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.CinemaMode.html",
+          "hash": "0yGTzAm+DxguuXkWIthiGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.Codec.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.Codec.html",
+          "hash": "UQ6X6HfC++TgyxONarl0fQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.CodecFormat.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.CodecFormat.html",
+          "hash": "bd5QAuRdmQk8E3zEua4emA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.ColorSpace.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.ColorSpace.html",
+          "hash": "BvsqDMfU4Eou+TbfdcdqyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.CompressionParameters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.CompressionParameters.html",
+          "hash": "isw7wv2PqgcaXm52fUKA5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.DecompressionParameters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.DecompressionParameters.html",
+          "hash": "RQKI5wZHLprId4TX6pEdKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.FileFormat.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.FileFormat.html",
+          "hash": "TNr1f4FV1unNz+d87w/IGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.Image.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.Image.html",
+          "hash": "MEiK2B6u+EpSxHL2a9ZYWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.ImageComponentParameters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.ImageComponentParameters.html",
+          "hash": "9NChRTmGT+6IjMdL+7Qq3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.OpenJpeg.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.OpenJpeg.html",
+          "hash": "aYxVyLZl6K157WB0f5kKcQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.OpenJpegObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.OpenJpegObject.html",
+          "hash": "swB6tKvOvWhCFKwv+qNYug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.ProgressionOrder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.ProgressionOrder.html",
+          "hash": "nvche/m9UnVXppmIQEtJEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.RegionSizeCapabilities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.RegionSizeCapabilities.html",
+          "hash": "DXUoEAtjZDDkJNQ+tbLpzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.Stream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.Stream.html",
+          "hash": "2ZCfM193+xK6CGrpB9wl2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.html",
+          "hash": "QSuxPj/erqbZqiPsMcs3HQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "6FKNvl438TLEahVP4WJVQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "TOjt5p/84BrgaLH0Rmzkag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "KaWDX8tr29+j6jkKYsd73w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 1,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 15,
+          "skipped_file_count": 0
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
