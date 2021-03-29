@@ -4,8 +4,6 @@
 #include "../export.hpp"
 #include "../shared.hpp"
 
-#include <string>
-
 #pragma region opj_dparameters_t
 
 DLLEXPORT const uint32_t openjpeg_openjp2_opj_dparameters_t_get_cp_reduce(opj_dparameters_t* parameters)

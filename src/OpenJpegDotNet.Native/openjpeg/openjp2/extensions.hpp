@@ -4,8 +4,6 @@
 #include "../export.hpp"
 #include "../shared.hpp"
 
-#include <string>
-
 // https://github.com/uclouvain/openjpeg/blob/v2.4.0/src/bin/jp2/convert.c
 DLLEXPORT int32_t openjpeg_openjp2_extensions_imagetobmp(opj_image_t * image,
                                                          bool big_endian,

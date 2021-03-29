@@ -4,8 +4,6 @@
 #include "../export.hpp"
 #include "../shared.hpp"
 
-#include <string>
-
 DLLEXPORT bool openjpeg_openjp2_opj_set_MCT(opj_cparameters_t* parameters,
                                             float* pEncodingMatrix,
                                             int32_t* p_dc_shift,

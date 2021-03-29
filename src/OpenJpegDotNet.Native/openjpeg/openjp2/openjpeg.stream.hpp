@@ -4,8 +4,6 @@
 #include "../export.hpp"
 #include "../shared.hpp"
 
-#include <string>
-
 DLLEXPORT void openjpeg_openjp2_opj_stream_destroy(opj_stream_t* p_stream)
 {
     ::opj_stream_destroy(p_stream);

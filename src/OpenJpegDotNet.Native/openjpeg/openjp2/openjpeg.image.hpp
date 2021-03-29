@@ -4,9 +4,6 @@
 #include "../export.hpp"
 #include "../shared.hpp"
 
-#include <string>
-#include <vector>
-
 #pragma region opj_image_t
 
 DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_t_get_x0(opj_image_t* image)

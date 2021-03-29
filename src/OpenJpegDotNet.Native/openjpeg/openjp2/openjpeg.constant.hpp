@@ -4,8 +4,6 @@
 #include "../export.hpp"
 #include "../shared.hpp"
 
-#include <string>
-
 #pragma region non-openjp2 functions
 
 DLLEXPORT const uint32_t openjpeg_openjp2_opj_get_JPWL_MAX_NO_TILESPECS()

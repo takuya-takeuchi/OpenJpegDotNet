@@ -4,8 +4,6 @@
 #include "../export.hpp"
 #include "../shared.hpp"
 
-#include <string>
-
 DLLEXPORT std::string* openjpeg_openjp2_opj_version()
 {
     const auto str = ::opj_version();
