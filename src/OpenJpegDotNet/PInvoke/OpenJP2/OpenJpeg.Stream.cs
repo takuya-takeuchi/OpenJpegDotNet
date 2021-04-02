@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using uint8_t = System.Byte;
 using uint16_t = System.UInt16;
 using uint32_t = System.UInt32;
+using uint64_t = System.UInt64;
 using int64_t = System.Int64;
 using int8_t = System.SByte;
 using int16_t = System.Int16;
@@ -24,6 +25,12 @@ namespace OpenJpegDotNet
         public static extern IntPtr openjpeg_openjp2_opj_stream_create_default_file_stream(byte[] fname,
                                                                                            uint fname_len,
                                                                                            bool p_is_read_stream);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern IntPtr openjpeg_openjp2_opj_stream_create_file_stream(byte[] fname,
+                                                                                   uint fname_len,
+                                                                                   uint64_t p_buffer_size,
+                                                                                   bool p_is_read_stream);
 
         #endregion
 
