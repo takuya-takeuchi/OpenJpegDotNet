@@ -186,7 +186,7 @@ namespace OpenJpegDotNet.IO
         #region IDisposable Members
 
         /// <summary>
-        /// Releases all resources used by this <see cref="OpenJpegObject"/>.
+        /// Releases all resources used by this <see cref="Reader"/>.
         /// </summary>
         public void Dispose()
         {
@@ -195,7 +195,7 @@ namespace OpenJpegDotNet.IO
         }
 
         /// <summary>
-        /// Releases all resources used by this <see cref="OpenJpegObject"/>.
+        /// Releases all resources used by this <see cref="Reader"/>.
         /// </summary>
         /// <param name="disposing">Indicate value whether <see cref="IDisposable.Dispose"/> method was called.</param>
         private void Dispose(bool disposing)
