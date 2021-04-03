@@ -29,6 +29,31 @@ namespace OpenJpegDotNet
                                                                        bool p_is_read_stream);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern IntPtr openjpeg_openjp2_opj_stream_set_read_function(IntPtr p_stream,
+                                                                                  IntPtr p_function);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern IntPtr openjpeg_openjp2_opj_stream_set_write_function(IntPtr p_stream,
+                                                                                   IntPtr p_function);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_stream_set_skip_function(IntPtr p_stream,
+                                                                                IntPtr p_function);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_stream_set_seek_function(IntPtr p_stream,
+                                                                                IntPtr p_function);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_stream_set_user_data(IntPtr p_stream,
+                                                                            IntPtr p_data,
+                                                                            IntPtr p_function);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_stream_set_user_data_length(IntPtr p_stream,
+                                                                                   uint64_t data_length);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern IntPtr openjpeg_openjp2_opj_stream_create_default_file_stream(byte[] fname,
                                                                                            uint fname_len,
                                                                                            bool p_is_read_stream);
