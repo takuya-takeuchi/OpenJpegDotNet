@@ -10,6 +10,24 @@ OpenJpeg wrapper written in C++ and C# for Windows, MacOS and Linux
 ||Linux|-|✓|-|-|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.svg)](https://www.nuget.org/packages/OpenJpegDotNet)|
 ||OSX|-|✓|-|-|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.svg)](https://www.nuget.org/packages/OpenJpegDotNet)|
  
+## How to use?
+
+OpenJpegDotNet provides **OpenJpeg APIs** and **Auxiliary APIs**. Auxiliary APIs allows developers to decode/encode jpeg 2000 data easily.
+
+### :warning: Warning
+
+Auxiliary APIs only wraps native OpenJpeg APIs. 
+Auxiliary APIs may be changed in the future.
+
+### Read
+
+````csharp
+byte[] image = System.IO.File.ReadAllBytes("test.j2k");
+using OpenJpegDotNet.IO.Reader reader = new OpenJpegDotNet.IO.Reader(image);
+bool result = reader.ReadHeader();
+System.Drawing.Bitmap bitmap = reader.ReadData();
+````
+
 ## Dependencies Libraries and Products
 
 #### [OpenJpeg](https://github.com/uclouvain/openjpeg)

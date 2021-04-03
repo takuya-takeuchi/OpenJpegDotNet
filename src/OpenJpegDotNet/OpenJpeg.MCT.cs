@@ -19,7 +19,7 @@ namespace OpenJpegDotNet
         /// <param name="components">The number of components of the image.</param>
         /// <returns><code>true</code> if the parameters could be set; otherwise, <code>false</code>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="parameters"/>, <paramref name="encodingMatrix"/> or <paramref name="dcShift"/> is null.</exception>
-        /// <exception cref="ObjectDisposedException"><paramref name="parameters"/>.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="parameters"/> is disposed.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The length of <paramref name="encodingMatrix"/> must be <paramref name="components"/> x <paramref name="components"/> or less. Or The length of <paramref name="dcShift"/> must be <paramref name="components"/> or less</exception>
         public static bool SetMCT(CompressionParameters parameters,
                                   float[] encodingMatrix,
