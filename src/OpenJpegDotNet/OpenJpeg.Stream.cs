@@ -22,6 +22,18 @@ namespace OpenJpegDotNet
         }
 
         /// <summary>
+        /// Creates an abstract stream with a specific buffer size.
+        /// </summary>
+        /// <param name="bufferSize">The size of the chunk used to stream.</param>
+        /// <param name="isReadStream">The value whether the stream is a read stream.</param>
+        /// <returns>The <see cref="Stream"/>.</returns>
+        public static Stream StreamCreate(ulong bufferSize, bool isReadStream)
+        {
+            var ret = NativeMethods.openjpeg_openjp2_opj_stream_create(bufferSize, isReadStream);
+            return new Stream(ret);
+        }
+
+        /// <summary>
         /// Sets the given callback to be used as a read function.
         /// </summary>
         /// <param name="stream">The stream to modify.</param>
