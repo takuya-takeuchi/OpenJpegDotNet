@@ -137,14 +137,14 @@ namespace OpenJpegDotNet
         /// <param name="dataLength">The length of the user_data.</param>
         /// <exception cref="ArgumentNullException"><paramref name="stream"/> is null.</exception>
         /// <exception cref="ObjectDisposedException"><paramref name="stream"/> is disposed.</exception>
-        public static void StreamSetUserDataLength(Stream stream, ulong dataLength)
+        public static void StreamSetUserDataLength(Stream stream, int dataLength)
         {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
 
             stream.ThrowIfDisposed();
 
-            NativeMethods.openjpeg_openjp2_opj_stream_set_user_data_length(stream.NativePtr, dataLength);
+            NativeMethods.openjpeg_openjp2_opj_stream_set_user_data_length(stream.NativePtr, (ulong)dataLength);
         }
 
         /// <summary>

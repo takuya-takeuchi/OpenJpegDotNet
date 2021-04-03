@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using Xunit;
 
+using OpenJpegDotNet.IO;
+
 // ReSharper disable once CheckNamespace
 namespace OpenJpegDotNet.Tests
 {
@@ -184,7 +186,7 @@ namespace OpenJpegDotNet.Tests
         #region Not Native Functions
 
         [Fact]
-        public void ToBitmap()
+        public void ToBitmapFromFile()
         {
             var targets = new[]
             {
@@ -213,6 +215,10 @@ namespace OpenJpegDotNet.Tests
                 using (var bitmap = image.ToBitmap())
                 {
                     var bitmapPath = Path.ChangeExtension(path, "bmp");
+                    var directory = Path.Combine(ResultDirectory, nameof(this.ToBitmapFromFile), target.Format.ToString());
+                    Directory.CreateDirectory(directory);
+                    bitmapPath = Path.Combine(directory, Path.GetFileName(bitmapPath));
+
                     bitmap.Save(bitmapPath, ImageFormat.Bmp);
                 }
 
@@ -220,6 +226,40 @@ namespace OpenJpegDotNet.Tests
                 this.DisposeAndCheckDisposedState(stream);
                 this.DisposeAndCheckDisposedState(decompressionParameters);
                 this.DisposeAndCheckDisposedState(codec);
+            }
+        }
+
+        [Fact]
+        public void ToBitmapFromMemory()
+        {
+            var targets = new[]
+            {
+                //new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Unknown,  Result = false },
+                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.J2k,      Result = true  },
+                //new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jp2,      Result = false  },
+                //new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jpp,      Result = false },
+                //new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jpt,      Result = false },
+                //new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jpx,      Result = false }
+            };
+
+            foreach (var target in targets)
+            {
+                var path = Path.GetFullPath(Path.Combine(TestImageDirectory, target.Name));
+                var data = File.ReadAllBytes(path);
+
+                var reader = new Reader(data);
+                var result = reader.ReadHeader();
+                Assert.True(result, $"Failed to invoke {typeof(Reader).FullName}.{nameof(IO.Reader.ReadHeader)} for {target.Format} and {target.IsReadStream}");
+
+                using (var bitmap = reader.ReadData())
+                {
+                    var bitmapPath = Path.ChangeExtension(path, "bmp");
+                    var directory = Path.Combine(ResultDirectory, nameof(this.ToBitmapFromMemory), target.Format.ToString());
+                    Directory.CreateDirectory(directory);
+                    bitmapPath = Path.Combine(directory, Path.GetFileName(bitmapPath));
+
+                    bitmap.Save(bitmapPath, ImageFormat.Bmp);
+                }
             }
         }
 
@@ -284,7 +324,7 @@ namespace OpenJpegDotNet.Tests
 
             return image;
         }
-
+        
         #endregion
 
     }
