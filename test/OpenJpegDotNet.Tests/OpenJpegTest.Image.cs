@@ -181,10 +181,157 @@ namespace OpenJpegDotNet.Tests
             }
         }
 
+        #region ImageComponent
+
+        [Fact]
+        public void ImageComponentAlpha()
+        {
+            // ToDo: test transparency image
+            const string testImage = "Bretagne1_0.j2k";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var image = DecodeImageFromFile(path, CodecFormat.J2k);
+
+            const ushort expected = 0;
+            Assert.Equal(expected, image.Components[0].Alpha);
+        }
+
+        [Fact]
+        public void ImageComponentBpp()
+        {
+            const string testImage = "Bretagne1_0.j2k";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var image = DecodeImageFromFile(path, CodecFormat.J2k);
+
+            const uint expected = 0;
+            Assert.Equal(expected, image.Components[0].Bpp);
+        }
+
+        [Fact]
+        public void ImageComponentData()
+        {
+            const string testImage = "Bretagne1_0.j2k";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var image = DecodeImageFromFile(path, CodecFormat.J2k);
+            
+            Assert.NotEqual(IntPtr.Zero, image.Components[0].Data);
+        }
+
+        [Fact]
+        public void ImageComponentDx()
+        {
+            const string testImage = "Bretagne1_0.j2k";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var image = DecodeImageFromFile(path, CodecFormat.J2k);
+
+            const uint expected = 1;
+            Assert.Equal(expected, image.Components[0].Dx);
+        }
+
+        [Fact]
+        public void ImageComponentDy()
+        {
+            const string testImage = "Bretagne1_0.j2k";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var image = DecodeImageFromFile(path, CodecFormat.J2k);
+
+            const uint expected = 1;
+            Assert.Equal(expected, image.Components[0].Dy);
+        }
+
+        [Fact]
+        public void ImageComponentFactor()
+        {
+            const string testImage = "Bretagne1_0.j2k";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var image = DecodeImageFromFile(path, CodecFormat.J2k);
+
+            const uint expected = 0;
+            Assert.Equal(expected, image.Components[0].Factor);
+        }
+
+        [Fact]
+        public void ImageComponentHeight()
+        {
+            const string testImage = "Bretagne1_0.j2k";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var image = DecodeImageFromFile(path, CodecFormat.J2k);
+
+            const uint expected = 480;
+            Assert.Equal(expected, image.Components[0].Height);
+        }
+
+        [Fact]
+        public void ImageComponentPrecision()
+        {
+            const string testImage = "Bretagne1_0.j2k";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var image = DecodeImageFromFile(path, CodecFormat.J2k);
+
+            const uint expected = 8;
+            Assert.Equal(expected, image.Components[0].Precision);
+        }
+
+        [Fact]
+        public void ImageComponentResolutionDecoded()
+        {
+            const string testImage = "Bretagne1_0.j2k";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var image = DecodeImageFromFile(path, CodecFormat.J2k);
+
+            const uint expected = 5;
+            Assert.Equal(expected, image.Components[0].ResolutionDecoded);
+        }
+
+        [Fact]
+        public void ImageComponentSigned()
+        {
+            const string testImage = "Bretagne1_0.j2k";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var image = DecodeImageFromFile(path, CodecFormat.J2k);
+
+            const bool expected = false;
+            Assert.Equal(expected, image.Components[0].Signed);
+        }
+
+        [Fact]
+        public void ImageComponentWidth()
+        {
+            const string testImage = "Bretagne1_0.j2k";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var image = DecodeImageFromFile(path, CodecFormat.J2k);
+
+            const uint expected = 640;
+            Assert.Equal(expected, image.Components[0].Width);
+        }
+
+        [Fact]
+        public void ImageComponentX0()
+        {
+            const string testImage = "Bretagne1_0.j2k";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var image = DecodeImageFromFile(path, CodecFormat.J2k);
+
+            const uint expected = 0;
+            Assert.Equal(expected, image.Components[0].X0);
+        }
+
+        [Fact]
+        public void ImageComponentY0()
+        {
+            const string testImage = "Bretagne1_0.j2k";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var image = DecodeImageFromFile(path, CodecFormat.J2k);
+
+            const uint expected = 0;
+            Assert.Equal(expected, image.Components[0].Y0);
+        }
+
+        #endregion
+
         #endregion
 
         #region Functions
-        
+
         [Fact]
         public void ImageCreate()
         {
@@ -389,6 +536,20 @@ namespace OpenJpegDotNet.Tests
             return image;
         }
         
+        private static Image DecodeImageFromFile(string path, CodecFormat format)
+        {
+            using var stream = OpenJpeg.StreamCreateDefaultFileStream(path, true);
+            using var codec = OpenJpeg.CreateDecompress(format);
+            using var decompressionParameters = new DecompressionParameters();
+            OpenJpeg.SetDefaultDecoderParameters(decompressionParameters);
+            OpenJpeg.SetupDecoder(codec, decompressionParameters);
+            OpenJpeg.ReadHeader(stream, codec, out var image);
+            OpenJpeg.SetDecodeArea(codec, image, 0, 0, 0, 0);
+            OpenJpeg.Decode(codec, stream, image);
+            OpenJpeg.EndDecompress(codec, stream);
+            return image;
+        }
+
         #endregion
 
     }
