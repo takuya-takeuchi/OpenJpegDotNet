@@ -183,6 +183,70 @@ namespace OpenJpegDotNet.Tests
 
         #endregion
 
+        #region Functions
+        
+        [Fact]
+        public void ImageCreate()
+        {
+            const uint numComps = 3;
+            const int numCompsMax = 4;
+            const int codeBlockWidthInitial = 64;
+            const int codeBlockHeightInitial = 64;
+            const int imageWidth = 2000;
+            const int imageHeight = 2000;
+            const int tileWidth = 1000;
+            const int tileHeight = 1000;
+            const uint compPrec = 8;
+            const bool irreversible = false;
+            const uint offsetX = 0;
+            const uint offsetY = 0;
+
+            using var codec = OpenJpeg.CreateCompress(CodecFormat.Jp2);
+            using var compressionParameters = new CompressionParameters();
+            OpenJpeg.SetDefaultEncoderParameters(compressionParameters);
+
+            compressionParameters.TcpNumLayers = 1;
+            compressionParameters.CodingParameterFixedQuality = 1;
+            compressionParameters.TcpDistoratio[0] = 20;
+            compressionParameters.CodingParameterTx0 = 0;
+            compressionParameters.CodingParameterTy0 = 0;
+            compressionParameters.TileSizeOn = true;
+            compressionParameters.CodingParameterTdx = tileWidth;
+            compressionParameters.CodingParameterTdy = tileHeight;
+            compressionParameters.CodeBlockWidthInitial = codeBlockWidthInitial;
+            compressionParameters.CodeBlockHeightInitial = codeBlockHeightInitial;
+            compressionParameters.Irreversible = irreversible;
+
+            var parameters = new ImageComponentParameters[numCompsMax];
+            for (var index = 0; index < parameters.Length; index++)
+            {
+                parameters[index] = new ImageComponentParameters
+                {
+                    Dx = 1,
+                    Dy = 1,
+                    Height = imageHeight,
+                    Width = imageWidth,
+                    Signed = false,
+                    Precision = compPrec,
+                    X0 = offsetX,
+                    Y0 = offsetY
+                };
+            }
+
+            var data = new byte[imageWidth * imageHeight];
+            for (var index = 0; index < data.Length; index++)
+                data[index] = (byte)(index % byte.MaxValue);
+
+            var image = OpenJpeg.ImageCreate(numComps, parameters, ColorSpace.Srgb);
+
+            foreach (var parameter in parameters)
+                this.DisposeAndCheckDisposedState(parameter);
+
+            this.DisposeAndCheckDisposedState(image);
+        }
+
+        #endregion
+
         #region Not Native Functions
 
         [Fact]

@@ -130,6 +130,9 @@ namespace OpenJpegDotNet
         #region Functions
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern IntPtr openjpeg_openjp2_opj_image_create(uint32_t numcmpts, IntPtr[] cmptparms, uint32_t cmptparms_len, ColorSpace clrsp);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern void openjpeg_openjp2_opj_image_t_destroy(IntPtr image);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]

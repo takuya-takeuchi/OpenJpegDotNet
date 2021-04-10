@@ -177,6 +177,16 @@ DLLEXPORT void openjpeg_openjp2_opj_image_cmptparm_t_set_sgnd(opj_image_cmptparm
 
 #pragma endregion opj_image_cmptparm_t
 
+DLLEXPORT opj_image_t* openjpeg_openjp2_opj_image_create(const uint32_t numcmpts,
+                                                         opj_image_cmptparm_t** cmptparms,
+                                                         const uint32_t cmptparms_len,
+                                                         OPJ_COLOR_SPACE clrsp)
+{
+    std::vector<opj_image_cmptparm_t> compparams(cmptparms_len);
+    for (size_t index = 0; index < cmptparms_len; index++) compparams[index] = *(cmptparms[index]);
+    return ::opj_image_create(numcmpts, compparams.data(), clrsp);
+}
+
 DLLEXPORT void openjpeg_openjp2_opj_image_t_destroy(opj_image_t* image)
 {
     ::opj_image_destroy(image);
