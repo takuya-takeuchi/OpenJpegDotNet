@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using Xunit;
@@ -644,7 +646,7 @@ namespace OpenJpegDotNet.Tests
         #region Functions
 
         [Fact]
-        public void Encode()
+        public void Compress()
         {
             var targets = new[]
             {
@@ -755,6 +757,74 @@ namespace OpenJpegDotNet.Tests
                 this.DisposeAndCheckDisposedState(compressionParameters);
                 this.DisposeAndCheckDisposedState(codec);
             }
+        }
+
+        [Fact]
+        public void Encode()
+        {
+            const string testImage = "obama-240p.jpg";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var bitmap = System.Drawing.Image.FromFile(path) as Bitmap;
+
+            var channels = 0;
+            var outPrecision = 0u;
+            var colorSpace = ColorSpace.Gray;
+            var format = bitmap.PixelFormat;
+            var width = bitmap.Width;
+            var height = bitmap.Height;
+            switch (format)
+            {
+                case PixelFormat.Format24bppRgb:
+                    channels = 3;
+                    outPrecision = 24u / (uint)channels;
+                    colorSpace = ColorSpace.Srgb;
+                    break;
+            }
+
+            using var compressionParameters = new CompressionParameters();
+            OpenJpeg.SetDefaultEncoderParameters(compressionParameters);
+            compressionParameters.TcpNumLayers = 1;
+            compressionParameters.CodingParameterDistortionAllocation = 1;
+
+            var componentParametersArray = new ImageComponentParameters[channels];
+            for (var i = 0; i < channels; i++)
+            {
+                componentParametersArray[i] = new ImageComponentParameters
+                {
+                    Precision = outPrecision,
+                    Bpp = outPrecision,
+                    Signed = false,
+                    Dx = (uint) compressionParameters.SubsamplingDx,
+                    Dy = (uint) compressionParameters.SubsamplingDy,
+                    Width = (uint) width,
+                    Height = (uint) height
+                };
+            }
+
+            using var image = OpenJpeg.ImageCreate((uint)channels, componentParametersArray, colorSpace);
+            image.X0 = 0;
+            image.Y0 = 0;
+            image.X1 = componentParametersArray[0].Dx * componentParametersArray[0].Width;
+            image.Y1 = componentParametersArray[0].Dy * componentParametersArray[0].Height;
+
+            using var codec = OpenJpeg.CreateCompress(CodecFormat.Jp2);
+            OpenJpeg.SetupEncoder(codec, compressionParameters, image);
+
+            var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+
+            using var stream = OpenJpeg.StreamDefaultCreate(false);
+            OpenJpeg.StreamSetUserData(stream, data.Scan0);
+            OpenJpeg.StreamSetUserDataLength(stream, data.Stride * data.Height);
+            //OpenJpeg.StreamSetWriteFunction(stream, new DelegateHandler<StreamWrite>(StreamWriteCallback));
+            //OpenJpeg.StreamSetReadFunction(stream, new DelegateHandler<StreamRead>(StreamReadCallback));
+            //OpenJpeg.StreamSetSeekFunction(stream, new DelegateHandler<StreamSeek>(StreamSeekCallback));
+            //OpenJpeg.StreamSetSkipFunction(stream, new DelegateHandler<StreamSkip>(StreamSkipCallback));
+
+            OpenJpeg.StartCompress(codec, image, stream);
+            OpenJpeg.Encode(codec, stream);
+            OpenJpeg.EndCompress(codec, stream);
+            
+            this.DisposeAndCheckDisposedStates(componentParametersArray);
         }
 
         #endregion
