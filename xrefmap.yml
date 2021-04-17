@@ -1094,6 +1094,49 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.DecompressionParameters.VerboseMode
   nameWithType: DecompressionParameters.VerboseMode
+- uid: OpenJpegDotNet.DelegateHandler`1
+  name: DelegateHandler<T>
+  href: api/OpenJpegDotNet.DelegateHandler-1.html
+  commentId: T:OpenJpegDotNet.DelegateHandler`1
+  name.vb: DelegateHandler(Of T)
+  fullName: OpenJpegDotNet.DelegateHandler<T>
+  fullName.vb: OpenJpegDotNet.DelegateHandler(Of T)
+  nameWithType: DelegateHandler<T>
+  nameWithType.vb: DelegateHandler(Of T)
+- uid: OpenJpegDotNet.DelegateHandler`1.#ctor(`0)
+  name: DelegateHandler(T)
+  href: api/OpenJpegDotNet.DelegateHandler-1.html#OpenJpegDotNet_DelegateHandler_1__ctor__0_
+  commentId: M:OpenJpegDotNet.DelegateHandler`1.#ctor(`0)
+  fullName: OpenJpegDotNet.DelegateHandler<T>.DelegateHandler(T)
+  fullName.vb: OpenJpegDotNet.DelegateHandler(Of T).DelegateHandler(T)
+  nameWithType: DelegateHandler<T>.DelegateHandler(T)
+  nameWithType.vb: DelegateHandler(Of T).DelegateHandler(T)
+- uid: OpenJpegDotNet.DelegateHandler`1.#ctor*
+  name: DelegateHandler
+  href: api/OpenJpegDotNet.DelegateHandler-1.html#OpenJpegDotNet_DelegateHandler_1__ctor_
+  commentId: Overload:OpenJpegDotNet.DelegateHandler`1.#ctor
+  isSpec: "True"
+  fullName: OpenJpegDotNet.DelegateHandler<T>.DelegateHandler
+  fullName.vb: OpenJpegDotNet.DelegateHandler(Of T).DelegateHandler
+  nameWithType: DelegateHandler<T>.DelegateHandler
+  nameWithType.vb: DelegateHandler(Of T).DelegateHandler
+- uid: OpenJpegDotNet.DelegateHandler`1.Handle
+  name: Handle
+  href: api/OpenJpegDotNet.DelegateHandler-1.html#OpenJpegDotNet_DelegateHandler_1_Handle
+  commentId: P:OpenJpegDotNet.DelegateHandler`1.Handle
+  fullName: OpenJpegDotNet.DelegateHandler<T>.Handle
+  fullName.vb: OpenJpegDotNet.DelegateHandler(Of T).Handle
+  nameWithType: DelegateHandler<T>.Handle
+  nameWithType.vb: DelegateHandler(Of T).Handle
+- uid: OpenJpegDotNet.DelegateHandler`1.Handle*
+  name: Handle
+  href: api/OpenJpegDotNet.DelegateHandler-1.html#OpenJpegDotNet_DelegateHandler_1_Handle_
+  commentId: Overload:OpenJpegDotNet.DelegateHandler`1.Handle
+  isSpec: "True"
+  fullName: OpenJpegDotNet.DelegateHandler<T>.Handle
+  fullName.vb: OpenJpegDotNet.DelegateHandler(Of T).Handle
+  nameWithType: DelegateHandler<T>.Handle
+  nameWithType.vb: DelegateHandler(Of T).Handle
 - uid: OpenJpegDotNet.FileFormat
   name: FileFormat
   href: api/OpenJpegDotNet.FileFormat.html
@@ -1314,6 +1357,194 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.Image.Y1
   nameWithType: Image.Y1
+- uid: OpenJpegDotNet.ImageComponent
+  name: ImageComponent
+  href: api/OpenJpegDotNet.ImageComponent.html
+  commentId: T:OpenJpegDotNet.ImageComponent
+  fullName: OpenJpegDotNet.ImageComponent
+  nameWithType: ImageComponent
+- uid: OpenJpegDotNet.ImageComponent.Alpha
+  name: Alpha
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Alpha
+  commentId: P:OpenJpegDotNet.ImageComponent.Alpha
+  fullName: OpenJpegDotNet.ImageComponent.Alpha
+  nameWithType: ImageComponent.Alpha
+- uid: OpenJpegDotNet.ImageComponent.Alpha*
+  name: Alpha
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Alpha_
+  commentId: Overload:OpenJpegDotNet.ImageComponent.Alpha
+  isSpec: "True"
+  fullName: OpenJpegDotNet.ImageComponent.Alpha
+  nameWithType: ImageComponent.Alpha
+- uid: OpenJpegDotNet.ImageComponent.Bpp
+  name: Bpp
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Bpp
+  commentId: P:OpenJpegDotNet.ImageComponent.Bpp
+  fullName: OpenJpegDotNet.ImageComponent.Bpp
+  nameWithType: ImageComponent.Bpp
+- uid: OpenJpegDotNet.ImageComponent.Bpp*
+  name: Bpp
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Bpp_
+  commentId: Overload:OpenJpegDotNet.ImageComponent.Bpp
+  isSpec: "True"
+  fullName: OpenJpegDotNet.ImageComponent.Bpp
+  nameWithType: ImageComponent.Bpp
+- uid: OpenJpegDotNet.ImageComponent.Data
+  name: Data
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Data
+  commentId: P:OpenJpegDotNet.ImageComponent.Data
+  fullName: OpenJpegDotNet.ImageComponent.Data
+  nameWithType: ImageComponent.Data
+- uid: OpenJpegDotNet.ImageComponent.Data*
+  name: Data
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Data_
+  commentId: Overload:OpenJpegDotNet.ImageComponent.Data
+  isSpec: "True"
+  fullName: OpenJpegDotNet.ImageComponent.Data
+  nameWithType: ImageComponent.Data
+- uid: OpenJpegDotNet.ImageComponent.DisposeUnmanaged
+  name: DisposeUnmanaged()
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_DisposeUnmanaged
+  commentId: M:OpenJpegDotNet.ImageComponent.DisposeUnmanaged
+  fullName: OpenJpegDotNet.ImageComponent.DisposeUnmanaged()
+  nameWithType: ImageComponent.DisposeUnmanaged()
+- uid: OpenJpegDotNet.ImageComponent.DisposeUnmanaged*
+  name: DisposeUnmanaged
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_DisposeUnmanaged_
+  commentId: Overload:OpenJpegDotNet.ImageComponent.DisposeUnmanaged
+  isSpec: "True"
+  fullName: OpenJpegDotNet.ImageComponent.DisposeUnmanaged
+  nameWithType: ImageComponent.DisposeUnmanaged
+- uid: OpenJpegDotNet.ImageComponent.Dx
+  name: Dx
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Dx
+  commentId: P:OpenJpegDotNet.ImageComponent.Dx
+  fullName: OpenJpegDotNet.ImageComponent.Dx
+  nameWithType: ImageComponent.Dx
+- uid: OpenJpegDotNet.ImageComponent.Dx*
+  name: Dx
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Dx_
+  commentId: Overload:OpenJpegDotNet.ImageComponent.Dx
+  isSpec: "True"
+  fullName: OpenJpegDotNet.ImageComponent.Dx
+  nameWithType: ImageComponent.Dx
+- uid: OpenJpegDotNet.ImageComponent.Dy
+  name: Dy
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Dy
+  commentId: P:OpenJpegDotNet.ImageComponent.Dy
+  fullName: OpenJpegDotNet.ImageComponent.Dy
+  nameWithType: ImageComponent.Dy
+- uid: OpenJpegDotNet.ImageComponent.Dy*
+  name: Dy
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Dy_
+  commentId: Overload:OpenJpegDotNet.ImageComponent.Dy
+  isSpec: "True"
+  fullName: OpenJpegDotNet.ImageComponent.Dy
+  nameWithType: ImageComponent.Dy
+- uid: OpenJpegDotNet.ImageComponent.Factor
+  name: Factor
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Factor
+  commentId: P:OpenJpegDotNet.ImageComponent.Factor
+  fullName: OpenJpegDotNet.ImageComponent.Factor
+  nameWithType: ImageComponent.Factor
+- uid: OpenJpegDotNet.ImageComponent.Factor*
+  name: Factor
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Factor_
+  commentId: Overload:OpenJpegDotNet.ImageComponent.Factor
+  isSpec: "True"
+  fullName: OpenJpegDotNet.ImageComponent.Factor
+  nameWithType: ImageComponent.Factor
+- uid: OpenJpegDotNet.ImageComponent.Height
+  name: Height
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Height
+  commentId: P:OpenJpegDotNet.ImageComponent.Height
+  fullName: OpenJpegDotNet.ImageComponent.Height
+  nameWithType: ImageComponent.Height
+- uid: OpenJpegDotNet.ImageComponent.Height*
+  name: Height
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Height_
+  commentId: Overload:OpenJpegDotNet.ImageComponent.Height
+  isSpec: "True"
+  fullName: OpenJpegDotNet.ImageComponent.Height
+  nameWithType: ImageComponent.Height
+- uid: OpenJpegDotNet.ImageComponent.Precision
+  name: Precision
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Precision
+  commentId: P:OpenJpegDotNet.ImageComponent.Precision
+  fullName: OpenJpegDotNet.ImageComponent.Precision
+  nameWithType: ImageComponent.Precision
+- uid: OpenJpegDotNet.ImageComponent.Precision*
+  name: Precision
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Precision_
+  commentId: Overload:OpenJpegDotNet.ImageComponent.Precision
+  isSpec: "True"
+  fullName: OpenJpegDotNet.ImageComponent.Precision
+  nameWithType: ImageComponent.Precision
+- uid: OpenJpegDotNet.ImageComponent.ResolutionDecoded
+  name: ResolutionDecoded
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_ResolutionDecoded
+  commentId: P:OpenJpegDotNet.ImageComponent.ResolutionDecoded
+  fullName: OpenJpegDotNet.ImageComponent.ResolutionDecoded
+  nameWithType: ImageComponent.ResolutionDecoded
+- uid: OpenJpegDotNet.ImageComponent.ResolutionDecoded*
+  name: ResolutionDecoded
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_ResolutionDecoded_
+  commentId: Overload:OpenJpegDotNet.ImageComponent.ResolutionDecoded
+  isSpec: "True"
+  fullName: OpenJpegDotNet.ImageComponent.ResolutionDecoded
+  nameWithType: ImageComponent.ResolutionDecoded
+- uid: OpenJpegDotNet.ImageComponent.Signed
+  name: Signed
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Signed
+  commentId: P:OpenJpegDotNet.ImageComponent.Signed
+  fullName: OpenJpegDotNet.ImageComponent.Signed
+  nameWithType: ImageComponent.Signed
+- uid: OpenJpegDotNet.ImageComponent.Signed*
+  name: Signed
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Signed_
+  commentId: Overload:OpenJpegDotNet.ImageComponent.Signed
+  isSpec: "True"
+  fullName: OpenJpegDotNet.ImageComponent.Signed
+  nameWithType: ImageComponent.Signed
+- uid: OpenJpegDotNet.ImageComponent.Width
+  name: Width
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Width
+  commentId: P:OpenJpegDotNet.ImageComponent.Width
+  fullName: OpenJpegDotNet.ImageComponent.Width
+  nameWithType: ImageComponent.Width
+- uid: OpenJpegDotNet.ImageComponent.Width*
+  name: Width
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Width_
+  commentId: Overload:OpenJpegDotNet.ImageComponent.Width
+  isSpec: "True"
+  fullName: OpenJpegDotNet.ImageComponent.Width
+  nameWithType: ImageComponent.Width
+- uid: OpenJpegDotNet.ImageComponent.X0
+  name: X0
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_X0
+  commentId: P:OpenJpegDotNet.ImageComponent.X0
+  fullName: OpenJpegDotNet.ImageComponent.X0
+  nameWithType: ImageComponent.X0
+- uid: OpenJpegDotNet.ImageComponent.X0*
+  name: X0
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_X0_
+  commentId: Overload:OpenJpegDotNet.ImageComponent.X0
+  isSpec: "True"
+  fullName: OpenJpegDotNet.ImageComponent.X0
+  nameWithType: ImageComponent.X0
+- uid: OpenJpegDotNet.ImageComponent.Y0
+  name: Y0
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Y0
+  commentId: P:OpenJpegDotNet.ImageComponent.Y0
+  fullName: OpenJpegDotNet.ImageComponent.Y0
+  nameWithType: ImageComponent.Y0
+- uid: OpenJpegDotNet.ImageComponent.Y0*
+  name: Y0
+  href: api/OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Y0_
+  commentId: Overload:OpenJpegDotNet.ImageComponent.Y0
+  isSpec: "True"
+  fullName: OpenJpegDotNet.ImageComponent.Y0
+  nameWithType: ImageComponent.Y0
 - uid: OpenJpegDotNet.ImageComponentParameters
   name: ImageComponentParameters
   href: api/OpenJpegDotNet.ImageComponentParameters.html
@@ -1463,6 +1694,250 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.ImageComponentParameters.Y0
   nameWithType: ImageComponentParameters.Y0
+- uid: OpenJpegDotNet.IO
+  name: OpenJpegDotNet.IO
+  href: api/OpenJpegDotNet.IO.html
+  commentId: N:OpenJpegDotNet.IO
+  fullName: OpenJpegDotNet.IO
+  nameWithType: OpenJpegDotNet.IO
+- uid: OpenJpegDotNet.IO.Parameter
+  name: Parameter
+  href: api/OpenJpegDotNet.IO.Parameter.html
+  commentId: T:OpenJpegDotNet.IO.Parameter
+  fullName: OpenJpegDotNet.IO.Parameter
+  nameWithType: Parameter
+- uid: OpenJpegDotNet.IO.Parameter.Compression
+  name: Compression
+  href: api/OpenJpegDotNet.IO.Parameter.html#OpenJpegDotNet_IO_Parameter_Compression
+  commentId: P:OpenJpegDotNet.IO.Parameter.Compression
+  fullName: OpenJpegDotNet.IO.Parameter.Compression
+  nameWithType: Parameter.Compression
+- uid: OpenJpegDotNet.IO.Parameter.Compression*
+  name: Compression
+  href: api/OpenJpegDotNet.IO.Parameter.html#OpenJpegDotNet_IO_Parameter_Compression_
+  commentId: Overload:OpenJpegDotNet.IO.Parameter.Compression
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Parameter.Compression
+  nameWithType: Parameter.Compression
+- uid: OpenJpegDotNet.IO.Reader
+  name: Reader
+  href: api/OpenJpegDotNet.IO.Reader.html
+  commentId: T:OpenJpegDotNet.IO.Reader
+  fullName: OpenJpegDotNet.IO.Reader
+  nameWithType: Reader
+- uid: OpenJpegDotNet.IO.Reader.#ctor(System.Byte[])
+  name: Reader(Byte[])
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader__ctor_System_Byte___
+  commentId: M:OpenJpegDotNet.IO.Reader.#ctor(System.Byte[])
+  name.vb: Reader(Byte())
+  fullName: OpenJpegDotNet.IO.Reader.Reader(System.Byte[])
+  fullName.vb: OpenJpegDotNet.IO.Reader.Reader(System.Byte())
+  nameWithType: Reader.Reader(Byte[])
+  nameWithType.vb: Reader.Reader(Byte())
+- uid: OpenJpegDotNet.IO.Reader.#ctor*
+  name: Reader
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader__ctor_
+  commentId: Overload:OpenJpegDotNet.IO.Reader.#ctor
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Reader.Reader
+  nameWithType: Reader.Reader
+- uid: OpenJpegDotNet.IO.Reader.Dispose
+  name: Dispose()
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_Dispose
+  commentId: M:OpenJpegDotNet.IO.Reader.Dispose
+  fullName: OpenJpegDotNet.IO.Reader.Dispose()
+  nameWithType: Reader.Dispose()
+- uid: OpenJpegDotNet.IO.Reader.Dispose*
+  name: Dispose
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_Dispose_
+  commentId: Overload:OpenJpegDotNet.IO.Reader.Dispose
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Reader.Dispose
+  nameWithType: Reader.Dispose
+- uid: OpenJpegDotNet.IO.Reader.Height
+  name: Height
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_Height
+  commentId: P:OpenJpegDotNet.IO.Reader.Height
+  fullName: OpenJpegDotNet.IO.Reader.Height
+  nameWithType: Reader.Height
+- uid: OpenJpegDotNet.IO.Reader.Height*
+  name: Height
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_Height_
+  commentId: Overload:OpenJpegDotNet.IO.Reader.Height
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Reader.Height
+  nameWithType: Reader.Height
+- uid: OpenJpegDotNet.IO.Reader.IsDisposed
+  name: IsDisposed
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_IsDisposed
+  commentId: P:OpenJpegDotNet.IO.Reader.IsDisposed
+  fullName: OpenJpegDotNet.IO.Reader.IsDisposed
+  nameWithType: Reader.IsDisposed
+- uid: OpenJpegDotNet.IO.Reader.IsDisposed*
+  name: IsDisposed
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_IsDisposed_
+  commentId: Overload:OpenJpegDotNet.IO.Reader.IsDisposed
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Reader.IsDisposed
+  nameWithType: Reader.IsDisposed
+- uid: OpenJpegDotNet.IO.Reader.ReadData
+  name: ReadData()
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_ReadData
+  commentId: M:OpenJpegDotNet.IO.Reader.ReadData
+  fullName: OpenJpegDotNet.IO.Reader.ReadData()
+  nameWithType: Reader.ReadData()
+- uid: OpenJpegDotNet.IO.Reader.ReadData*
+  name: ReadData
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_ReadData_
+  commentId: Overload:OpenJpegDotNet.IO.Reader.ReadData
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Reader.ReadData
+  nameWithType: Reader.ReadData
+- uid: OpenJpegDotNet.IO.Reader.ReadHeader
+  name: ReadHeader()
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_ReadHeader
+  commentId: M:OpenJpegDotNet.IO.Reader.ReadHeader
+  fullName: OpenJpegDotNet.IO.Reader.ReadHeader()
+  nameWithType: Reader.ReadHeader()
+- uid: OpenJpegDotNet.IO.Reader.ReadHeader*
+  name: ReadHeader
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_ReadHeader_
+  commentId: Overload:OpenJpegDotNet.IO.Reader.ReadHeader
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Reader.ReadHeader
+  nameWithType: Reader.ReadHeader
+- uid: OpenJpegDotNet.IO.Reader.Width
+  name: Width
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_Width
+  commentId: P:OpenJpegDotNet.IO.Reader.Width
+  fullName: OpenJpegDotNet.IO.Reader.Width
+  nameWithType: Reader.Width
+- uid: OpenJpegDotNet.IO.Reader.Width*
+  name: Width
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_Width_
+  commentId: Overload:OpenJpegDotNet.IO.Reader.Width
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Reader.Width
+  nameWithType: Reader.Width
+- uid: OpenJpegDotNet.IO.Writer
+  name: Writer
+  href: api/OpenJpegDotNet.IO.Writer.html
+  commentId: T:OpenJpegDotNet.IO.Writer
+  fullName: OpenJpegDotNet.IO.Writer
+  nameWithType: Writer
+- uid: OpenJpegDotNet.IO.Writer.#ctor(System.Byte[])
+  name: Writer(Byte[])
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer__ctor_System_Byte___
+  commentId: M:OpenJpegDotNet.IO.Writer.#ctor(System.Byte[])
+  name.vb: Writer(Byte())
+  fullName: OpenJpegDotNet.IO.Writer.Writer(System.Byte[])
+  fullName.vb: OpenJpegDotNet.IO.Writer.Writer(System.Byte())
+  nameWithType: Writer.Writer(Byte[])
+  nameWithType.vb: Writer.Writer(Byte())
+- uid: OpenJpegDotNet.IO.Writer.#ctor*
+  name: Writer
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer__ctor_
+  commentId: Overload:OpenJpegDotNet.IO.Writer.#ctor
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Writer.Writer
+  nameWithType: Writer.Writer
+- uid: OpenJpegDotNet.IO.Writer.Dispose
+  name: Dispose()
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer_Dispose
+  commentId: M:OpenJpegDotNet.IO.Writer.Dispose
+  fullName: OpenJpegDotNet.IO.Writer.Dispose()
+  nameWithType: Writer.Dispose()
+- uid: OpenJpegDotNet.IO.Writer.Dispose*
+  name: Dispose
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer_Dispose_
+  commentId: Overload:OpenJpegDotNet.IO.Writer.Dispose
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Writer.Dispose
+  nameWithType: Writer.Dispose
+- uid: OpenJpegDotNet.IO.Writer.Height
+  name: Height
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer_Height
+  commentId: P:OpenJpegDotNet.IO.Writer.Height
+  fullName: OpenJpegDotNet.IO.Writer.Height
+  nameWithType: Writer.Height
+- uid: OpenJpegDotNet.IO.Writer.Height*
+  name: Height
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer_Height_
+  commentId: Overload:OpenJpegDotNet.IO.Writer.Height
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Writer.Height
+  nameWithType: Writer.Height
+- uid: OpenJpegDotNet.IO.Writer.IsDisposed
+  name: IsDisposed
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer_IsDisposed
+  commentId: P:OpenJpegDotNet.IO.Writer.IsDisposed
+  fullName: OpenJpegDotNet.IO.Writer.IsDisposed
+  nameWithType: Writer.IsDisposed
+- uid: OpenJpegDotNet.IO.Writer.IsDisposed*
+  name: IsDisposed
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer_IsDisposed_
+  commentId: Overload:OpenJpegDotNet.IO.Writer.IsDisposed
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Writer.IsDisposed
+  nameWithType: Writer.IsDisposed
+- uid: OpenJpegDotNet.IO.Writer.ReadData
+  name: ReadData()
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer_ReadData
+  commentId: M:OpenJpegDotNet.IO.Writer.ReadData
+  fullName: OpenJpegDotNet.IO.Writer.ReadData()
+  nameWithType: Writer.ReadData()
+- uid: OpenJpegDotNet.IO.Writer.ReadData*
+  name: ReadData
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer_ReadData_
+  commentId: Overload:OpenJpegDotNet.IO.Writer.ReadData
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Writer.ReadData
+  nameWithType: Writer.ReadData
+- uid: OpenJpegDotNet.IO.Writer.Width
+  name: Width
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer_Width
+  commentId: P:OpenJpegDotNet.IO.Writer.Width
+  fullName: OpenJpegDotNet.IO.Writer.Width
+  nameWithType: Writer.Width
+- uid: OpenJpegDotNet.IO.Writer.Width*
+  name: Width
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer_Width_
+  commentId: Overload:OpenJpegDotNet.IO.Writer.Width
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Writer.Width
+  nameWithType: Writer.Width
+- uid: OpenJpegDotNet.IO.Writer.Write(Bitmap)
+  name: Write(Bitmap)
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer_Write_Bitmap_
+  commentId: M:OpenJpegDotNet.IO.Writer.Write(Bitmap)
+  fullName: OpenJpegDotNet.IO.Writer.Write(Bitmap)
+  nameWithType: Writer.Write(Bitmap)
+- uid: OpenJpegDotNet.IO.Writer.Write*
+  name: Write
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer_Write_
+  commentId: Overload:OpenJpegDotNet.IO.Writer.Write
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Writer.Write
+  nameWithType: Writer.Write
+- uid: OpenJpegDotNet.IO.Writer.WriteHeader(OpenJpegDotNet.IO.Parameter)
+  name: WriteHeader(Parameter)
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer_WriteHeader_OpenJpegDotNet_IO_Parameter_
+  commentId: M:OpenJpegDotNet.IO.Writer.WriteHeader(OpenJpegDotNet.IO.Parameter)
+  fullName: OpenJpegDotNet.IO.Writer.WriteHeader(OpenJpegDotNet.IO.Parameter)
+  nameWithType: Writer.WriteHeader(Parameter)
+- uid: OpenJpegDotNet.IO.Writer.WriteHeader*
+  name: WriteHeader
+  href: api/OpenJpegDotNet.IO.Writer.html#OpenJpegDotNet_IO_Writer_WriteHeader_
+  commentId: Overload:OpenJpegDotNet.IO.Writer.WriteHeader
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Writer.WriteHeader
+  nameWithType: Writer.WriteHeader
+- uid: OpenJpegDotNet.MsgCallback
+  name: MsgCallback
+  href: api/OpenJpegDotNet.MsgCallback.html
+  commentId: T:OpenJpegDotNet.MsgCallback
+  fullName: OpenJpegDotNet.MsgCallback
+  nameWithType: MsgCallback
 - uid: OpenJpegDotNet.OpenJpeg
   name: OpenJpeg
   href: api/OpenJpegDotNet.OpenJpeg.html
@@ -1508,6 +1983,19 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.OpenJpeg.Decode
   nameWithType: OpenJpeg.Decode
+- uid: OpenJpegDotNet.OpenJpeg.Encode(OpenJpegDotNet.Codec,OpenJpegDotNet.Stream)
+  name: Encode(Codec, Stream)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_Encode_OpenJpegDotNet_Codec_OpenJpegDotNet_Stream_
+  commentId: M:OpenJpegDotNet.OpenJpeg.Encode(OpenJpegDotNet.Codec,OpenJpegDotNet.Stream)
+  fullName: OpenJpegDotNet.OpenJpeg.Encode(OpenJpegDotNet.Codec, OpenJpegDotNet.Stream)
+  nameWithType: OpenJpeg.Encode(Codec, Stream)
+- uid: OpenJpegDotNet.OpenJpeg.Encode*
+  name: Encode
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_Encode_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.Encode
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.Encode
+  nameWithType: OpenJpeg.Encode
 - uid: OpenJpegDotNet.OpenJpeg.Encoding
   name: Encoding
   href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_Encoding
@@ -1573,6 +2061,22 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.OpenJpeg.GetVersion
   nameWithType: OpenJpeg.GetVersion
+- uid: OpenJpegDotNet.OpenJpeg.ImageCreate(System.UInt32,OpenJpegDotNet.ImageComponentParameters[],OpenJpegDotNet.ColorSpace)
+  name: ImageCreate(UInt32, ImageComponentParameters[], ColorSpace)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_ImageCreate_System_UInt32_OpenJpegDotNet_ImageComponentParameters___OpenJpegDotNet_ColorSpace_
+  commentId: M:OpenJpegDotNet.OpenJpeg.ImageCreate(System.UInt32,OpenJpegDotNet.ImageComponentParameters[],OpenJpegDotNet.ColorSpace)
+  name.vb: ImageCreate(UInt32, ImageComponentParameters(), ColorSpace)
+  fullName: OpenJpegDotNet.OpenJpeg.ImageCreate(System.UInt32, OpenJpegDotNet.ImageComponentParameters[], OpenJpegDotNet.ColorSpace)
+  fullName.vb: OpenJpegDotNet.OpenJpeg.ImageCreate(System.UInt32, OpenJpegDotNet.ImageComponentParameters(), OpenJpegDotNet.ColorSpace)
+  nameWithType: OpenJpeg.ImageCreate(UInt32, ImageComponentParameters[], ColorSpace)
+  nameWithType.vb: OpenJpeg.ImageCreate(UInt32, ImageComponentParameters(), ColorSpace)
+- uid: OpenJpegDotNet.OpenJpeg.ImageCreate*
+  name: ImageCreate
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_ImageCreate_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.ImageCreate
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.ImageCreate
+  nameWithType: OpenJpeg.ImageCreate
 - uid: OpenJpegDotNet.OpenJpeg.ImageTileCreate(System.UInt32,OpenJpegDotNet.ImageComponentParameters[],OpenJpegDotNet.ColorSpace)
   name: ImageTileCreate(UInt32, ImageComponentParameters[], ColorSpace)
   href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_ImageTileCreate_System_UInt32_OpenJpegDotNet_ImageComponentParameters___OpenJpegDotNet_ColorSpace_
@@ -1644,6 +2148,38 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.OpenJpeg.SetDefaultEncoderParameters
   nameWithType: OpenJpeg.SetDefaultEncoderParameters
+- uid: OpenJpegDotNet.OpenJpeg.SetErrorHandler(OpenJpegDotNet.Codec,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.MsgCallback},IntPtr)
+  name: SetErrorHandler(Codec, DelegateHandler<MsgCallback>, IntPtr)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_SetErrorHandler_OpenJpegDotNet_Codec_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_MsgCallback__IntPtr_
+  commentId: M:OpenJpegDotNet.OpenJpeg.SetErrorHandler(OpenJpegDotNet.Codec,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.MsgCallback},IntPtr)
+  name.vb: SetErrorHandler(Codec, DelegateHandler(Of MsgCallback), IntPtr)
+  fullName: OpenJpegDotNet.OpenJpeg.SetErrorHandler(OpenJpegDotNet.Codec, OpenJpegDotNet.DelegateHandler<OpenJpegDotNet.MsgCallback>, IntPtr)
+  fullName.vb: OpenJpegDotNet.OpenJpeg.SetErrorHandler(OpenJpegDotNet.Codec, OpenJpegDotNet.DelegateHandler(Of OpenJpegDotNet.MsgCallback), IntPtr)
+  nameWithType: OpenJpeg.SetErrorHandler(Codec, DelegateHandler<MsgCallback>, IntPtr)
+  nameWithType.vb: OpenJpeg.SetErrorHandler(Codec, DelegateHandler(Of MsgCallback), IntPtr)
+- uid: OpenJpegDotNet.OpenJpeg.SetErrorHandler*
+  name: SetErrorHandler
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_SetErrorHandler_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.SetErrorHandler
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.SetErrorHandler
+  nameWithType: OpenJpeg.SetErrorHandler
+- uid: OpenJpegDotNet.OpenJpeg.SetInfoHandler(OpenJpegDotNet.Codec,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.MsgCallback},IntPtr)
+  name: SetInfoHandler(Codec, DelegateHandler<MsgCallback>, IntPtr)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_SetInfoHandler_OpenJpegDotNet_Codec_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_MsgCallback__IntPtr_
+  commentId: M:OpenJpegDotNet.OpenJpeg.SetInfoHandler(OpenJpegDotNet.Codec,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.MsgCallback},IntPtr)
+  name.vb: SetInfoHandler(Codec, DelegateHandler(Of MsgCallback), IntPtr)
+  fullName: OpenJpegDotNet.OpenJpeg.SetInfoHandler(OpenJpegDotNet.Codec, OpenJpegDotNet.DelegateHandler<OpenJpegDotNet.MsgCallback>, IntPtr)
+  fullName.vb: OpenJpegDotNet.OpenJpeg.SetInfoHandler(OpenJpegDotNet.Codec, OpenJpegDotNet.DelegateHandler(Of OpenJpegDotNet.MsgCallback), IntPtr)
+  nameWithType: OpenJpeg.SetInfoHandler(Codec, DelegateHandler<MsgCallback>, IntPtr)
+  nameWithType.vb: OpenJpeg.SetInfoHandler(Codec, DelegateHandler(Of MsgCallback), IntPtr)
+- uid: OpenJpegDotNet.OpenJpeg.SetInfoHandler*
+  name: SetInfoHandler
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_SetInfoHandler_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.SetInfoHandler
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.SetInfoHandler
+  nameWithType: OpenJpeg.SetInfoHandler
 - uid: OpenJpegDotNet.OpenJpeg.SetMCT(OpenJpegDotNet.CompressionParameters,System.Single[],System.Int32[],System.UInt32)
   name: SetMCT(CompressionParameters, Single[], Int32[], UInt32)
   href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_SetMCT_OpenJpegDotNet_CompressionParameters_System_Single___System_Int32___System_UInt32_
@@ -1686,6 +2222,22 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.OpenJpeg.SetupEncoder
   nameWithType: OpenJpeg.SetupEncoder
+- uid: OpenJpegDotNet.OpenJpeg.SetWarnHandler(OpenJpegDotNet.Codec,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.MsgCallback},IntPtr)
+  name: SetWarnHandler(Codec, DelegateHandler<MsgCallback>, IntPtr)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_SetWarnHandler_OpenJpegDotNet_Codec_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_MsgCallback__IntPtr_
+  commentId: M:OpenJpegDotNet.OpenJpeg.SetWarnHandler(OpenJpegDotNet.Codec,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.MsgCallback},IntPtr)
+  name.vb: SetWarnHandler(Codec, DelegateHandler(Of MsgCallback), IntPtr)
+  fullName: OpenJpegDotNet.OpenJpeg.SetWarnHandler(OpenJpegDotNet.Codec, OpenJpegDotNet.DelegateHandler<OpenJpegDotNet.MsgCallback>, IntPtr)
+  fullName.vb: OpenJpegDotNet.OpenJpeg.SetWarnHandler(OpenJpegDotNet.Codec, OpenJpegDotNet.DelegateHandler(Of OpenJpegDotNet.MsgCallback), IntPtr)
+  nameWithType: OpenJpeg.SetWarnHandler(Codec, DelegateHandler<MsgCallback>, IntPtr)
+  nameWithType.vb: OpenJpeg.SetWarnHandler(Codec, DelegateHandler(Of MsgCallback), IntPtr)
+- uid: OpenJpegDotNet.OpenJpeg.SetWarnHandler*
+  name: SetWarnHandler
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_SetWarnHandler_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.SetWarnHandler
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.SetWarnHandler
+  nameWithType: OpenJpeg.SetWarnHandler
 - uid: OpenJpegDotNet.OpenJpeg.StartCompress(OpenJpegDotNet.Codec,OpenJpegDotNet.Image,OpenJpegDotNet.Stream)
   name: StartCompress(Codec, Image, Stream)
   href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StartCompress_OpenJpegDotNet_Codec_OpenJpegDotNet_Image_OpenJpegDotNet_Stream_
@@ -1699,6 +2251,19 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.OpenJpeg.StartCompress
   nameWithType: OpenJpeg.StartCompress
+- uid: OpenJpegDotNet.OpenJpeg.StreamCreate(System.UInt64,System.Boolean)
+  name: StreamCreate(UInt64, Boolean)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamCreate_System_UInt64_System_Boolean_
+  commentId: M:OpenJpegDotNet.OpenJpeg.StreamCreate(System.UInt64,System.Boolean)
+  fullName: OpenJpegDotNet.OpenJpeg.StreamCreate(System.UInt64, System.Boolean)
+  nameWithType: OpenJpeg.StreamCreate(UInt64, Boolean)
+- uid: OpenJpegDotNet.OpenJpeg.StreamCreate*
+  name: StreamCreate
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamCreate_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.StreamCreate
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.StreamCreate
+  nameWithType: OpenJpeg.StreamCreate
 - uid: OpenJpegDotNet.OpenJpeg.StreamCreateDefaultFileStream(System.String,System.Boolean)
   name: StreamCreateDefaultFileStream(String, Boolean)
   href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamCreateDefaultFileStream_System_String_System_Boolean_
@@ -1712,6 +2277,125 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.OpenJpeg.StreamCreateDefaultFileStream
   nameWithType: OpenJpeg.StreamCreateDefaultFileStream
+- uid: OpenJpegDotNet.OpenJpeg.StreamCreateFileStream(System.String,System.UInt64,System.Boolean)
+  name: StreamCreateFileStream(String, UInt64, Boolean)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamCreateFileStream_System_String_System_UInt64_System_Boolean_
+  commentId: M:OpenJpegDotNet.OpenJpeg.StreamCreateFileStream(System.String,System.UInt64,System.Boolean)
+  fullName: OpenJpegDotNet.OpenJpeg.StreamCreateFileStream(System.String, System.UInt64, System.Boolean)
+  nameWithType: OpenJpeg.StreamCreateFileStream(String, UInt64, Boolean)
+- uid: OpenJpegDotNet.OpenJpeg.StreamCreateFileStream*
+  name: StreamCreateFileStream
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamCreateFileStream_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.StreamCreateFileStream
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.StreamCreateFileStream
+  nameWithType: OpenJpeg.StreamCreateFileStream
+- uid: OpenJpegDotNet.OpenJpeg.StreamDefaultCreate(System.Boolean)
+  name: StreamDefaultCreate(Boolean)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamDefaultCreate_System_Boolean_
+  commentId: M:OpenJpegDotNet.OpenJpeg.StreamDefaultCreate(System.Boolean)
+  fullName: OpenJpegDotNet.OpenJpeg.StreamDefaultCreate(System.Boolean)
+  nameWithType: OpenJpeg.StreamDefaultCreate(Boolean)
+- uid: OpenJpegDotNet.OpenJpeg.StreamDefaultCreate*
+  name: StreamDefaultCreate
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamDefaultCreate_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.StreamDefaultCreate
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.StreamDefaultCreate
+  nameWithType: OpenJpeg.StreamDefaultCreate
+- uid: OpenJpegDotNet.OpenJpeg.StreamSetReadFunction(OpenJpegDotNet.Stream,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamRead})
+  name: StreamSetReadFunction(Stream, DelegateHandler<StreamRead>)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamSetReadFunction_OpenJpegDotNet_Stream_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamRead__
+  commentId: M:OpenJpegDotNet.OpenJpeg.StreamSetReadFunction(OpenJpegDotNet.Stream,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamRead})
+  name.vb: StreamSetReadFunction(Stream, DelegateHandler(Of StreamRead))
+  fullName: OpenJpegDotNet.OpenJpeg.StreamSetReadFunction(OpenJpegDotNet.Stream, OpenJpegDotNet.DelegateHandler<OpenJpegDotNet.StreamRead>)
+  fullName.vb: OpenJpegDotNet.OpenJpeg.StreamSetReadFunction(OpenJpegDotNet.Stream, OpenJpegDotNet.DelegateHandler(Of OpenJpegDotNet.StreamRead))
+  nameWithType: OpenJpeg.StreamSetReadFunction(Stream, DelegateHandler<StreamRead>)
+  nameWithType.vb: OpenJpeg.StreamSetReadFunction(Stream, DelegateHandler(Of StreamRead))
+- uid: OpenJpegDotNet.OpenJpeg.StreamSetReadFunction*
+  name: StreamSetReadFunction
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamSetReadFunction_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.StreamSetReadFunction
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.StreamSetReadFunction
+  nameWithType: OpenJpeg.StreamSetReadFunction
+- uid: OpenJpegDotNet.OpenJpeg.StreamSetSeekFunction(OpenJpegDotNet.Stream,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamSeek})
+  name: StreamSetSeekFunction(Stream, DelegateHandler<StreamSeek>)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamSetSeekFunction_OpenJpegDotNet_Stream_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamSeek__
+  commentId: M:OpenJpegDotNet.OpenJpeg.StreamSetSeekFunction(OpenJpegDotNet.Stream,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamSeek})
+  name.vb: StreamSetSeekFunction(Stream, DelegateHandler(Of StreamSeek))
+  fullName: OpenJpegDotNet.OpenJpeg.StreamSetSeekFunction(OpenJpegDotNet.Stream, OpenJpegDotNet.DelegateHandler<OpenJpegDotNet.StreamSeek>)
+  fullName.vb: OpenJpegDotNet.OpenJpeg.StreamSetSeekFunction(OpenJpegDotNet.Stream, OpenJpegDotNet.DelegateHandler(Of OpenJpegDotNet.StreamSeek))
+  nameWithType: OpenJpeg.StreamSetSeekFunction(Stream, DelegateHandler<StreamSeek>)
+  nameWithType.vb: OpenJpeg.StreamSetSeekFunction(Stream, DelegateHandler(Of StreamSeek))
+- uid: OpenJpegDotNet.OpenJpeg.StreamSetSeekFunction*
+  name: StreamSetSeekFunction
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamSetSeekFunction_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.StreamSetSeekFunction
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.StreamSetSeekFunction
+  nameWithType: OpenJpeg.StreamSetSeekFunction
+- uid: OpenJpegDotNet.OpenJpeg.StreamSetSkipFunction(OpenJpegDotNet.Stream,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamSkip})
+  name: StreamSetSkipFunction(Stream, DelegateHandler<StreamSkip>)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamSetSkipFunction_OpenJpegDotNet_Stream_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamSkip__
+  commentId: M:OpenJpegDotNet.OpenJpeg.StreamSetSkipFunction(OpenJpegDotNet.Stream,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamSkip})
+  name.vb: StreamSetSkipFunction(Stream, DelegateHandler(Of StreamSkip))
+  fullName: OpenJpegDotNet.OpenJpeg.StreamSetSkipFunction(OpenJpegDotNet.Stream, OpenJpegDotNet.DelegateHandler<OpenJpegDotNet.StreamSkip>)
+  fullName.vb: OpenJpegDotNet.OpenJpeg.StreamSetSkipFunction(OpenJpegDotNet.Stream, OpenJpegDotNet.DelegateHandler(Of OpenJpegDotNet.StreamSkip))
+  nameWithType: OpenJpeg.StreamSetSkipFunction(Stream, DelegateHandler<StreamSkip>)
+  nameWithType.vb: OpenJpeg.StreamSetSkipFunction(Stream, DelegateHandler(Of StreamSkip))
+- uid: OpenJpegDotNet.OpenJpeg.StreamSetSkipFunction*
+  name: StreamSetSkipFunction
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamSetSkipFunction_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.StreamSetSkipFunction
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.StreamSetSkipFunction
+  nameWithType: OpenJpeg.StreamSetSkipFunction
+- uid: OpenJpegDotNet.OpenJpeg.StreamSetUserData(OpenJpegDotNet.Stream,IntPtr,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamFreeUserData})
+  name: StreamSetUserData(Stream, IntPtr, DelegateHandler<StreamFreeUserData>)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamSetUserData_OpenJpegDotNet_Stream_IntPtr_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamFreeUserData__
+  commentId: M:OpenJpegDotNet.OpenJpeg.StreamSetUserData(OpenJpegDotNet.Stream,IntPtr,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamFreeUserData})
+  name.vb: StreamSetUserData(Stream, IntPtr, DelegateHandler(Of StreamFreeUserData))
+  fullName: OpenJpegDotNet.OpenJpeg.StreamSetUserData(OpenJpegDotNet.Stream, IntPtr, OpenJpegDotNet.DelegateHandler<OpenJpegDotNet.StreamFreeUserData>)
+  fullName.vb: OpenJpegDotNet.OpenJpeg.StreamSetUserData(OpenJpegDotNet.Stream, IntPtr, OpenJpegDotNet.DelegateHandler(Of OpenJpegDotNet.StreamFreeUserData))
+  nameWithType: OpenJpeg.StreamSetUserData(Stream, IntPtr, DelegateHandler<StreamFreeUserData>)
+  nameWithType.vb: OpenJpeg.StreamSetUserData(Stream, IntPtr, DelegateHandler(Of StreamFreeUserData))
+- uid: OpenJpegDotNet.OpenJpeg.StreamSetUserData*
+  name: StreamSetUserData
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamSetUserData_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.StreamSetUserData
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.StreamSetUserData
+  nameWithType: OpenJpeg.StreamSetUserData
+- uid: OpenJpegDotNet.OpenJpeg.StreamSetUserDataLength(OpenJpegDotNet.Stream,System.Int32)
+  name: StreamSetUserDataLength(Stream, Int32)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamSetUserDataLength_OpenJpegDotNet_Stream_System_Int32_
+  commentId: M:OpenJpegDotNet.OpenJpeg.StreamSetUserDataLength(OpenJpegDotNet.Stream,System.Int32)
+  fullName: OpenJpegDotNet.OpenJpeg.StreamSetUserDataLength(OpenJpegDotNet.Stream, System.Int32)
+  nameWithType: OpenJpeg.StreamSetUserDataLength(Stream, Int32)
+- uid: OpenJpegDotNet.OpenJpeg.StreamSetUserDataLength*
+  name: StreamSetUserDataLength
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamSetUserDataLength_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.StreamSetUserDataLength
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.StreamSetUserDataLength
+  nameWithType: OpenJpeg.StreamSetUserDataLength
+- uid: OpenJpegDotNet.OpenJpeg.StreamSetWriteFunction(OpenJpegDotNet.Stream,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamWrite})
+  name: StreamSetWriteFunction(Stream, DelegateHandler<StreamWrite>)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamSetWriteFunction_OpenJpegDotNet_Stream_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamWrite__
+  commentId: M:OpenJpegDotNet.OpenJpeg.StreamSetWriteFunction(OpenJpegDotNet.Stream,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamWrite})
+  name.vb: StreamSetWriteFunction(Stream, DelegateHandler(Of StreamWrite))
+  fullName: OpenJpegDotNet.OpenJpeg.StreamSetWriteFunction(OpenJpegDotNet.Stream, OpenJpegDotNet.DelegateHandler<OpenJpegDotNet.StreamWrite>)
+  fullName.vb: OpenJpegDotNet.OpenJpeg.StreamSetWriteFunction(OpenJpegDotNet.Stream, OpenJpegDotNet.DelegateHandler(Of OpenJpegDotNet.StreamWrite))
+  nameWithType: OpenJpeg.StreamSetWriteFunction(Stream, DelegateHandler<StreamWrite>)
+  nameWithType.vb: OpenJpeg.StreamSetWriteFunction(Stream, DelegateHandler(Of StreamWrite))
+- uid: OpenJpegDotNet.OpenJpeg.StreamSetWriteFunction*
+  name: StreamSetWriteFunction
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StreamSetWriteFunction_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.StreamSetWriteFunction
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.StreamSetWriteFunction
+  nameWithType: OpenJpeg.StreamSetWriteFunction
 - uid: OpenJpegDotNet.OpenJpeg.WriteTile(OpenJpegDotNet.Codec,System.Int32,System.Byte[],System.UInt32,OpenJpegDotNet.Stream)
   name: WriteTile(Codec, Int32, Byte[], UInt32, Stream)
   href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_WriteTile_OpenJpegDotNet_Codec_System_Int32_System_Byte___System_UInt32_OpenJpegDotNet_Stream_
@@ -1961,3 +2645,33 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.Stream.DisposeUnmanaged
   nameWithType: Stream.DisposeUnmanaged
+- uid: OpenJpegDotNet.StreamFreeUserData
+  name: StreamFreeUserData
+  href: api/OpenJpegDotNet.StreamFreeUserData.html
+  commentId: T:OpenJpegDotNet.StreamFreeUserData
+  fullName: OpenJpegDotNet.StreamFreeUserData
+  nameWithType: StreamFreeUserData
+- uid: OpenJpegDotNet.StreamRead
+  name: StreamRead
+  href: api/OpenJpegDotNet.StreamRead.html
+  commentId: T:OpenJpegDotNet.StreamRead
+  fullName: OpenJpegDotNet.StreamRead
+  nameWithType: StreamRead
+- uid: OpenJpegDotNet.StreamSeek
+  name: StreamSeek
+  href: api/OpenJpegDotNet.StreamSeek.html
+  commentId: T:OpenJpegDotNet.StreamSeek
+  fullName: OpenJpegDotNet.StreamSeek
+  nameWithType: StreamSeek
+- uid: OpenJpegDotNet.StreamSkip
+  name: StreamSkip
+  href: api/OpenJpegDotNet.StreamSkip.html
+  commentId: T:OpenJpegDotNet.StreamSkip
+  fullName: OpenJpegDotNet.StreamSkip
+  nameWithType: StreamSkip
+- uid: OpenJpegDotNet.StreamWrite
+  name: StreamWrite
+  href: api/OpenJpegDotNet.StreamWrite.html
+  commentId: T:OpenJpegDotNet.StreamWrite
+  fullName: OpenJpegDotNet.StreamWrite
+  nameWithType: StreamWrite

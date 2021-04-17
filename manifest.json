@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.CinemaMode.html",
-          "hash": "0yGTzAm+DxguuXkWIthiGQ=="
+          "hash": "CRX0jmJ4bdo0T8C0vsWepubl2sGqrtzJMse3iATKk4M="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.Codec.html",
-          "hash": "UQ6X6HfC++TgyxONarl0fQ=="
+          "hash": "DHdW+3HnrpTkA5uB3MErwhWkVgmXqzDI23jXlUIPN6Q="
         }
       },
       "is_incremental": false,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.CodecFormat.html",
-          "hash": "bd5QAuRdmQk8E3zEua4emA=="
+          "hash": "vfc0+dvo4DbnZMy52YZfEu5Wh2+RC3JPtIS/bylqnjk="
         }
       },
       "is_incremental": false,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.ColorSpace.html",
-          "hash": "BvsqDMfU4Eou+TbfdcdqyA=="
+          "hash": "EljAh9ZsIcEs7BN2pmvn7ah/zA1je28KKYR0R8AZAew="
         }
       },
       "is_incremental": false,
@@ -57,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.CompressionParameters.html",
-          "hash": "isw7wv2PqgcaXm52fUKA5w=="
+          "hash": "F3mGBnJdgUsVelc1/yLfLz0WOJT2SYIBQja+r/DLFHc="
         }
       },
       "is_incremental": false,
@@ -69,7 +69,19 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.DecompressionParameters.html",
-          "hash": "RQKI5wZHLprId4TX6pEdKA=="
+          "hash": "Xw5ahzwMP3H5BeINrTkBK/QccmAUdSEXvf0l6XlsyKA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.DelegateHandler-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.DelegateHandler-1.html",
+          "hash": "8aOvJM5ICW2tfHALGS7Yrhk6Ot4YaWFEIdWLFl4NfI0="
         }
       },
       "is_incremental": false,
@@ -81,7 +93,55 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.FileFormat.html",
-          "hash": "TNr1f4FV1unNz+d87w/IGg=="
+          "hash": "ZY+4dibivTimHeG+qPNSoDMW++WD8F25gh3DtpN9YX0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.IO.Parameter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.IO.Parameter.html",
+          "hash": "E0O9xF4EUvhdCihYNxImKzzltIJ6dvLoFV2r5kabXcY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.IO.Reader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.IO.Reader.html",
+          "hash": "dR/VacQuk3vEneXiCHuL6TZcbkPabpnCGkiXmYYsvJA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.IO.Writer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.IO.Writer.html",
+          "hash": "gPxDG9HKzt35qoerUMkVD72vgTOM3ijsiJQ6PWyOUfw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.IO.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.IO.html",
+          "hash": "cMWoC6Fw88RpP4xh0PBiZ5IQdryI0PzTxA2oe0Ons6k="
         }
       },
       "is_incremental": false,
@@ -93,7 +153,19 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.Image.html",
-          "hash": "MEiK2B6u+EpSxHL2a9ZYWw=="
+          "hash": "IsFEyb2HrWSJUAHeQ4JqXD1uPDTTHRZCPl2PmsTK0Kw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.ImageComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.ImageComponent.html",
+          "hash": "KLlw5P2RZl5qyuHyNOySc3hoHIBAvpfoivWWLBCrQz4="
         }
       },
       "is_incremental": false,
@@ -105,7 +177,19 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.ImageComponentParameters.html",
-          "hash": "9NChRTmGT+6IjMdL+7Qq3w=="
+          "hash": "qKI1dUiP7QyLLHDVX37WCBB0CdvZQphMysgFCZDxP+g="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.MsgCallback.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.MsgCallback.html",
+          "hash": "Ar08hCOy4fCt3rIiE3i6otV1RbkKPjL75scMND2XtcE="
         }
       },
       "is_incremental": false,
@@ -117,7 +201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.OpenJpeg.html",
-          "hash": "aYxVyLZl6K157WB0f5kKcQ=="
+          "hash": "wyLlrW9rqHZm9K0kA6i3St1pFATWgTBERarBoryFV6I="
         }
       },
       "is_incremental": false,
@@ -129,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.OpenJpegObject.html",
-          "hash": "swB6tKvOvWhCFKwv+qNYug=="
+          "hash": "faeftuoFns7jnYEMwakjZZNaXpYh6zOI0R/XVlZhykw="
         }
       },
       "is_incremental": false,
@@ -141,7 +225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.ProgressionOrder.html",
-          "hash": "nvche/m9UnVXppmIQEtJEw=="
+          "hash": "X40tVwk2g6YEYa6fNC0GDDhY8pAEGfAAvDM8TTtnAFY="
         }
       },
       "is_incremental": false,
@@ -153,7 +237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.RegionSizeCapabilities.html",
-          "hash": "DXUoEAtjZDDkJNQ+tbLpzQ=="
+          "hash": "GrKMOmzB5MuyMTcJdkKpLEGQqQ8q8ylJ9IGzJfPz7HM="
         }
       },
       "is_incremental": false,
@@ -165,7 +249,67 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.Stream.html",
-          "hash": "2ZCfM193+xK6CGrpB9wl2g=="
+          "hash": "dnNm3xG9Zn2rYshvA0d2cA1vjKNuNo82hB5Go8qlNpo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.StreamFreeUserData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.StreamFreeUserData.html",
+          "hash": "FEYIdOsEwioBbGZZpioN2K+YQ+5SoUsavitviFq1M3M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.StreamRead.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.StreamRead.html",
+          "hash": "3Fnyup6cKA5cXc7nft4B6WCeMiMTKbS/OK/YGxaXslY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.StreamSeek.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.StreamSeek.html",
+          "hash": "/7B53vkVPO2ABhez4cT6D7eDWJIkbJQwsMajnmOgCDQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.StreamSkip.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.StreamSkip.html",
+          "hash": "ZYqUkzDpHrqv0qF32yYsfWNTjdy/RGvvB1og8Y2oXhw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OpenJpegDotNet.StreamWrite.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OpenJpegDotNet.StreamWrite.html",
+          "hash": "8hLl6k9kdfcCi2VvuGm8MyhqwIX95QbpBpbpYnMSTxY="
         }
       },
       "is_incremental": false,
@@ -177,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/OpenJpegDotNet.html",
-          "hash": "QSuxPj/erqbZqiPsMcs3HQ=="
+          "hash": "1IQ54zNsCnF6rgEWlbRfqO5dazK5P2SSVH0p6XNFrcc="
         }
       },
       "is_incremental": false,
@@ -189,7 +333,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "6FKNvl438TLEahVP4WJVQg=="
+          "hash": "ofb8iB4CgDj2bGPHxiIXZZzOYR7kDZKp1OMsLw0NK8w="
         }
       },
       "is_incremental": false,
@@ -212,7 +356,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "TOjt5p/84BrgaLH0Rmzkag=="
+          "hash": "u1Xt7CEuBRReCuuAEiVg6g1CVwrRI8nD+0T0aq7KQHk="
         }
       },
       "is_incremental": false,
@@ -224,7 +368,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "KaWDX8tr29+j6jkKYsd73w=="
+          "hash": "mZ/UuoFrvwqUXRXiMGV3U7oltxelhcq9JqH5aT8Oiz4="
         }
       },
       "is_incremental": false,
@@ -251,7 +395,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 15,
+          "total_file_count": 27,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
