@@ -65,8 +65,8 @@ namespace OpenJpegDotNet
                                 for (var i = 0; i < channels; i++)
                                 {
                                     var target = image.Components[i].Data;
-                                    var pTarget = (byte*)target;
-                                    var source = pRaw;
+                                    var pTarget = (int*)target;
+                                    var source = pRaw + i;
                                     for (var y = 0; y < height; y++)
                                     {
                                         for (var x = 0; x < width; x++)
@@ -85,8 +85,8 @@ namespace OpenJpegDotNet
                                 for (var i = 0; i < channels; i++)
                                 {
                                     var target = image.Components[i].Data;
-                                    var pTarget = (byte*)target;
-                                    var source = pRaw;
+                                    var pTarget = (int*)target;
+                                    var source = pRaw + i * (stride * height);
                                     for (var y = 0; y < height; y++)
                                     {
                                         for (var x = 0; x < width; x++)
@@ -190,8 +190,9 @@ namespace OpenJpegDotNet
                             for (var i = 0; i < channels; i++)
                             {
                                 var target = image.Components[i].Data;
-                                var pTarget = (byte*)target;
+                                var pTarget = (int*)target;
                                 var source = (byte*)scan0;
+                                source += i;
                                 for (var y = 0; y < height; y++)
                                 {
                                     for (var x = 0; x < width; x++)

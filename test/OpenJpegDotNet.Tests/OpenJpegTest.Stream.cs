@@ -293,7 +293,7 @@ namespace OpenJpegDotNet.Tests
                 var bufLength = (ulong)(buf->Length - buf->Position);
                 var readLength = bytes < bufLength ? bytes : bufLength;
 
-                System.Buffer.MemoryCopy((void*)buffer, (void*)IntPtr.Add(buf->Data, buf->Position), readLength, readLength);
+                System.Buffer.MemoryCopy((void*)IntPtr.Add(buf->Data, buf->Position), (void*)buffer, readLength, readLength);
                 buf->Position += (int)readLength;
 
                 return readLength;
@@ -342,7 +342,7 @@ namespace OpenJpegDotNet.Tests
                 var bufLength = (ulong)(buf->Length - buf->Position);
                 var writeLength = bytes < bufLength ? bytes : bufLength;
 
-                System.Buffer.MemoryCopy((void*)IntPtr.Add(buf->Data, buf->Position), (void*)buffer, writeLength, writeLength);
+                System.Buffer.MemoryCopy((void*)buffer, (void*)IntPtr.Add(buf->Data, buf->Position), writeLength, writeLength);
                 buf->Position += (int)writeLength;
 
                 return (ulong)writeLength;

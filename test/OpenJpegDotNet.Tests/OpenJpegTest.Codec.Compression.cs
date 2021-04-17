@@ -775,7 +775,7 @@ namespace OpenJpegDotNet.Tests
             using var image = ImageHelper.FromBitmap(bitmap);
 
             using var codec = OpenJpeg.CreateCompress(CodecFormat.J2k);
-            OpenJpeg.SetupEncoder(codec, compressionParameters, image);
+            Assert.True(OpenJpeg.SetupEncoder(codec, compressionParameters, image));
 
             var bufferLength = (int)(image.X1 * image.Y1 * image.NumberOfComponents + 1024);
             var outputBuffer = Marshal.AllocHGlobal(bufferLength);
@@ -803,9 +803,9 @@ namespace OpenJpegDotNet.Tests
             OpenJpeg.SetWarnHandler(codec, new DelegateHandler<MsgCallback>(MsgWarnCallback), IntPtr.Zero);
             OpenJpeg.SetErrorHandler(codec, new DelegateHandler<MsgCallback>(MsgErrorCallback), IntPtr.Zero);
 
-            OpenJpeg.StartCompress(codec, image, stream);
-            OpenJpeg.Encode(codec, stream);
-            OpenJpeg.EndCompress(codec, stream);
+            Assert.True(OpenJpeg.StartCompress(codec, image, stream));
+            Assert.True(OpenJpeg.Encode(codec, stream));
+            Assert.True(OpenJpeg.EndCompress(codec, stream));
 
             var outputPath = Path.Combine(ResultDirectory, nameof(this.EncodeFromBitmap), $"{Path.GetFileNameWithoutExtension(testImage)}.j2k");
             Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
@@ -837,7 +837,7 @@ namespace OpenJpegDotNet.Tests
             OpenJpeg.SetWarnHandler(codec, new DelegateHandler<MsgCallback>(MsgWarnCallback), IntPtr.Zero);
             OpenJpeg.SetErrorHandler(codec, new DelegateHandler<MsgCallback>(MsgErrorCallback), IntPtr.Zero);
 
-            OpenJpeg.SetupEncoder(codec, compressionParameters, image);
+            Assert.True(OpenJpeg.SetupEncoder(codec, compressionParameters, image));
 
             var bufferLength = imageByte.Length + 1024;
             var outputBuffer = Marshal.AllocHGlobal(bufferLength);
@@ -861,9 +861,9 @@ namespace OpenJpegDotNet.Tests
             OpenJpeg.StreamSetSeekFunction(stream, new DelegateHandler<StreamSeek>(StreamSeekCallback));
             OpenJpeg.StreamSetSkipFunction(stream, new DelegateHandler<StreamSkip>(StreamSkipCallback));
 
-            OpenJpeg.StartCompress(codec, image, stream);
-            OpenJpeg.Encode(codec, stream);
-            OpenJpeg.EndCompress(codec, stream);
+            Assert.True(OpenJpeg.StartCompress(codec, image, stream));
+            Assert.True(OpenJpeg.Encode(codec, stream));
+            Assert.True(OpenJpeg.EndCompress(codec, stream));
 
             var outputPath = Path.Combine(ResultDirectory, nameof(this.EncodeFromRaw), $"{Path.GetFileNameWithoutExtension(testImage)}.j2k");
             Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
