@@ -227,28 +227,90 @@ namespace OpenJpegDotNet.Tests
         #endregion
 
         #region Helpers
-
+        
         private static ulong StreamReadCallback(IntPtr buffer, ulong bytes, IntPtr userData)
         {
-            return 0;
+            unsafe
+            {
+                var buf = (Buffer*)userData;
+                if (buf == null || buf->Data == IntPtr.Zero || buf->Length == 0)
+                    return unchecked((ulong)-1);
+
+                if (buf->Position >= buf->Length)
+                    return unchecked((ulong)-1);
+
+                var bufLength = (ulong)(buf->Length - buf->Position);
+                var readLength = bytes < bufLength ? bytes : bufLength;
+
+                System.Buffer.MemoryCopy((void*)IntPtr.Add(buf->Data, buf->Position), (void*)buffer, readLength, readLength);
+                buf->Position += (int)readLength;
+
+                return readLength;
+            }
         }
 
         private static int StreamSeekCallback(ulong bytes, IntPtr userData)
         {
-            return 0;
+            unsafe
+            {
+                var buf = (Buffer*)userData;
+                if (buf == null || buf->Data == IntPtr.Zero || buf->Length == 0)
+                    return 0;
+
+                buf->Position = (int)Math.Min(bytes, (ulong)buf->Length);
+
+                return 1;
+            }
         }
 
         private static long StreamSkipCallback(ulong bytes, IntPtr userData)
         {
-            return 0;
+            unsafe
+            {
+                var buf = (Buffer*)userData;
+                if (buf == null || buf->Data == IntPtr.Zero || buf->Length == 0)
+                    return -1;
+
+                buf->Position = (int)Math.Min((ulong)buf->Position + bytes, (ulong)buf->Length);
+
+                return (long)bytes;
+            }
         }
 
         private static ulong StreamWriteCallback(IntPtr buffer, ulong bytes, IntPtr userData)
         {
-            return 0;
+            unsafe
+            {
+                var buf = (Buffer*)userData;
+                if (buf == null || buf->Data == IntPtr.Zero || buf->Length == 0)
+                    return unchecked((ulong)-1);
+
+                if (buf->Position >= buf->Length)
+                    return unchecked((ulong)-1);
+
+                var bufLength = (ulong)(buf->Length - buf->Position);
+                var writeLength = bytes < bufLength ? bytes : bufLength;
+
+                System.Buffer.MemoryCopy((void*)buffer, (void*)IntPtr.Add(buf->Data, buf->Position), writeLength, writeLength);
+                buf->Position += (int)writeLength;
+
+                return (ulong)writeLength;
+            }
         }
 
         #endregion
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct Buffer
+        {
+
+            public IntPtr Data;
+
+            public int Length;
+
+            public int Position;
+
+        }
 
     }
 

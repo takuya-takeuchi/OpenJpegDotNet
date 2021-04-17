@@ -67,6 +67,27 @@ namespace OpenJpegDotNet
         }
 
         /// <summary>
+        /// Encode an image into a JPEG-2000 codestream.
+        /// </summary>
+        /// <param name="codec">the Jpeg 2000 codec to compress.</param>
+        /// <param name="stream">The Jpeg 2000 stream.</param>
+        /// <returns><code>true</code> if the end to compress is correctly set; otherwise, <code>false</code>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="codec"/> or <paramref name="stream"/> is null.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="stream"/> is disposed.</exception>
+        public static bool Encode(Codec codec, Stream stream)
+        {
+            if (codec == null)
+                throw new ArgumentNullException(nameof(codec));
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
+
+            codec.ThrowIfDisposed();
+            stream.ThrowIfDisposed();
+
+            return NativeMethods.openjpeg_openjp2_opj_encode(codec.NativePtr, stream.NativePtr);
+        }
+
+        /// <summary>
         /// Set encoding parameters to default values.
         /// </summary>
         /// <param name="parameters">The <see cref="CompressionParameters"/> to compress image.</param>

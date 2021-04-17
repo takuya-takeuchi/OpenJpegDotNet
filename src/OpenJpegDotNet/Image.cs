@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -135,12 +136,23 @@ namespace OpenJpegDotNet
         /// Gets the image components.
         /// </summary>
         /// <exception cref="ObjectDisposedException">This object is disposed.</exception>
-        public IntPtr Components
+        public ImageComponent[] Components
         {
             get
             {
                 this.ThrowIfDisposed();
-                return NativeMethods.openjpeg_openjp2_opj_image_t_get_comps(this.NativePtr);
+
+                var components = new List<ImageComponent>();
+                for (var index = 0; ; index++)
+                {
+                    var ptr = NativeMethods.openjpeg_openjp2_opj_image_t_get_comps_by_index(this.NativePtr, (uint)index);
+                    if (ptr == IntPtr.Zero)
+                        break;
+
+                    components.Add(new ImageComponent(ptr));
+                }
+
+                return components.ToArray();
             }
         }
 

@@ -71,6 +71,13 @@ DLLEXPORT const opj_image_comp_t* openjpeg_openjp2_opj_image_t_get_comps(opj_ima
     return image->comps;
 }
 
+DLLEXPORT const opj_image_comp_t* openjpeg_openjp2_opj_image_t_get_comps_by_index(opj_image_t* image,
+                                                                                  const uint32_t index)
+{
+    if (!(0 <= index && index < image->numcomps)) return nullptr;
+    return &(image->comps[index]);
+}
+
 DLLEXPORT const OPJ_BYTE* openjpeg_openjp2_opj_image_t_get_icc_profile_buf(opj_image_t* image)
 {
     return image->icc_profile_buf;
@@ -177,6 +184,85 @@ DLLEXPORT void openjpeg_openjp2_opj_image_cmptparm_t_set_sgnd(opj_image_cmptparm
 
 #pragma endregion opj_image_cmptparm_t
 
+#pragma region opj_image_comp_t
+
+DLLEXPORT const int32_t* openjpeg_openjp2_opj_image_comp_t_get_data(opj_image_comp_t* comp)
+{
+    return comp->data;
+}
+
+DLLEXPORT const uint16_t openjpeg_openjp2_opj_image_comp_t_get_alpha(opj_image_comp_t* comp)
+{
+    return comp->alpha;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_comp_t_get_bpp(opj_image_comp_t* comp)
+{
+    return comp->bpp;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_comp_t_get_dx(opj_image_comp_t* comp)
+{
+    return comp->dx;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_comp_t_get_dy(opj_image_comp_t* comp)
+{
+    return comp->dy;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_comp_t_get_factor(opj_image_comp_t* comp)
+{
+    return comp->factor;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_comp_t_get_h(opj_image_comp_t* comp)
+{
+    return comp->h;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_comp_t_get_prec(opj_image_comp_t* comp)
+{
+    return comp->prec;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_comp_t_get_resno_decoded(opj_image_comp_t* comp)
+{
+    return comp->resno_decoded;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_comp_t_get_sgnd(opj_image_comp_t* comp)
+{
+    return comp->sgnd;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_comp_t_get_w(opj_image_comp_t* comp)
+{
+    return comp->w;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_comp_t_get_x0(opj_image_comp_t* comp)
+{
+    return comp->x0;
+}
+
+DLLEXPORT const uint32_t openjpeg_openjp2_opj_image_comp_t_get_y0(opj_image_comp_t* comp)
+{
+    return comp->y0;
+}
+
+#pragma endregion opj_image_comp_t
+
+DLLEXPORT opj_image_t* openjpeg_openjp2_opj_image_create(const uint32_t numcmpts,
+                                                         opj_image_cmptparm_t** cmptparms,
+                                                         const uint32_t cmptparms_len,
+                                                         OPJ_COLOR_SPACE clrsp)
+{
+    std::vector<opj_image_cmptparm_t> compparams(cmptparms_len);
+    for (size_t index = 0; index < cmptparms_len; index++) compparams[index] = *(cmptparms[index]);
+    return ::opj_image_create(numcmpts, compparams.data(), clrsp);
+}
+
 DLLEXPORT void openjpeg_openjp2_opj_image_t_destroy(opj_image_t* image)
 {
     ::opj_image_destroy(image);
@@ -188,7 +274,7 @@ DLLEXPORT const opj_image_t* openjpeg_openjp2_opj_image_tile_create(const uint32
                                                                     const OPJ_COLOR_SPACE clrspc)
 {
     auto tmp = std::vector<opj_image_cmptparm_t>(cmptparms_len);
-    for (auto index = 0; index < cmptparms_len; index++) tmp[index] = (*cmptparms[index]);
+    for (uint32_t index = 0; index < cmptparms_len; index++) tmp[index] = (*cmptparms[index]);
     const auto ret = ::opj_image_tile_create(numcmpts, tmp.data(), clrspc);
     return ret;
 }
