@@ -84,7 +84,7 @@ namespace OpenJpegDotNet
             codec.ThrowIfDisposed();
             stream.ThrowIfDisposed();
 
-            return NativeMethods.openjpeg_openjp2_opj_end_compress(codec.NativePtr, stream.NativePtr);
+            return NativeMethods.openjpeg_openjp2_opj_encode(codec.NativePtr, stream.NativePtr);
         }
 
         /// <summary>

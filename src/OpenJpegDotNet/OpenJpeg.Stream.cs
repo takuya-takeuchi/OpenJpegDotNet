@@ -36,20 +36,20 @@ namespace OpenJpegDotNet
         /// <summary>
         /// Sets the given callback to be used as a read function.
         /// </summary>
-        /// <param name="stream">The stream to modify.</param>
+        /// <param name="codec">The stream to modify.</param>
         /// <param name="callback">The callback to free user data when <see cref="Stream"/> reads data stream.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="stream"/> or <paramref name="callback"/> is null.</exception>
-        /// <exception cref="ObjectDisposedException"><paramref name="stream"/> is disposed.</exception>
-        public static void StreamSetReadFunction(Stream stream, DelegateHandler<StreamRead> callback = null)
+        /// <exception cref="ArgumentNullException"><paramref name="codec"/> or <paramref name="callback"/> is null.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> is disposed.</exception>
+        public static void StreamSetReadFunction(Stream codec, DelegateHandler<StreamRead> callback)
         {
-            if (stream == null)
-                throw new ArgumentNullException(nameof(stream));
+            if (codec == null)
+                throw new ArgumentNullException(nameof(codec));
             if (callback == null)
                 throw new ArgumentNullException(nameof(callback));
 
-            stream.ThrowIfDisposed();
+            codec.ThrowIfDisposed();
 
-            NativeMethods.openjpeg_openjp2_opj_stream_set_read_function(stream.NativePtr, callback.Handle);
+            NativeMethods.openjpeg_openjp2_opj_stream_set_read_function(codec.NativePtr, callback.Handle);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace OpenJpegDotNet
         /// <param name="callback">The callback to free user data when <see cref="Stream"/> writes data stream.</param>
         /// <exception cref="ArgumentNullException"><paramref name="stream"/> or <paramref name="callback"/> is null.</exception>
         /// <exception cref="ObjectDisposedException"><paramref name="stream"/> is disposed.</exception>
-        public static void StreamSetWriteFunction(Stream stream, DelegateHandler<StreamWrite> callback = null)
+        public static void StreamSetWriteFunction(Stream stream, DelegateHandler<StreamWrite> callback)
         {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
@@ -78,7 +78,7 @@ namespace OpenJpegDotNet
         /// <param name="callback">The callback to free user data when <see cref="Stream"/> skips data stream.</param>
         /// <exception cref="ArgumentNullException"><paramref name="stream"/> or <paramref name="callback"/> is null.</exception>
         /// <exception cref="ObjectDisposedException"><paramref name="stream"/> is disposed.</exception>
-        public static void StreamSetSkipFunction(Stream stream, DelegateHandler<StreamSkip> callback = null)
+        public static void StreamSetSkipFunction(Stream stream, DelegateHandler<StreamSkip> callback)
         {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));

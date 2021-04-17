@@ -78,18 +78,21 @@ void main(uint8_t** argv, int argc)
     DecodeData mysrc((unsigned char*)buffer, size);
     l_stream = opj_stream_create_memory_stream(&mysrc, size, OPJ_FALSE);
 
+    std::cout << "[Info] start opj_start_compress" << std::endl;
     if(!opj_start_compress(l_codec,image,l_stream))
     {
         std::cout << "[Error] opj_start_compress" << std::endl;
         return;
     }
 
+    std::cout << "[Info] start opj_encode" << std::endl;
     if(!opj_encode(l_codec, l_stream))
     {
         std::cout << "[Error] opj_encode" << std::endl;
         return;
     }
 
+    std::cout << "[Info] start opj_end_compress" << std::endl;
     if(!opj_end_compress(l_codec, l_stream))
     {
         std::cout << "[Error] opj_end_compress" << std::endl;
