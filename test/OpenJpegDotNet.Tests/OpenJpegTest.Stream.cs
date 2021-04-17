@@ -227,58 +227,7 @@ namespace OpenJpegDotNet.Tests
         #endregion
 
         #region Helpers
-
-        //private static ulong StreamReadCallback(IntPtr buffer, ulong bytes, IntPtr userData)
-        //{
-        //    return 0;
-        //}
-
-        //private static int StreamSeekCallback(ulong bytes, IntPtr userData)
-        //{
-        //    unsafe
-        //    {
-        //        var buf = (Buffer*)userData;
-        //        var position = Math.Min((ulong)buf->Length, bytes);
-        //        buf->Position = (int)position;
-        //        return 1;
-        //    }
-        //}
-
-        //private static long StreamSkipCallback(ulong bytes, IntPtr userData)
-        //{
-        //    unsafe
-        //    {
-        //        var buf = (Buffer*)userData;
-        //        var bytesToSkip = (int)Math.Min((ulong)buf->Length, bytes);
-        //        if (bytesToSkip > 0)
-        //        {
-        //            buf->Position += bytesToSkip;
-        //            return bytesToSkip;
-        //        }
-        //        else
-        //        {
-        //            return unchecked(-1);
-        //        }
-        //    }
-        //}
-
-        //private static ulong StreamWriteCallback(IntPtr buffer, ulong bytes, IntPtr userData)
-        //{
-        //    unsafe
-        //    {
-        //        var buf = (Buffer*)userData;
-        //        if (buf->Position >= buf->Length)
-        //            return unchecked((ulong)-1);
-
-        //        if (bytes > (ulong) (buf->Length - buf->Position))
-        //            bytes = (ulong) (buf->Length - buf->Position);
-
-        //        System.Buffer.MemoryCopy((void*)IntPtr.Add(buf->Data, buf->Position), (void*)buffer, bytes, bytes);
-        //        buf->Position += (int)bytes;
-
-        //        return (ulong)bytes;
-        //    }
-        //}
+        
         private static ulong StreamReadCallback(IntPtr buffer, ulong bytes, IntPtr userData)
         {
             unsafe
