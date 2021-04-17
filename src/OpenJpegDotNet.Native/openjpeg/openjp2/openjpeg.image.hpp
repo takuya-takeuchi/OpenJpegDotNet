@@ -274,7 +274,7 @@ DLLEXPORT const opj_image_t* openjpeg_openjp2_opj_image_tile_create(const uint32
                                                                     const OPJ_COLOR_SPACE clrspc)
 {
     auto tmp = std::vector<opj_image_cmptparm_t>(cmptparms_len);
-    for (auto index = 0; index < cmptparms_len; index++) tmp[index] = (*cmptparms[index]);
+    for (uint32_t index = 0; index < cmptparms_len; index++) tmp[index] = (*cmptparms[index]);
     const auto ret = ::opj_image_tile_create(numcmpts, tmp.data(), clrspc);
     return ret;
 }

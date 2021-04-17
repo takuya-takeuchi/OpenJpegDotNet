@@ -832,6 +832,11 @@ namespace OpenJpegDotNet.Tests
             compressionParameters.CodingParameterDistortionAllocation = 1;
 
             using var codec = OpenJpeg.CreateCompress(CodecFormat.J2k);
+
+            OpenJpeg.SetInfoHandler(codec, new DelegateHandler<MsgCallback>(MsgInfoCallback), IntPtr.Zero);
+            OpenJpeg.SetWarnHandler(codec, new DelegateHandler<MsgCallback>(MsgWarnCallback), IntPtr.Zero);
+            OpenJpeg.SetErrorHandler(codec, new DelegateHandler<MsgCallback>(MsgErrorCallback), IntPtr.Zero);
+
             OpenJpeg.SetupEncoder(codec, compressionParameters, image);
 
             var bufferLength = imageByte.Length + 1024;
@@ -852,13 +857,9 @@ namespace OpenJpegDotNet.Tests
             OpenJpeg.StreamSetUserData(stream, userData);
             OpenJpeg.StreamSetUserDataLength(stream, buffer.Length);
             OpenJpeg.StreamSetWriteFunction(stream, new DelegateHandler<StreamWrite>(StreamWriteCallback));
-            //OpenJpeg.StreamSetReadFunction(stream, new DelegateHandler<StreamRead>(StreamReadCallback));
+            OpenJpeg.StreamSetReadFunction(stream, new DelegateHandler<StreamRead>(StreamReadCallback));
             OpenJpeg.StreamSetSeekFunction(stream, new DelegateHandler<StreamSeek>(StreamSeekCallback));
             OpenJpeg.StreamSetSkipFunction(stream, new DelegateHandler<StreamSkip>(StreamSkipCallback));
-
-            OpenJpeg.SetInfoHandler(codec, new DelegateHandler<MsgCallback>(MsgInfoCallback), IntPtr.Zero);
-            OpenJpeg.SetWarnHandler(codec, new DelegateHandler<MsgCallback>(MsgWarnCallback), IntPtr.Zero);
-            OpenJpeg.SetErrorHandler(codec, new DelegateHandler<MsgCallback>(MsgErrorCallback), IntPtr.Zero);
 
             OpenJpeg.StartCompress(codec, image, stream);
             OpenJpeg.Encode(codec, stream);
