@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.0)
 cmake_policy(SET CMP0053 NEW)
 cmake_policy(SET CMP0054 NEW)
 
-set(PROJ_NAME OpenJpegDotNetNative)
+set(PROJ_NAME openjpeg_memory_writer_demo)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -24,10 +24,10 @@ message("-- Binaries: ${CMAKE_CURRENT_BINARY_DIR}")
 message("-------------------------------------------------------")
 
 # Version info
-set(VERSION_MAJOR 0)
+set(VERSION_MAJOR 1)
 set(VERSION_MINOR 0)
-set(VERSION_PATCH 1)
-set(VERSION_DATE 20210417)
+set(VERSION_PATCH 0)
+set(VERSION_DATE 0)
 
 # Only GCC requires -fPIC
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
@@ -74,17 +74,11 @@ find_package (OpenJPEG REQUIRED)
 
 # create config file
 configure_file(
-    ${PROJECT_SOURCE_DIR}/openjpeg/config.hpp.in
-    ${PROJECT_SOURCE_DIR}/openjpeg/config.hpp
-    @ONLY)
-
-configure_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/version.rc.in
     ${CMAKE_CURRENT_BINARY_DIR}/version.rc
     @ONLY)
 
-FILE(GLOB_RECURSE HEADERS ${PROJECT_SOURCE_DIR}/openjpeg/*.h)
-FILE(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/openjpeg/*.cpp)
+FILE(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 OPTION(ENABLE_NEON "Enable ARM NEON" OFF)
 if (${ENABLE_NEON})
@@ -95,13 +89,13 @@ if (${ENABLE_NEON})
 endif()
 
 if ("${CMAKE_SYSTEM_NAME}" STREQUAL "iOS")
-    add_library(${PROJ_NAME} ${HEADERS}
-                             ${SOURCES}
-                             ${CMAKE_CURRENT_BINARY_DIR}/version.rc)
+    add_executable(${PROJ_NAME} ${HEADERS}
+                                ${SOURCES}
+                                ${CMAKE_CURRENT_BINARY_DIR}/version.rc)
 else()
-    add_library(${PROJ_NAME} SHARED ${HEADERS}
-                                    ${SOURCES}
-                                    ${CMAKE_CURRENT_BINARY_DIR}/version.rc)
+    add_executable(${PROJ_NAME} ${HEADERS}
+                                ${SOURCES}
+                                ${CMAKE_CURRENT_BINARY_DIR}/version.rc)
 endif()
 
 include_directories("$ENV{OpenJPEG_DIR}/include")

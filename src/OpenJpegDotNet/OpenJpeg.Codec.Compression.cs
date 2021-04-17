@@ -28,7 +28,7 @@ namespace OpenJpegDotNet
         /// <param name="stream">The Jpeg 2000 stream.</param>
         /// <returns><code>true</code> if the start to compress is correctly set; otherwise, <code>false</code>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="codec"/>, <paramref name="image"/> or <paramref name="stream"/> is null.</exception>
-        /// <exception cref="ObjectDisposedException"><paramref name="codec"/>, <paramref name="image"/> or <paramref name="stream"/>.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/>, <paramref name="image"/> or <paramref name="stream"/> is disposed.</exception>
         public static bool StartCompress(Codec codec, Image image, Stream stream)
         {
             if (codec == null)
@@ -52,7 +52,7 @@ namespace OpenJpegDotNet
         /// <param name="stream">The Jpeg 2000 stream.</param>
         /// <returns><code>true</code> if the end to compress is correctly set; otherwise, <code>false</code>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="codec"/> or <paramref name="stream"/> is null.</exception>
-        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="stream"/>.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="stream"/> is disposed.</exception>
         public static bool EndCompress(Codec codec, Stream stream)
         {
             if (codec == null)
@@ -67,11 +67,32 @@ namespace OpenJpegDotNet
         }
 
         /// <summary>
+        /// Encode an image into a JPEG-2000 codestream.
+        /// </summary>
+        /// <param name="codec">the Jpeg 2000 codec to compress.</param>
+        /// <param name="stream">The Jpeg 2000 stream.</param>
+        /// <returns><code>true</code> if the end to compress is correctly set; otherwise, <code>false</code>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="codec"/> or <paramref name="stream"/> is null.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="stream"/> is disposed.</exception>
+        public static bool Encode(Codec codec, Stream stream)
+        {
+            if (codec == null)
+                throw new ArgumentNullException(nameof(codec));
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
+
+            codec.ThrowIfDisposed();
+            stream.ThrowIfDisposed();
+
+            return NativeMethods.openjpeg_openjp2_opj_encode(codec.NativePtr, stream.NativePtr);
+        }
+
+        /// <summary>
         /// Set encoding parameters to default values.
         /// </summary>
         /// <param name="parameters">The <see cref="CompressionParameters"/> to compress image.</param>
         /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is null.</exception>
-        /// <exception cref="ObjectDisposedException"><paramref name="parameters"/>.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="parameters"/> is disposed.</exception>
         public static void SetDefaultEncoderParameters(CompressionParameters parameters)
         {
             if (parameters == null)
@@ -90,7 +111,7 @@ namespace OpenJpegDotNet
         /// <param name="image">Input filled image.</param>
         /// <returns><code>true</code> if the decoder is correctly set; otherwise, <code>false</code>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="codec"/>, <paramref name="parameters"/> or <paramref name="image"/> is null.</exception>
-        /// <exception cref="ObjectDisposedException"><paramref name="codec"/>, <paramref name="parameters"/> or <paramref name="image"/>.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/>, <paramref name="parameters"/> or <paramref name="image"/> is disposed.</exception>
         public static bool SetupEncoder(Codec codec, CompressionParameters parameters, Image image)
         {
             if (codec == null)

@@ -28,7 +28,7 @@ namespace OpenJpegDotNet
         /// <param name="image">The image that receives decoded datum.</param>
         /// <returns><code>true</code> if success; otherwise, <code>false</code>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="codec"/>, <paramref name="stream"/> or <paramref name="image"/> is null.</exception>
-        /// <exception cref="ObjectDisposedException"><paramref name="codec"/>, <paramref name="stream"/> or <paramref name="image"/>.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/>, <paramref name="stream"/> or <paramref name="image"/> is disposed.</exception>
         public static bool Decode(Codec codec, Stream stream, Image image)
         {
             if (codec == null)
@@ -52,7 +52,7 @@ namespace OpenJpegDotNet
         /// <param name="stream">The Jpeg 2000 stream.</param>
         /// <returns><code>true</code> if success; otherwise, <code>false</code>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="codec"/> or <paramref name="stream"/> is null.</exception>
-        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="stream"/>.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="stream"/> is disposed.</exception>
         public static bool EndDecompress(Codec codec, Stream stream)
         {
             if (codec == null)
@@ -74,7 +74,7 @@ namespace OpenJpegDotNet
         /// <param name="image">When this method returns, contains the <see cref="Image"/> read from stream. This parameter is passed uninitialized.</param>
         /// <returns><code>true</code> if the main header of the codestream and the JP2 header is correctly read; otherwise, <code>false</code>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="stream"/> or <paramref name="codec"/> is null.</exception>
-        /// <exception cref="ObjectDisposedException"><paramref name="stream"/> or <paramref name="codec"/>.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="stream"/> or <paramref name="codec"/> is disposed.</exception>
         public static bool ReadHeader(Stream stream, Codec codec, out Image image)
         {
             if (stream == null)
@@ -101,7 +101,7 @@ namespace OpenJpegDotNet
         /// <param name="bottom">The bottom position of the rectangle to decode in image.</param>
         /// <returns><code>true</code> if the area is correctly set; otherwise, <code>false</code>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="codec"/> or <paramref name="image"/> is null.</exception>
-        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="image"/>.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="image"/> is disposed.</exception>
         public static bool SetDecodeArea(Codec codec, Image image, uint left, uint top, uint right, uint bottom)
         {
             if (codec == null)
@@ -125,7 +125,7 @@ namespace OpenJpegDotNet
         /// </summary>
         /// <param name="parameters">The <see cref="DecompressionParameters"/> to decompress image.</param>
         /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is null.</exception>
-        /// <exception cref="ObjectDisposedException"><paramref name="parameters"/>.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="parameters"/> is disposed.</exception>
         public static void SetDefaultDecoderParameters(DecompressionParameters parameters)
         {
             if (parameters == null)
@@ -143,7 +143,7 @@ namespace OpenJpegDotNet
         /// <param name="parameters">The <see cref="DecompressionParameters"/> to decompress image.</param>
         /// <returns><code>true</code> if the decoder is correctly set; otherwise, <code>false</code>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="codec"/> or <paramref name="parameters"/> is null.</exception>
-        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="parameters"/>.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="parameters"/> is disposed.</exception>
         public static bool SetupDecoder(Codec codec, DecompressionParameters parameters)
         {
             if (codec == null)
@@ -167,7 +167,7 @@ namespace OpenJpegDotNet
         /// <param name="stream">The stream to write data to.</param>
         /// <returns><code>true</code> if the data could be written; otherwise, <code>false</code>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="codec"/> or <paramref name="stream"/> is null.</exception>
-        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="stream"/>.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="stream"/> is disposed.</exception>
         public static bool WriteTile(Codec codec, int tileIndex, byte[] data, uint dataSize, Stream stream)
         {
             if (codec == null)

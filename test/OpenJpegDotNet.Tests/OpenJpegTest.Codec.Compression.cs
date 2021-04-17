@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Xunit;
 
 // ReSharper disable once CheckNamespace
@@ -644,16 +647,16 @@ namespace OpenJpegDotNet.Tests
         #region Functions
 
         [Fact]
-        public void Encode()
+        public void Compress()
         {
             var targets = new[]
             {
-                new { Format = CodecFormat.Unknown, FileName = $"{nameof(this.Encode)}.ukn", Result = false },
-                new { Format = CodecFormat.J2k,     FileName = $"{nameof(this.Encode)}.j2k", Result = true  },
-                new { Format = CodecFormat.Jp2,     FileName = $"{nameof(this.Encode)}.jp2", Result = true  },
-                new { Format = CodecFormat.Jpp,     FileName = $"{nameof(this.Encode)}.jpp", Result = false },
-                new { Format = CodecFormat.Jpt,     FileName = $"{nameof(this.Encode)}.jpt", Result = false },
-                new { Format = CodecFormat.Jpx,     FileName = $"{nameof(this.Encode)}.jpx", Result = false },
+                new { Format = CodecFormat.Unknown, FileName = $"{nameof(this.Compress)}.ukn", Result = false },
+                new { Format = CodecFormat.J2k,     FileName = $"{nameof(this.Compress)}.j2k", Result = true  },
+                new { Format = CodecFormat.Jp2,     FileName = $"{nameof(this.Compress)}.jp2", Result = true  },
+                new { Format = CodecFormat.Jpp,     FileName = $"{nameof(this.Compress)}.jpp", Result = false },
+                new { Format = CodecFormat.Jpt,     FileName = $"{nameof(this.Compress)}.jpt", Result = false },
+                new { Format = CodecFormat.Jpx,     FileName = $"{nameof(this.Compress)}.jpx", Result = false },
             };
 
             const int numCompsMax = 4;
@@ -720,8 +723,8 @@ namespace OpenJpegDotNet.Tests
                 image.ColorSpace = ColorSpace.Srgb;
 
                 Directory.CreateDirectory(ResultDirectory);
-                Directory.CreateDirectory(Path.Combine(ResultDirectory, nameof(this.Encode)));
-                var path = Path.Combine(ResultDirectory, nameof(this.Encode), target.FileName);
+                Directory.CreateDirectory(Path.Combine(ResultDirectory, nameof(this.Compress)));
+                var path = Path.Combine(ResultDirectory, nameof(this.Compress), target.FileName);
 
                 Assert.True(OpenJpeg.SetupEncoder(codec, compressionParameters, image) == target.Result, $"Failed to invoke {nameof(OpenJpeg.SetupDecoder)} for {target.Format}");
                 if (!target.Result)
@@ -755,6 +758,122 @@ namespace OpenJpegDotNet.Tests
                 this.DisposeAndCheckDisposedState(compressionParameters);
                 this.DisposeAndCheckDisposedState(codec);
             }
+        }
+
+        [Fact]
+        public void EncodeFromBitmap()
+        {
+            const string testImage = "obama-240p.jpg";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            using var bitmap = System.Drawing.Image.FromFile(path) as Bitmap;
+
+            using var compressionParameters = new CompressionParameters();
+            OpenJpeg.SetDefaultEncoderParameters(compressionParameters);
+            compressionParameters.TcpNumLayers = 1;
+            compressionParameters.CodingParameterDistortionAllocation = 1;
+
+            using var image = ImageHelper.FromBitmap(bitmap);
+
+            using var codec = OpenJpeg.CreateCompress(CodecFormat.J2k);
+            Assert.True(OpenJpeg.SetupEncoder(codec, compressionParameters, image));
+
+            var bufferLength = (int)(image.X1 * image.Y1 * image.NumberOfComponents + 1024);
+            var outputBuffer = Marshal.AllocHGlobal(bufferLength);
+
+            var buffer = new Buffer
+            {
+                Data = outputBuffer,
+                Length = bufferLength,
+                Position = 0
+            };
+
+            var size = Marshal.SizeOf(buffer);
+            var userData = Marshal.AllocHGlobal(size);
+            Marshal.StructureToPtr(buffer, userData, false);
+
+            using var stream = OpenJpeg.StreamCreate((ulong)buffer.Length, false);
+            OpenJpeg.StreamSetUserData(stream, userData);
+            OpenJpeg.StreamSetUserDataLength(stream, buffer.Length);
+            OpenJpeg.StreamSetWriteFunction(stream, new DelegateHandler<StreamWrite>(StreamWriteCallback));
+            //OpenJpeg.StreamSetReadFunction(stream, new DelegateHandler<StreamRead>(StreamReadCallback));
+            OpenJpeg.StreamSetSeekFunction(stream, new DelegateHandler<StreamSeek>(StreamSeekCallback));
+            OpenJpeg.StreamSetSkipFunction(stream, new DelegateHandler<StreamSkip>(StreamSkipCallback));
+
+            OpenJpeg.SetInfoHandler(codec, new DelegateHandler<MsgCallback>(MsgInfoCallback), IntPtr.Zero);
+            OpenJpeg.SetWarnHandler(codec, new DelegateHandler<MsgCallback>(MsgWarnCallback), IntPtr.Zero);
+            OpenJpeg.SetErrorHandler(codec, new DelegateHandler<MsgCallback>(MsgErrorCallback), IntPtr.Zero);
+
+            Assert.True(OpenJpeg.StartCompress(codec, image, stream));
+            Assert.True(OpenJpeg.Encode(codec, stream));
+            Assert.True(OpenJpeg.EndCompress(codec, stream));
+
+            var outputPath = Path.Combine(ResultDirectory, nameof(this.EncodeFromBitmap), $"{Path.GetFileNameWithoutExtension(testImage)}.j2k");
+            Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
+            var tmp = Marshal.PtrToStructure<Buffer>(userData);
+            var output = new byte[tmp.Position];
+            Marshal.Copy(buffer.Data, output, 0, output.Length);
+            File.WriteAllBytes(outputPath, output);
+
+            Marshal.FreeHGlobal(outputBuffer);
+            Marshal.FreeHGlobal(userData);
+        }
+
+        [Fact]
+        public void EncodeFromRaw()
+        {
+            const string testImage = "obama-240p.raw";
+            var path = Path.GetFullPath(Path.Combine(TestImageDirectory, testImage));
+            var imageByte = File.ReadAllBytes(path);
+            using var image = ImageHelper.FromRaw(imageByte, 427, 240, 427 * 3, 3, true);
+
+            using var compressionParameters = new CompressionParameters();
+            OpenJpeg.SetDefaultEncoderParameters(compressionParameters);
+            compressionParameters.TcpNumLayers = 1;
+            compressionParameters.CodingParameterDistortionAllocation = 1;
+
+            using var codec = OpenJpeg.CreateCompress(CodecFormat.J2k);
+
+            OpenJpeg.SetInfoHandler(codec, new DelegateHandler<MsgCallback>(MsgInfoCallback), IntPtr.Zero);
+            OpenJpeg.SetWarnHandler(codec, new DelegateHandler<MsgCallback>(MsgWarnCallback), IntPtr.Zero);
+            OpenJpeg.SetErrorHandler(codec, new DelegateHandler<MsgCallback>(MsgErrorCallback), IntPtr.Zero);
+
+            Assert.True(OpenJpeg.SetupEncoder(codec, compressionParameters, image));
+
+            var bufferLength = imageByte.Length + 1024;
+            var outputBuffer = Marshal.AllocHGlobal(bufferLength);
+
+            var buffer = new Buffer
+            {
+                Data = outputBuffer,
+                Length = bufferLength,
+                Position = 0
+            };
+
+            var size = Marshal.SizeOf(buffer);
+            var userData = Marshal.AllocHGlobal(size);
+            Marshal.StructureToPtr(buffer, userData, false);
+
+            using var stream = OpenJpeg.StreamCreate((ulong)buffer.Length, false);
+            OpenJpeg.StreamSetUserData(stream, userData);
+            OpenJpeg.StreamSetUserDataLength(stream, buffer.Length);
+            OpenJpeg.StreamSetWriteFunction(stream, new DelegateHandler<StreamWrite>(StreamWriteCallback));
+            OpenJpeg.StreamSetReadFunction(stream, new DelegateHandler<StreamRead>(StreamReadCallback));
+            OpenJpeg.StreamSetSeekFunction(stream, new DelegateHandler<StreamSeek>(StreamSeekCallback));
+            OpenJpeg.StreamSetSkipFunction(stream, new DelegateHandler<StreamSkip>(StreamSkipCallback));
+
+            Assert.True(OpenJpeg.StartCompress(codec, image, stream));
+            Assert.True(OpenJpeg.Encode(codec, stream));
+            Assert.True(OpenJpeg.EndCompress(codec, stream));
+
+            var outputPath = Path.Combine(ResultDirectory, nameof(this.EncodeFromRaw), $"{Path.GetFileNameWithoutExtension(testImage)}.j2k");
+            Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
+            var tmp = Marshal.PtrToStructure<Buffer>(userData);
+            var output = new byte[tmp.Position];
+            Marshal.Copy(buffer.Data, output, 0, output.Length);
+            File.WriteAllBytes(outputPath, output);
+
+            Marshal.FreeHGlobal(outputBuffer);
+            Marshal.FreeHGlobal(userData);
         }
 
         #endregion
