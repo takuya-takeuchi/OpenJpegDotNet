@@ -1,12 +1,8 @@
 ﻿using System;
-using System.IO;
 
 namespace OpenJpegDotNet
 {
-
-    /// <summary>
-    /// Provides the methods of OpenJpeg.
-    /// </summary>
+    
     public static partial class OpenJpeg
     {
 

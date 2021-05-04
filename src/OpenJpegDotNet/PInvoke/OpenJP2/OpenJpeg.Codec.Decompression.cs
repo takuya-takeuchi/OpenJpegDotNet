@@ -136,6 +136,10 @@ namespace OpenJpegDotNet
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         [return: MarshalAs(UnmanagedType.U1)]
+        public static extern bool openjpeg_openjp2_opj_codec_set_threads(IntPtr p_codec, int32_t num_threads);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        [return: MarshalAs(UnmanagedType.U1)]
         public static extern bool openjpeg_openjp2_opj_read_header(IntPtr p_stream, IntPtr p_codec, out IntPtr p_image);
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]

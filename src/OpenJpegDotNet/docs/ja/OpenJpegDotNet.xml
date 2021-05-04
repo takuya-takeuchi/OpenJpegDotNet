@@ -271,25 +271,25 @@
         </member>
         <member name="P:OpenJpegDotNet.Image.X0">
             <summary>
-            参照グリッドの原点から画像領域の左端までの水平方向のオフセットを取得します。
+            参照グリッドの原点から画像領域の左端までの水平方向のオフセットを取得または設定します。
             </summary>
             <exception cref="T:System.ObjectDisposedException">このオブジェクトは破棄されています。</exception>
         </member>
         <member name="P:OpenJpegDotNet.Image.X1">
             <summary>
-            参照グリッドの幅を取得します。
+            参照グリッドの幅を取得または設定します。
             </summary>
             <exception cref="T:System.ObjectDisposedException">このオブジェクトは破棄されています。</exception>
         </member>
         <member name="P:OpenJpegDotNet.Image.Y0">
             <summary>
-            参照グリッドの原点から画像領域の上端までの垂直方向のオフセットを取得します。
+            参照グリッドの原点から画像領域の上端までの垂直方向のオフセットを取得または設定します。
             </summary>
             <exception cref="T:System.ObjectDisposedException">このオブジェクトは破棄されています。</exception>
         </member>
         <member name="P:OpenJpegDotNet.Image.Y1">
             <summary>
-            参照グリッドの高さを取得します。
+            参照グリッドの高さを取得または設定します。
             </summary>
             <exception cref="T:System.ObjectDisposedException">このオブジェクトは破棄されています。</exception>
         </member>

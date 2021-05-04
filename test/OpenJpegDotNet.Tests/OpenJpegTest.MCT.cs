@@ -26,7 +26,7 @@ namespace OpenJpegDotNet.Tests
             };
 
             using var parameter = new CompressionParameters();
-            OpenJpeg.SetMCT(parameter, mct, dcShift, 4);
+            Assert.True(OpenJpeg.SetMCT(parameter, mct, dcShift, 4));
         }
 
         #endregion

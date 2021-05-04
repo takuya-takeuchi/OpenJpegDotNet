@@ -15,6 +15,7 @@
 #define ERR_GENERAL_ERROR                                                 0x76000000
 #define ERR_GENERAL_FILE_IO                         -(ERR_GENERAL_ERROR | 0x00000001)
 #define ERR_GENERAL_OUT_OF_RANGE                    -(ERR_GENERAL_ERROR | 0x00000002)
+#define ERR_GENERAL_MEMALLOC                        -(ERR_GENERAL_ERROR | 0x00000003)
 
 // Image
 #define ERR_IMAGE_ERROR                                                   0x77000000
