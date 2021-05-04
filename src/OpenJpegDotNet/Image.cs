@@ -61,7 +61,7 @@ namespace OpenJpegDotNet
         }
 
         /// <summary>
-        /// Gets the vertical offset from the origin of the reference grid to the top side of the image area.
+        /// Gets or sets the vertical offset from the origin of the reference grid to the top side of the image area.
         /// </summary>
         /// <exception cref="ObjectDisposedException">This object is disposed.</exception>
         public uint Y0
