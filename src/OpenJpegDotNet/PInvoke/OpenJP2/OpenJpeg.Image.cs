@@ -7,6 +7,7 @@ using int64_t = System.Int64;
 using int8_t = System.SByte;
 using int16_t = System.Int16;
 using int32_t = System.Int32;
+using size_t = System.Int64;
 
 // ReSharper disable once CheckNamespace
 namespace OpenJpegDotNet
@@ -183,6 +184,12 @@ namespace OpenJpegDotNet
 
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
         public static extern IntPtr openjpeg_openjp2_opj_image_tile_create(uint numcmpts, IntPtr[] cmptparms, uint cmptparms_len, ColorSpace clrspc);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern IntPtr openjpeg_openjp2_opj_image_data_alloc(size_t size);
+
+        [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
+        public static extern void openjpeg_openjp2_opj_image_data_free(IntPtr ptr);
 
         #endregion
 

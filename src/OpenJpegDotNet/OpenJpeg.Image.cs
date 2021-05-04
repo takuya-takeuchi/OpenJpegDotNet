@@ -54,6 +54,25 @@ namespace OpenJpegDotNet
             var ret = NativeMethods.openjpeg_openjp2_opj_image_tile_create(components, pointers, (uint)pointers.Length, colorSpace);
             return ret != IntPtr.Zero ? new Image(ret) : null;
         }
+        
+        /// <summary>
+        /// Allocates new memory buffer for <see cref="ImageComponent.Data"/>.
+        /// </summary>
+        /// <param name="size">The number of bytes to allocate.</param>
+        /// <returns>The new pointer to indicate allocated memory buffer if success; otherwise, <see cref="IntPtr.Zero"/>.</returns>
+        public static IntPtr ImageDataAlloc(long size)
+        {
+            return NativeMethods.openjpeg_openjp2_opj_image_data_alloc(size);
+        }
+
+        /// <summary>
+        /// Unallocates memory buffer for <see cref="ImageComponent.Data"/>.
+        /// </summary>
+        /// <param name="ptr">The pointer to indicate allocated memory buffer by <see cref="ImageDataAlloc"/>.</param>
+        public static void ImageDataFree(IntPtr ptr)
+        {
+            NativeMethods.openjpeg_openjp2_opj_image_data_free(ptr);
+        }
 
     }
 

@@ -279,6 +279,16 @@ DLLEXPORT const opj_image_t* openjpeg_openjp2_opj_image_tile_create(const uint32
     return ret;
 }
 
+DLLEXPORT const void* openjpeg_openjp2_opj_image_data_alloc(OPJ_SIZE_T size)
+{
+    return ::opj_image_data_alloc(size);
+}
+
+DLLEXPORT void openjpeg_openjp2_opj_image_data_free(void* const ptr)
+{
+    ::opj_image_data_free(ptr);
+}
+
 #pragma region non-openjp2 functions
 
 DLLEXPORT const opj_image_cmptparm_t* openjpeg_openjp2_opj_image_cmptparm_t_new()

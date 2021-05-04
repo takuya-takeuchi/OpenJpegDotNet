@@ -392,6 +392,20 @@ namespace OpenJpegDotNet.Tests
             this.DisposeAndCheckDisposedState(image);
         }
 
+        [Fact]
+        public void ImageDataAlloc()
+        {
+            var mem = OpenJpeg.ImageDataAlloc(100);
+            Assert.True(mem != IntPtr.Zero);
+            OpenJpeg.ImageDataFree(mem);
+        }
+
+        [Fact]
+        public void ImageDataFree()
+        {
+            OpenJpeg.ImageDataFree(IntPtr.Zero);
+        }
+
         #endregion
 
         #region Not Native Functions
