@@ -215,6 +215,29 @@ namespace OpenJpegDotNet.Tests
             }
         }
 
+        [Fact]
+        public void CodecSetThreads()
+        {
+            var targets = new[]
+            {
+                //new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Unknown,  Result = false },
+                new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.J2k,      Result = true  },
+                //new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jp2,      Result = false  },
+                //new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jpp,      Result = false },
+                //new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jpt,      Result = false },
+                //new { Name = "Bretagne1_0.j2k", IsReadStream = true, Format = CodecFormat.Jpx,      Result = false }
+            };
+
+            foreach (var target in targets)
+            {
+                var codec = OpenJpeg.CreateDecompress(target.Format);
+                Assert.True(OpenJpeg.CodecSetThreads(codec, 2));
+                Assert.True(OpenJpeg.CodecSetThreads(codec, 0));
+                Assert.False(OpenJpeg.CodecSetThreads(codec, -1));
+                this.DisposeAndCheckDisposedState(codec);
+            }
+        }
+
         #endregion
 
     }

@@ -156,6 +156,25 @@ namespace OpenJpegDotNet
 
             return NativeMethods.openjpeg_openjp2_opj_setup_decoder(codec.NativePtr, parameters.NativePtr);
         }
+ 
+        /// <summary>
+        /// Allocates worker threads for the compressor/decompressor.
+        /// </summary>
+        /// <param name="codec">The <see cref="Codec"/> to compress or decompress image.</param>
+        /// <param name="threads">The number of threads.</param>
+        /// <returns><code>true</code> if the function succeeds; otherwise, <code>false</code>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="codec"/> or <paramref name="parameters"/> is null.</exception>
+        /// <exception cref="ObjectDisposedException"><paramref name="codec"/> or <paramref name="parameters"/> is disposed.</exception>
+        /// <remarks>This function must be called after <see cref="SetupDecoder"/> and before <see cref="ReadHeader"/> for the decoding side, or after <see cref="SetupEncoder"/>() and before <see cref="StartCompress"/> for the encoding side.</remarks>
+        public static bool CodecSetThreads(Codec codec, int threads)
+        {
+            if (codec == null)
+                throw new ArgumentNullException(nameof(codec));
+
+            codec.ThrowIfDisposed();
+
+            return NativeMethods.openjpeg_openjp2_opj_codec_set_threads(codec.NativePtr, threads);
+        }
 
         /// <summary>
         /// Writes a tile with the given data.

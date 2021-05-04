@@ -187,6 +187,12 @@ DLLEXPORT const bool openjpeg_openjp2_opj_setup_decoder(opj_codec_t* p_codec,
     return ::opj_setup_decoder(p_codec, parameters) == OPJ_TRUE;
 }
 
+DLLEXPORT const bool openjpeg_openjp2_opj_codec_set_threads(opj_codec_t* p_codec,
+                                                            const int32_t num_threads)
+{
+    return ::opj_codec_set_threads(p_codec, num_threads) == OPJ_TRUE;
+}
+
 DLLEXPORT const bool openjpeg_openjp2_opj_read_header(opj_stream_t *p_stream,
                                                       opj_codec_t *p_codec,
                                                       opj_image_t **p_image)
