@@ -27,7 +27,7 @@ class Config
       64
    )
 
-   $VisualStudio = "Visual Studio 16 2019"
+   $VisualStudio = "Visual Studio 15 2017"
 
    $VisualStudioConsole = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
    
@@ -678,15 +678,6 @@ function ConfigIOS([Config]$Config)
    }
 }
 
-function Reset-OpenJpeg-Modification([Config]$Config, [string]$currentDir)
-{
-   $openjpegDir = $Config.GetOpenJpegRootDir()
-   Set-Location -Path $openjpegDir
-   Write-Host "Reset modification of ${openjpegDir}" -ForegroundColor Yellow
-   git checkout .
-   Set-Location -Path $currentDir
-}
-
 function Build([Config]$Config)
 {
    $Current = Get-Location
@@ -701,9 +692,6 @@ function Build([Config]$Config)
 
    $Target = $Config.GetTarget()
    $Platform = $Config.GetPlatform()
-
-   # revert openjpeg
-   Reset-OpenJpeg-Modification $Config (Join-Path $Current $Output)
 
    switch ($Platform)
    {
