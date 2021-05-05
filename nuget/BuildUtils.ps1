@@ -360,14 +360,14 @@ class Config
 
 function CallVisualStudioDeveloperConsole([Config]$Config)
 {
-   $console = $Config.GetVisualStudioConsole()
-   cmd.exe /c "call `"${console}`" && set > %temp%\vcvars.txt"
+   # $console = $Config.GetVisualStudioConsole()
+   # cmd.exe /c "call `"${console}`" && set > %temp%\vcvars.txt"
 
-   Get-Content "${env:temp}\vcvars.txt" | Foreach-Object {
-      if ($_ -match "^(.*?)=(.*)$") {
-        Set-Content "env:\$($matches[1])" $matches[2]
-      }
-    }
+   # Get-Content "${env:temp}\vcvars.txt" | Foreach-Object {
+   #    if ($_ -match "^(.*?)=(.*)$") {
+   #      Set-Content "env:\$($matches[1])" $matches[2]
+   #    }
+   #  }
 }
 
 class ThirdPartyBuilder
@@ -589,17 +589,11 @@ function ConfigUWP([Config]$Config)
       Write-Host "   cmake -G `"${VS}`" -A ${VSARC} -T host=x64 `
          -D CMAKE_SYSTEM_NAME=WindowsStore `
          -D CMAKE_SYSTEM_VERSION=10.0 `
-         -D WINAPI_FAMILY=WINAPI_FAMILY_APP `
-         -D _WINDLL=ON `
-         -D _WIN32_UNIVERSAL_APP=ON `
          -D OpenJPEG_DIR=`"${installOpenJpegDir}`" `
          .." -ForegroundColor Yellow
       cmake -G "${VS}" -A ${VSARC} -T host=x64 `
             -D CMAKE_SYSTEM_NAME=WindowsStore `
             -D CMAKE_SYSTEM_VERSION=10.0 `
-            -D WINAPI_FAMILY=WINAPI_FAMILY_APP `
-            -D _WINDLL=ON `
-            -D _WIN32_UNIVERSAL_APP=ON `
             -D OpenJPEG_DIR="${installOpenJpegDir}" `
             ..
    }
