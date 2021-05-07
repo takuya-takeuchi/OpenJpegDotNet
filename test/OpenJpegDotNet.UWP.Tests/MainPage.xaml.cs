@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
@@ -42,8 +40,8 @@ namespace OpenJpegDotNet.UWP.Tests
                 if (!result)
                     return;
 
-                using (var bitmap = reader.ReadData())
-                    this._Image.Source = await ToBitmapSource(bitmap);
+                reader.ReadRawBitmapData(out var raw, out var width, out var height, out var channel);
+                this._Image.Source = await ToBitmapSource(raw, width, height, channel);
             }
         }
 
@@ -51,64 +49,49 @@ namespace OpenJpegDotNet.UWP.Tests
 
         #region Helperss
 
-        private static async Task<BitmapImage> ToBitmapSource(Bitmap bitmap)
+        private static async Task<BitmapImage> ToBitmapSource(byte[] raw, uint width, uint height, uint channels)
         {
-            var width = bitmap.Width;
-            var height = bitmap.Height;
-            var pixelFormat = bitmap.PixelFormat;
+            var data = new byte[width * height * 4];
 
-            BitmapData bitmapData = null;
-
-            try
+            unsafe
             {
-                var rect = new Rectangle(0, 0, width, height);
-                bitmapData = bitmap.LockBits(rect, ImageLockMode.ReadOnly, pixelFormat);
-                
-                var data = new byte[width * height * 4];
-
-                unsafe
+                fixed (byte* pRaw = &raw[0])
+                fixed (byte* dst = &data[0])
                 {
-                    var src = (byte*)bitmapData.Scan0;
-                    fixed (byte* dst = &data[0])
+                    var src = pRaw;
+                    for (var y = 0; y < height; y++)
                     {
-                        for (var y = 0; y < height; y++)
+                        var index = y * width * 4;
+                        for (var x = 0; x < width; x++)
                         {
-                            var index = y * width * 4;
-                            for (var x = 0; x < width; x++)
-                            {
-                                dst[index] = *++src;
-                                dst[index + 1] = *++src;
-                                dst[index + 2] = *++src;
-                                ++src;
-                                index += 4;
-                            }
+                            dst[index] = src[2];
+                            dst[index + 1] = src[1];
+                            dst[index + 2] = src[0];
+                            index += 4;
+                            src += channels;
                         }
                     }
                 }
-                var writeableBitmap = new WriteableBitmap(width, height);
-                using (var imras = new InMemoryRandomAccessStream())
-                {
-
-                    var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.BmpEncoderId, imras);
-                    encoder.SetPixelData(BitmapPixelFormat.Bgra8,
-                                         BitmapAlphaMode.Ignore,
-                                         (uint)writeableBitmap.PixelWidth,
-                                         (uint)writeableBitmap.PixelHeight,
-                                         96.0,
-                                         96.0,
-                                         data);
-
-                    await encoder.FlushAsync();
-                    var bitmapImage = new BitmapImage();
-                    bitmapImage.SetSource(imras);
-
-                    return bitmapImage;
-                }
             }
-            finally
+
+            var writeableBitmap = new WriteableBitmap((int)width, (int)height);
+            using (var imras = new InMemoryRandomAccessStream())
             {
-                if (bitmapData != null)
-                    bitmap.UnlockBits(bitmapData);
+
+                var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.BmpEncoderId, imras);
+                encoder.SetPixelData(BitmapPixelFormat.Rgba8,
+                                     BitmapAlphaMode.Ignore,
+                                     (uint)writeableBitmap.PixelWidth,
+                                     (uint)writeableBitmap.PixelHeight,
+                                     96.0,
+                                     96.0,
+                                     data);
+
+                await encoder.FlushAsync();
+                var bitmapImage = new BitmapImage();
+                bitmapImage.SetSource(imras);
+
+                return bitmapImage;
             }
         }
 

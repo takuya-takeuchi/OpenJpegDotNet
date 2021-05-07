@@ -298,6 +298,105 @@ namespace OpenJpegDotNet
             return bitmap;
         }
 
+        /// <summary>
+        /// Converts this <see cref="Image"/> to a raw bitmap data.
+        /// </summary>
+        /// <returns>A <see cref="Bitmap"/> that represents the converted <see cref="Image"/>.</returns>
+        /// <exception cref="ObjectDisposedException">This object is disposed.</exception>
+        /// <exception cref="NotSupportedException">This object is not supported.</exception>
+        public void ToRawBitmap(out byte[] raw, out uint width, out uint height, out uint channel)
+        {
+            this.ThrowIfDisposed();
+
+            var ret = NativeMethods.openjpeg_openjp2_extensions_imagetobmp(this.NativePtr,
+                                                                           false,
+                                                                           out var planes,
+                                                                           out width,
+                                                                           out height,
+                                                                           out channel,
+                                                                           out var pixel);
+            if (ret != NativeMethods.ErrorType.OK)
+            {
+                if (planes != IntPtr.Zero)
+                    NativeMethods.stdlib_free(planes);
+
+                throw new NotSupportedException("This object is not supported.");
+            }
+
+            if (channel != 3 && channel != 1)
+            {
+                if (planes != IntPtr.Zero)
+                    NativeMethods.stdlib_free(planes);
+
+                throw new NotSupportedException("This object is not supported.");
+            }
+
+            raw = new byte[width * height * channel];
+
+            try
+            {
+
+                switch (pixel)
+                {
+                    case 8:
+                        switch (channel)
+                        {
+                            case 1:
+                                {
+                                    unsafe
+                                    {
+                                        fixed (byte* dst = &raw[0])
+                                        {
+                                            var stride = (int)(width * channel);
+                                            for (var y = 0; y < height; y++)
+                                            {
+                                                var src = IntPtr.Add(planes, (int)(y * width));
+                                                var dest = IntPtr.Add((IntPtr)dst, y * stride);
+                                                NativeMethods.cstd_memcpy(dest, src, (int)width);
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            case 3:
+                                {
+                                    unsafe
+                                    {
+                                        fixed (byte* dst = &raw[0])
+                                        {
+                                            var pSrc = (byte*)planes;
+                                            var pDest = dst;
+                                            var size = width * height;
+                                            for (var y = 0; y < height; y++)
+                                            {
+                                                for (var x = 0; x < width; x++)
+                                                {
+                                                    pDest[2] = pSrc[0];
+                                                    pDest[1] = pSrc[0 + size];
+                                                    pDest[0] = pSrc[0 + size * 2];
+
+                                                    pSrc += 1;
+                                                    pDest += channel;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+
+                        break;
+                    default:
+                        throw new NotSupportedException("This object is not supported.");
+                }
+            }
+            finally
+            {
+                if (planes != IntPtr.Zero)
+                    NativeMethods.stdlib_free(planes);
+            }
+        }
+
         #endregion
 
         #region Overrides 
