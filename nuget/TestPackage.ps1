@@ -1,6 +1,6 @@
 #***************************************
 #Arguments
-#%1: Test Package (OpenJpegDotNet.CUDA92)
+#%1: Test Package (OpenJpegDotNet)
 #%2: Version of Release (19.17.0.yyyyMMdd)
 #***************************************
 Param([Parameter(
@@ -152,7 +152,7 @@ function RunTest($BuildTargets)
 }
 
 $BuildTargets = @()
-$BuildTargets += New-Object PSObject -Property @{Target = "cpu";  Architecture = 64; CUDA = 0;   Package = "OpenJpegDotNet"         }
+$BuildTargets += New-Object PSObject -Property @{Target = "cpu";  Architecture = 64; Package = "OpenJpegDotNet" }
 
 # Store current directory
 $Current = Get-Location
