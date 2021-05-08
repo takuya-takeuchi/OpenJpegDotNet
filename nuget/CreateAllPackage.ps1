@@ -1,5 +1,6 @@
 $targets = @(
-   "CPU"
+   "CPU",
+   "UWP"
 )
 
 $ScriptPath = $PSScriptRoot

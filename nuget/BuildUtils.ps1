@@ -27,7 +27,7 @@ class Config
       64
    )
 
-   $VisualStudio = "Visual Studio 16 2019"
+   $VisualStudio = "Visual Studio 15 2017"
 
    $VisualStudioConsole = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
    
@@ -360,14 +360,14 @@ class Config
 
 function CallVisualStudioDeveloperConsole([Config]$Config)
 {
-   $console = $Config.GetVisualStudioConsole()
-   cmd.exe /c "call `"${console}`" && set > %temp%\vcvars.txt"
+   # $console = $Config.GetVisualStudioConsole()
+   # cmd.exe /c "call `"${console}`" && set > %temp%\vcvars.txt"
 
-   Get-Content "${env:temp}\vcvars.txt" | Foreach-Object {
-      if ($_ -match "^(.*?)=(.*)$") {
-        Set-Content "env:\$($matches[1])" $matches[2]
-      }
-    }
+   # Get-Content "${env:temp}\vcvars.txt" | Foreach-Object {
+   #    if ($_ -match "^(.*?)=(.*)$") {
+   #      Set-Content "env:\$($matches[1])" $matches[2]
+   #    }
+   #  }
 }
 
 class ThirdPartyBuilder
@@ -405,7 +405,39 @@ class ThirdPartyBuilder
          {
             $VS = $this._Config.GetVisualStudio()
             $VSARC = $this._Config.GetVisualStudioArchitecture()
-            Write-Host "   cmake -G `"${VS}`" -A ${VSARC} -T host=x64 `
+
+            if ($this._Config.GetPlatform() -eq "uwp")
+            {
+               Write-Host "   cmake -G `"${VS}`" -A ${VSARC} -T host=x64 `
+         -D BUILD_SHARED_LIBS:BOOL=OFF `
+         -D CMAKE_SYSTEM_NAME=WindowsStore `
+         -D CMAKE_SYSTEM_VERSION=`"10.0`" `
+         -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
+         -D CMAKE_INSTALL_PREFIX:PATH=`"${installDir}`" `
+         -D CMAKE_LIBRARY_PATH:PATH=`"${installDir}`" `
+         -D CMAKE_INCLUDE_PATH:PATH=`"${installDir}/include`" `
+         -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
+         `"$openjpegDir`"" -ForegroundColor Yellow
+               cmake -G "${VS}" -A ${VSARC} -T host=x64 `
+                     -D BUILD_SHARED_LIBS:BOOL=OFF `
+                     -D CMAKE_SYSTEM_NAME=WindowsStore `
+                     -D CMAKE_SYSTEM_VERSION="10.0" `
+                     -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
+                     -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
+                     -D CMAKE_LIBRARY_PATH:PATH="${installDir}" `
+                     -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
+                     -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
+                     "${openjpegDir}"
+               Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
+               cmake --build . --config ${buildConfig}
+               Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
+               cmake --install . --config ${buildConfig}
+            }
+            else
+            {
+               $VS = $this._Config.GetVisualStudio()
+               $VSARC = $this._Config.GetVisualStudioArchitecture()
+               Write-Host "   cmake -G `"${VS}`" -A ${VSARC} -T host=x64 `
          -D BUILD_SHARED_LIBS:BOOL=OFF `
          -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
          -D CMAKE_INSTALL_PREFIX:PATH=`"${installDir}`" `
@@ -413,18 +445,19 @@ class ThirdPartyBuilder
          -D CMAKE_INCLUDE_PATH:PATH=`"${installDir}/include`" `
          -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
          `"$openjpegDir`"" -ForegroundColor Yellow
-            cmake -G "${VS}" -A ${VSARC} -T host=x64 `
-                  -D BUILD_SHARED_LIBS:BOOL=OFF `
-                  -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
-                  -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
-                  -D CMAKE_LIBRARY_PATH:PATH="${installDir}" `
-                  -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
-                  -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
-                  "${openjpegDir}"
-            Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
-            cmake --build . --config ${buildConfig}
-            Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
-            cmake --install . --config ${buildConfig}
+               cmake -G "${VS}" -A ${VSARC} -T host=x64 `
+                     -D BUILD_SHARED_LIBS:BOOL=OFF `
+                     -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
+                     -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
+                     -D CMAKE_LIBRARY_PATH:PATH="${installDir}" `
+                     -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
+                     -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
+                     "${openjpegDir}"
+               Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
+               cmake --build . --config ${buildConfig}
+               Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
+               cmake --install . --config ${buildConfig}
+            }
          }
          else
          {
@@ -539,47 +572,30 @@ function ConfigUWP([Config]$Config)
 {
    if ($IsWindows)
    {
-      # apply patch
-      $patch = "uwp.patch"
-      $nugetDir = $Config.GetNugetDir()
-      $openjpegDir = $Config.GetOpenJpegRootDir()
-      $patchFullPath = Join-Path $nugetDir $patch
-      $current = Get-Location
-      Set-Location -Path $openjpegDir
-      Write-Host "Apply ${patch} to ${openjpegDir}" -ForegroundColor Yellow
-      Write-Host "git apply ""${patchFullPath}""" -ForegroundColor Yellow
-      git apply """${patchFullPath}"""
-      Set-Location -Path $current
+      CallVisualStudioDeveloperConsole($Config)
+   }
 
-      if ($Config.GetTarget() -eq "arm")
-      {
-         cmake -G $Config.GetVisualStudio() -A $Config.GetVisualStudioArchitecture() -T host=x64 `
-               -D CMAKE_SYSTEM_NAME=WindowsStore `
-               -D CMAKE_SYSTEM_VERSION=10.0 `
-               -D WINAPI_FAMILY=WINAPI_FAMILY_APP `
-               -D _WINDLL=ON `
-               -D _WIN32_UNIVERSAL_APP=ON `
-               -D DLIB_USE_CUDA=OFF `
-               -D DLIB_USE_BLAS=OFF `
-               -D DLIB_USE_LAPACK=OFF `
-               -D DLIB_NO_GUI_SUPPORT=ON `
-               ..
-      }
-      else
-      {         
-         cmake -G $Config.GetVisualStudio() -A $Config.GetVisualStudioArchitecture() -T host=x64 `
-               -D CMAKE_SYSTEM_NAME=WindowsStore `
-               -D CMAKE_SYSTEM_VERSION=10.0 `
-               -D WINAPI_FAMILY=WINAPI_FAMILY_APP `
-               -D _WINDLL=ON `
-               -D _WIN32_UNIVERSAL_APP=ON `
-               -D DLIB_USE_CUDA=OFF `
-               -D DLIB_USE_BLAS=OFF `
-               -D DLIB_USE_LAPACK=OFF `
-               -D DLIB_NO_GUI_SUPPORT=ON `
-               ..
-      }
+   $Builder = [ThirdPartyBuilder]::new($Config)
+      
+   # Build opnejpeg
+   $installOpenJpegDir = $Builder.BuildOpenJpeg()
+   
+   if ($IsWindows)
+   {
+      $VS = $Config.GetVisualStudio()
+      $VSARC = $Config.GetVisualStudioArchitecture()
 
+      $env:OpenJPEG_DIR = $installOpenJpegDir
+      Write-Host "   cmake -G `"${VS}`" -A ${VSARC} -T host=x64 `
+         -D CMAKE_SYSTEM_NAME=WindowsStore `
+         -D CMAKE_SYSTEM_VERSION=10.0 `
+         -D OpenJPEG_DIR=`"${installOpenJpegDir}`" `
+         .." -ForegroundColor Yellow
+      cmake -G "${VS}" -A ${VSARC} -T host=x64 `
+            -D CMAKE_SYSTEM_NAME=WindowsStore `
+            -D CMAKE_SYSTEM_VERSION=10.0 `
+            -D OpenJPEG_DIR="${installOpenJpegDir}" `
+            ..
    }
 }
 
@@ -662,15 +678,6 @@ function ConfigIOS([Config]$Config)
    }
 }
 
-function Reset-OpenJpeg-Modification([Config]$Config, [string]$currentDir)
-{
-   $openjpegDir = $Config.GetOpenJpegRootDir()
-   Set-Location -Path $openjpegDir
-   Write-Host "Reset modification of ${openjpegDir}" -ForegroundColor Yellow
-   git checkout .
-   Set-Location -Path $currentDir
-}
-
 function Build([Config]$Config)
 {
    $Current = Get-Location
@@ -685,9 +692,6 @@ function Build([Config]$Config)
 
    $Target = $Config.GetTarget()
    $Platform = $Config.GetPlatform()
-
-   # revert openjpeg
-   Reset-OpenJpeg-Modification $Config (Join-Path $Current $Output)
 
    switch ($Platform)
    {

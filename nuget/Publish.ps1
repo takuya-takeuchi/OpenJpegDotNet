@@ -9,7 +9,7 @@ Param([Parameter(
       $Version
 )
 
-$PublishTargets = ( "OpenJpegDotNet" )
+$PublishTargets = ( "OpenJpegDotNet", "OpenJpegDotNet.UWP" )
 
 $Token = $env:OpenJpegDotNetNugetToken
 if ([string]::IsNullOrWhitespace($Token))
