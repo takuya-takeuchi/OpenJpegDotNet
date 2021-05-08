@@ -33,4 +33,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Trigger first run experience by running arbitrary cmd to populate local package cache
+# NOTE
+# https://github.com/dotnet/runtime/issues/33344
+# qemu is not supported
 RUN dotnet help
