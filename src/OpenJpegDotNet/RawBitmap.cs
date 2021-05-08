@@ -24,22 +24,38 @@ namespace OpenJpegDotNet
 
         #region Properties
 
+        /// <summary>
+        /// Gets the number of channel, of this <see cref="RawBitmap"/>.
+        /// </summary>
+        /// <returns>The number of channel, of this <see cref="RawBitmap"/>.</returns>
         public int Channel
         {
             get;
         }
 
+        /// <summary>
+        /// Gets the pixel data of this <see cref="RawBitmap"/>.
+        /// </summary>
+        /// <returns>The pixel data.</returns>
         public IReadOnlyCollection<byte> Data
         {
             get;
         }
 
-        public int Width
+        /// <summary>
+        /// Gets the height, in pixels, of this <see cref="RawBitmap"/>.
+        /// </summary>
+        /// <returns>The height, in pixels, of this <see cref="RawBitmap"/>.</returns>
+        public int Height
         {
             get;
         }
 
-        public int Height
+        /// <summary>
+        /// Gets the width, in pixels, of this <see cref="RawBitmap"/>.
+        /// </summary>
+        /// <returns>The width, in pixels, of this <see cref="RawBitmap"/>.</returns>
+        public int Width
         {
             get;
         }
