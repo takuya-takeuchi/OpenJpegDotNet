@@ -461,28 +461,75 @@ class ThirdPartyBuilder
          }
          else
          {
-            Write-Host "   cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
-            -D BUILD_SHARED_LIBS:BOOL=OFF `
-            -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
-            -D CMAKE_INSTALL_PREFIX:PATH=`"${installDir}`" `
-            -D CMAKE_LIBRARY_PATH:PATH=`"${installDir}`" `
-            -D CMAKE_INCLUDE_PATH:PATH=`"${installDir}/include`" `
-            -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
-            -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
-            `"$openjpegDir`"" -ForegroundColor Yellow
-               cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
-                     -D BUILD_SHARED_LIBS:BOOL=OFF `
-                     -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
-                     -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
-                     -D CMAKE_LIBRARY_PATH:PATH="${installDir}" `
-                     -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
-                     -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
-                     -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
-                     "${openjpegDir}"
-               Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
-               cmake --build . --config ${buildConfig}
-               Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
-               cmake --install . --config ${buildConfig}
+            if ($this._Config.GetPlatform() -eq "desktop")
+            {
+               switch ($this._Config.GetTarget())
+               {
+                  "cpu"
+                  {
+                     Write-Host "   cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
+         -D BUILD_SHARED_LIBS:BOOL=OFF `
+         -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
+         -D CMAKE_INSTALL_PREFIX:PATH=`"${installDir}`" `
+         -D CMAKE_LIBRARY_PATH:PATH=`"${installDir}`" `
+         -D CMAKE_INCLUDE_PATH:PATH=`"${installDir}/include`" `
+         -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
+         -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
+         `"$openjpegDir`"" -ForegroundColor Yellow
+                        cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
+                              -D BUILD_SHARED_LIBS:BOOL=OFF `
+                              -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
+                              -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
+                              -D CMAKE_LIBRARY_PATH:PATH="${installDir}" `
+                              -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
+                              -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
+                              -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
+                              "${openjpegDir}"
+                        Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
+                        cmake --build . --config ${buildConfig}
+                        Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
+                        cmake --install . --config ${buildConfig}
+                  }
+                  "arm"
+                  {
+                     if ($this._Config.GetArchitecture() -eq 32)
+                     {
+                        $CMAKE_C_COMPILER = "/usr/bin/arm-linux-gnueabihf-gcc"
+                        $CMAKE_CXX_COMPILER = "/usr/bin/arm-linux-gnueabihf-g++"
+                     }
+                     else
+                     {
+                        $CMAKE_C_COMPILER = "/usr/bin/aarch64-linux-gnu-gcc"
+                        $CMAKE_CXX_COMPILER = "/usr/bin/aarch64-linux-gnu-g++"
+                     }
+
+                     Write-Host "   cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
+         -D BUILD_SHARED_LIBS:BOOL=OFF `
+         -D CMAKE_C_COMPILER=`"$CMAKE_C_COMPILER`" `
+         -D CMAKE_CXX_COMPILER=`"$CMAKE_CXX_COMPILER`" `
+         -D CMAKE_INSTALL_PREFIX:PATH=`"${installDir}`" `
+         -D CMAKE_LIBRARY_PATH:PATH=`"${installDir}`" `
+         -D CMAKE_INCLUDE_PATH:PATH=`"${installDir}/include`" `
+         -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
+         -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
+         `"$openjpegDir`"" -ForegroundColor Yellow
+                        cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
+                              -D BUILD_SHARED_LIBS:BOOL=OFF `
+                              -D CMAKE_C_COMPILER="$CMAKE_C_COMPILER" `
+                              -D CMAKE_CXX_COMPILER="$CMAKE_CXX_COMPILER" `
+                              -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
+                              -D CMAKE_LIBRARY_PATH:PATH="${installDir}" `
+                              -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
+                              -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
+                              -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
+                              "${openjpegDir}"
+                        Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
+                        cmake --build . --config ${buildConfig}
+                        Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
+                        cmake --install . --config ${buildConfig}
+                  }
+               }
+            }
          }
       }
       finally
@@ -511,59 +558,74 @@ function ConfigCPU([Config]$Config)
    {
       $VS = $Config.GetVisualStudio()
       $VSARC = $Config.GetVisualStudioArchitecture()
+      $target_arch = $Config.GetArchitectureName()
 
       $env:OpenJPEG_DIR = $installOpenJpegDir
       Write-Host "   cmake -G `"${VS}`" -A ${VSARC} -T host=x64 `
          -D OpenJPEG_DIR=`"${installOpenJpegDir}`" `
+         -D TARGET_ARCH=`"${target_arch}`" `
          .." -ForegroundColor Yellow
       cmake -G "${VS}" -A ${VSARC} -T host=x64 `
             -D OpenJPEG_DIR="${installOpenJpegDir}" `
+            -D TARGET_ARCH="${target_arch}" `
             ..
    }
    else
    {
       $arch_type = $Config.GetArchitecture()
+      $target_arch = $Config.GetArchitectureName()
 
       $env:OpenJPEG_DIR = $installOpenJpegDir
       Write-Host "   cmake -D ARCH_TYPE=`"${arch_type}`" `
          -D OpenJPEG_DIR=`"${installOpenJpegDir}`" `
+         -D TARGET_ARCH=`"${target_arch}`" `
          .." -ForegroundColor Yellow
       cmake -D ARCH_TYPE="$arch_type" `
             -D OpenJPEG_DIR="${installOpenJpegDir}" `
+            -D TARGET_ARCH="${target_arch}" `
             ..
    }
 }
 
 function ConfigARM([Config]$Config)
 {
+   $Builder = [ThirdPartyBuilder]::new($Config)
+      
+   # Build opnejpeg
+   $installOpenJpegDir = $Builder.BuildOpenJpeg()
+
+   $arch_type = $Config.GetArchitecture()
+   $target_arch = $Config.GetArchitectureName()
+   $env:OpenJPEG_DIR = $installOpenJpegDir
+
    if ($Config.GetArchitecture() -eq 32)
    {
-      cmake -D DLIB_USE_CUDA=OFF `
-            -D ENABLE_NEON=ON `
-            -D DLIB_USE_BLAS=ON `
-            -D DLIB_USE_LAPACK=OFF `
+      Write-Host "   cmake -D ARCH_TYPE=`"${arch_type}`" `
+         -D OpenJPEG_DIR=`"${installOpenJpegDir}`" `
+         -D CMAKE_C_COMPILER=`"/usr/bin/arm-linux-gnueabihf-gcc`" `
+         -D CMAKE_CXX_COMPILER=`"/usr/bin/arm-linux-gnueabihf-g++`" `
+         -D TARGET_ARCH=`"${target_arch}`" `
+         .." -ForegroundColor Yellow
+      cmake -D ARCH_TYPE="$arch_type" `
+            -D OpenJPEG_DIR="${installOpenJpegDir}" `
             -D CMAKE_C_COMPILER="/usr/bin/arm-linux-gnueabihf-gcc" `
             -D CMAKE_CXX_COMPILER="/usr/bin/arm-linux-gnueabihf-g++" `
-            -D LIBPNG_IS_GOOD=OFF `
-            -D PNG_FOUND=OFF `
-            -D PNG_LIBRARY_RELEASE="" `
-            -D PNG_LIBRARY_DEBUG="" `
-            -D PNG_PNG_INCLUDE_DIR="" `
+            -D TARGET_ARCH="${target_arch}" `
             ..
    }
    else
    {
-      cmake -D DLIB_USE_CUDA=OFF `
-            -D ENABLE_NEON=ON `
-            -D DLIB_USE_BLAS=ON `
-            -D DLIB_USE_LAPACK=OFF `
+      Write-Host "   cmake -D ARCH_TYPE=`"${arch_type}`" `
+         -D OpenJPEG_DIR=`"${installOpenJpegDir}`" `
+         -D CMAKE_C_COMPILER=`"/usr/bin/aarch64-linux-gnu-gcc`" `
+         -D CMAKE_CXX_COMPILER=`"/usr/bin/aarch64-linux-gnu-g++`" `
+         -D TARGET_ARCH=`"${target_arch}`" `
+         .." -ForegroundColor Yellow
+      cmake -D ARCH_TYPE="$arch_type" `
+            -D OpenJPEG_DIR="${installOpenJpegDir}" `
             -D CMAKE_C_COMPILER="/usr/bin/aarch64-linux-gnu-gcc" `
             -D CMAKE_CXX_COMPILER="/usr/bin/aarch64-linux-gnu-g++" `
-            -D LIBPNG_IS_GOOD=OFF `
-            -D PNG_FOUND=OFF `
-            -D PNG_LIBRARY_RELEASE="" `
-            -D PNG_LIBRARY_DEBUG="" `
-            -D PNG_PNG_INCLUDE_DIR="" `
+            -D TARGET_ARCH="${target_arch}" `
             ..
    }
 }
@@ -584,17 +646,20 @@ function ConfigUWP([Config]$Config)
    {
       $VS = $Config.GetVisualStudio()
       $VSARC = $Config.GetVisualStudioArchitecture()
+      $target_arch = $Config.GetArchitectureName()
 
       $env:OpenJPEG_DIR = $installOpenJpegDir
       Write-Host "   cmake -G `"${VS}`" -A ${VSARC} -T host=x64 `
          -D CMAKE_SYSTEM_NAME=WindowsStore `
          -D CMAKE_SYSTEM_VERSION=10.0 `
          -D OpenJPEG_DIR=`"${installOpenJpegDir}`" `
+         -D TARGET_ARCH=`"${target_arch}`" `
          .." -ForegroundColor Yellow
       cmake -G "${VS}" -A ${VSARC} -T host=x64 `
             -D CMAKE_SYSTEM_NAME=WindowsStore `
             -D CMAKE_SYSTEM_VERSION=10.0 `
             -D OpenJPEG_DIR="${installOpenJpegDir}" `
+            -D TARGET_ARCH="${target_arch}" `
             ..
    }
 }

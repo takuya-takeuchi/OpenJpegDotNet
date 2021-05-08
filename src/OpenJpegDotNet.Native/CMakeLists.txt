@@ -37,10 +37,10 @@ endif()
 
 # set architecture
 if (NOT ${CMAKE_GENERATOR} MATCHES "Visual Studio")
-    if ("${ARCH_TYPE}" STREQUAL "32")
+	if ("${TARGET_ARCH}" STREQUAL "x86")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
-    elseif ("${ARCH_TYPE}" STREQUAL "64")
+    elseif ("${TARGET_ARCH}" STREQUAL "x64")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m64")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64")
     endif()

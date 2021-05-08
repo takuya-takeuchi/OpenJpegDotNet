@@ -34,3 +34,9 @@ RUN apt-get update && apt-get install -y \
     python3-distutils \
     python3-dev \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ # install compiler for arm
+RUN apt-get update && apt-get install -y \
+    g++-arm-linux-gnueabihf \
+    g++-aarch64-linux-gnu \
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
