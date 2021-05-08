@@ -15,7 +15,22 @@ build:win:
     - pwsh BuildWindows.ps1
   tags:
     - windows
-    - cuda
+  artifacts:
+    paths:
+      - nuget/artifacts
+
+build:uwp:
+  stage: build
+  before_script:
+    - chcp 65001
+    - git submodule update --init --recursive
+    - "Get-ChildItem env:"
+  script:
+    - cd nuget
+    - git clean -fxd .
+    - pwsh BuildUniversalWindowsPlatform.ps1
+  tags:
+    - windows
   artifacts:
     paths:
       - nuget/artifacts
@@ -30,7 +45,6 @@ build:ubuntu:
     - pwsh BuildUbuntu18.ps1
   tags:
     - linux
-    - cuda
   artifacts:
     paths:
       - nuget/artifacts
@@ -88,7 +102,6 @@ test:ubuntu:
     - pwsh TestPackageUbuntu18.ps1
   tags:
     - linux
-    - cuda
   dependencies:
     - package
   artifacts:
