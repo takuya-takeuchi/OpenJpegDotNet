@@ -9,7 +9,7 @@ foreach($dockerfile in $baseDockerfiles)
    $basetag = "openjpegdotnet" + $dockerfileDirectory.Trim('.').Replace('\', '/')
 
    # for cross compile by qemu
-   if ($tag.Contains("/arm/arm"))
+   if ($basetag.Contains("/arm/arm"))
    {
       Write-Host "Start 'docker run --rm --privileged multiarch/qemu-user-static --reset -p yes" -ForegroundColor Blue
       docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
