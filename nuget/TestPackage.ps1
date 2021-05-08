@@ -130,7 +130,7 @@ function RunTest($BuildTargets)
       }
 
       Write-Host "${dotnetPath} test -c Release -r "$TestDir" -s $runsetting --logger trx" -Foreground Yellow
-      & ${dotnetPath} test -c Release -r "$TestDir" -s $runsetting --logger trx
+      & ${dotnetPath} test -c Release --runtime $RuntimeIdentifier -r "$TestDir" -s $runsetting --logger trx
       if ($lastexitcode -eq 0) {
          Write-Host "Test Successful" -ForegroundColor Green
       } else {
@@ -153,6 +153,8 @@ function RunTest($BuildTargets)
 
 $BuildTargets = @()
 $BuildTargets += New-Object PSObject -Property @{Target = "cpu";  Architecture = 64; Package = "OpenJpegDotNet" }
+$BuildTargets += New-Object PSObject -Property @{Target = "arm";  Architecture = 64; Package = "OpenJpegDotNet.ARM" }
+# $BuildTargets += New-Object PSObject -Property @{Target = "arm";  Architecture = 32; Package = "OpenJpegDotNet.ARM" }
 
 # Store current directory
 $Current = Get-Location

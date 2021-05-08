@@ -74,6 +74,7 @@ package:
     - windows
   dependencies:
     - build:win
+    - build:uwp
     - build:ubuntu
     - build:osx
   artifacts:
