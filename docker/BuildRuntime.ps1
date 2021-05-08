@@ -8,6 +8,13 @@ foreach($dockerfile in $baseDockerfiles)
    $dockerfileDirectory = Resolve-Path ((Get-ChildItem $relativePath).Directory.FullName) -Relative
    $basetag = "openjpegdotnet" + $dockerfileDirectory.Trim('.').Replace('\', '/')
 
+   # for cross compile by qemu
+   if ($tag.Contains("/arm/arm"))
+   {
+      Write-Host "Start 'docker run --rm --privileged multiarch/qemu-user-static --reset -p yes" -ForegroundColor Blue
+      docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+   }
+
    Write-Host "Start 'docker build -t $basetag $dockerfileDirectory'" -ForegroundColor Green
    docker build --force-rm=true -t $basetag $dockerfileDirectory
 
