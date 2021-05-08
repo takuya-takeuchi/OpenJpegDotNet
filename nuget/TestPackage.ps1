@@ -129,8 +129,8 @@ function RunTest($BuildTargets)
          }
       }
 
-      Write-Host "${dotnetPath} test -c Release -r "$TestDir" -s $runsetting --logger trx" -Foreground Yellow
-      & ${dotnetPath} test -c Release --runtime $RuntimeIdentifier -r "$TestDir" -s $runsetting --logger trx
+      Write-Host "${dotnetPath} test -c Release --runtime $RuntimeIdentifier -r "$TestDir" --logger trx" -Foreground Yellow
+      & ${dotnetPath} test -c Release --runtime $RuntimeIdentifier -r "$TestDir" --logger trx
       if ($lastexitcode -eq 0) {
          Write-Host "Test Successful" -ForegroundColor Green
       } else {
