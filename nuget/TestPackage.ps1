@@ -91,7 +91,9 @@ function RunTest($BuildTargets)
 
       # restore package from local nuget pacakge
       # And drop stdout message
+      Write-Host "dotnet remove reference `"..\..\src\OpenJpegDotNet\OpenJpegDotNet.csproj`"" -Foreground Yellow
       dotnet remove reference "..\..\src\OpenJpegDotNet\OpenJpegDotNet.csproj" > $null
+      Write-Host "dotnet add package $package -v $VERSION --source `"$NugetDir`"" -Foreground Yellow
       dotnet add package $package -v $VERSION --source "$NugetDir" > $null
 
       $ErrorActionPreference = "silentlycontinue"
@@ -129,7 +131,7 @@ function RunTest($BuildTargets)
          }
       }
 
-      Write-Host "${dotnetPath} test -c Release --runtime $RuntimeIdentifier -r "$TestDir" --logger trx" -Foreground Yellow
+      Write-Host "${dotnetPath} test -c Release --runtime $RuntimeIdentifier -r `"$TestDir`" --logger trx" -Foreground Yellow
       & ${dotnetPath} test -c Release --runtime $RuntimeIdentifier -r "$TestDir" --logger trx
       if ($lastexitcode -eq 0) {
          Write-Host "Test Successful" -ForegroundColor Green
