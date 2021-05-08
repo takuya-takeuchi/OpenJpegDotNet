@@ -1,14 +1,14 @@
-﻿# DlibDotNet.UWP.Tests
+﻿# OpenJpegDotNet.UWP.Tests
 
-This project aims to test whether DlibDotNet.UWP can pass for **Windows App Certification Kit**.
+This project aims to test whether OpenJpegDotNet.UWP can pass for **Windows App Certification Kit**.
 
 ## 1. Create certifications
 
 This project already contains the following files
 
-* DlibDotNet.cer
-* DlibDotNet.pvk
-* DlibDotNet.pfx
+* OpenJpegDotNet.cer
+* OpenJpegDotNet.pvk
+* OpenJpegDotNet.pfx
 
 These files are for demonstration.
 
@@ -19,7 +19,7 @@ Specify **password** as password.
 
 ````bat
 > set makecert="C:\Program Files (x86)\Windows Kits\10\bin\x64\makecert.exe"
-> %makecert% -n "CN=DlibDotNet" -a sha256 -b 01/01/2000 -e 01/01/2100 -eku 1.3.6.1.5.5.7.3.3 -cy end -r -sv DlibDotNet.pvk DlibDotNet.cer
+> %makecert% -n "CN=OpenJpegDotNet" -a sha256 -b 01/01/2000 -e 01/01/2100 -eku 1.3.6.1.5.5.7.3.3 -cy end -r -sv OpenJpegDotNet.pvk OpenJpegDotNet.cer
 Succeeded
 ````
 
@@ -29,12 +29,12 @@ Specify **password** as password of pfx.
 
 ````bat
 > set pvk2pfx="C:\Program Files (x86)\Windows Kits\10\bin\x64\pvk2pfx.exe"
-> %pvk2pfx% -pvk DlibDotNet.pvk -spc DlibDotNet.cer -pfx DlibDotNet.pfx -pi password
+> %pvk2pfx% -pvk OpenJpegDotNet.pvk -spc OpenJpegDotNet.cer -pfx OpenJpegDotNet.pfx -pi password
 ````
 
 ### Add *.pfx file to system
 
-1. Double click *DlibDotNet.pfx*
+1. Double click *OpenJpegDotNet.pfx*
 
 ![import](images/01.png "import")
 
@@ -69,7 +69,7 @@ Specify **password** as password of pfx.
 ![certmgr](images/certmgr01.png "certmgr")
 
 2. Select **Trusted Root Certification Authorities** and **Certificates**
-3. You can see and double click **DlibDotNet** 
+3. You can see and double click **OpenJpegDotNet** 
 
 ![certmgr](images/certmgr02.png "certmgr")
 
@@ -77,23 +77,23 @@ Specify **password** as password of pfx.
 
 ## 2. Build Application 
 
-You must create **DlibDotNet.UWP.nupkg** in nuget directory before build.
+You must create **OpenJpegDotNet.UWP.nupkg** in nuget directory before build.
 
 ### Build
 
 Specify copied **thumbprint** for **/p:PackageCertificateThumbprint**
 
 ````bat
-> cd DlibDotNet
-> set rootDlibDotNet=%cd%
-> cd test\DlibDotNet.UWP.Tests
+> cd OpenJpegDotNet
+> set rootOpenJpegDotNet=%cd%
+> cd test\OpenJpegDotNet.UWP.Tests
 > set OutputDir=Package
 > set msbuild="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MSBuild.exe"
 > if exist Package rmdir %OutputDir% /s /q
-> %msbuild% DlibDotNet.UWP.Tests.csproj ^
+> %msbuild% OpenJpegDotNet.UWP.Tests.csproj ^
             /t:restore ^
             /t:Rebuild ^
-            /p:RestoreAdditionalProjectSources=%rootDlibDotNet%\nuget ^
+            /p:RestoreAdditionalProjectSources=%rootOpenJpegDotNet%\nuget ^
             /p:RestoreNoCache=true ^
             /p:Configuration=Release ^
             /p:Platform="x64" ^
@@ -102,7 +102,7 @@ Specify copied **thumbprint** for **/p:PackageCertificateThumbprint**
             /p:AppxBundlePlatforms="x64" ^
             /p:AppxPackageSigningEnabled=true ^
             /p:PackageCertificateThumbprint=f57d76083b91b1bddf9bfbc5fdb14bd352c73fec ^
-            /p:PackageCertificateKeyFile="DlibDotNet.pfx"
+            /p:PackageCertificateKeyFile="OpenJpegDotNet.pfx"
 ````
 
 ### Sign appx
@@ -111,22 +111,22 @@ Specify **password** as pfx password for **/p**.
 Basically, this pfx must not be test certifications but formal certifications.
 
 ````bat
-> cd DlibDotNet.UWP.Tests
+> cd OpenJpegDotNet.UWP.Tests
 > set OutputDir=Package
 > set signtool="C:\Program Files (x86)\Windows Kits\10\bin\x64\signtool.exe"
-> %signtool% sign /a /fd SHA256 /f DlibDotNet.pfx /p password %OutputDir%\DlibDotNet.UWP.Tests\DlibDotNet.UWP.Tests_1.0.0.0_x64.appx
+> %signtool% sign /a /fd SHA256 /f OpenJpegDotNet.pfx /p password %OutputDir%\OpenJpegDotNet.UWP.Tests\OpenJpegDotNet.UWP.Tests_1.0.0.0_x64.appx
 Done Adding Additional Store
-Successfully signed: Package\DlibDotNet.UWP.Tests\DlibDotNet.UWP.Tests_1.0.0.0_x64.appx
+Successfully signed: Package\OpenJpegDotNet.UWP.Tests\OpenJpegDotNet.UWP.Tests_1.0.0.0_x64.appx
 ````
 
 ## 3. Start Windows App Certification Kit
 
 ````bat
-> cd DlibDotNet.UWP.Tests
+> cd OpenJpegDotNet.UWP.Tests
 > set rootUWPTest=%cd%
 > set appcert="C:\Program Files (x86)\Windows Kits\10\App Certification Kit\appcert.exe"
-> set appx="%rootUWPTest%\Package\DlibDotNet.UWP.Tests\DlibDotNet.UWP.Tests_1.0.0.0_x64.appx"
-> set report="%rootUWPTest%\Package\DlibDotNet.UWP.Tests\AppCertReport.xml"
+> set appx="%rootUWPTest%\Package\OpenJpegDotNet.UWP.Tests\OpenJpegDotNet.UWP.Tests_1.0.0.0_x64.appx"
+> set report="%rootUWPTest%\Package\OpenJpegDotNet.UWP.Tests\AppCertReport.xml"
 > if exist %report% del %report%
 > %appcert% test -appxpackagepath %appx%  -reportoutputpath %report%
 ````

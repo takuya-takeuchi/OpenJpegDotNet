@@ -299,21 +299,20 @@ namespace OpenJpegDotNet
         }
 
         /// <summary>
-        /// Converts this <see cref="Image"/> to a raw bitmap data.
+        /// Converts this <see cref="Image"/> to a <see cref="RawBitmap"/>.
         /// </summary>
-        /// <returns>A <see cref="Bitmap"/> that represents the converted <see cref="Image"/>.</returns>
-        /// <exception cref="ObjectDisposedException">This object is disposed.</exception>
+        /// <returns>A <see cref="RawBitmap"/> that represents the converted <see cref="Image"/>.</returns>
         /// <exception cref="NotSupportedException">This object is not supported.</exception>
-        public void ToRawBitmap(out byte[] raw, out uint width, out uint height, out uint channel)
+        public RawBitmap ToRawBitmap()
         {
             this.ThrowIfDisposed();
 
             var ret = NativeMethods.openjpeg_openjp2_extensions_imagetobmp(this.NativePtr,
                                                                            false,
                                                                            out var planes,
-                                                                           out width,
-                                                                           out height,
-                                                                           out channel,
+                                                                           out var width,
+                                                                           out var height,
+                                                                           out var channel,
                                                                            out var pixel);
             if (ret != NativeMethods.ErrorType.OK)
             {
@@ -331,7 +330,7 @@ namespace OpenJpegDotNet
                 throw new NotSupportedException("This object is not supported.");
             }
 
-            raw = new byte[width * height * channel];
+            var raw = new byte[width * height * channel];
 
             try
             {
@@ -395,6 +394,8 @@ namespace OpenJpegDotNet
                 if (planes != IntPtr.Zero)
                     NativeMethods.stdlib_free(planes);
             }
+
+            return new RawBitmap(raw, (int) width, (int) height, (int) channel);
         }
 
         #endregion

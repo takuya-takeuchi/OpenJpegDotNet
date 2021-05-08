@@ -129,7 +129,7 @@ namespace OpenJpegDotNet.IO
             return this._Image.ToBitmap();
         }
 
-        public void ReadRawBitmapData(out byte[] raw, out uint width, out uint height, out uint channel)
+        public RawBitmap ReadRawBitmap()
         {
             if (this._Image == null || this._Image.IsDisposed)
                 throw new InvalidOperationException();
@@ -137,7 +137,7 @@ namespace OpenJpegDotNet.IO
             if (!OpenJpeg.Decode(this._Codec, this._Stream, this._Image))
                 throw new InvalidOperationException();
 
-            this._Image.ToRawBitmap(out raw, out width, out height, out channel);
+            return this._Image.ToRawBitmap();
         }
 
         #region Event Handlers

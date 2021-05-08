@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
 using Windows.Storage.Streams;
@@ -40,8 +41,8 @@ namespace OpenJpegDotNet.UWP.Tests
                 if (!result)
                     return;
 
-                reader.ReadRawBitmapData(out var raw, out var width, out var height, out var channel);
-                this._Image.Source = await ToBitmapSource(raw, width, height, channel);
+                var raw = reader.ReadRawBitmap();
+                this._Image.Source = await ToBitmapSource(raw);
             }
         }
 
@@ -49,8 +50,12 @@ namespace OpenJpegDotNet.UWP.Tests
 
         #region Helperss
 
-        private static async Task<BitmapImage> ToBitmapSource(byte[] raw, uint width, uint height, uint channels)
+        private static async Task<BitmapImage> ToBitmapSource(RawBitmap rawBitmap)
         {
+            var raw = rawBitmap.Data.ToArray();
+            var width = rawBitmap.Width;
+            var height = rawBitmap.Height;
+            var channel = rawBitmap.Channel;
             var data = new byte[width * height * 4];
 
             unsafe
@@ -68,7 +73,7 @@ namespace OpenJpegDotNet.UWP.Tests
                             dst[index + 1] = src[1];
                             dst[index + 2] = src[0];
                             index += 4;
-                            src += channels;
+                            src += channel;
                         }
                     }
                 }
