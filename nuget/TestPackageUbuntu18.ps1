@@ -27,7 +27,9 @@ $DockerFileDir = Join-Path $DockerDir test  | `
 # https://github.com/dotnet/coreclr/issues/9265
 # linux-x86 does not support
 $BuildTargets = @()
-$BuildTargets += New-Object PSObject -Property @{Target = "cpu";  Architecture = 64; Package = "OpenJpegDotNet"; PlatformTarget="x64"; Postfix = "/x64"; RID = "$RidOperatingSystem-x64"; }
+$BuildTargets += New-Object PSObject -Property @{Target = "cpu";  Architecture = 64; Package = "OpenJpegDotNet";     PlatformTarget="x64";   Postfix = "/x64";   RID = "$RidOperatingSystem-x64"; }
+$BuildTargets += New-Object PSObject -Property @{Target = "arm";  Architecture = 64; Package = "OpenJpegDotNet.ARM"; PlatformTarget="arm64"; Postfix = "/arm64"; RID = "$RidOperatingSystem-arm64"; }
+$BuildTargets += New-Object PSObject -Property @{Target = "arm";  Architecture = 32; Package = "OpenJpegDotNet.ARM"; PlatformTarget="arm";   Postfix = "/arm";   RID = "$RidOperatingSystem-arm"; }
 
 if ([string]::IsNullOrEmpty($Version))
 {
@@ -54,6 +56,13 @@ foreach($BuildTarget in $BuildTargets)
 
    $dockername = "openjpegdotnet/test/$OperatingSystem/$OperatingSystemVersion/$Target" + $postfix
    $imagename  = "openjpegdotnet/runtime/$OperatingSystem/$OperatingSystemVersion/$Target" + $postfix
+
+   # for cross compile by qemu
+   if ($Target -eq "arm")
+   {
+      Write-Host "Start 'docker run --rm --privileged multiarch/qemu-user-static --reset -p yes" -ForegroundColor Blue
+      docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+   }
 
    Write-Host "Start docker build -t $dockername $DockerFileDir --build-arg IMAGE_NAME=""$imagename""" -ForegroundColor Green
    docker build --network host --force-rm=true -t $dockername $DockerFileDir --build-arg IMAGE_NAME="$imagename"
