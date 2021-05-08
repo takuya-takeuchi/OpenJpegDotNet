@@ -24,10 +24,10 @@ message("-- Binaries: ${CMAKE_CURRENT_BINARY_DIR}")
 message("-------------------------------------------------------")
 
 # Version info
-set(VERSION_MAJOR 0)
-set(VERSION_MINOR 0)
-set(VERSION_PATCH 1)
-set(VERSION_DATE 20210417)
+set(VERSION_MAJOR 2)
+set(VERSION_MINOR 4)
+set(VERSION_PATCH 0)
+set(VERSION_DATE 20210509)
 
 # Only GCC requires -fPIC
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
