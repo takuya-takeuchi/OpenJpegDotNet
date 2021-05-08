@@ -28,7 +28,7 @@ $BuildSourceHash = [Config]::GetBinaryLibraryLinuxHash()
 # https://github.com/dotnet/coreclr/issues/9265
 # linux-x86 does not support
 $BuildTargets = @()
-$BuildTargets += New-Object PSObject -Property @{ Platform = "desktop"; Target = "cpu";  Architecture = 64; Postfix = "/x64"; RID = "$OperatingSystem-x64";   CUDA = 0   }
+$BuildTargets += New-Object PSObject -Property @{ Platform = "desktop"; Target = "cpu";  Architecture = 64; Postfix = "/x64"; RID = "$OperatingSystem-x64"; }
 
 foreach($BuildTarget in $BuildTargets)
 {

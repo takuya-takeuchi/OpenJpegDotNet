@@ -17,9 +17,9 @@ $OpenJpegDotNetSourceRoot = Join-Path $OpenJpegDotNetRoot src
 $BuildSourceHash = [Config]::GetBinaryLibraryWindowsHash()
 
 $BuildTargets = @()
-$BuildTargets += New-Object PSObject -Property @{ Platform = "uwp"; Target = "cpu";  Architecture = 64; RID = "${OperatingSystem}10-x64";   CUDA = 0   }
-$BuildTargets += New-Object PSObject -Property @{ Platform = "uwp"; Target = "cpu";  Architecture = 32; RID = "${OperatingSystem}10-x86";   CUDA = 0   }
-$BuildTargets += New-Object PSObject -Property @{ Platform = "uwp"; Target = "arm";  Architecture = 32; RID = "${OperatingSystem}10-arm";   CUDA = 0   }
+$BuildTargets += New-Object PSObject -Property @{ Platform = "uwp"; Target = "cpu";  Architecture = 64; RID = "${OperatingSystem}10-x64"; }
+$BuildTargets += New-Object PSObject -Property @{ Platform = "uwp"; Target = "cpu";  Architecture = 32; RID = "${OperatingSystem}10-x86"; }
+$BuildTargets += New-Object PSObject -Property @{ Platform = "uwp"; Target = "arm";  Architecture = 32; RID = "${OperatingSystem}10-arm"; }
 $BuildTargets += New-Object PSObject -Property @{ Platform = "uwp"; Target = "arm";  Architecture = 64; RID = "${OperatingSystem}10-arm64"; CUDA = 0   }
 
 foreach ($BuildTarget in $BuildTargets)

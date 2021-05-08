@@ -19,7 +19,7 @@ $BuildSourceHash = [Config]::GetBinaryLibraryOSXHash()
 # https://docs.microsoft.com/ja-jp/dotnet/core/rid-catalog#macos-rids
 # osx-x86 does not support
 $BuildTargets = @()
-$BuildTargets += New-Object PSObject -Property @{ Platform = "desktop"; Target = "cpu";  Architecture = 64; RID = "$OperatingSystem-x64";   CUDA = 0   }
+$BuildTargets += New-Object PSObject -Property @{ Platform = "desktop"; Target = "cpu";  Architecture = 64; RID = "$OperatingSystem-x64"; }
 
 foreach($BuildTarget in $BuildTargets)
 {
