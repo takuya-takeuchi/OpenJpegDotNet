@@ -118,7 +118,18 @@ namespace OpenJpegDotNet.IO
             return true;
         }
 
-        public Bitmap ReadData()
+        public OpenJpegDotNet.Image Decode()
+        {
+            if (this._Image == null || this._Image.IsDisposed)
+                throw new InvalidOperationException();
+
+            if (!OpenJpeg.Decode(this._Codec, this._Stream, this._Image))
+                throw new InvalidOperationException();
+
+            return this._Image;
+        }
+
+        public Bitmap DecodeToBitmap()
         {
             if (this._Image == null || this._Image.IsDisposed)
                 throw new InvalidOperationException();
@@ -127,17 +138,6 @@ namespace OpenJpegDotNet.IO
                 throw new InvalidOperationException();
 
             return this._Image.ToBitmap();
-        }
-
-        public RawBitmap ReadRawBitmap()
-        {
-            if (this._Image == null || this._Image.IsDisposed)
-                throw new InvalidOperationException();
-
-            if (!OpenJpeg.Decode(this._Codec, this._Stream, this._Image))
-                throw new InvalidOperationException();
-
-            return this._Image.ToRawBitmap();
         }
 
         #region Event Handlers
