@@ -343,7 +343,26 @@ class Config
       $platform = $this._Platform
       $architecture = $this.GetArchitectureName()
 
-      return "build_${osname}_${platform}_${target}_${architecture}"
+      switch ($platform)
+      {
+         "android"
+         {
+            $architecture = $this._AndroidABI
+         }
+         "ios"
+         {
+            $architecture = $this._OSXArchitectures
+         }
+      }
+
+      if ($this._Configuration -eq "Debug")
+      {
+         return "build_${osname}_${platform}_${target}_${architecture}_d"
+      }
+      else
+      {
+         return "build_${osname}_${platform}_${target}_${architecture}"
+      }
    }
 
    [string] GetVisualStudio()
@@ -454,7 +473,7 @@ class Config
          $build = $config.GetBuildDirectoryName($operatingSystem)
 
          Write-Host "Start 'docker build -t $dockername $dockerFileDir --build-arg IMAGE_NAME=""$imagename""'" -ForegroundColor Green
-         docker build --network host --force-rm=true -t $dockername $dockerFileDir --build-arg IMAGE_NAME="$imagename"
+         docker build --network host --force-rm=true -t $dockername $dockerFileDir --build-arg IMAGE_NAME="$imagename" | Write-Host
 
          if ($lastexitcode -ne 0)
          {
@@ -474,12 +493,12 @@ class Config
          # Build binary
          foreach ($key in $buildHashTable.keys)
          {
-            Write-Host "Start 'docker run --rm -v ""$($root):/opt/data/OpenJpegDotNet"" -e LOCAL_UID=$(id -u $env:USER) -e LOCAL_GID=$(id -g $env:USER) -t $dockername'" -ForegroundColor Green
+            Write-Host "Start 'docker run --rm -v ""$($root):/opt/data/OpenJpegDotNet"" -e LOCAL_UID=$(id -u $env:USER) -e LOCAL_GID=$(id -g $env:USER) -t $dockername $key $target $architecture $platform $option'" -ForegroundColor Green
             docker run --rm --network host `
                         -v "$($root):/opt/data/OpenJpegDotNet" `
                         -e "LOCAL_UID=$(id -u $env:USER)" `
                         -e "LOCAL_GID=$(id -g $env:USER)" `
-                        -t "$dockername" $key $target $architecture $platform $option
+                        -t "$dockername" $key $target $architecture $platform $option | Write-Host
 
             if ($lastexitcode -ne 0)
             {
@@ -591,14 +610,115 @@ class ThirdPartyBuilder
 
          # OSX failed to build due to zlib
          $BUILD_THIRDPARTY="OFF"
+         
+         $Platform = $this._Config.GetPlatform()
+         $Configuration = $this._Config.GetConfigurationName()
 
-         if ($global:IsWindows)
+         switch ($Platform)
          {
-            $VS = $this._Config.GetVisualStudio()
-            $VSARC = $this._Config.GetVisualStudioArchitecture()
-
-            if ($this._Config.GetPlatform() -eq "uwp")
+            "desktop"
             {
+               if ($global:IsWindows)
+               {
+                  $VS = $this._Config.GetVisualStudio()
+                  $VSARC = $this._Config.GetVisualStudioArchitecture()
+      
+                  Write-Host "   cmake -G `"${VS}`" -A ${VSARC} -T host=x64 `
+            -D BUILD_SHARED_LIBS:BOOL=OFF `
+            -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
+            -D CMAKE_INSTALL_PREFIX:PATH=`"${installDir}`" `
+            -D CMAKE_LIBRARY_PATH:PATH=`"${installDir}`" `
+            -D CMAKE_INCLUDE_PATH:PATH=`"${installDir}/include`" `
+            -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
+            `"$openjpegDir`"" -ForegroundColor Yellow
+                  cmake -G "${VS}" -A ${VSARC} -T host=x64 `
+                        -D BUILD_SHARED_LIBS:BOOL=OFF `
+                        -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
+                        -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
+                        -D CMAKE_LIBRARY_PATH:PATH="${installDir}" `
+                        -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
+                        -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
+                        "${openjpegDir}"
+                  Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
+                  cmake --build . --config ${buildConfig}
+                  Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
+                  cmake --install . --config ${buildConfig}
+               }
+               else
+               {
+                  switch ($this._Config.GetTarget())
+                  {
+                     "cpu"
+                     {
+                        Write-Host "   cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
+            -D BUILD_SHARED_LIBS:BOOL=OFF `
+            -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
+            -D CMAKE_INSTALL_PREFIX:PATH=`"${installDir}`" `
+            -D CMAKE_LIBRARY_PATH:PATH=`"${installDir}`" `
+            -D CMAKE_INCLUDE_PATH:PATH=`"${installDir}/include`" `
+            -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
+            -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
+            `"$openjpegDir`"" -ForegroundColor Yellow
+                           cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
+                                 -D BUILD_SHARED_LIBS:BOOL=OFF `
+                                 -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
+                                 -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
+                                 -D CMAKE_LIBRARY_PATH:PATH="${installDir}" `
+                                 -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
+                                 -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
+                                 -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
+                                 "${openjpegDir}"
+                           Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
+                           cmake --build . --config ${buildConfig}
+                           Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
+                           cmake --install . --config ${buildConfig}
+                     }
+                     "arm"
+                     {
+                        if ($this._Config.GetArchitecture() -eq 32)
+                        {
+                           $CMAKE_C_COMPILER = "/usr/bin/arm-linux-gnueabihf-gcc"
+                           $CMAKE_CXX_COMPILER = "/usr/bin/arm-linux-gnueabihf-g++"
+                        }
+                        else
+                        {
+                           $CMAKE_C_COMPILER = "/usr/bin/aarch64-linux-gnu-gcc"
+                           $CMAKE_CXX_COMPILER = "/usr/bin/aarch64-linux-gnu-g++"
+                        }
+   
+                        Write-Host "   cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
+            -D BUILD_SHARED_LIBS:BOOL=OFF `
+            -D CMAKE_C_COMPILER=`"$CMAKE_C_COMPILER`" `
+            -D CMAKE_CXX_COMPILER=`"$CMAKE_CXX_COMPILER`" `
+            -D CMAKE_INSTALL_PREFIX:PATH=`"${installDir}`" `
+            -D CMAKE_LIBRARY_PATH:PATH=`"${installDir}`" `
+            -D CMAKE_INCLUDE_PATH:PATH=`"${installDir}/include`" `
+            -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
+            -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
+            `"$openjpegDir`"" -ForegroundColor Yellow
+                           cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
+                                 -D BUILD_SHARED_LIBS:BOOL=OFF `
+                                 -D CMAKE_C_COMPILER="$CMAKE_C_COMPILER" `
+                                 -D CMAKE_CXX_COMPILER="$CMAKE_CXX_COMPILER" `
+                                 -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
+                                 -D CMAKE_LIBRARY_PATH:PATH="${installDir}" `
+                                 -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
+                                 -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
+                                 -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
+                                 "${openjpegDir}"
+                           Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
+                           cmake --build . --config ${buildConfig}
+                           Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
+                           cmake --install . --config ${buildConfig}
+                     }
+                  }
+               }
+            }
+            "uwp"
+            {
+               $VS = $this._Config.GetVisualStudio()
+               $VSARC = $this._Config.GetVisualStudioArchitecture()
+
                Write-Host "   cmake -G `"${VS}`" -A ${VSARC} -T host=x64 `
          -D BUILD_SHARED_LIBS:BOOL=OFF `
          -D CMAKE_SYSTEM_NAME=WindowsStore `
@@ -624,102 +744,40 @@ class ThirdPartyBuilder
                Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
                cmake --install . --config ${buildConfig}
             }
-            else
+            "android"
             {
-               $VS = $this._Config.GetVisualStudio()
-               $VSARC = $this._Config.GetVisualStudioArchitecture()
-               Write-Host "   cmake -G `"${VS}`" -A ${VSARC} -T host=x64 `
+               $level = $this._Config.GetAndroidNativeAPILevel()
+               $abi = $this._Config.GetAndroidABI()
+               
+               Write-Host "   cmake -D CMAKE_TOOLCHAIN_FILE=${env:ANDROID_NDK}/build/cmake/android.toolchain.cmake `
+         -D CMAKE_BUILD_TYPE=$Configuration `
          -D BUILD_SHARED_LIBS:BOOL=OFF `
          -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
          -D CMAKE_INSTALL_PREFIX:PATH=`"${installDir}`" `
          -D CMAKE_LIBRARY_PATH:PATH=`"${installDir}`" `
          -D CMAKE_INCLUDE_PATH:PATH=`"${installDir}/include`" `
+         -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
+         -D ANDROID_ABI=$abi `
+         -D ANDROID_PLATFORM=android-$level `
          -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
          `"$openjpegDir`"" -ForegroundColor Yellow
-               cmake -G "${VS}" -A ${VSARC} -T host=x64 `
+               cmake -D CMAKE_TOOLCHAIN_FILE=${env:ANDROID_NDK}/build/cmake/android.toolchain.cmake `
+                     -D CMAKE_BUILD_TYPE=$Configuration `
                      -D BUILD_SHARED_LIBS:BOOL=OFF `
                      -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
                      -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
                      -D CMAKE_LIBRARY_PATH:PATH="${installDir}" `
                      -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
+                     -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
+                     -D ANDROID_ABI=$abi `
+                     -D ANDROID_PLATFORM=android-$level `
                      -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
                      "${openjpegDir}"
-               Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
-               cmake --build . --config ${buildConfig}
-               Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
-               cmake --install . --config ${buildConfig}
-            }
-         }
-         else
-         {
-            if ($this._Config.GetPlatform() -eq "desktop")
-            {
-               switch ($this._Config.GetTarget())
-               {
-                  "cpu"
-                  {
-                     Write-Host "   cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
-         -D BUILD_SHARED_LIBS:BOOL=OFF `
-         -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
-         -D CMAKE_INSTALL_PREFIX:PATH=`"${installDir}`" `
-         -D CMAKE_LIBRARY_PATH:PATH=`"${installDir}`" `
-         -D CMAKE_INCLUDE_PATH:PATH=`"${installDir}/include`" `
-         -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
-         -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
-         `"$openjpegDir`"" -ForegroundColor Yellow
-                        cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
-                              -D BUILD_SHARED_LIBS:BOOL=OFF `
-                              -D CMAKE_BUILD_TYPE:STRING=${buildConfig} `
-                              -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
-                              -D CMAKE_LIBRARY_PATH:PATH="${installDir}" `
-                              -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
-                              -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
-                              -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
-                              "${openjpegDir}"
-                        Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
-                        cmake --build . --config ${buildConfig}
-                        Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
-                        cmake --install . --config ${buildConfig}
-                  }
-                  "arm"
-                  {
-                     if ($this._Config.GetArchitecture() -eq 32)
-                     {
-                        $CMAKE_C_COMPILER = "/usr/bin/arm-linux-gnueabihf-gcc"
-                        $CMAKE_CXX_COMPILER = "/usr/bin/arm-linux-gnueabihf-g++"
-                     }
-                     else
-                     {
-                        $CMAKE_C_COMPILER = "/usr/bin/aarch64-linux-gnu-gcc"
-                        $CMAKE_CXX_COMPILER = "/usr/bin/aarch64-linux-gnu-g++"
-                     }
 
-                     Write-Host "   cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
-         -D BUILD_SHARED_LIBS:BOOL=OFF `
-         -D CMAKE_C_COMPILER=`"$CMAKE_C_COMPILER`" `
-         -D CMAKE_CXX_COMPILER=`"$CMAKE_CXX_COMPILER`" `
-         -D CMAKE_INSTALL_PREFIX:PATH=`"${installDir}`" `
-         -D CMAKE_LIBRARY_PATH:PATH=`"${installDir}`" `
-         -D CMAKE_INCLUDE_PATH:PATH=`"${installDir}/include`" `
-         -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
-         -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
-         `"$openjpegDir`"" -ForegroundColor Yellow
-                        cmake -D CMAKE_BUILD_TYPE=${buildConfig} `
-                              -D BUILD_SHARED_LIBS:BOOL=OFF `
-                              -D CMAKE_C_COMPILER="$CMAKE_C_COMPILER" `
-                              -D CMAKE_CXX_COMPILER="$CMAKE_CXX_COMPILER" `
-                              -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
-                              -D CMAKE_LIBRARY_PATH:PATH="${installDir}" `
-                              -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
-                              -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
-                              -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
-                              "${openjpegDir}"
-                        Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
-                        cmake --build . --config ${buildConfig}
-                        Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
-                        cmake --install . --config ${buildConfig}
-                  }
-               }
+               Write-Host "   make" -ForegroundColor Yellow
+               make -j4
+               Write-Host "   make install" -ForegroundColor Yellow
+               make install
             }
          }
       }
@@ -857,51 +915,50 @@ function ConfigUWP([Config]$Config)
 
 function ConfigANDROID([Config]$Config)
 {
-   if ($IsLinux)
+   if (!${env:ANDROID_NDK_HOME})
    {
-      if (!${env:ANDROID_NDK_HOME})
-      {
-         Write-Host "Error: Specify ANDROID_NDK_HOME environmental value" -ForegroundColor Red
-         exit -1
-      }
-
-      if ((Test-Path "${env:ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake") -eq $False)
-      {
-         Write-Host "Error: Specified Android NDK toolchain '${env:ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake' does not found" -ForegroundColor Red
-         exit -1
-      }
-
-      $level = $Config.GetAndroidNativeAPILevel()
-      $abi = $Config.GetAndroidABI()
-
-      cmake -G Ninja `
-            -D CMAKE_TOOLCHAIN_FILE=${env:ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake `
-            -D ANDROID_NDK=${env:ANDROID_NDK_HOME} `
-            -D CMAKE_MAKE_PROGRAM=ninja `
-            -D ANDROID_NATIVE_API_LEVEL=${level} `
-            -D ANDROID_ABI=${abi} `
-            -D ANDROID_TOOLCHAIN=clang `
-            -D DLIB_USE_CUDA=OFF `
-            -D DLIB_USE_BLAS=OFF `
-            -D DLIB_USE_LAPACK=OFF `
-            -D mkl_include_dir="" `
-            -D mkl_intel="" `
-            -D mkl_rt="" `
-            -D mkl_thread="" `
-            -D mkl_pthread="" `
-            -D LIBPNG_IS_GOOD=OFF `
-            -D PNG_FOUND=OFF `
-            -D PNG_LIBRARY_RELEASE="" `
-            -D PNG_LIBRARY_DEBUG="" `
-            -D PNG_PNG_INCLUDE_DIR="" `
-            -D DLIB_NO_GUI_SUPPORT=ON `
-            ..
-   }
-   else
-   {
-      Write-Host "Error: This platform can not build android binary" -ForegroundColor Red
+      Write-Host "Error: Specify ANDROID_NDK_HOME environmental value" -ForegroundColor Red
       exit -1
    }
+
+   if ((Test-Path "${env:ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake") -eq $False)
+   {
+      Write-Host "Error: Specified Android NDK toolchain '${env:ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake' does not found" -ForegroundColor Red
+      exit -1
+   }
+
+   $Builder = [ThirdPartyBuilder]::new($Config)
+
+   # Build opnejpeg
+   $installOpenJpegDir = $Builder.BuildOpenJpeg()
+
+   # # Build OpenJpegDotNet.Native
+   Write-Host "Start Build OpenJpegDotNet.Native" -ForegroundColor Green
+
+   $level = $Config.GetAndroidNativeAPILevel()
+   $abi = $Config.GetAndroidABI()
+
+   $arch_type = $Config.GetArchitecture()
+   
+   # https://github.com/Tencent/ncnn/wiki/FAQ-ncnn-throw-error#undefined-reference-to-__kmpc_xyz_xyz
+   # $env:NDK_TOOLCHAIN_VERSION = 4.9
+   $env:OpenJPEG_DIR = "${installOpenJpegDir}/lib/openjpeg-2.4"
+      Write-Host "   cmake -D CMAKE_TOOLCHAIN_FILE=${env:ANDROID_NDK}/build/cmake/android.toolchain.cmake `
+         -D ANDROID_ABI=$abi `
+         -D ANDROID_PLATFORM=android-$level `
+         -D ANDROID_CPP_FEATURES:STRING=`"exceptions rtti`" `
+         -D BUILD_SHARED_LIBS=ON `
+         -D OpenJPEG_DIR=`"${env:OpenJPEG_DIR}`" `
+         -D TARGET_ARCH=`"${target_arch}`" `
+         .." -ForegroundColor Yellow
+      cmake -D CMAKE_TOOLCHAIN_FILE=${env:ANDROID_NDK}/build/cmake/android.toolchain.cmake `
+            -D ANDROID_ABI=$abi `
+            -D ANDROID_PLATFORM=android-$level `
+            -D ANDROID_CPP_FEATURES:STRING="exceptions rtti" `
+            -D BUILD_SHARED_LIBS=ON `
+            -D OpenJPEG_DIR="${env:OpenJPEG_DIR}" `
+            -D TARGET_ARCH="${target_arch}" `
+            ..
 }
 
 function ConfigIOS([Config]$Config)
