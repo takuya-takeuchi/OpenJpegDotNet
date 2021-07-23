@@ -1,0 +1,19 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <!-- <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)\..\..\native\android\armeabi\libOpenJpegDotNetNative.so">
+      <Link>Libs\armeabi\libOpenJpegDotNetNative.so</Link>
+    </AndroidNativeLibrary> -->
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)\..\..\native\android\armeabi-v7a\libOpenJpegDotNetNative.so">
+      <Link>Libs\armeabi-v7a\libOpenJpegDotNetNative.so</Link>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)\..\..\native\android\arm64-v8a\libOpenJpegDotNetNative.so">
+      <Link>Libs\arm64-v8a\libOpenJpegDotNetNative.so</Link>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)\..\..\native\android\x86\libOpenJpegDotNetNative.so">
+      <Link>Libs\x86\libOpenJpegDotNetNative.so</Link>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)\..\..\native\android\x86_64\libOpenJpegDotNetNative.so">
+      <Link>Libs\x86_64\libOpenJpegDotNetNative.so</Link>
+    </AndroidNativeLibrary>
+  </ItemGroup>
+</Project>
