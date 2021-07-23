@@ -7,7 +7,7 @@ OpenJpeg wrapper written in C++ and C# for Windows, MacOS and Linux
 |Package|OS|x86|x64|ARM|ARM64|Nuget|
 |---|---|---|---|---|---|---|
 |OpenJpegDotNet|Windows|✓|✓|-|-|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.svg)](https://www.nuget.org/packages/OpenJpegDotNet)|
-||Linux|-|✓|-|-|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.svg)](https://www.nuget.org/packages/OpenJpegDotNet)|
+||Linux|-|✓|✓|✓|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.svg)](https://www.nuget.org/packages/OpenJpegDotNet)|
 ||OSX|-|✓|-|-|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.svg)](https://www.nuget.org/packages/OpenJpegDotNet)|
  
 ## How to use?
