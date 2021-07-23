@@ -80,11 +80,6 @@ class Config
 
    static $BuildLibraryIOSHash =
    @{
-      "OpenJpegDotNet.Native"     = "libOpenJpegDotNetNative.a";
-   }
-
-   static $BuildLibraryIOSHash =
-   @{
       "OpenJpegDotNet.Native"     = "libOpenJpegDotNetNative_merged.a";
    }
 
@@ -195,6 +190,12 @@ class Config
    [string] GetRootDir()
    {
       return $this._Root
+   }
+
+   [string] GetToolchainDir()
+   {
+      return   Join-Path $this.GetRootDir() src |
+               Join-Path -ChildPath toolchains
    }
 
    [string] GetOpenJpegRootDir()

@@ -38,7 +38,7 @@ foreach ($BuildTarget in $BuildTargets)
 {
    $BuildTarget.OperatingSystem = ${OperatingSystem}
    
-   $ret = [Config]::Build($NcnnDotNetRoot, $False, $BuildSourceHash, $BuildTarget)
+   $ret = [Config]::Build($OpenJpegDotNetRoot, $False, $BuildSourceHash, $BuildTarget)
    if ($ret -eq $False)
    {
       Set-Location -Path $Current
