@@ -456,11 +456,6 @@ class Config
          Write-Host "Start 'docker build -t $dockername $dockerFileDir --build-arg IMAGE_NAME=""$imagename""'" -ForegroundColor Green
          docker build --network host --force-rm=true -t $dockername $dockerFileDir --build-arg IMAGE_NAME="$imagename"
 
-         if ($lastexitcode -ne 0)
-         {
-            return $False
-         }
-
          if ($platform -eq "desktop")
          {
             if ($target -eq "arm")
