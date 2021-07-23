@@ -62,23 +62,23 @@ class Config
    $VisualStudio = "Visual Studio 15 2017"
 
    $VisualStudioConsole = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
-   
-   static $BuildLibraryWindowsHash = 
+
+   static $BuildLibraryWindowsHash =
    @{
       "OpenJpegDotNet.Native"     = "OpenJpegDotNetNative.dll";
    }
-   
-   static $BuildLibraryLinuxHash = 
+
+   static $BuildLibraryLinuxHash =
    @{
       "OpenJpegDotNet.Native"     = "libOpenJpegDotNetNative.so";
    }
-   
-   static $BuildLibraryOSXHash = 
+
+   static $BuildLibraryOSXHash =
    @{
       "OpenJpegDotNet.Native"     = "libOpenJpegDotNetNative.dylib";
    }
-   
-   static $BuildLibraryIOSHash = 
+
+   static $BuildLibraryIOSHash =
    @{
       "OpenJpegDotNet.Native"     = "libOpenJpegDotNetNative.a";
    }
@@ -338,7 +338,7 @@ class Config
       {
          $osname = $this.GetOSName()
       }
-      
+
       $target = $this._Target
       $platform = $this._Platform
       $architecture = $this.GetArchitectureName()
@@ -360,7 +360,7 @@ class Config
    {
       $architecture = $this._Architecture
       $target = $this._Target
-      
+
       if ($target -eq "arm")
       {
          if ($architecture -eq 32)
@@ -401,9 +401,9 @@ class Config
       $distribution          = $buildTarget.Distribution
       $distributionVersion   = $buildTarget.DistributionVersion
       $cudaVersion           = $buildTarget.CudaVersion
-      $androidVersion        = $buildTarget.AndroidVersion      
-      $androidNativeApiLevel = $buildTarget.AndroidNativeApiLevel      
-      
+      $androidVersion        = $buildTarget.AndroidVersion
+      $androidNativeApiLevel = $buildTarget.AndroidNativeApiLevel
+
       $option = ""
 
       $sourceRoot = Join-Path $root src
@@ -411,13 +411,13 @@ class Config
       if ($docker -eq $True)
       {
          $dockerDir = Join-Path $root docker
-         
+
          Set-Location -Path $dockerDir
-         
+
          $dockerFileDir = Join-Path $dockerDir build  | `
                           Join-Path -ChildPath $distribution | `
                           Join-Path -ChildPath $distributionVersion
-  
+
          if ($platform -eq "android")
          {
             $setting =
@@ -435,27 +435,27 @@ class Config
             if ($target -ne "cuda")
             {
                $option = ""
-   
+
                $dockername = "openjpegdotnet/build/$distribution/$distributionVersion/$Target" + $postfix
                $imagename  = "openjpegdotnet/devel/$distribution/$distributionVersion/$Target" + $postfix
             }
             else
             {
                $option = $cudaVersion
-         
+
                $cudaVersion = ($cudaVersion / 10).ToString("0.0")
                $dockername = "openjpegdotnet/build/$distribution/$distributionVersion/$Target/$cudaVersion"
                $imagename  = "openjpegdotnet/devel/$distribution/$distributionVersion/$Target/$cudaVersion"
             }
          }
-   
+
          $config = [Config]::new($root, "Release", $target, $architecture, $platform, $option)
          $libraryDir = Join-Path "artifacts" $config.GetArtifactDirectoryName()
          $build = $config.GetBuildDirectoryName($operatingSystem)
-   
+
          Write-Host "Start 'docker build -t $dockername $dockerFileDir --build-arg IMAGE_NAME=""$imagename""'" -ForegroundColor Green
          docker build --network host --force-rm=true -t $dockername $dockerFileDir --build-arg IMAGE_NAME="$imagename"
-   
+
          if ($lastexitcode -ne 0)
          {
             return $False
@@ -469,7 +469,7 @@ class Config
                docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
             }
          }
-   
+
          # Build binary
          foreach ($key in $buildHashTable.keys)
          {
@@ -479,53 +479,58 @@ class Config
                         -e "LOCAL_UID=$(id -u $env:USER)" `
                         -e "LOCAL_GID=$(id -g $env:USER)" `
                         -t "$dockername" $key $target $architecture $platform $option
-         
+
             if ($lastexitcode -ne 0)
             {
                return $False
             }
          }
-   
+
          # Copy output binary
          foreach ($key in $buildHashTable.keys)
          {
             $srcDir = Join-Path $sourceRoot $key
             $dll = $buildHashTable[$key]
             $dstDir = Join-Path $current $libraryDir
-   
+
             CopyToArtifact -srcDir $srcDir -build $build -libraryName $dll -dstDir $dstDir -rid $rid
          }
       }
       else
       {
+         if ($platform -eq "ios")
+         {
+            $option = $rid
+         }
+
          $config = [Config]::new($root, "Release", $target, $architecture, $platform, $option)
          $libraryDir = Join-Path "artifacts" $config.GetArtifactDirectoryName()
          $build = $config.GetBuildDirectoryName($OperatingSystem)
-      
+
          foreach ($key in $buildHashTable.keys)
          {
             $srcDir = Join-Path $sourceRoot $key
-      
+
             # Move to build target directory
             Set-Location -Path $srcDir
-      
+
             $arc = $config.GetArchitectureName()
             Write-Host "Build $key [$arc] for $target" -ForegroundColor Green
             Build -Config $config
-      
+
             if ($lastexitcode -ne 0)
             {
                return $False
             }
          }
-      
+
          # Copy output binary
          foreach ($key in $buildHashTable.keys)
          {
             $srcDir = Join-Path $sourceRoot $key
             $dll = $buildHashTable[$key]
             $dstDir = Join-Path $current $libraryDir
-      
+
             if ($global:IsWindows)
             {
                CopyToArtifact -configuration "Release" -srcDir $srcDir -build $build -libraryName $dll -dstDir $dstDir -rid $rid
@@ -734,7 +739,7 @@ function ConfigCPU([Config]$Config)
    }
 
    $Builder = [ThirdPartyBuilder]::new($Config)
-      
+
    # Build opnejpeg
    $installOpenJpegDir = $Builder.BuildOpenJpeg()
 
@@ -774,7 +779,7 @@ function ConfigCPU([Config]$Config)
 function ConfigARM([Config]$Config)
 {
    $Builder = [ThirdPartyBuilder]::new($Config)
-      
+
    # Build opnejpeg
    $installOpenJpegDir = $Builder.BuildOpenJpeg()
 
@@ -822,10 +827,10 @@ function ConfigUWP([Config]$Config)
    }
 
    $Builder = [ThirdPartyBuilder]::new($Config)
-      
+
    # Build opnejpeg
    $installOpenJpegDir = $Builder.BuildOpenJpeg()
-   
+
    if ($IsWindows)
    {
       $VS = $Config.GetVisualStudio()
@@ -891,7 +896,7 @@ function ConfigANDROID([Config]$Config)
             ..
    }
    else
-   {      
+   {
       Write-Host "Error: This platform can not build android binary" -ForegroundColor Red
       exit -1
    }
@@ -921,7 +926,7 @@ function ConfigIOS([Config]$Config)
             ..
    }
    else
-   {      
+   {
       Write-Host "Error: This platform can not build iOS binary" -ForegroundColor Red
       exit -1
    }
