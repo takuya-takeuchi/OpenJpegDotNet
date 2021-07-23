@@ -456,6 +456,12 @@ class Config
          Write-Host "Start 'docker build -t $dockername $dockerFileDir --build-arg IMAGE_NAME=""$imagename""'" -ForegroundColor Green
          docker build --network host --force-rm=true -t $dockername $dockerFileDir --build-arg IMAGE_NAME="$imagename"
 
+         if ($lastexitcode -ne 0)
+         {
+            Write-Host "Failed to docker build: $lastexitcode" -ForegroundColor Red
+            return $False
+         }
+
          if ($platform -eq "desktop")
          {
             if ($target -eq "arm")
@@ -477,6 +483,7 @@ class Config
 
             if ($lastexitcode -ne 0)
             {
+               Write-Host "Failed to docker run: $lastexitcode" -ForegroundColor Red
                return $False
             }
          }
