@@ -60,6 +60,12 @@ foreach($BuildTarget in $BuildTargets)
                        Join-Path -ChildPath $target | `
                        Join-Path -ChildPath $platformTarget
    }
+   else
+   {
+      $DockerFileDir = Join-Path $DockerDir test  | `
+                       Join-Path -ChildPath $OperatingSystem | `
+                       Join-Path -ChildPath $OperatingSystemVersion
+   }
 
    Write-Host "Start docker build -t $dockername $DockerFileDir --build-arg IMAGE_NAME=""$imagename""" -ForegroundColor Green
    docker build --network host --force-rm=true -t $dockername $DockerFileDir --build-arg IMAGE_NAME="$imagename"
