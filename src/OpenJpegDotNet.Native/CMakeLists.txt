@@ -108,7 +108,7 @@ include_directories("${OPENJPEG_INCLUDE_DIRS}")
 
 if (MSVC OR MSYS OR MINGW)
     list(APPEND STATIC_LIBRARIES
-        $ENV{OpenJPEG_DIR}/lib/openjp2.lib
+        openjp2
     )
 elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "iOS")
     list(APPEND STATIC_LIBRARIES
