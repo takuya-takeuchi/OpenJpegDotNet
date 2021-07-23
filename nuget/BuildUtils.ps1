@@ -23,6 +23,11 @@ class BuildTarget
    [string] $OperatingSystem
    [string] $Distribution
    [string] $DistributionVersion
+
+   [string] $CudaVersion
+
+   [string] $AndroidVersion
+   [string] $AndroidNativeApiLevel
 }
 
 class Config
@@ -387,14 +392,17 @@ class Config
    {
       $current = $PSScriptRoot
 
-      $platform            = $buildTarget.Platform
-      $target              = $buildTarget.Target
-      $architecture        = $buildTarget.Architecture
-      $postfix             = $buildTarget.Postfix
-      $rid                 = $buildTarget.RID
-      $operatingSystem     = $buildTarget.OperatingSystem
-      $distribution        = $buildTarget.Distribution
-      $distributionVersion = $buildTarget.DistributionVersion
+      $platform              = $buildTarget.Platform
+      $target                = $buildTarget.Target
+      $architecture          = $buildTarget.Architecture
+      $postfix               = $buildTarget.Postfix
+      $rid                   = $buildTarget.RID
+      $operatingSystem       = $buildTarget.OperatingSystem
+      $distribution          = $buildTarget.Distribution
+      $distributionVersion   = $buildTarget.DistributionVersion
+      $cudaVersion           = $buildTarget.CudaVersion
+      $androidVersion        = $buildTarget.AndroidVersion      
+      $androidNativeApiLevel = $buildTarget.AndroidNativeApiLevel      
       
       $option = ""
 
@@ -409,10 +417,37 @@ class Config
          $dockerFileDir = Join-Path $dockerDir build  | `
                           Join-Path -ChildPath $distribution | `
                           Join-Path -ChildPath $distributionVersion
+  
+         if ($platform -eq "android")
+         {
+            $setting =
+            @{
+               'ANDROID_ABI' = $rid;
+               'ANDROID_NATIVE_API_LEVEL' = $androidNativeApiLevel
+            }
+            $option = [Config]::Base64Encode((ConvertTo-Json -Compress $setting))
 
-         $option = ""   
-         $dockername = "openjpegdotnet/build/$distribution/$distributionVersion/$Target" + $postfix
-         $imagename  = "openjpegdotnet/devel/$distribution/$distributionVersion/$Target" + $postfix
+            $dockername = "openjpegdotnet/build/$distribution/$distributionVersion/android/$androidVersion"
+            $imagename  = "openjpegdotnet/devel/$distribution/$distributionVersion/android/$androidVersion"
+         }
+         else
+         {
+            if ($target -ne "cuda")
+            {
+               $option = ""
+   
+               $dockername = "openjpegdotnet/build/$distribution/$distributionVersion/$Target" + $postfix
+               $imagename  = "openjpegdotnet/devel/$distribution/$distributionVersion/$Target" + $postfix
+            }
+            else
+            {
+               $option = $cudaVersion
+         
+               $cudaVersion = ($cudaVersion / 10).ToString("0.0")
+               $dockername = "openjpegdotnet/build/$distribution/$distributionVersion/$Target/$cudaVersion"
+               $imagename  = "openjpegdotnet/devel/$distribution/$distributionVersion/$Target/$cudaVersion"
+            }
+         }
    
          $config = [Config]::new($root, "Release", $target, $architecture, $platform, $option)
          $libraryDir = Join-Path "artifacts" $config.GetArtifactDirectoryName()
@@ -426,10 +461,13 @@ class Config
             return $False
          }
 
-         if ($target -eq "arm")
+         if ($platform -eq "desktop")
          {
-            Write-Host "Start 'docker run --rm --privileged multiarch/qemu-user-static --reset -p yes'" -ForegroundColor Green
-            docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+            if ($target -eq "arm")
+            {
+               Write-Host "Start 'docker run --rm --privileged multiarch/qemu-user-static --reset -p yes'" -ForegroundColor Green
+               docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+            }
          }
    
          # Build binary
@@ -460,11 +498,6 @@ class Config
       }
       else
       {
-         if ($target -eq "cpu")
-         {
-            $option = ""
-         }
-      
          $config = [Config]::new($root, "Release", $target, $architecture, $platform, $option)
          $libraryDir = Join-Path "artifacts" $config.GetArtifactDirectoryName()
          $build = $config.GetBuildDirectoryName($OperatingSystem)
