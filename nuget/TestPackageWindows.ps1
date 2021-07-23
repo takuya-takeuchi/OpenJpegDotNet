@@ -25,7 +25,7 @@ $Current = Get-Location
 
 $BuildTargets = @()
 $BuildTargets += New-Object PSObject -Property @{Package = "OpenJpegDotNet";     PlatformTarget="x64"; RID = "$OperatingSystem-x64"; }
-# $BuildTargets += New-Object PSObject -Property @{Package = "OpenJpegDotNet";     PlatformTarget="x86"; RID = "$OperatingSystem-x86"; }
+$BuildTargets += New-Object PSObject -Property @{Package = "OpenJpegDotNet";     PlatformTarget="x86"; RID = "$OperatingSystem-x86"; }
 
 foreach($BuildTarget in $BuildTargets)
 {

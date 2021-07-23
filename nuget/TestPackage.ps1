@@ -196,14 +196,14 @@ function RunTest($BuildTargets)
 }
 
 $BuildTargets = @()
-$BuildTargets += New-Object PSObject -Property @{Target = "cpu";  Architecture = 64; Package = "OpenJpegDotNet" }
-$BuildTargets += New-Object PSObject -Property @{Target = "cpu";  Architecture = 32; Package = "OpenJpegDotNet" }
+$BuildTargets += New-Object PSObject -Property @{Target = "cpu";  PlatformTarget = "x64"; Architecture = 64; Package = "OpenJpegDotNet" }
+# $BuildTargets += New-Object PSObject -Property @{Target = "cpu";  PlatformTarget = "x86"; Architecture = 32; Package = "OpenJpegDotNet" }
 
 # Store current directory
 $Current = Get-Location
 $OpenJpegDotNetRoot = (Split-Path (Get-Location) -Parent)
 
-$targets = $BuildTargets.Where({$PSItem.Package -eq $Package})
+$targets = $BuildTargets.Where({$PSItem.Package -eq $Package}).Where({$PSItem.PlatformTarget -eq $PlatformTarget})
 RunTest $targets
 
 # Move to Root directory
