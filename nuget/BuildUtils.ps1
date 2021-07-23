@@ -83,6 +83,11 @@ class Config
       "OpenJpegDotNet.Native"     = "libOpenJpegDotNetNative.a";
    }
 
+   static $BuildLibraryIOSHash =
+   @{
+      "OpenJpegDotNet.Native"     = "libOpenJpegDotNetNative_merged.a";
+   }
+
    [string]   $_Root
    [string]   $_Configuration
    [int]      $_Architecture
@@ -718,10 +723,9 @@ class ThirdPartyBuilder
                         -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
                         -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
                         "${openjpegDir}"
-                  Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
-                  cmake --build . --config ${buildConfig}
-                  Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
-                  cmake --install . --config ${buildConfig}
+
+                  Write-Host "   cmake --build . --config ${Configuration} --target install" -ForegroundColor Yellow
+                  cmake --build . --config $Configuration --target install
                }
                else
                {
@@ -747,10 +751,9 @@ class ThirdPartyBuilder
                                  -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
                                  -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
                                  "${openjpegDir}"
-                           Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
-                           cmake --build . --config ${buildConfig}
-                           Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
-                           cmake --install . --config ${buildConfig}
+
+                           Write-Host "   cmake --build . --config ${Configuration} --target install" -ForegroundColor Yellow
+                           cmake --build . --config $Configuration --target install
                      }
                      "arm"
                      {
@@ -785,10 +788,9 @@ class ThirdPartyBuilder
                                  -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON `
                                  -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
                                  "${openjpegDir}"
-                           Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
-                           cmake --build . --config ${buildConfig}
-                           Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
-                           cmake --install . --config ${buildConfig}
+
+                           Write-Host "   cmake --build . --config ${Configuration} --target install" -ForegroundColor Yellow
+                           cmake --build . --config $Configuration --target install
                      }
                   }
                }
@@ -818,10 +820,9 @@ class ThirdPartyBuilder
                      -D CMAKE_INCLUDE_PATH:PATH="${installDir}/include" `
                      -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
                      "${openjpegDir}"
-               Write-Host "   cmake --build . --config ${buildConfig}" -ForegroundColor Yellow
-               cmake --build . --config ${buildConfig}
-               Write-Host "   cmake --install . --config ${buildConfig}" -ForegroundColor Yellow
-               cmake --install . --config ${buildConfig}
+
+               Write-Host "   cmake --build . --config ${Configuration} --target install" -ForegroundColor Yellow
+               cmake --build . --config $Configuration --target install
             }
             "android"
             {
@@ -857,6 +858,46 @@ class ThirdPartyBuilder
                make -j4
                Write-Host "   make install" -ForegroundColor Yellow
                make install
+            }
+            "ios"
+            {
+               $developerDir = $this._Config.GetDeveloperDir()
+               $osxArchitectures = $this._Config.GetOSXArchitectures()
+               $toolchain = $this._Config.GetToolchainFile()
+
+               $OSX_SYSROOT = $this._Config.GetIOSSDK($osxArchitectures, $developerDir)
+
+               $CMAKE_IOS_INSTALL_COMBINED="NO"
+               $CMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH="NO"
+
+               # use libc++ rather than libstdc++
+               Write-Host "   cmake -D CMAKE_BUILD_TYPE=$Configuration `
+         -D CMAKE_CXX_FLAGS=`"-std=c++11`" `
+         -D CMAKE_EXE_LINKER_FLAGS=`"-stdlib=libc++ -lc++abi`" `
+         -D CMAKE_SYSTEM_NAME=iOS `
+         -D BUILD_SHARED_LIBS=OFF `
+         -D CMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH=$CMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH `
+         -D CMAKE_IOS_INSTALL_COMBINED=$CMAKE_IOS_INSTALL_COMBINED `
+         -D CMAKE_OSX_ARCHITECTURES=${osxArchitectures} `
+         -D CMAKE_OSX_SYSROOT=${OSX_SYSROOT} `
+         -D CMAKE_TOOLCHAIN_FILE=`"${toolchain}`" `
+         -D CMAKE_INSTALL_PREFIX=`"${installDir}`" `
+         ${openjpegDir}" -ForegroundColor Yellow
+               cmake -D CMAKE_BUILD_TYPE=$Configuration `
+                     -D CMAKE_CXX_FLAGS="-std=c++11" `
+                     -D CMAKE_EXE_LINKER_FLAGS="-stdlib=libc++ -lc++abi" `
+                     -D CMAKE_SYSTEM_NAME=iOS `
+                     -D BUILD_SHARED_LIBS=OFF `
+                     -D CMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH=$CMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH `
+                     -D CMAKE_IOS_INSTALL_COMBINED=$CMAKE_IOS_INSTALL_COMBINED `
+                     -D CMAKE_OSX_ARCHITECTURES=${osxArchitectures} `
+                     -D CMAKE_OSX_SYSROOT=${OSX_SYSROOT} `
+                     -D CMAKE_TOOLCHAIN_FILE="${toolchain}" `
+                     -D CMAKE_INSTALL_PREFIX="${installDir}" `
+                     "${openjpegDir}"
+
+               Write-Host "   cmake --build . --config ${Configuration} --target install" -ForegroundColor Yellow
+               cmake --build . --config $Configuration --target install
             }
          }
       }
@@ -1019,48 +1060,106 @@ function ConfigANDROID([Config]$Config)
 
    $arch_type = $Config.GetArchitecture()
    
-   # https://github.com/Tencent/ncnn/wiki/FAQ-ncnn-throw-error#undefined-reference-to-__kmpc_xyz_xyz
-   # $env:NDK_TOOLCHAIN_VERSION = 4.9
    $env:OpenJPEG_DIR = "${installOpenJpegDir}/lib/openjpeg-2.4"
-      Write-Host "   cmake -D CMAKE_TOOLCHAIN_FILE=${env:ANDROID_NDK}/build/cmake/android.toolchain.cmake `
+   Write-Host "   cmake -D CMAKE_TOOLCHAIN_FILE=${env:ANDROID_NDK}/build/cmake/android.toolchain.cmake `
+      -D ANDROID_ABI=$abi `
+      -D ANDROID_PLATFORM=android-$level `
+      -D ANDROID_CPP_FEATURES:STRING=`"exceptions rtti`" `
+      -D BUILD_SHARED_LIBS=ON `
+      -D OpenJPEG_DIR=`"${env:OpenJPEG_DIR}`" `
+      -D TARGET_ARCH=`"${target_arch}`" `
+      .." -ForegroundColor Yellow
+   cmake -D CMAKE_TOOLCHAIN_FILE=${env:ANDROID_NDK}/build/cmake/android.toolchain.cmake `
          -D ANDROID_ABI=$abi `
          -D ANDROID_PLATFORM=android-$level `
-         -D ANDROID_CPP_FEATURES:STRING=`"exceptions rtti`" `
+         -D ANDROID_CPP_FEATURES:STRING="exceptions rtti" `
          -D BUILD_SHARED_LIBS=ON `
-         -D OpenJPEG_DIR=`"${env:OpenJPEG_DIR}`" `
-         -D TARGET_ARCH=`"${target_arch}`" `
-         .." -ForegroundColor Yellow
-      cmake -D CMAKE_TOOLCHAIN_FILE=${env:ANDROID_NDK}/build/cmake/android.toolchain.cmake `
-            -D ANDROID_ABI=$abi `
-            -D ANDROID_PLATFORM=android-$level `
-            -D ANDROID_CPP_FEATURES:STRING="exceptions rtti" `
-            -D BUILD_SHARED_LIBS=ON `
-            -D OpenJPEG_DIR="${env:OpenJPEG_DIR}" `
-            -D TARGET_ARCH="${target_arch}" `
-            ..
+         -D OpenJPEG_DIR="${env:OpenJPEG_DIR}" `
+         -D TARGET_ARCH="${target_arch}" `
+         ..
 }
 
 function ConfigIOS([Config]$Config)
 {
    if ($IsMacOS)
    {
-      cmake -G Xcode `
-            -D CMAKE_TOOLCHAIN_FILE=../../ios-cmake/ios.toolchain.cmake `
-            -D PLATFORM=OS64COMBINED `
-            -D DLIB_USE_CUDA=OFF `
-            -D DLIB_USE_BLAS=OFF `
-            -D DLIB_USE_LAPACK=OFF `
-            -D mkl_include_dir="" `
-            -D mkl_intel="" `
-            -D mkl_rt="" `
-            -D mkl_thread="" `
-            -D mkl_pthread="" `
-            -D LIBPNG_IS_GOOD=OFF `
-            -D PNG_FOUND=OFF `
-            -D PNG_LIBRARY_RELEASE="" `
-            -D PNG_LIBRARY_DEBUG="" `
-            -D PNG_PNG_INCLUDE_DIR="" `
-            -D DLIB_NO_GUI_SUPPORT=ON `
+      $Builder = [ThirdPartyBuilder]::new($Config)
+
+      $osxArchitectures = $Config.GetOSXArchitectures()
+
+      $vulkanOnOff = "ON"
+      $targetPlatform = ""
+      switch ($osxArchitectures)
+      {
+         "arm64e"
+         {
+            $vulkanOnOff = "ON"
+            $targetPlatform = "ios-arm64"
+         }
+         "arm64"
+         {
+            $vulkanOnOff = "ON"
+            $targetPlatform = "ios-arm64"
+         }
+         "arm"
+         {
+            $vulkanOnOff = "OFF"
+            $targetPlatform = ""
+         }
+         "armv7"
+         {
+            $vulkanOnOff = "OFF"
+            $targetPlatform = ""
+         }
+         "armv7s"
+         {
+            $vulkanOnOff = "OFF"
+            $targetPlatform = ""
+         }
+         "i386"
+         {
+            $vulkanOnOff = "OFF"
+            $targetPlatform = ""
+         }
+         "x86_64"
+         {
+            $vulkanOnOff = "ON"
+            $targetPlatform = "ios-arm64_x86_64-simulator"
+         }
+      }
+
+      # Build opnejpeg
+      $installOpenJpegDir = $Builder.BuildOpenJpeg()
+
+      # Build OpenJpegDotNet.Native
+      Write-Host "Start Build OpenJpegDotNet.Native" -ForegroundColor Green
+
+      $developerDir = $Config.GetDeveloperDir()
+      $osxArchitectures = $Config.GetOSXArchitectures()
+      $toolchain = $Config.GetToolchainFile()
+
+      $OSX_SYSROOT = $Config.GetIOSSDK($osxArchitectures, $developerDir)
+
+      $env:OpenJPEG_DIR = "${installOpenJpegDir}/lib/openjpeg-2.4"
+
+      # use libc++ rather than libstdc++
+      Write-Host "   cmake -D CMAKE_SYSTEM_NAME=iOS `
+         -D CMAKE_OSX_ARCHITECTURES=${osxArchitectures} `
+         -D CMAKE_OSX_SYSROOT=${OSX_SYSROOT} `
+         -D CMAKE_TOOLCHAIN_FILE=`"${toolchain}`" `
+         -D CMAKE_CXX_FLAGS=`"-std=c++11 -stdlib=libc++ -static`" `
+         -D CMAKE_EXE_LINKER_FLAGS=`"-std=c++11 -stdlib=libc++ -static`" `
+         -D BUILD_SHARED_LIBS=OFF `
+         -D OpenJPEG_DIR=`"${OpenJPEG_DIR}`" `
+         .." -ForegroundColor Yellow
+      cmake -D CMAKE_SYSTEM_NAME=iOS `
+            -D CMAKE_OSX_ARCHITECTURES=${osxArchitectures} `
+            -D CMAKE_OSX_SYSROOT=${OSX_SYSROOT} `
+            -D CMAKE_TOOLCHAIN_FILE="${toolchain}" `
+            -D CMAKE_CXX_FLAGS="-std=c++11 -stdlib=libc++ -static" `
+            -D CMAKE_EXE_LINKER_FLAGS="-std=c++11 -stdlib=libc++ -static" `
+            -D BUILD_SHARED_LIBS=OFF `
+            -D OpenJPEG_DIR="${OpenJPEG_DIR}" `
             ..
    }
    else
@@ -1116,6 +1215,46 @@ function Build([Config]$Config)
    }
 
    cmake --build . --config $Config.GetConfigurationName()
+
+   $Platform = $Config.GetPlatform()
+
+   # Post build
+   switch ($Platform)
+   {
+      "ios"
+      {
+         $BuildTargets = @()
+         $BuildTargets += New-Object PSObject -Property @{ Platform = "arm64e"; }
+         $BuildTargets += New-Object PSObject -Property @{ Platform = "arm64";  }
+         $BuildTargets += New-Object PSObject -Property @{ Platform = "arm";    }
+         $BuildTargets += New-Object PSObject -Property @{ Platform = "armv7";  }
+         $BuildTargets += New-Object PSObject -Property @{ Platform = "armv7s"; }
+         $BuildTargets += New-Object PSObject -Property @{ Platform = "i386";   }
+         $BuildTargets += New-Object PSObject -Property @{ Platform = "x86_64"; }
+
+         foreach($BuildTarget in $BuildTargets)
+         {
+            $platform = $BuildTarget.Platform
+            $vulkan = $BuildTarget.Vulkan
+            $osxArchitectures = $Config.GetOSXArchitectures()
+
+            if ($osxArchitectures -eq $platform )
+            {
+               Write-Host "Invoke libtool for ${platform}" -ForegroundColor Yellow
+
+               if (Test-Path "libOpenJpegDotNetNative_merged.a")
+               {
+                  Remove-Item "libOpenJpegDotNetNative_merged.a"
+               }
+
+               # https://github.com/abseil/abseil-cpp/issues/604
+               libtool -o "libOpenJpegDotNetNative_merged.a" `
+                          "libOpenJpegDotNetNative.a" `
+                          "openjpeg/install/lib/libopenjp2.a"
+            }
+         }
+      }
+   }
 
    # Move to Root directory
    Set-Location -Path $Current
