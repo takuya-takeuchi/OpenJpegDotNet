@@ -18,7 +18,7 @@ $BuildTargets = @()
 $BuildTargets += [BuildTarget]::new("uwp", "cpu", 64, "${OperatingSystem}10-x64",   "" )
 $BuildTargets += [BuildTarget]::new("uwp", "cpu", 32, "${OperatingSystem}10-x86",   "" )
 $BuildTargets += [BuildTarget]::new("uwp", "arm", 64, "${OperatingSystem}10-arm64", "" )
-$BuildTargets += [BuildTarget]::new("uwp", "arm", 32, "${OperatingSystem}arm",      "" )
+$BuildTargets += [BuildTarget]::new("uwp", "arm", 32, "${OperatingSystem}10-arm",   "" )
 
 foreach ($BuildTarget in $BuildTargets)
 {
