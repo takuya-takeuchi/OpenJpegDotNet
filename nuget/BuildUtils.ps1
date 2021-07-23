@@ -872,6 +872,7 @@ class ThirdPartyBuilder
 
                # use libc++ rather than libstdc++
                Write-Host "   cmake -D CMAKE_BUILD_TYPE=$Configuration `
+         -D CMAKE_INSTALL_PREFIX:PATH=`"${installDir}`" `
          -D CMAKE_CXX_FLAGS=`"-std=c++11`" `
          -D CMAKE_EXE_LINKER_FLAGS=`"-stdlib=libc++ -lc++abi`" `
          -D CMAKE_SYSTEM_NAME=iOS `
@@ -884,6 +885,7 @@ class ThirdPartyBuilder
          -D CMAKE_INSTALL_PREFIX=`"${installDir}`" `
          ${openjpegDir}" -ForegroundColor Yellow
                cmake -D CMAKE_BUILD_TYPE=$Configuration `
+                     -D CMAKE_INSTALL_PREFIX:PATH="${installDir}" `
                      -D CMAKE_CXX_FLAGS="-std=c++11" `
                      -D CMAKE_EXE_LINKER_FLAGS="-stdlib=libc++ -lc++abi" `
                      -D CMAKE_SYSTEM_NAME=iOS `
@@ -1150,7 +1152,7 @@ function ConfigIOS([Config]$Config)
          -D CMAKE_CXX_FLAGS=`"-std=c++11 -stdlib=libc++ -static`" `
          -D CMAKE_EXE_LINKER_FLAGS=`"-std=c++11 -stdlib=libc++ -static`" `
          -D BUILD_SHARED_LIBS=OFF `
-         -D OpenJPEG_DIR=`"${OpenJPEG_DIR}`" `
+         -D OpenJPEG_DIR=`"${env:OpenJPEG_DIR}`" `
          .." -ForegroundColor Yellow
       cmake -D CMAKE_SYSTEM_NAME=iOS `
             -D CMAKE_OSX_ARCHITECTURES=${osxArchitectures} `
@@ -1159,7 +1161,7 @@ function ConfigIOS([Config]$Config)
             -D CMAKE_CXX_FLAGS="-std=c++11 -stdlib=libc++ -static" `
             -D CMAKE_EXE_LINKER_FLAGS="-std=c++11 -stdlib=libc++ -static" `
             -D BUILD_SHARED_LIBS=OFF `
-            -D OpenJPEG_DIR="${OpenJPEG_DIR}" `
+            -D OpenJPEG_DIR="${env:OpenJPEG_DIR}" `
             ..
    }
    else
