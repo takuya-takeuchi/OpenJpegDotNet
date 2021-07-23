@@ -88,9 +88,9 @@ class Config
    [int]      $_Architecture
    [string]   $_Target
    [string]   $_Platform
-   [string]   $_MklDirectory
    [string]   $_AndroidABI
    [string]   $_AndroidNativeAPILevel
+   [string]   $_OSXArchitectures
 
    #***************************************
    # Arguments
@@ -145,6 +145,10 @@ class Config
             $setting = ConvertFrom-Json $decoded
             $this._AndroidABI            = $setting.ANDROID_ABI
             $this._AndroidNativeAPILevel = $setting.ANDROID_NATIVE_API_LEVEL
+         }
+         "ios"
+         {
+            $this._OSXArchitectures = $Option
          }
       }
 
@@ -281,11 +285,6 @@ class Config
       }
 
       return $os
-   }
-
-   [string] GetIntelMklDirectory()
-   {
-      return [string]$this._MklDirectory
    }
 
    [string] GetArchitectureName()
