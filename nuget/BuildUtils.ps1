@@ -1,3 +1,30 @@
+class BuildTarget
+{
+   [string] $Platform
+   [string] $Target
+   [int]    $Architecture
+   [string] $Postfix
+   [string] $RID
+
+   BuildTarget( [string]$Platform,
+                [string]$Target,
+                [int]   $Architecture,
+                [string]$RID,
+                [string]$Postfix = ""
+              )
+   {
+      $this.Platform = $Platform
+      $this.Target = $Target
+      $this.Architecture = $Architecture
+      $this.Postfix = $Postfix
+      $this.RID = $RID
+   }
+
+   [string] $OperatingSystem
+   [string] $Distribution
+   [string] $DistributionVersion
+}
+
 class Config
 {
 
@@ -356,6 +383,124 @@ class Config
       exit -1
    }
 
+   static [bool] Build([string]$root, [bool]$docker, [hashtable]$buildHashTable, [BuildTarget]$buildTarget)
+   {
+      $current = $PSScriptRoot
+
+      $platform            = $buildTarget.Platform
+      $target              = $buildTarget.Target
+      $architecture        = $buildTarget.Architecture
+      $postfix             = $buildTarget.Postfix
+      $rid                 = $buildTarget.RID
+      $operatingSystem     = $buildTarget.OperatingSystem
+      $distribution        = $buildTarget.Distribution
+      $distributionVersion = $buildTarget.DistributionVersion
+      
+      $option = ""
+
+      $sourceRoot = Join-Path $root src
+
+      if ($docker -eq $True)
+      {
+         $dockerDir = Join-Path $root docker
+         
+         Set-Location -Path $dockerDir
+         
+         $dockerFileDir = Join-Path $dockerDir build  | `
+                          Join-Path -ChildPath $distribution | `
+                          Join-Path -ChildPath $distributionVersion
+
+         $option = ""   
+         $dockername = "openjpegdotnet/build/$distribution/$distributionVersion/$Target" + $postfix
+         $imagename  = "openjpegdotnet/devel/$distribution/$distributionVersion/$Target" + $postfix
+   
+         $config = [Config]::new($root, "Release", $target, $architecture, $platform, $option)
+         $libraryDir = Join-Path "artifacts" $config.GetArtifactDirectoryName()
+         $build = $config.GetBuildDirectoryName($operatingSystem)
+   
+         Write-Host "Start 'docker build -t $dockername $dockerFileDir --build-arg IMAGE_NAME=""$imagename""'" -ForegroundColor Green
+         docker build --network host --force-rm=true -t $dockername $dockerFileDir --build-arg IMAGE_NAME="$imagename"
+   
+         if ($lastexitcode -ne 0)
+         {
+            return $False
+         }
+   
+         # Build binary
+         foreach ($key in $buildHashTable.keys)
+         {
+            Write-Host "Start 'docker run --rm -v ""$($root):/opt/data/OpenJpegDotNet"" -e LOCAL_UID=$(id -u $env:USER) -e LOCAL_GID=$(id -g $env:USER) -t $dockername'" -ForegroundColor Green
+            docker run --rm --network host `
+                        -v "$($root):/opt/data/OpenJpegDotNet" `
+                        -e "LOCAL_UID=$(id -u $env:USER)" `
+                        -e "LOCAL_GID=$(id -g $env:USER)" `
+                        -t "$dockername" $key $target $architecture $platform $option
+         
+            if ($lastexitcode -ne 0)
+            {
+               return $False
+            }
+         }
+   
+         # Copy output binary
+         foreach ($key in $buildHashTable.keys)
+         {
+            $srcDir = Join-Path $sourceRoot $key
+            $dll = $buildHashTable[$key]
+            $dstDir = Join-Path $current $libraryDir
+   
+            CopyToArtifact -srcDir $srcDir -build $build -libraryName $dll -dstDir $dstDir -rid $rid
+         }
+      }
+      else
+      {
+         if ($target -eq "cpu")
+         {
+            $option = ""
+         }
+      
+         $config = [Config]::new($root, "Release", $target, $architecture, $platform, $option)
+         $libraryDir = Join-Path "artifacts" $config.GetArtifactDirectoryName()
+         $build = $config.GetBuildDirectoryName($OperatingSystem)
+      
+         foreach ($key in $buildHashTable.keys)
+         {
+            $srcDir = Join-Path $sourceRoot $key
+      
+            # Move to build target directory
+            Set-Location -Path $srcDir
+      
+            $arc = $config.GetArchitectureName()
+            Write-Host "Build $key [$arc] for $target" -ForegroundColor Green
+            Build -Config $config
+      
+            if ($lastexitcode -ne 0)
+            {
+               return $False
+            }
+         }
+      
+         # Copy output binary
+         foreach ($key in $buildHashTable.keys)
+         {
+            $srcDir = Join-Path $sourceRoot $key
+            $dll = $buildHashTable[$key]
+            $dstDir = Join-Path $current $libraryDir
+      
+            if ($global:IsWindows)
+            {
+               CopyToArtifact -configuration "Release" -srcDir $srcDir -build $build -libraryName $dll -dstDir $dstDir -rid $rid
+            }
+            else
+            {
+               CopyToArtifact -srcDir $srcDir -build $build -libraryName $dll -dstDir $dstDir -rid $rid
+            }
+         }
+      }
+
+      return $True
+   }
+
 }
 
 function CallVisualStudioDeveloperConsole([Config]$Config)
@@ -554,7 +699,7 @@ function ConfigCPU([Config]$Config)
    # Build opnejpeg
    $installOpenJpegDir = $Builder.BuildOpenJpeg()
 
-   if ($IsWindows)
+   if ($global:IsWindows)
    {
       $VS = $Config.GetVisualStudio()
       $VSARC = $Config.GetVisualStudioArchitecture()
@@ -810,10 +955,21 @@ function CopyToArtifact()
                Join-Path -ChildPath ${libraryName}
    }
 
-   $output = Join-Path $dstDir runtimes | `
-            Join-Path -ChildPath ${rid} | `
-            Join-Path -ChildPath native | `
-            Join-Path -ChildPath $libraryName
+   $dstDir = Join-Path $dstDir runtimes | `
+             Join-Path -ChildPath ${rid} | `
+             Join-Path -ChildPath native
+
+   $output = Join-Path $dstDir $libraryName
+
+   if (!(Test-Path($binary)))
+   {
+      Write-Host "${binary} does not exist" -ForegroundColor Red
+   }
+
+   if (!(Test-Path($dstDir)))
+   {
+      Write-Host "${dstDir} does not exist" -ForegroundColor Red
+   }
 
    Write-Host "Copy ${libraryName} to ${output}" -ForegroundColor Green
    Copy-Item ${binary} ${output}
