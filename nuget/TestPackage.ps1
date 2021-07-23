@@ -40,13 +40,15 @@ function Clear-PackakgeCache([string]$Package, [string]$Version)
       {
          $path = (dotnet nuget locals global-packages --list).Replace('global-packages: ', '').Trim()
       }
-      $path =  Join-Path $path $Package | `
-               Join-Path -ChildPath $Version
-      if (Test-Path $path)
+      $pathPackage = Join-Path $path $Package | `
+                     Join-Path -ChildPath $Version
+      if (Test-Path ${pathPackage})
       {
-         Write-Host "Remove '$path'" -Foreground Green
-         Remove-Item -Path "$path" -Recurse -Force
+         Write-Host "Remove '${pathPackage}'" -Foreground Green
+         Remove-Item -Path "${pathPackage}" -Recurse -Force
       }
+
+      New-Item "${path}" -ItemType Directory > $null
    }
 }
 
@@ -91,10 +93,12 @@ function RunTest($BuildTargets)
 
       # restore package from local nuget pacakge
       # And drop stdout message
-      Write-Host "dotnet remove reference `"..\..\src\OpenJpegDotNet\OpenJpegDotNet.csproj`"" -Foreground Yellow
+      Write-Host "dotnet remove reference `"..\..\src\OpenJpegDotNet\OpenJpegDotNet.csproj`"" -ForegroundColor Yellow
       dotnet remove reference "..\..\src\OpenJpegDotNet\OpenJpegDotNet.csproj" > $null
-      Write-Host "dotnet add package $package -v $VERSION --source `"$NugetDir`"" -Foreground Yellow
-      dotnet add package $package -v $VERSION --source "$NugetDir" > $null
+      Write-Host "dotnet restore" -ForegroundColor Yellow
+      dotnet restore > $null
+      Write-Host "dotnet add package $package -v $VERSION --source ${NugetDir}" -ForegroundColor Yellow
+      dotnet add package $package -v $VERSION --source ${NugetDir} > $null
 
       $ErrorActionPreference = "silentlycontinue"
       $env:PlatformTarget = $PlatformTarget
@@ -155,8 +159,7 @@ function RunTest($BuildTargets)
 
 $BuildTargets = @()
 $BuildTargets += New-Object PSObject -Property @{Target = "cpu";  Architecture = 64; Package = "OpenJpegDotNet" }
-$BuildTargets += New-Object PSObject -Property @{Target = "arm";  Architecture = 64; Package = "OpenJpegDotNet.ARM" }
-# $BuildTargets += New-Object PSObject -Property @{Target = "arm";  Architecture = 32; Package = "OpenJpegDotNet.ARM" }
+$BuildTargets += New-Object PSObject -Property @{Target = "cpu";  Architecture = 32; Package = "OpenJpegDotNet" }
 
 # Store current directory
 $Current = Get-Location
