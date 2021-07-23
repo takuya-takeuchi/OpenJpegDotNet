@@ -7,11 +7,12 @@ RUN apt-get update && apt-get install -y \
     gosu
 
 # install package to build
-RUN mkdir -p /usr/share/powershell
-RUN curl -SL -o powershell.tar.gz https://github.com/PowerShell/PowerShell/releases/download/v6.2.7/powershell-6.2.7-linux-arm64.tar.gz
-RUN tar -zxf powershell.tar.gz -C /usr/share/powershell && rm powershell.tar.gz
-RUN chmod +x /usr/share/powershell/pwsh
-RUN ln -s /usr/share/powershell/pwsh /usr/bin/pwsh
+RUN wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb \
+ && dpkg -i packages-microsoft-prod.deb \
+ && rm packages-microsoft-prod.deb
+RUN apt-get update && apt-get install -y \
+    powershell \
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # copy build script and run
 COPY runTest.sh /runTest.sh

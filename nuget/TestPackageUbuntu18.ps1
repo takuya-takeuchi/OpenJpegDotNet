@@ -53,13 +53,13 @@ foreach($BuildTarget in $BuildTargets)
    {
       Write-Host "Start 'docker run --rm --privileged multiarch/qemu-user-static --reset -p yes" -ForegroundColor Blue
       docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-   }
 
-   $DockerFileDir = Join-Path $DockerDir test  | `
-                    Join-Path -ChildPath $OperatingSystem | `
-                    Join-Path -ChildPath $OperatingSystemVersion | `
-                    Join-Path -ChildPath $target | `
-                    Join-Path -ChildPath $platformTarget
+      $DockerFileDir = Join-Path $DockerDir test  | `
+                       Join-Path -ChildPath $OperatingSystem | `
+                       Join-Path -ChildPath $OperatingSystemVersion | `
+                       Join-Path -ChildPath $target | `
+                       Join-Path -ChildPath $platformTarget
+   }
 
    Write-Host "Start docker build -t $dockername $DockerFileDir --build-arg IMAGE_NAME=""$imagename""" -ForegroundColor Green
    docker build --network host --force-rm=true -t $dockername $DockerFileDir --build-arg IMAGE_NAME="$imagename"
