@@ -3,7 +3,7 @@
 namespace ViewJpeg2000.Services.Interfaces
 {
 
-    public interface IDetectService
+    public interface IImageService
     {
 
         DetectResult Detect(byte[] file);

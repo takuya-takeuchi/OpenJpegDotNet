@@ -2,7 +2,6 @@
 using Prism;
 using Prism.Ioc;
 using UIKit;
-using ViewJpeg2000.Services;
 
 namespace ViewJpeg2000.iOS
 {
@@ -33,7 +32,6 @@ namespace ViewJpeg2000.iOS
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             // Services
-            containerRegistry.RegisterSingleton<IFileAccessService, FileAccessService>();
         }
     }
 }

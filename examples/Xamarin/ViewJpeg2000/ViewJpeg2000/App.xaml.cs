@@ -1,13 +1,13 @@
 using Prism;
 using Prism.Ioc;
-using Xamarin.Essentials.Implementation;
-using Xamarin.Essentials.Interfaces;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using ViewJpeg2000.Services;
 using ViewJpeg2000.Services.Interfaces;
 using ViewJpeg2000.ViewModels;
 using ViewJpeg2000.Views;
+using Xamarin.Essentials.Implementation;
+using Xamarin.Essentials.Interfaces;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ViewJpeg2000
@@ -36,8 +36,9 @@ namespace ViewJpeg2000
         {
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
-            containerRegistry.RegisterSingleton<IDetectService, DetectService>();
-            
+            containerRegistry.RegisterSingleton<IImageService, ImageService>();
+            containerRegistry.RegisterSingleton<IFileDownloadService, FileDownloadService>();
+
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
         }

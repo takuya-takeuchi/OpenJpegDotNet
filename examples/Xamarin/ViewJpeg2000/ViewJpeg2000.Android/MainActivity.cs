@@ -3,7 +3,6 @@ using Android.Content.PM;
 using Android.OS;
 using Prism;
 using Prism.Ioc;
-using ViewJpeg2000.Services;
 
 namespace ViewJpeg2000.Droid
 {
@@ -35,7 +34,6 @@ namespace ViewJpeg2000.Droid
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             // Register any platform specific implementations
-            containerRegistry.RegisterSingleton<IFileAccessService, FileAccessService>();
         }
     }
 }

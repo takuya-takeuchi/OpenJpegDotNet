@@ -2,11 +2,10 @@
 using Prism.Commands;
 using Prism.Navigation;
 using SkiaSharp;
-using Xamarin.Essentials;
-using Xamarin.Forms;
 using ViewJpeg2000.Services;
 using ViewJpeg2000.Services.Interfaces;
 using ViewJpeg2000.ViewModels.Interfaces;
+using Xamarin.Forms;
 
 namespace ViewJpeg2000.ViewModels
 {
@@ -16,41 +15,48 @@ namespace ViewJpeg2000.ViewModels
 
         #region Fields
 
-        private readonly IFileAccessService _FileAccessService;
+        private readonly IFileDownloadService _FileDownloadService;
 
-        private readonly IDetectService _DetectService;
+        private readonly IImageService _ImageService;
 
         #endregion
 
         #region Constructors
 
         public MainPageViewModel(INavigationService navigationService,
-                                 IFileAccessService fileAccessService,
-                                 IDetectService detectService)
+                                 IFileDownloadService fileAccessService,
+                                 IImageService detectService)
             : base(navigationService)
         {
             this.Title = "Yolo V3";
 
-            this._FileAccessService = fileAccessService;
-            this._DetectService = detectService;
-            this._FilePickCommand = new Lazy<DelegateCommand>(this.FilePickCommandFactory);
+            this._FileDownloadService = fileAccessService;
+            this._ImageService = detectService;
+            this._ShowImageCommand = new Lazy<DelegateCommand>(this.ShowImageCommandFactory);
         }
 
         #endregion
 
         #region Properties
 
-        private readonly Lazy<DelegateCommand> _FilePickCommand;
+        private readonly Lazy<DelegateCommand> _ShowImageCommand;
 
-        private DelegateCommand FilePickCommandFactory()
+        private DelegateCommand ShowImageCommandFactory()
         {
             return new DelegateCommand(async () =>
             {
-                var result = await this._FileAccessService.GetFileContent();
-                if (result == null) 
-                    return;
+                byte[] content = null;
 
-                var detectResult = this._DetectService.Detect(result);
+                try
+                {
+                    content = await this._FileDownloadService.GetFileContent(this.Url);
+                }
+                catch (Exception e)
+                {
+                    return;
+                }
+
+                var detectResult = this._ImageService.Detect(content);
                 if (detectResult == null) 
                     return;
 
@@ -103,16 +109,28 @@ namespace ViewJpeg2000.ViewModels
             });
         }
 
-        public DelegateCommand FilePickCommand => this._FilePickCommand.Value;
+        public DelegateCommand ShowImageCommand => this._ShowImageCommand.Value;
 
-        private ImageSource _SelectedImage;
+        private ImageSource _Image;
 
-        public ImageSource SelectedImage
+        public ImageSource Image
         {
-            get => this._SelectedImage;
+            get => this._Image;
             private set
             {
-                this._SelectedImage = value;
+                this._Image = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        private string _Url;
+
+        public string Url
+        {
+            get => this._Url;
+            private set
+            {
+                this._Url = value;
                 this.RaisePropertyChanged();
             }
         }

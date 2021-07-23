@@ -7,12 +7,17 @@ namespace ViewJpeg2000.ViewModels.Interfaces
     public interface IMainPageViewModel
     {
 
-        DelegateCommand FilePickCommand
+        DelegateCommand ShowImageCommand
         {
             get;
         }
 
-        ImageSource SelectedImage
+        ImageSource Image
+        {
+            get;
+        }
+
+        string Url
         {
             get;
         }
