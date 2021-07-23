@@ -2,7 +2,7 @@
 #define _CPP_SHARED_H_
 
 #define OPJ_STATIC
-#include <openjpeg-2.4/openjpeg.h>
+#include <openjpeg.h>
 
 #include <cstdint>
 #include <string>
