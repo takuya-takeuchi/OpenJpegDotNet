@@ -9,6 +9,13 @@ Param([Parameter(
       $Version
 )
 
+# import class and function
+$ScriptPath = $PSScriptRoot
+$OpenJpegDotNetRoot = Split-Path $ScriptPath -Parent
+$ScriptPath = Join-Path $OpenJpegDotNetRoot "nuget" | `
+              Join-Path -ChildPath "TestPackage.ps1"
+import-module $ScriptPath -function *
+
 Set-StrictMode -Version Latest
 
 $RidOperatingSystem="linux"
@@ -36,33 +43,7 @@ foreach($BuildTarget in $BuildTargets)
    $platformTarget = $BuildTarget.PlatformTarget
    $rid = $BuildTarget.RID
    $postfix = $BuildTarget.Postfix
-   $versionStr = $Version
-
-   if ([string]::IsNullOrEmpty($Version))
-   {
-      $packages = Get-ChildItem "${Current}/*" -include *.nupkg | `
-                  Where-Object -FilterScript {$_.Name -match "${package}\.([0-9\.]+).nupkg"} | `
-                  Sort-Object -Property Name -Descending
-      foreach ($file in $packages)
-      {
-         Write-Host $file -ForegroundColor Blue
-      }
-
-      foreach ($file in $packages)
-      {
-         $file = Split-Path $file -leaf
-         $file = $file -replace "${package}\.",""
-         $file = $file -replace "\.nupkg",""
-         $versionStr = $file
-         break
-      }
-
-      if ([string]::IsNullOrEmpty($versionStr))
-      {
-         Write-Host "Version is not specified" -ForegroundColor Red
-         exit -1
-      }
-   }
+   $versionStr = Get-Version $Version $Current
 
    $dockername = "openjpegdotnet/test/$OperatingSystem/$OperatingSystemVersion/$Target" + $postfix
    $imagename  = "openjpegdotnet/runtime/$OperatingSystem/$OperatingSystemVersion/$Target" + $postfix
