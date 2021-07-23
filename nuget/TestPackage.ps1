@@ -32,6 +32,8 @@ Set-StrictMode -Version Latest
 
 function Get-Version([string]$Version, [string]$Current)
 {
+   $versionStr = $Version
+   
    if ([string]::IsNullOrEmpty($Version))
    {
       $packages = Get-ChildItem "${Current}/*" -include *.nupkg | `

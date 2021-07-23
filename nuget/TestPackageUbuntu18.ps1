@@ -30,9 +30,9 @@ $DockerDir = Join-Path $OpenJpegDotNetRoot docker
 # https://github.com/dotnet/coreclr/issues/9265
 # linux-x86 does not support
 $BuildTargets = @()
-# $BuildTargets += New-Object PSObject -Property @{Target = "cpu";  Architecture = 64; Package = "OpenJpegDotNet";     PlatformTarget="x64";   Postfix = "/x64";   RID = "$RidOperatingSystem-x64"; }
-$BuildTargets += New-Object PSObject -Property @{Target = "arm";  Architecture = 64; Package = "OpenJpegDotNet.ARM"; PlatformTarget="arm64"; Postfix = "/arm64"; RID = "$RidOperatingSystem-arm64"; }
-# $BuildTargets += New-Object PSObject -Property @{Target = "arm";  Architecture = 32; Package = "OpenJpegDotNet.ARM"; PlatformTarget="arm";   Postfix = "/arm";   RID = "$RidOperatingSystem-arm"; }
+$BuildTargets += New-Object PSObject -Property @{Target = "cpu";  Architecture = 64; Package = "OpenJpegDotNet"; PlatformTarget="x64";   Postfix = "/x64";   RID = "$RidOperatingSystem-x64"; }
+# $BuildTargets += New-Object PSObject -Property @{Target = "arm";  Architecture = 64; Package = "OpenJpegDotNet"; PlatformTarget="arm64"; Postfix = "/arm64"; RID = "$RidOperatingSystem-arm64"; }
+# $BuildTargets += New-Object PSObject -Property @{Target = "arm";  Architecture = 32; Package = "OpenJpegDotNet"; PlatformTarget="arm";   Postfix = "/arm";   RID = "$RidOperatingSystem-arm"; }
 
 Set-Location -Path $DockerDir
 
