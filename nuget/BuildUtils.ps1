@@ -407,6 +407,85 @@ class Config
       exit -1
    }
 
+   [string] GetToolchainFile()
+   {
+      $architecture = $this._Architecture
+      $target = $this._Target
+      $toolchainDir = $this.GetToolchainDir()
+      $toolchain = Join-Path $toolchainDir "empty.cmake"
+
+      if ($global:IsLinux)
+      {
+         if ($target -eq "arm")
+         {
+            if ($architecture -eq 64)
+            {
+               $toolchain = Join-Path $toolchainDir "aarch64-linux-gnu.toolchain.cmake"
+            }
+         }
+      }
+      else
+      {
+         $Platform = $this._Platform
+         switch ($Platform)
+         {
+            "ios"
+            {
+               $osxArchitectures = $this.GetOSXArchitectures()
+               $toolchain = Join-Path $toolchainDir "${osxArchitectures}-ios.cmake"
+            }
+         }
+      }
+
+      return $toolchain
+   }
+
+   [string] GetDeveloperDir()
+   {
+      return $env:DEVELOPER_DIR
+   }
+
+   [string] GetOSXArchitectures()
+   {
+      return $this._OSXArchitectures
+   }
+
+   [string] GetIOSSDK([string]$osxArchitectures, [string]$developerDir)
+   {
+      switch ($osxArchitectures)
+      {
+         "arm64e"
+         {
+            return "${developerDir}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
+         }
+         "arm64"
+         {
+            return "${developerDir}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
+         }
+         "arm"
+         {
+            return "${developerDir}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
+         }
+         "armv7"
+         {
+            return "${developerDir}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
+         }
+         "armv7s"
+         {
+            return "${developerDir}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
+         }
+         "i386"
+         {
+            return "${developerDir}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk"
+         }
+         "x86_64"
+         {
+            return "${developerDir}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk"
+         }
+      }
+      return $this._OSXArchitectures
+   }
+
    static [bool] Build([string]$root, [bool]$docker, [hashtable]$buildHashTable, [BuildTarget]$buildTarget)
    {
       $current = $PSScriptRoot
