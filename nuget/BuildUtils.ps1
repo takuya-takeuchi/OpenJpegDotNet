@@ -425,6 +425,12 @@ class Config
          {
             return $False
          }
+
+         if ($target -eq "arm")
+         {
+            Write-Host "Start 'docker run --rm --privileged multiarch/qemu-user-static --reset -p yes'" -ForegroundColor Green
+            docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+         }
    
          # Build binary
          foreach ($key in $buildHashTable.keys)
