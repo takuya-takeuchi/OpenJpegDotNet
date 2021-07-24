@@ -129,6 +129,17 @@ namespace OpenJpegDotNet.IO
             return this._Image.ToBitmap();
         }
 
+        public RawBitmap ReadRawBitmap()
+        {
+            if (this._Image == null || this._Image.IsDisposed)
+                throw new InvalidOperationException();
+
+            if (!OpenJpeg.Decode(this._Codec, this._Stream, this._Image))
+                throw new InvalidOperationException();
+
+            return this._Image.ToRawBitmap();
+        }
+
         #region Event Handlers
 
         private static ulong Read(IntPtr buffer, ulong bytes, IntPtr userData)

@@ -319,3 +319,4 @@ src/OpenJpegDotNet.Native/build*
 nuget/*.nupkg
 
 work
+AppCertReport.xml

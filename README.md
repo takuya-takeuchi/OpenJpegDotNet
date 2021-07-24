@@ -1,14 +1,17 @@
 # ![Alt text](nuget/jpeg48.png "OpenJpegDotNet") OpenJpegDotNet [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
-OpenJpeg wrapper written in C++ and C# for Windows, MacOS and Linux
+OpenJpeg wrapper written in C++ and C# for Windows, MacOS, Linux, iOS and Android
 
 #### OpenJpegDotNet
 
 |Package|OS|x86|x64|ARM|ARM64|Nuget|
 |---|---|---|---|---|---|---|
 |OpenJpegDotNet|Windows|✓|✓|-|-|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.svg)](https://www.nuget.org/packages/OpenJpegDotNet)|
-||Linux|-|✓|-|-|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.svg)](https://www.nuget.org/packages/OpenJpegDotNet)|
+||Linux|-|✓|✓|✓|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.svg)](https://www.nuget.org/packages/OpenJpegDotNet)|
 ||OSX|-|✓|-|-|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.svg)](https://www.nuget.org/packages/OpenJpegDotNet)|
+|OpenJpegDotNet (Xamarin)|UWP|✓|✓|✓|✓|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.Xamarin.svg)](https://www.nuget.org/packages/OpenJpegDotNet.Xamarin)|
+||Android|✓|✓|✓|✓|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.Xamarin.svg)](https://www.nuget.org/packages/OpenJpegDotNet.Xamarin)|
+||iOS|-|✓|-|✓|[![NuGet version](https://img.shields.io/nuget/v/OpenJpegDotNet.Xamarin.svg)](https://www.nuget.org/packages/OpenJpegDotNet.Xamarin)|
  
 ## How to use?
 

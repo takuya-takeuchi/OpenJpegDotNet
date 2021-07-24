@@ -1,6 +1,6 @@
 #***************************************
 #Arguments
-#%1: Test Package (OpenJpegDotNet.CUDA92)
+#%1: Test Package (OpenJpegDotNet)
 #%2: Version of Release (19.17.0.yyyyMMdd)
 #***************************************
 Param([Parameter(
@@ -30,6 +30,41 @@ Param([Parameter(
 
 Set-StrictMode -Version Latest
 
+function Get-Version([string]$Version, [string]$Current)
+{
+   $versionStr = $Version
+   
+   if ([string]::IsNullOrEmpty($Version))
+   {
+      $packages = Get-ChildItem "${Current}/*" -include *.nupkg | `
+                  Where-Object -FilterScript {$_.Name -match "${package}\.([0-9\.]+).nupkg"} | `
+                  Sort-Object -Property Name -Descending
+      foreach ($file in $packages)
+      {
+         Write-Host $file -ForegroundColor Blue
+      }
+
+      foreach ($file in $packages)
+      {
+         $file = Split-Path $file -leaf
+         $file = $file -replace "${package}\.",""
+         $file = $file -replace "\.nupkg",""
+         $versionStr = $file
+         break
+      }
+
+      if ([string]::IsNullOrEmpty($versionStr))
+      {
+         Write-Host "Version is not specified" -ForegroundColor Red
+         exit -1
+      }
+
+      return $versionStr
+   }
+
+   return $Version
+}
+
 function Clear-PackakgeCache([string]$Package, [string]$Version)
 {
    # Linux is executed on container
@@ -40,12 +75,17 @@ function Clear-PackakgeCache([string]$Package, [string]$Version)
       {
          $path = (dotnet nuget locals global-packages --list).Replace('global-packages: ', '').Trim()
       }
-      $path =  Join-Path $path $Package | `
-               Join-Path -ChildPath $Version
-      if (Test-Path $path)
+      $pathPackage = Join-Path $path $Package | `
+                     Join-Path -ChildPath $Version
+      if (Test-Path ${pathPackage})
       {
-         Write-Host "Remove '$path'" -Foreground Green
-         Remove-Item -Path "$path" -Recurse -Force
+         Write-Host "Remove '${pathPackage}'" -Foreground Green
+         Remove-Item -Path "${pathPackage}" -Recurse -Force
+      }
+
+      if (!(Test-Path "${path}"))
+      {
+         New-Item "${path}" -ItemType Directory > $null
       }
    }
 }
@@ -91,8 +131,12 @@ function RunTest($BuildTargets)
 
       # restore package from local nuget pacakge
       # And drop stdout message
+      Write-Host "dotnet remove reference `"..\..\src\OpenJpegDotNet\OpenJpegDotNet.csproj`"" -ForegroundColor Yellow
       dotnet remove reference "..\..\src\OpenJpegDotNet\OpenJpegDotNet.csproj" > $null
-      dotnet add package $package -v $VERSION --source "$NugetDir" > $null
+      Write-Host "dotnet restore" -ForegroundColor Yellow
+      dotnet restore > $null
+      Write-Host "dotnet add package $package -v $VERSION --source ${NugetDir}" -ForegroundColor Yellow
+      dotnet add package $package -v $VERSION --source ${NugetDir} > $null
 
       $ErrorActionPreference = "silentlycontinue"
       $env:PlatformTarget = $PlatformTarget
@@ -129,8 +173,8 @@ function RunTest($BuildTargets)
          }
       }
 
-      Write-Host "${dotnetPath} test -c Release -r "$TestDir" -s $runsetting --logger trx" -Foreground Yellow
-      & ${dotnetPath} test -c Release -r "$TestDir" -s $runsetting --logger trx
+      Write-Host "${dotnetPath} test -c Release -r "$TestDir" -s $runsetting --runtime ${RuntimeIdentifier} --logger trx" -Foreground Yellow
+      & ${dotnetPath} test -c Release -r "$TestDir" -s $runsetting --runtime ${RuntimeIdentifier} --logger trx
       if ($lastexitcode -eq 0) {
          Write-Host "Test Successful" -ForegroundColor Green
       } else {
@@ -152,13 +196,14 @@ function RunTest($BuildTargets)
 }
 
 $BuildTargets = @()
-$BuildTargets += New-Object PSObject -Property @{Target = "cpu";  Architecture = 64; CUDA = 0;   Package = "OpenJpegDotNet"         }
+$BuildTargets += New-Object PSObject -Property @{Target = "cpu";  PlatformTarget = "x64"; Architecture = 64; Package = "OpenJpegDotNet" }
+# $BuildTargets += New-Object PSObject -Property @{Target = "cpu";  PlatformTarget = "x86"; Architecture = 32; Package = "OpenJpegDotNet" }
 
 # Store current directory
 $Current = Get-Location
 $OpenJpegDotNetRoot = (Split-Path (Get-Location) -Parent)
 
-$targets = $BuildTargets.Where({$PSItem.Package -eq $Package})
+$targets = $BuildTargets.Where({$PSItem.Package -eq $Package}).Where({$PSItem.PlatformTarget -eq $PlatformTarget})
 RunTest $targets
 
 # Move to Root directory

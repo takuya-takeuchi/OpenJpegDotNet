@@ -24,23 +24,23 @@ message("-- Binaries: ${CMAKE_CURRENT_BINARY_DIR}")
 message("-------------------------------------------------------")
 
 # Version info
-set(VERSION_MAJOR 0)
-set(VERSION_MINOR 0)
-set(VERSION_PATCH 1)
-set(VERSION_DATE 20210417)
+set(VERSION_MAJOR 2)
+set(VERSION_MINOR 4)
+set(VERSION_PATCH 0)
+set(VERSION_DATE 20210725)
 
 # Only GCC requires -fPIC
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-	set(CMAKE_C_FLAGS "-fPIC")
-	set(CMAKE_CXX_FLAGS "-fPIC")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 endif()
 
 # set architecture
 if (NOT ${CMAKE_GENERATOR} MATCHES "Visual Studio")
-    if ("${ARCH_TYPE}" STREQUAL "32")
+	if ("${TARGET_ARCH}" STREQUAL "x86")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
-    elseif ("${ARCH_TYPE}" STREQUAL "64")
+    elseif ("${TARGET_ARCH}" STREQUAL "x64")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m64")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64")
     endif()
@@ -70,7 +70,7 @@ if (${CMAKE_GENERATOR} MATCHES "Visual Studio")
 endif()
 
 # openjpeg project submodule
-find_package (OpenJPEG REQUIRED)
+find_package(OpenJPEG REQUIRED)
 
 # create config file
 configure_file(
@@ -104,20 +104,30 @@ else()
                                     ${CMAKE_CURRENT_BINARY_DIR}/version.rc)
 endif()
 
-include_directories("$ENV{OpenJPEG_DIR}/include")
+include_directories("${OPENJPEG_INCLUDE_DIRS}")
 
 if (MSVC OR MSYS OR MINGW)
     list(APPEND STATIC_LIBRARIES
-        $ENV{OpenJPEG_DIR}/lib/openjp2.lib
+        openjp2
+    )
+elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "iOS")
+    list(APPEND STATIC_LIBRARIES
+        openjp2
     )
 elseif(APPLE)
     list(APPEND STATIC_LIBRARIES
-        $ENV{OpenJPEG_DIR}/lib/libopenjp2.a
+        openjp2
+    )
+elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Android")
+    list(APPEND STATIC_LIBRARIES
+        openjp2
     )
 elseif(UNIX AND NOT APPLE)
     list(APPEND STATIC_LIBRARIES
-        $ENV{OpenJPEG_DIR}/lib/libopenjp2.a
+        openjp2
     )
+else()
+    message(FATAL_ERROR "Failed to link library")
 endif()
 
 target_link_libraries(${PROJ_NAME} ${STATIC_LIBRARIES})

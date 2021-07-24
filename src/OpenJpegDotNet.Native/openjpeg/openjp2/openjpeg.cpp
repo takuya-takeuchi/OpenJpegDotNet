@@ -5,3 +5,4 @@
 #include "openjpeg.image.hpp"
 #include "openjpeg.mct.hpp"
 #include "openjpeg.stream.hpp"
+#include "openjpeg.thread.hpp"
