@@ -28,7 +28,7 @@
         <Button Grid.Row="3"
                 Command="{Binding ShowImageCommand}"
                 HorizontalOptions="Center"
-                Text="Select Photo" />
+                Text="Show Image" />
     </Grid>
 
 </ContentPage>
