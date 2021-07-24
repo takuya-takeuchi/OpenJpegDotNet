@@ -126,7 +126,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.10" />
     <PackageReference Include="OpenJpegDotNet.Xamarin">
-      <Version>2.4.0.20210509</Version>
+      <Version>2.4.0.20210725</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.7.0.1260" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.6.1" />
