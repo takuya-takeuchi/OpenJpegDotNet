@@ -62,10 +62,11 @@ namespace ViewJpeg2000.ViewModels
                     var height = raw.Height;
                     var channel = raw.Channel;
                     var bpp = bitmap.BytesPerPixel;
+                    var stride = bitmap.RowBytes;
                     var bgra = new byte[width * height * bpp];
                     for (var h = 0; h < height; h++)
                         for (var w = 0; w < width; w++)
-                            Array.Copy(rawPixel, h * w * channel, bgra, h * w * bpp, channel);
+                            Array.Copy(rawPixel, h * (width * channel) + w * channel, bgra, h * stride + w * bpp, channel);
                     // disable transparent
                     for (var index = 0; index < width * height; index++)
                         bgra[index * bpp + 3] = 255;
