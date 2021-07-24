@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewJpeg2000", "ViewJpeg2000.csproj", "{FE8B05A4-5D47-4523-96F9-4188738BCB51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE8B05A4-5D47-4523-96F9-4188738BCB51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE8B05A4-5D47-4523-96F9-4188738BCB51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE8B05A4-5D47-4523-96F9-4188738BCB51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE8B05A4-5D47-4523-96F9-4188738BCB51}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F2129EA9-1ED2-4FCA-8A8E-00C77CC1C554}
+	EndGlobalSection
+EndGlobal
