@@ -42,14 +42,14 @@ namespace ViewJpeg2000
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(895, 367);
+            this.pictureBox.Size = new System.Drawing.Size(947, 394);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             // 
             // button
             // 
             this.button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button.Location = new System.Drawing.Point(808, 373);
+            this.button.Location = new System.Drawing.Point(860, 400);
             this.button.Name = "button";
             this.button.Size = new System.Drawing.Size(75, 23);
             this.button.TabIndex = 1;
@@ -61,21 +61,21 @@ namespace ViewJpeg2000
             // 
             this.textBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox.Location = new System.Drawing.Point(12, 375);
+            this.textBox.Location = new System.Drawing.Point(12, 402);
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(790, 19);
+            this.textBox.Size = new System.Drawing.Size(842, 19);
             this.textBox.TabIndex = 2;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(895, 408);
+            this.ClientSize = new System.Drawing.Size(947, 435);
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.button);
             this.Controls.Add(this.pictureBox);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "View Jpeg2000";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -15,6 +15,7 @@ namespace ViewJpeg2000
             InitializeComponent();
 
             this.textBox.Text = "https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/test/OpenJpegDotNet.Tests/TestImages/Bretagne1_0.j2k?raw=true";
+            this.pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         #endregion
