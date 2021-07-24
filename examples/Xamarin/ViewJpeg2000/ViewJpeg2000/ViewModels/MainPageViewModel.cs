@@ -1,7 +1,10 @@
 ﻿using System;
+using System.IO;
+using System.Runtime.InteropServices;
 using Prism.Commands;
 using Prism.Navigation;
 using SkiaSharp;
+using ViewJpeg2000.Models;
 using ViewJpeg2000.Services;
 using ViewJpeg2000.Services.Interfaces;
 using ViewJpeg2000.ViewModels.Interfaces;
@@ -28,11 +31,12 @@ namespace ViewJpeg2000.ViewModels
                                  IImageService detectService)
             : base(navigationService)
         {
-            this.Title = "Yolo V3";
+            this.Title = "View Jpeg2000";
 
             this._FileDownloadService = fileAccessService;
             this._ImageService = detectService;
             this._ShowImageCommand = new Lazy<DelegateCommand>(this.ShowImageCommandFactory);
+            this.Url = "https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/test/OpenJpegDotNet.Tests/TestImages/Bretagne1_0.j2k?raw=true";
         }
 
         #endregion
@@ -45,67 +49,35 @@ namespace ViewJpeg2000.ViewModels
         {
             return new DelegateCommand(async () =>
             {
-                byte[] content = null;
-
                 try
                 {
-                    content = await this._FileDownloadService.GetFileContent(this.Url);
+                    var content = await this._FileDownloadService.GetFileContent(this.Url);
+                    var raw = this._ImageService.ToPng(content);
+
+                    var rawPixel = raw.Image;
+                    using var bitmap = new SKBitmap(new SKImageInfo(raw.Width, raw.Height, SKColorType.Bgra8888));
+                    var pixels = bitmap.GetPixels();
+
+                    var width = raw.Width;
+                    var height = raw.Height;
+                    var channel = raw.Channel;
+                    var bpp = bitmap.BytesPerPixel;
+                    var bgra = new byte[width * height * bpp];
+                    for (var h = 0; h < height; h++)
+                        for (var w = 0; w < width; w++)
+                            Array.Copy(rawPixel, h * w * channel, bgra, h * w * bpp, channel);
+                    // disable transparent
+                    for (var index = 0; index < width * height; index++)
+                        bgra[index * bpp + 3] = 255;
+                    Marshal.Copy(bgra, 0, pixels, bgra.Length);
+
+                    var data = bitmap.Encode(SKEncodedImageFormat.Jpeg, 100);
+                    this.Image = ImageSource.FromStream(() => data.AsStream());
                 }
                 catch (Exception e)
                 {
                     return;
                 }
-
-                var detectResult = this._ImageService.Detect(content);
-                if (detectResult == null) 
-                    return;
-
-                var surface = SKSurface.Create(new SKImageInfo(detectResult.Width, detectResult.Height, SKColorType.Rgba8888));
-                using var paint = new SKPaint();
-                using var bitmap = SKBitmap.Decode(result);
-
-                surface.Canvas.DrawBitmap(bitmap, 0, 0, paint);
-                paint.StrokeWidth = 3;
-                paint.TextSize = 48;
-                paint.IsAntialias = true;
-                paint.TextEncoding = SKTextEncoding.Utf8;
-
-                string[] classNames =
-                {
-                    "background",
-                    "aeroplane",
-                    "bicycle",
-                    "bird",
-                    "boat",
-                    "bottle",
-                    "bus",
-                    "car",
-                    "cat",
-                    "chair",
-                    "cow",
-                    "diningtable",
-                    "dog",
-                    "horse",
-                    "motorbike",
-                    "person",
-                    "pottedplant",
-                    "sheep",
-                    "sofa",
-                    "train",
-                    "tvmonitor"
-                };
-
-                foreach (var box in detectResult.Boxes)
-                {
-                    paint.Color = SKColors.Red;
-                    paint.Style = SKPaintStyle.Stroke;
-                    surface.Canvas.DrawRect(box.Rect.X, box.Rect.Y, box.Rect.Width, box.Rect.Height, paint);
-
-                    paint.Color = SKColors.Black;
-                    paint.Style = SKPaintStyle.Fill;
-                    surface.Canvas.DrawText(classNames[box.Label], new SKPoint(box.Rect.X + 5, box.Rect.Y + 5), paint);
-                }
-                this.SelectedImage = ImageSource.FromStream(() => surface.Snapshot().Encode().AsStream());
             });
         }
 

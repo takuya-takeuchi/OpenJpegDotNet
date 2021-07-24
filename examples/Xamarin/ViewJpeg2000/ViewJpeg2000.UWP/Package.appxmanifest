@@ -29,5 +29,6 @@
   <Capabilities>
     <uap:Capability Name="picturesLibrary"/>
     <rescap:Capability Name="broadFileSystemAccess" />
+    <Capability Name="internetClient"/>
   </Capabilities>
 </Package>

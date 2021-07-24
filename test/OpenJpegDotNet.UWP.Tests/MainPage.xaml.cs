@@ -48,7 +48,7 @@ namespace OpenJpegDotNet.UWP.Tests
 
         #endregion
 
-        #region Helperss
+        #region Helpers
 
         private static async Task<BitmapImage> ToBitmapSource(RawBitmap rawBitmap)
         {

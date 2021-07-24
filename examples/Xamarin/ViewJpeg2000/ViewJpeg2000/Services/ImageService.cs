@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
-using NcnnDotNet;
-using NcnnDotNet.OpenCV;
+using System.Linq;
+using System.Runtime.InteropServices;
+using ViewJpeg2000.Models;
 using ViewJpeg2000.Services.Interfaces;
-using Mat = NcnnDotNet.Mat;
 
 namespace ViewJpeg2000.Services
 {
@@ -14,11 +15,12 @@ namespace ViewJpeg2000.Services
 
         #region IImageService Members
 
-        public byte[] Detect(byte[] content)
+        public RawImage ToPng(byte[] content)
         {
-            using OpenJpegDotNet.IO.Reader reader = new OpenJpegDotNet.IO.Reader(image);
-            bool result = reader.ReadHeader();
-            System.Drawing.Bitmap bitmap = reader.ReadData();
+            using var reader = new OpenJpegDotNet.IO.Reader(content);
+            var result = reader.ReadHeader();
+            using var rawBitmap = reader.ReadRawBitmap();
+            return new RawImage(rawBitmap.Data.ToArray(), rawBitmap.Width, rawBitmap.Height, 3);
         }
 
         #endregion
