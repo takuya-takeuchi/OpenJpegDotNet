@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class OpenJpeg
    | OpenJpegDotNet API Document ">
-    <meta name="generator" content="docfx 2.57.1.0">
+    <meta name="generator" content="docfx 2.58.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -123,10 +123,69 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_CodecSetThreads_OpenJpegDotNet_Codec_System_Int32_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.CodecSetThreads(OpenJpegDotNet.Codec%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L166">View Source</a>
+  </span>
+  <a id="OpenJpegDotNet_OpenJpeg_CodecSetThreads_" data-uid="OpenJpegDotNet.OpenJpeg.CodecSetThreads*"></a>
+  <h4 id="OpenJpegDotNet_OpenJpeg_CodecSetThreads_OpenJpegDotNet_Codec_System_Int32_" data-uid="OpenJpegDotNet.OpenJpeg.CodecSetThreads(OpenJpegDotNet.Codec,System.Int32)">CodecSetThreads(Codec, Int32)</h4>
+  <div class="markdown level1 summary"><p>Allocates worker threads for the compressor/decompressor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool CodecSetThreads(Codec codec, int threads)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="OpenJpegDotNet.Codec.html">Codec</a></td>
+        <td><span class="parametername">codec</span></td>
+        <td><p>The <a class="xref" href="OpenJpegDotNet.Codec.html">Codec</a> to compress or decompress image.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">threads</span></td>
+        <td><p>The number of threads.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><pre><code>true</code></pre> if the function succeeds; otherwise, <pre><code>false</code></pre>.
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="OpenJpegDotNet_OpenJpeg_CodecSetThreads_OpenJpegDotNet_Codec_System_Int32__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This function must be called after <a class="xref" href="OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_SetupDecoder_OpenJpegDotNet_Codec_OpenJpegDotNet_DecompressionParameters_">SetupDecoder(Codec, DecompressionParameters)</a> and before <a class="xref" href="OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_ReadHeader_OpenJpegDotNet_Stream_OpenJpegDotNet_Codec_OpenJpegDotNet_Image__">ReadHeader(Stream, Codec, out Image)</a> for the decoding side, or after <a class="xref" href="OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_SetupEncoder_OpenJpegDotNet_Codec_OpenJpegDotNet_CompressionParameters_OpenJpegDotNet_Image_">SetupEncoder(Codec, CompressionParameters, Image)</a>() and before <a class="xref" href="OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_StartCompress_OpenJpegDotNet_Codec_OpenJpegDotNet_Image_OpenJpegDotNet_Stream_">StartCompress(Codec, Image, Stream)</a> for the encoding side.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_CreateCompress_OpenJpegDotNet_CodecFormat_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.CreateCompress(OpenJpegDotNet.CodecFormat)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Compression.cs/#L17">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Compression.cs/#L14">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_CreateCompress_" data-uid="OpenJpegDotNet.OpenJpeg.CreateCompress*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_CreateCompress_OpenJpegDotNet_CodecFormat_" data-uid="OpenJpegDotNet.OpenJpeg.CreateCompress(OpenJpegDotNet.CodecFormat)">CreateCompress(CodecFormat)</h4>
@@ -176,7 +235,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_CreateDecompress_OpenJpegDotNet_CodecFormat_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.CreateDecompress(OpenJpegDotNet.CodecFormat)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L17">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L14">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_CreateDecompress_" data-uid="OpenJpegDotNet.OpenJpeg.CreateDecompress*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_CreateDecompress_OpenJpegDotNet_CodecFormat_" data-uid="OpenJpegDotNet.OpenJpeg.CreateDecompress(OpenJpegDotNet.CodecFormat)">CreateDecompress(CodecFormat)</h4>
@@ -226,7 +285,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_Decode_OpenJpegDotNet_Codec_OpenJpegDotNet_Stream_OpenJpegDotNet_Image_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.Decode(OpenJpegDotNet.Codec%2COpenJpegDotNet.Stream%2COpenJpegDotNet.Image)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L32">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L29">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_Decode_" data-uid="OpenJpegDotNet.OpenJpeg.Decode*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_Decode_OpenJpegDotNet_Codec_OpenJpegDotNet_Stream_OpenJpegDotNet_Image_" data-uid="OpenJpegDotNet.OpenJpeg.Decode(OpenJpegDotNet.Codec,OpenJpegDotNet.Stream,OpenJpegDotNet.Image)">Decode(Codec, Stream, Image)</h4>
@@ -288,7 +347,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_Encode_OpenJpegDotNet_Codec_OpenJpegDotNet_Stream_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.Encode(OpenJpegDotNet.Codec%2COpenJpegDotNet.Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Compression.cs/#L77">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Compression.cs/#L74">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_Encode_" data-uid="OpenJpegDotNet.OpenJpeg.Encode*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_Encode_OpenJpegDotNet_Codec_OpenJpegDotNet_Stream_" data-uid="OpenJpegDotNet.OpenJpeg.Encode(OpenJpegDotNet.Codec,OpenJpegDotNet.Stream)">Encode(Codec, Stream)</h4>
@@ -344,7 +403,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_EndCompress_OpenJpegDotNet_Codec_OpenJpegDotNet_Stream_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.EndCompress(OpenJpegDotNet.Codec%2COpenJpegDotNet.Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Compression.cs/#L56">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Compression.cs/#L53">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_EndCompress_" data-uid="OpenJpegDotNet.OpenJpeg.EndCompress*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_EndCompress_OpenJpegDotNet_Codec_OpenJpegDotNet_Stream_" data-uid="OpenJpegDotNet.OpenJpeg.EndCompress(OpenJpegDotNet.Codec,OpenJpegDotNet.Stream)">EndCompress(Codec, Stream)</h4>
@@ -400,7 +459,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_EndDecompress_OpenJpegDotNet_Codec_OpenJpegDotNet_Stream_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.EndDecompress(OpenJpegDotNet.Codec%2COpenJpegDotNet.Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L56">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L53">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_EndDecompress_" data-uid="OpenJpegDotNet.OpenJpeg.EndDecompress*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_EndDecompress_OpenJpegDotNet_Codec_OpenJpegDotNet_Stream_" data-uid="OpenJpegDotNet.OpenJpeg.EndDecompress(OpenJpegDotNet.Codec,OpenJpegDotNet.Stream)">EndDecompress(Codec, Stream)</h4>
@@ -485,6 +544,38 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_GetNumCpus.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.GetNumCpus%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Thread.cs/#L23">View Source</a>
+  </span>
+  <a id="OpenJpegDotNet_OpenJpeg_GetNumCpus_" data-uid="OpenJpegDotNet.OpenJpeg.GetNumCpus*"></a>
+  <h4 id="OpenJpegDotNet_OpenJpeg_GetNumCpus" data-uid="OpenJpegDotNet.OpenJpeg.GetNumCpus">GetNumCpus()</h4>
+  <div class="markdown level1 summary"><p>Return the number of virtual CPUs.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int GetNumCpus()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>The number of virtual CPUs.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_GetVersion.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.GetVersion%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -517,10 +608,42 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_HasThreadSupport.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.HasThreadSupport%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Thread.cs/#L14">View Source</a>
+  </span>
+  <a id="OpenJpegDotNet_OpenJpeg_HasThreadSupport_" data-uid="OpenJpegDotNet.OpenJpeg.HasThreadSupport*"></a>
+  <h4 id="OpenJpegDotNet_OpenJpeg_HasThreadSupport" data-uid="OpenJpegDotNet.OpenJpeg.HasThreadSupport">HasThreadSupport()</h4>
+  <div class="markdown level1 summary"><p>Returns if the library is built with thread support.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool HasThreadSupport()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><pre><code>true</code></pre> if mutex, condition, thread, thread pool are available; otherwise, <pre><code>false</code></pre>.
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_ImageCreate_System_UInt32_OpenJpegDotNet_ImageComponentParameters___OpenJpegDotNet_ColorSpace_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.ImageCreate(System.UInt32%2COpenJpegDotNet.ImageComponentParameters%5B%5D%2COpenJpegDotNet.ColorSpace)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Image.cs/#L21">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Image.cs/#L17">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_ImageCreate_" data-uid="OpenJpegDotNet.OpenJpeg.ImageCreate*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_ImageCreate_System_UInt32_OpenJpegDotNet_ImageComponentParameters___OpenJpegDotNet_ColorSpace_" data-uid="OpenJpegDotNet.OpenJpeg.ImageCreate(System.UInt32,OpenJpegDotNet.ImageComponentParameters[],OpenJpegDotNet.ColorSpace)">ImageCreate(UInt32, ImageComponentParameters[], ColorSpace)</h4>
@@ -579,10 +702,94 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_ImageDataAlloc_System_Int64_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.ImageDataAlloc(System.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Image.cs/#L59">View Source</a>
+  </span>
+  <a id="OpenJpegDotNet_OpenJpeg_ImageDataAlloc_" data-uid="OpenJpegDotNet.OpenJpeg.ImageDataAlloc*"></a>
+  <h4 id="OpenJpegDotNet_OpenJpeg_ImageDataAlloc_System_Int64_" data-uid="OpenJpegDotNet.OpenJpeg.ImageDataAlloc(System.Int64)">ImageDataAlloc(Int64)</h4>
+  <div class="markdown level1 summary"><p>Allocates new memory buffer for <a class="xref" href="OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Data">Data</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IntPtr ImageDataAlloc(long size)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">size</span></td>
+        <td><p>The number of bytes to allocate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IntPtr</span></td>
+        <td><p>The new pointer to indicate allocated memory buffer if success; otherwise, <see cref="!:IntPtr.Zero"></see>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_ImageDataFree_IntPtr_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.ImageDataFree(IntPtr)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Image.cs/#L68">View Source</a>
+  </span>
+  <a id="OpenJpegDotNet_OpenJpeg_ImageDataFree_" data-uid="OpenJpegDotNet.OpenJpeg.ImageDataFree*"></a>
+  <h4 id="OpenJpegDotNet_OpenJpeg_ImageDataFree_IntPtr_" data-uid="OpenJpegDotNet.OpenJpeg.ImageDataFree(IntPtr)">ImageDataFree(IntPtr)</h4>
+  <div class="markdown level1 summary"><p>Unallocates memory buffer for <a class="xref" href="OpenJpegDotNet.ImageComponent.html#OpenJpegDotNet_ImageComponent_Data">Data</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ImageDataFree(IntPtr ptr)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IntPtr</span></td>
+        <td><span class="parametername">ptr</span></td>
+        <td><p>The pointer to indicate allocated memory buffer by <a class="xref" href="OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_ImageDataAlloc_System_Int64_">ImageDataAlloc(Int64)</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_ImageTileCreate_System_UInt32_OpenJpegDotNet_ImageComponentParameters___OpenJpegDotNet_ColorSpace_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.ImageTileCreate(System.UInt32%2COpenJpegDotNet.ImageComponentParameters%5B%5D%2COpenJpegDotNet.ColorSpace)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Image.cs/#L43">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Image.cs/#L39">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_ImageTileCreate_" data-uid="OpenJpegDotNet.OpenJpeg.ImageTileCreate*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_ImageTileCreate_System_UInt32_OpenJpegDotNet_ImageComponentParameters___OpenJpegDotNet_ColorSpace_" data-uid="OpenJpegDotNet.OpenJpeg.ImageTileCreate(System.UInt32,OpenJpegDotNet.ImageComponentParameters[],OpenJpegDotNet.ColorSpace)">ImageTileCreate(UInt32, ImageComponentParameters[], ColorSpace)</h4>
@@ -644,7 +851,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_ReadHeader_OpenJpegDotNet_Stream_OpenJpegDotNet_Codec_OpenJpegDotNet_Image__.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.ReadHeader(OpenJpegDotNet.Stream%2COpenJpegDotNet.Codec%2COpenJpegDotNet.Image%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L78">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L75">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_ReadHeader_" data-uid="OpenJpegDotNet.OpenJpeg.ReadHeader*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_ReadHeader_OpenJpegDotNet_Stream_OpenJpegDotNet_Codec_OpenJpegDotNet_Image__" data-uid="OpenJpegDotNet.OpenJpeg.ReadHeader(OpenJpegDotNet.Stream,OpenJpegDotNet.Codec,OpenJpegDotNet.Image@)">ReadHeader(Stream, Codec, out Image)</h4>
@@ -706,7 +913,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_SetDecodeArea_OpenJpegDotNet_Codec_OpenJpegDotNet_Image_System_UInt32_System_UInt32_System_UInt32_System_UInt32_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.SetDecodeArea(OpenJpegDotNet.Codec%2COpenJpegDotNet.Image%2CSystem.UInt32%2CSystem.UInt32%2CSystem.UInt32%2CSystem.UInt32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L105">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L102">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_SetDecodeArea_" data-uid="OpenJpegDotNet.OpenJpeg.SetDecodeArea*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_SetDecodeArea_OpenJpegDotNet_Codec_OpenJpegDotNet_Image_System_UInt32_System_UInt32_System_UInt32_System_UInt32_" data-uid="OpenJpegDotNet.OpenJpeg.SetDecodeArea(OpenJpegDotNet.Codec,OpenJpegDotNet.Image,System.UInt32,System.UInt32,System.UInt32,System.UInt32)">SetDecodeArea(Codec, Image, UInt32, UInt32, UInt32, UInt32)</h4>
@@ -786,7 +993,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_SetDefaultDecoderParameters_OpenJpegDotNet_DecompressionParameters_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.SetDefaultDecoderParameters(OpenJpegDotNet.DecompressionParameters)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L129">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L126">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_SetDefaultDecoderParameters_" data-uid="OpenJpegDotNet.OpenJpeg.SetDefaultDecoderParameters*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_SetDefaultDecoderParameters_OpenJpegDotNet_DecompressionParameters_" data-uid="OpenJpegDotNet.OpenJpeg.SetDefaultDecoderParameters(OpenJpegDotNet.DecompressionParameters)">SetDefaultDecoderParameters(DecompressionParameters)</h4>
@@ -820,7 +1027,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_SetDefaultEncoderParameters_OpenJpegDotNet_CompressionParameters_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.SetDefaultEncoderParameters(OpenJpegDotNet.CompressionParameters)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Compression.cs/#L96">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Compression.cs/#L93">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_SetDefaultEncoderParameters_" data-uid="OpenJpegDotNet.OpenJpeg.SetDefaultEncoderParameters*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_SetDefaultEncoderParameters_OpenJpegDotNet_CompressionParameters_" data-uid="OpenJpegDotNet.OpenJpeg.SetDefaultEncoderParameters(OpenJpegDotNet.CompressionParameters)">SetDefaultEncoderParameters(CompressionParameters)</h4>
@@ -854,7 +1061,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_SetErrorHandler_OpenJpegDotNet_Codec_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_MsgCallback__IntPtr_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.SetErrorHandler(OpenJpegDotNet.Codec%2COpenJpegDotNet.DelegateHandler%7BOpenJpegDotNet.MsgCallback%7D%2CIntPtr)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Event.cs/#L61">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Event.cs/#L57">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_SetErrorHandler_" data-uid="OpenJpegDotNet.OpenJpeg.SetErrorHandler*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_SetErrorHandler_OpenJpegDotNet_Codec_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_MsgCallback__IntPtr_" data-uid="OpenJpegDotNet.OpenJpeg.SetErrorHandler(OpenJpegDotNet.Codec,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.MsgCallback},IntPtr)">SetErrorHandler(Codec, DelegateHandler&lt;MsgCallback&gt;, IntPtr)</h4>
@@ -900,7 +1107,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_SetInfoHandler_OpenJpegDotNet_Codec_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_MsgCallback__IntPtr_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.SetInfoHandler(OpenJpegDotNet.Codec%2COpenJpegDotNet.DelegateHandler%7BOpenJpegDotNet.MsgCallback%7D%2CIntPtr)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Event.cs/#L21">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Event.cs/#L17">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_SetInfoHandler_" data-uid="OpenJpegDotNet.OpenJpeg.SetInfoHandler*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_SetInfoHandler_OpenJpegDotNet_Codec_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_MsgCallback__IntPtr_" data-uid="OpenJpegDotNet.OpenJpeg.SetInfoHandler(OpenJpegDotNet.Codec,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.MsgCallback},IntPtr)">SetInfoHandler(Codec, DelegateHandler&lt;MsgCallback&gt;, IntPtr)</h4>
@@ -946,7 +1153,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_SetMCT_OpenJpegDotNet_CompressionParameters_System_Single___System_Int32___System_UInt32_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.SetMCT(OpenJpegDotNet.CompressionParameters%2CSystem.Single%5B%5D%2CSystem.Int32%5B%5D%2CSystem.UInt32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.MCT.cs/#L24">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.MCT.cs/#L20">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_SetMCT_" data-uid="OpenJpegDotNet.OpenJpeg.SetMCT*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_SetMCT_OpenJpegDotNet_CompressionParameters_System_Single___System_Int32___System_UInt32_" data-uid="OpenJpegDotNet.OpenJpeg.SetMCT(OpenJpegDotNet.CompressionParameters,System.Single[],System.Int32[],System.UInt32)">SetMCT(CompressionParameters, Single[], Int32[], UInt32)</h4>
@@ -1014,7 +1221,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_SetupDecoder_OpenJpegDotNet_Codec_OpenJpegDotNet_DecompressionParameters_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.SetupDecoder(OpenJpegDotNet.Codec%2COpenJpegDotNet.DecompressionParameters)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L147">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L144">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_SetupDecoder_" data-uid="OpenJpegDotNet.OpenJpeg.SetupDecoder*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_SetupDecoder_OpenJpegDotNet_Codec_OpenJpegDotNet_DecompressionParameters_" data-uid="OpenJpegDotNet.OpenJpeg.SetupDecoder(OpenJpegDotNet.Codec,OpenJpegDotNet.DecompressionParameters)">SetupDecoder(Codec, DecompressionParameters)</h4>
@@ -1070,7 +1277,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_SetupEncoder_OpenJpegDotNet_Codec_OpenJpegDotNet_CompressionParameters_OpenJpegDotNet_Image_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.SetupEncoder(OpenJpegDotNet.Codec%2COpenJpegDotNet.CompressionParameters%2COpenJpegDotNet.Image)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Compression.cs/#L115">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Compression.cs/#L112">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_SetupEncoder_" data-uid="OpenJpegDotNet.OpenJpeg.SetupEncoder*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_SetupEncoder_OpenJpegDotNet_Codec_OpenJpegDotNet_CompressionParameters_OpenJpegDotNet_Image_" data-uid="OpenJpegDotNet.OpenJpeg.SetupEncoder(OpenJpegDotNet.Codec,OpenJpegDotNet.CompressionParameters,OpenJpegDotNet.Image)">SetupEncoder(Codec, CompressionParameters, Image)</h4>
@@ -1132,7 +1339,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_SetWarnHandler_OpenJpegDotNet_Codec_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_MsgCallback__IntPtr_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.SetWarnHandler(OpenJpegDotNet.Codec%2COpenJpegDotNet.DelegateHandler%7BOpenJpegDotNet.MsgCallback%7D%2CIntPtr)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Event.cs/#L41">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Event.cs/#L37">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_SetWarnHandler_" data-uid="OpenJpegDotNet.OpenJpeg.SetWarnHandler*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_SetWarnHandler_OpenJpegDotNet_Codec_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_MsgCallback__IntPtr_" data-uid="OpenJpegDotNet.OpenJpeg.SetWarnHandler(OpenJpegDotNet.Codec,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.MsgCallback},IntPtr)">SetWarnHandler(Codec, DelegateHandler&lt;MsgCallback&gt;, IntPtr)</h4>
@@ -1178,7 +1385,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_StartCompress_OpenJpegDotNet_Codec_OpenJpegDotNet_Image_OpenJpegDotNet_Stream_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.StartCompress(OpenJpegDotNet.Codec%2COpenJpegDotNet.Image%2COpenJpegDotNet.Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Compression.cs/#L32">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Compression.cs/#L29">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_StartCompress_" data-uid="OpenJpegDotNet.OpenJpeg.StartCompress*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_StartCompress_OpenJpegDotNet_Codec_OpenJpegDotNet_Image_OpenJpegDotNet_Stream_" data-uid="OpenJpegDotNet.OpenJpeg.StartCompress(OpenJpegDotNet.Codec,OpenJpegDotNet.Image,OpenJpegDotNet.Stream)">StartCompress(Codec, Image, Stream)</h4>
@@ -1240,7 +1447,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_StreamCreate_System_UInt64_System_Boolean_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.StreamCreate(System.UInt64%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L30">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L27">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_StreamCreate_" data-uid="OpenJpegDotNet.OpenJpeg.StreamCreate*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_StreamCreate_System_UInt64_System_Boolean_" data-uid="OpenJpegDotNet.OpenJpeg.StreamCreate(System.UInt64,System.Boolean)">StreamCreate(UInt64, Boolean)</h4>
@@ -1296,7 +1503,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_StreamCreateDefaultFileStream_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.StreamCreateDefaultFileStream(System.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L158">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L155">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_StreamCreateDefaultFileStream_" data-uid="OpenJpegDotNet.OpenJpeg.StreamCreateDefaultFileStream*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_StreamCreateDefaultFileStream_System_String_System_Boolean_" data-uid="OpenJpegDotNet.OpenJpeg.StreamCreateDefaultFileStream(System.String,System.Boolean)">StreamCreateDefaultFileStream(String, Boolean)</h4>
@@ -1352,7 +1559,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_StreamCreateFileStream_System_String_System_UInt64_System_Boolean_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.StreamCreateFileStream(System.String%2CSystem.UInt64%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L179">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L176">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_StreamCreateFileStream_" data-uid="OpenJpegDotNet.OpenJpeg.StreamCreateFileStream*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_StreamCreateFileStream_System_String_System_UInt64_System_Boolean_" data-uid="OpenJpegDotNet.OpenJpeg.StreamCreateFileStream(System.String,System.UInt64,System.Boolean)">StreamCreateFileStream(String, UInt64, Boolean)</h4>
@@ -1414,7 +1621,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_StreamDefaultCreate_System_Boolean_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.StreamDefaultCreate(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L18">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L15">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_StreamDefaultCreate_" data-uid="OpenJpegDotNet.OpenJpeg.StreamDefaultCreate*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_StreamDefaultCreate_System_Boolean_" data-uid="OpenJpegDotNet.OpenJpeg.StreamDefaultCreate(System.Boolean)">StreamDefaultCreate(Boolean)</h4>
@@ -1464,7 +1671,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_StreamSetReadFunction_OpenJpegDotNet_Stream_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamRead__.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.StreamSetReadFunction(OpenJpegDotNet.Stream%2COpenJpegDotNet.DelegateHandler%7BOpenJpegDotNet.StreamRead%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L43">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L40">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_StreamSetReadFunction_" data-uid="OpenJpegDotNet.OpenJpeg.StreamSetReadFunction*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_StreamSetReadFunction_OpenJpegDotNet_Stream_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamRead__" data-uid="OpenJpegDotNet.OpenJpeg.StreamSetReadFunction(OpenJpegDotNet.Stream,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamRead})">StreamSetReadFunction(Stream, DelegateHandler&lt;StreamRead&gt;)</h4>
@@ -1504,7 +1711,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_StreamSetSeekFunction_OpenJpegDotNet_Stream_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamSeek__.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.StreamSetSeekFunction(OpenJpegDotNet.Stream%2COpenJpegDotNet.DelegateHandler%7BOpenJpegDotNet.StreamSeek%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L100">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L97">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_StreamSetSeekFunction_" data-uid="OpenJpegDotNet.OpenJpeg.StreamSetSeekFunction*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_StreamSetSeekFunction_OpenJpegDotNet_Stream_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamSeek__" data-uid="OpenJpegDotNet.OpenJpeg.StreamSetSeekFunction(OpenJpegDotNet.Stream,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamSeek})">StreamSetSeekFunction(Stream, DelegateHandler&lt;StreamSeek&gt;)</h4>
@@ -1544,7 +1751,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_StreamSetSkipFunction_OpenJpegDotNet_Stream_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamSkip__.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.StreamSetSkipFunction(OpenJpegDotNet.Stream%2COpenJpegDotNet.DelegateHandler%7BOpenJpegDotNet.StreamSkip%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L81">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L78">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_StreamSetSkipFunction_" data-uid="OpenJpegDotNet.OpenJpeg.StreamSetSkipFunction*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_StreamSetSkipFunction_OpenJpegDotNet_Stream_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamSkip__" data-uid="OpenJpegDotNet.OpenJpeg.StreamSetSkipFunction(OpenJpegDotNet.Stream,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamSkip})">StreamSetSkipFunction(Stream, DelegateHandler&lt;StreamSkip&gt;)</h4>
@@ -1584,7 +1791,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_StreamSetUserData_OpenJpegDotNet_Stream_IntPtr_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamFreeUserData__.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.StreamSetUserData(OpenJpegDotNet.Stream%2CIntPtr%2COpenJpegDotNet.DelegateHandler%7BOpenJpegDotNet.StreamFreeUserData%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L120">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L117">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_StreamSetUserData_" data-uid="OpenJpegDotNet.OpenJpeg.StreamSetUserData*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_StreamSetUserData_OpenJpegDotNet_Stream_IntPtr_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamFreeUserData__" data-uid="OpenJpegDotNet.OpenJpeg.StreamSetUserData(OpenJpegDotNet.Stream,IntPtr,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamFreeUserData})">StreamSetUserData(Stream, IntPtr, DelegateHandler&lt;StreamFreeUserData&gt;)</h4>
@@ -1630,7 +1837,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_StreamSetUserDataLength_OpenJpegDotNet_Stream_System_Int32_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.StreamSetUserDataLength(OpenJpegDotNet.Stream%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L140">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L137">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_StreamSetUserDataLength_" data-uid="OpenJpegDotNet.OpenJpeg.StreamSetUserDataLength*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_StreamSetUserDataLength_OpenJpegDotNet_Stream_System_Int32_" data-uid="OpenJpegDotNet.OpenJpeg.StreamSetUserDataLength(OpenJpegDotNet.Stream,System.Int32)">StreamSetUserDataLength(Stream, Int32)</h4>
@@ -1670,7 +1877,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_StreamSetWriteFunction_OpenJpegDotNet_Stream_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamWrite__.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.StreamSetWriteFunction(OpenJpegDotNet.Stream%2COpenJpegDotNet.DelegateHandler%7BOpenJpegDotNet.StreamWrite%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L62">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L59">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_StreamSetWriteFunction_" data-uid="OpenJpegDotNet.OpenJpeg.StreamSetWriteFunction*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_StreamSetWriteFunction_OpenJpegDotNet_Stream_OpenJpegDotNet_DelegateHandler_OpenJpegDotNet_StreamWrite__" data-uid="OpenJpegDotNet.OpenJpeg.StreamSetWriteFunction(OpenJpegDotNet.Stream,OpenJpegDotNet.DelegateHandler{OpenJpegDotNet.StreamWrite})">StreamSetWriteFunction(Stream, DelegateHandler&lt;StreamWrite&gt;)</h4>
@@ -1710,7 +1917,7 @@
     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg_WriteTile_OpenJpegDotNet_Codec_System_Int32_System_Byte___System_UInt32_OpenJpegDotNet_Stream_.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg.WriteTile(OpenJpegDotNet.Codec%2CSystem.Int32%2CSystem.Byte%5B%5D%2CSystem.UInt32%2COpenJpegDotNet.Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L171">View Source</a>
+    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Codec.Decompression.cs/#L187">View Source</a>
   </span>
   <a id="OpenJpegDotNet_OpenJpeg_WriteTile_" data-uid="OpenJpegDotNet.OpenJpeg.WriteTile*"></a>
   <h4 id="OpenJpegDotNet_OpenJpeg_WriteTile_OpenJpegDotNet_Codec_System_Int32_System_Byte___System_UInt32_OpenJpegDotNet_Stream_" data-uid="OpenJpegDotNet.OpenJpeg.WriteTile(OpenJpegDotNet.Codec,System.Int32,System.Byte[],System.UInt32,OpenJpegDotNet.Stream)">WriteTile(Codec, Int32, Byte[], UInt32, Stream)</h4>
@@ -1790,7 +1997,7 @@
                     <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/new/main/apiSpec/new?filename=OpenJpegDotNet_OpenJpeg.md&amp;value=---%0Auid%3A%20OpenJpegDotNet.OpenJpeg%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Stream.cs/#L10" class="contribution-link">View Source</a>
+                    <a href="https://github.com/takuya-takeuchi/OpenJpegDotNet/blob/main/src/OpenJpegDotNet/OpenJpeg.Thread.cs/#L7" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

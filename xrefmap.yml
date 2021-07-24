@@ -1305,6 +1305,19 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.Image.ToBitmap
   nameWithType: Image.ToBitmap
+- uid: OpenJpegDotNet.Image.ToRawBitmap
+  name: ToRawBitmap()
+  href: api/OpenJpegDotNet.Image.html#OpenJpegDotNet_Image_ToRawBitmap
+  commentId: M:OpenJpegDotNet.Image.ToRawBitmap
+  fullName: OpenJpegDotNet.Image.ToRawBitmap()
+  nameWithType: Image.ToRawBitmap()
+- uid: OpenJpegDotNet.Image.ToRawBitmap*
+  name: ToRawBitmap
+  href: api/OpenJpegDotNet.Image.html#OpenJpegDotNet_Image_ToRawBitmap_
+  commentId: Overload:OpenJpegDotNet.Image.ToRawBitmap
+  isSpec: "True"
+  fullName: OpenJpegDotNet.Image.ToRawBitmap
+  nameWithType: Image.ToRawBitmap
 - uid: OpenJpegDotNet.Image.X0
   name: X0
   href: api/OpenJpegDotNet.Image.html#OpenJpegDotNet_Image_X0
@@ -1806,6 +1819,19 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.IO.Reader.ReadHeader
   nameWithType: Reader.ReadHeader
+- uid: OpenJpegDotNet.IO.Reader.ReadRawBitmap
+  name: ReadRawBitmap()
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_ReadRawBitmap
+  commentId: M:OpenJpegDotNet.IO.Reader.ReadRawBitmap
+  fullName: OpenJpegDotNet.IO.Reader.ReadRawBitmap()
+  nameWithType: Reader.ReadRawBitmap()
+- uid: OpenJpegDotNet.IO.Reader.ReadRawBitmap*
+  name: ReadRawBitmap
+  href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_ReadRawBitmap_
+  commentId: Overload:OpenJpegDotNet.IO.Reader.ReadRawBitmap
+  isSpec: "True"
+  fullName: OpenJpegDotNet.IO.Reader.ReadRawBitmap
+  nameWithType: Reader.ReadRawBitmap
 - uid: OpenJpegDotNet.IO.Reader.Width
   name: Width
   href: api/OpenJpegDotNet.IO.Reader.html#OpenJpegDotNet_IO_Reader_Width
@@ -1944,6 +1970,19 @@ references:
   commentId: T:OpenJpegDotNet.OpenJpeg
   fullName: OpenJpegDotNet.OpenJpeg
   nameWithType: OpenJpeg
+- uid: OpenJpegDotNet.OpenJpeg.CodecSetThreads(OpenJpegDotNet.Codec,System.Int32)
+  name: CodecSetThreads(Codec, Int32)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_CodecSetThreads_OpenJpegDotNet_Codec_System_Int32_
+  commentId: M:OpenJpegDotNet.OpenJpeg.CodecSetThreads(OpenJpegDotNet.Codec,System.Int32)
+  fullName: OpenJpegDotNet.OpenJpeg.CodecSetThreads(OpenJpegDotNet.Codec, System.Int32)
+  nameWithType: OpenJpeg.CodecSetThreads(Codec, Int32)
+- uid: OpenJpegDotNet.OpenJpeg.CodecSetThreads*
+  name: CodecSetThreads
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_CodecSetThreads_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.CodecSetThreads
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.CodecSetThreads
+  nameWithType: OpenJpeg.CodecSetThreads
 - uid: OpenJpegDotNet.OpenJpeg.CreateCompress(OpenJpegDotNet.CodecFormat)
   name: CreateCompress(CodecFormat)
   href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_CreateCompress_OpenJpegDotNet_CodecFormat_
@@ -2048,6 +2087,19 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.OpenJpeg.GetNativeVersion
   nameWithType: OpenJpeg.GetNativeVersion
+- uid: OpenJpegDotNet.OpenJpeg.GetNumCpus
+  name: GetNumCpus()
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_GetNumCpus
+  commentId: M:OpenJpegDotNet.OpenJpeg.GetNumCpus
+  fullName: OpenJpegDotNet.OpenJpeg.GetNumCpus()
+  nameWithType: OpenJpeg.GetNumCpus()
+- uid: OpenJpegDotNet.OpenJpeg.GetNumCpus*
+  name: GetNumCpus
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_GetNumCpus_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.GetNumCpus
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.GetNumCpus
+  nameWithType: OpenJpeg.GetNumCpus
 - uid: OpenJpegDotNet.OpenJpeg.GetVersion
   name: GetVersion()
   href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_GetVersion
@@ -2061,6 +2113,19 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.OpenJpeg.GetVersion
   nameWithType: OpenJpeg.GetVersion
+- uid: OpenJpegDotNet.OpenJpeg.HasThreadSupport
+  name: HasThreadSupport()
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_HasThreadSupport
+  commentId: M:OpenJpegDotNet.OpenJpeg.HasThreadSupport
+  fullName: OpenJpegDotNet.OpenJpeg.HasThreadSupport()
+  nameWithType: OpenJpeg.HasThreadSupport()
+- uid: OpenJpegDotNet.OpenJpeg.HasThreadSupport*
+  name: HasThreadSupport
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_HasThreadSupport_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.HasThreadSupport
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.HasThreadSupport
+  nameWithType: OpenJpeg.HasThreadSupport
 - uid: OpenJpegDotNet.OpenJpeg.ImageCreate(System.UInt32,OpenJpegDotNet.ImageComponentParameters[],OpenJpegDotNet.ColorSpace)
   name: ImageCreate(UInt32, ImageComponentParameters[], ColorSpace)
   href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_ImageCreate_System_UInt32_OpenJpegDotNet_ImageComponentParameters___OpenJpegDotNet_ColorSpace_
@@ -2077,6 +2142,32 @@ references:
   isSpec: "True"
   fullName: OpenJpegDotNet.OpenJpeg.ImageCreate
   nameWithType: OpenJpeg.ImageCreate
+- uid: OpenJpegDotNet.OpenJpeg.ImageDataAlloc(System.Int64)
+  name: ImageDataAlloc(Int64)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_ImageDataAlloc_System_Int64_
+  commentId: M:OpenJpegDotNet.OpenJpeg.ImageDataAlloc(System.Int64)
+  fullName: OpenJpegDotNet.OpenJpeg.ImageDataAlloc(System.Int64)
+  nameWithType: OpenJpeg.ImageDataAlloc(Int64)
+- uid: OpenJpegDotNet.OpenJpeg.ImageDataAlloc*
+  name: ImageDataAlloc
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_ImageDataAlloc_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.ImageDataAlloc
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.ImageDataAlloc
+  nameWithType: OpenJpeg.ImageDataAlloc
+- uid: OpenJpegDotNet.OpenJpeg.ImageDataFree(IntPtr)
+  name: ImageDataFree(IntPtr)
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_ImageDataFree_IntPtr_
+  commentId: M:OpenJpegDotNet.OpenJpeg.ImageDataFree(IntPtr)
+  fullName: OpenJpegDotNet.OpenJpeg.ImageDataFree(IntPtr)
+  nameWithType: OpenJpeg.ImageDataFree(IntPtr)
+- uid: OpenJpegDotNet.OpenJpeg.ImageDataFree*
+  name: ImageDataFree
+  href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_ImageDataFree_
+  commentId: Overload:OpenJpegDotNet.OpenJpeg.ImageDataFree
+  isSpec: "True"
+  fullName: OpenJpegDotNet.OpenJpeg.ImageDataFree
+  nameWithType: OpenJpeg.ImageDataFree
 - uid: OpenJpegDotNet.OpenJpeg.ImageTileCreate(System.UInt32,OpenJpegDotNet.ImageComponentParameters[],OpenJpegDotNet.ColorSpace)
   name: ImageTileCreate(UInt32, ImageComponentParameters[], ColorSpace)
   href: api/OpenJpegDotNet.OpenJpeg.html#OpenJpegDotNet_OpenJpeg_ImageTileCreate_System_UInt32_OpenJpegDotNet_ImageComponentParameters___OpenJpegDotNet_ColorSpace_
@@ -2596,6 +2687,64 @@ references:
   commentId: F:OpenJpegDotNet.ProgressionOrder.Unknown
   fullName: OpenJpegDotNet.ProgressionOrder.Unknown
   nameWithType: ProgressionOrder.Unknown
+- uid: OpenJpegDotNet.RawBitmap
+  name: RawBitmap
+  href: api/OpenJpegDotNet.RawBitmap.html
+  commentId: T:OpenJpegDotNet.RawBitmap
+  fullName: OpenJpegDotNet.RawBitmap
+  nameWithType: RawBitmap
+- uid: OpenJpegDotNet.RawBitmap.Channel
+  name: Channel
+  href: api/OpenJpegDotNet.RawBitmap.html#OpenJpegDotNet_RawBitmap_Channel
+  commentId: P:OpenJpegDotNet.RawBitmap.Channel
+  fullName: OpenJpegDotNet.RawBitmap.Channel
+  nameWithType: RawBitmap.Channel
+- uid: OpenJpegDotNet.RawBitmap.Channel*
+  name: Channel
+  href: api/OpenJpegDotNet.RawBitmap.html#OpenJpegDotNet_RawBitmap_Channel_
+  commentId: Overload:OpenJpegDotNet.RawBitmap.Channel
+  isSpec: "True"
+  fullName: OpenJpegDotNet.RawBitmap.Channel
+  nameWithType: RawBitmap.Channel
+- uid: OpenJpegDotNet.RawBitmap.Data
+  name: Data
+  href: api/OpenJpegDotNet.RawBitmap.html#OpenJpegDotNet_RawBitmap_Data
+  commentId: P:OpenJpegDotNet.RawBitmap.Data
+  fullName: OpenJpegDotNet.RawBitmap.Data
+  nameWithType: RawBitmap.Data
+- uid: OpenJpegDotNet.RawBitmap.Data*
+  name: Data
+  href: api/OpenJpegDotNet.RawBitmap.html#OpenJpegDotNet_RawBitmap_Data_
+  commentId: Overload:OpenJpegDotNet.RawBitmap.Data
+  isSpec: "True"
+  fullName: OpenJpegDotNet.RawBitmap.Data
+  nameWithType: RawBitmap.Data
+- uid: OpenJpegDotNet.RawBitmap.Height
+  name: Height
+  href: api/OpenJpegDotNet.RawBitmap.html#OpenJpegDotNet_RawBitmap_Height
+  commentId: P:OpenJpegDotNet.RawBitmap.Height
+  fullName: OpenJpegDotNet.RawBitmap.Height
+  nameWithType: RawBitmap.Height
+- uid: OpenJpegDotNet.RawBitmap.Height*
+  name: Height
+  href: api/OpenJpegDotNet.RawBitmap.html#OpenJpegDotNet_RawBitmap_Height_
+  commentId: Overload:OpenJpegDotNet.RawBitmap.Height
+  isSpec: "True"
+  fullName: OpenJpegDotNet.RawBitmap.Height
+  nameWithType: RawBitmap.Height
+- uid: OpenJpegDotNet.RawBitmap.Width
+  name: Width
+  href: api/OpenJpegDotNet.RawBitmap.html#OpenJpegDotNet_RawBitmap_Width
+  commentId: P:OpenJpegDotNet.RawBitmap.Width
+  fullName: OpenJpegDotNet.RawBitmap.Width
+  nameWithType: RawBitmap.Width
+- uid: OpenJpegDotNet.RawBitmap.Width*
+  name: Width
+  href: api/OpenJpegDotNet.RawBitmap.html#OpenJpegDotNet_RawBitmap_Width_
+  commentId: Overload:OpenJpegDotNet.RawBitmap.Width
+  isSpec: "True"
+  fullName: OpenJpegDotNet.RawBitmap.Width
+  nameWithType: RawBitmap.Width
 - uid: OpenJpegDotNet.RegionSizeCapabilities
   name: RegionSizeCapabilities
   href: api/OpenJpegDotNet.RegionSizeCapabilities.html
