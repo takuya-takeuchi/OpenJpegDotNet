@@ -610,7 +610,7 @@ class Config
 
          $config = [Config]::new($root, "Release", $target, $architecture, $platform, $option)
          $libraryDir = Join-Path "artifacts" $config.GetArtifactDirectoryName()
-         $build = $config.GetBuildDirectoryName($OperatingSystem)
+         $build = $config.GetBuildDirectoryName($operatingSystem)
 
          foreach ($key in $buildHashTable.keys)
          {

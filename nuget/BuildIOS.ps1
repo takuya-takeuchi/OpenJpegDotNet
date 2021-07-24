@@ -28,7 +28,7 @@ if ($DeveloperDir -And !(Test-Path $DeveloperDir))
 $BuildTargets = @()
 $BuildTargets += [BuildTarget]::new("ios", "cpu", 64, "arm64",  "" )
 $BuildTargets += [BuildTarget]::new("ios", "cpu", 64, "arm64e", "" )
-$BuildTargets += [BuildTarget]::new("ios", "cpu", 32, "arm",    "" )
+# $BuildTargets += [BuildTarget]::new("ios", "cpu", 32, "arm",    "" ) # too old armv4t
 $BuildTargets += [BuildTarget]::new("ios", "cpu", 32, "armv7s", "" )
 $BuildTargets += [BuildTarget]::new("ios", "cpu", 32, "armv7",  "" )
 $BuildTargets += [BuildTarget]::new("ios", "cpu", 64, "x86_64", "" )
