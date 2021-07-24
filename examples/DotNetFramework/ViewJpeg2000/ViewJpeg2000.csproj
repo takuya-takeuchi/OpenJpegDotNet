@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="OpenJpegDotNet, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\OpenJpegDotNet.2.4.0.20210509\lib\netstandard2.0\OpenJpegDotNet.dll</HintPath>
+      <HintPath>packages\OpenJpegDotNet.2.4.0.20210725\lib\netstandard2.0\OpenJpegDotNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -85,9 +85,5 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\OpenJpegDotNet.2.4.0.20210509\build\net45\OpenJpegDotNet.targets" Condition="Exists('packages\OpenJpegDotNet.2.4.0.20210509\build\net45\OpenJpegDotNet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\OpenJpegDotNet.2.4.0.20210509\build\net45\OpenJpegDotNet.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\OpenJpegDotNet.2.4.0.20210509\build\net45\OpenJpegDotNet.targets'))" />
   </Target>
 </Project>
