@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="ViewJpeg2000.Views.MainPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:ViewJpeg2000.ViewModels;assembly=ViewJpeg2000"
+             Title="{Binding Title}"
+             d:DataContext="{d:DesignInstance viewModels:MainPageViewModel,
+                                              IsDesignTimeCreatable=True}"
+             mc:Ignorable="d">
+
+    <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Text="Welcome to Xamarin Forms and Prism!" />
+        <Image Grid.Row="1"
+               HorizontalOptions="FillAndExpand"
+               Source="{Binding Image}"
+               VerticalOptions="FillAndExpand" />
+        <Editor Grid.Row="2"
+                HorizontalOptions="FillAndExpand"
+                Text="{Binding Url}" />
+        <Button Grid.Row="3"
+                Command="{Binding ShowImageCommand}"
+                HorizontalOptions="Center"
+                Text="Show Image" />
+    </Grid>
+
+</ContentPage>

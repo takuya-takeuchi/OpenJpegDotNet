@@ -43,6 +43,7 @@ build:ubuntu:
   script:
     - cd nuget
     - pwsh BuildUbuntu18.ps1
+    - pwsh BuildAndroid.ps1
   tags:
     - linux
   artifacts:
@@ -57,6 +58,7 @@ build:osx:
   script:
     - cd nuget
     - pwsh BuildOSX.ps1
+    - pwsh BuildIOS.ps1
   tags:
     - osx
   artifacts:
