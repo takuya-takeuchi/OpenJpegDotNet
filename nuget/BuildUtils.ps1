@@ -877,6 +877,7 @@ class ThirdPartyBuilder
          -D CMAKE_EXE_LINKER_FLAGS=`"-stdlib=libc++ -lc++abi`" `
          -D CMAKE_SYSTEM_NAME=iOS `
          -D BUILD_SHARED_LIBS=OFF `
+         -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
          -D CMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH=$CMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH `
          -D CMAKE_IOS_INSTALL_COMBINED=$CMAKE_IOS_INSTALL_COMBINED `
          -D CMAKE_OSX_ARCHITECTURES=${osxArchitectures} `
@@ -890,6 +891,7 @@ class ThirdPartyBuilder
                      -D CMAKE_EXE_LINKER_FLAGS="-stdlib=libc++ -lc++abi" `
                      -D CMAKE_SYSTEM_NAME=iOS `
                      -D BUILD_SHARED_LIBS=OFF `
+                     -D BUILD_THIRDPARTY:BOOL=${BUILD_THIRDPARTY} `
                      -D CMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH=$CMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH `
                      -D CMAKE_IOS_INSTALL_COMBINED=$CMAKE_IOS_INSTALL_COMBINED `
                      -D CMAKE_OSX_ARCHITECTURES=${osxArchitectures} `
@@ -900,6 +902,31 @@ class ThirdPartyBuilder
 
                Write-Host "   cmake --build . --config ${Configuration} --target install" -ForegroundColor Yellow
                cmake --build . --config $Configuration --target install
+
+               # https://gitlab.kitware.com/cmake/cmake/-/issues/20956
+               # CMake does not generate these files and it will occur failing find_package
+               # so generates these manually
+               # openjpeg/install/bin/opj_compress.app/Contents/MacOS/opj_compress
+               # openjpeg/install/bin/opj_decompress.app/Contents/MacOS/opj_decompress
+               # openjpeg/install/bin/opj_dump.app/Contents/MacOS/opj_dump
+               $files = @("opj_compress", "opj_decompress", "opj_dump")
+               foreach ($file in $files)
+               {
+                  $osx = Join-Path ${installDir} bin | `
+                         Join-Path -ChildPath "${file}.app" | `
+                         Join-Path -ChildPath Contents | `
+                         Join-Path -ChildPath MacOS
+                  if (!(Test-Path $osx))
+                  {
+                     New-Item $osx -Force -ItemType Directory
+                  }
+
+                  $openjpeg = Split-Path ${installDir} -Parent
+                  $src = Join-Path ${openjpeg} bin | `
+                         Join-Path -ChildPath "${file}.app" | `
+                         Join-Path -ChildPath ${file}
+                  Copy-Item $src $osx -Force
+               }
             }
          }
       }
@@ -1086,49 +1113,6 @@ function ConfigIOS([Config]$Config)
    if ($IsMacOS)
    {
       $Builder = [ThirdPartyBuilder]::new($Config)
-
-      $osxArchitectures = $Config.GetOSXArchitectures()
-
-      $vulkanOnOff = "ON"
-      $targetPlatform = ""
-      switch ($osxArchitectures)
-      {
-         "arm64e"
-         {
-            $vulkanOnOff = "ON"
-            $targetPlatform = "ios-arm64"
-         }
-         "arm64"
-         {
-            $vulkanOnOff = "ON"
-            $targetPlatform = "ios-arm64"
-         }
-         "arm"
-         {
-            $vulkanOnOff = "OFF"
-            $targetPlatform = ""
-         }
-         "armv7"
-         {
-            $vulkanOnOff = "OFF"
-            $targetPlatform = ""
-         }
-         "armv7s"
-         {
-            $vulkanOnOff = "OFF"
-            $targetPlatform = ""
-         }
-         "i386"
-         {
-            $vulkanOnOff = "OFF"
-            $targetPlatform = ""
-         }
-         "x86_64"
-         {
-            $vulkanOnOff = "ON"
-            $targetPlatform = "ios-arm64_x86_64-simulator"
-         }
-      }
 
       # Build opnejpeg
       $installOpenJpegDir = $Builder.BuildOpenJpeg()
