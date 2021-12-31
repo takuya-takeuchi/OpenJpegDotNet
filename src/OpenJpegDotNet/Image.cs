@@ -184,10 +184,11 @@ namespace OpenJpegDotNet
         /// <summary>
         /// Converts this <see cref="Image"/> to a GDI+ <see cref="Bitmap"/>.
         /// </summary>
+        /// <param name="alpha">Export alpha channel</param>
         /// <returns>A <see cref="Bitmap"/> that represents the converted <see cref="Image"/>.</returns>
         /// <exception cref="ObjectDisposedException">This object is disposed.</exception>
         /// <exception cref="NotSupportedException">This object is not supported.</exception>
-        public Bitmap ToBitmap()
+        public Bitmap ToBitmap(bool alpha = true)
         {
             this.ThrowIfDisposed();
 
@@ -199,14 +200,6 @@ namespace OpenJpegDotNet
                                                                            out var channel,
                                                                            out var pixel);
             if (ret != NativeMethods.ErrorType.OK)
-            {
-                if (planes != IntPtr.Zero)
-                    NativeMethods.stdlib_free(planes);
-
-                throw new NotSupportedException("This object is not supported.");
-            }
-
-            if (channel != 3 && channel != 1)
             {
                 if (planes != IntPtr.Zero)
                     NativeMethods.stdlib_free(planes);
@@ -271,11 +264,45 @@ namespace OpenJpegDotNet
                                     }
                                 }
                                 break;
+                            case 4:
+                                {
+                                    bitmap = new Bitmap((int)width, (int)height, PixelFormat.Format32bppArgb);
+                                    var rect = new Rectangle(0, 0, (int)width, (int)height);
+                                    bitmapData = bitmap.LockBits(rect, ImageLockMode.WriteOnly, bitmap.PixelFormat);
+                                    var scan0 = bitmapData.Scan0;
+                                    var stride = bitmapData.Stride;
+
+                                    unsafe
+                                    {
+                                        var pSrc = (byte*)planes;
+                                        var pDest = (byte*)scan0;
+                                        var gap = stride - width * channel;
+                                        var size = width * height;
+                                        for (var y = 0; y < height; y++)
+                                        {
+                                            for (var x = 0; x < width; x++)
+                                            {
+                                                pDest[3] = alpha ? pSrc[0 + size * 3] : (byte)255;
+                                                pDest[2] = pSrc[0];
+                                                pDest[1] = pSrc[0 + size];
+                                                pDest[0] = pSrc[0 + size * 2];
+
+                                                pSrc += 1;
+                                                pDest += channel;
+                                            }
+
+                                            pDest += gap;
+                                        }
+                                    }
+                                }
+                                break;
+                            default:
+                                throw new NotSupportedException($"Unsupported number of channels: ${channel}.");
                         }
 
                         break;
                     default:
-                        throw new NotSupportedException("This object is not supported.");
+                        throw new NotSupportedException($"Unsupported pixel depth: ${pixel}.");
                 }
             }
             catch
@@ -301,6 +328,7 @@ namespace OpenJpegDotNet
         /// <summary>
         /// Converts this <see cref="Image"/> to a <see cref="RawBitmap"/>.
         /// </summary>
+        /// <param name="alpha">Export alpha channel</param>
         /// <returns>A <see cref="RawBitmap"/> that represents the converted <see cref="Image"/>.</returns>
         /// <exception cref="NotSupportedException">This object is not supported.</exception>
         public RawBitmap ToRawBitmap()
@@ -315,14 +343,6 @@ namespace OpenJpegDotNet
                                                                            out var channel,
                                                                            out var pixel);
             if (ret != NativeMethods.ErrorType.OK)
-            {
-                if (planes != IntPtr.Zero)
-                    NativeMethods.stdlib_free(planes);
-
-                throw new NotSupportedException("This object is not supported.");
-            }
-
-            if (channel != 3 && channel != 1)
             {
                 if (planes != IntPtr.Zero)
                     NativeMethods.stdlib_free(planes);
@@ -382,11 +402,39 @@ namespace OpenJpegDotNet
                                     }
                                 }
                                 break;
+                            case 4:
+                                {
+                                    unsafe
+                                    {
+                                        fixed (byte* dst = &raw[0])
+                                        {
+                                            var pSrc = (byte*)planes;
+                                            var pDest = dst;
+                                            var size = width * height;
+                                            for (var y = 0; y < height; y++)
+                                            {
+                                                for (var x = 0; x < width; x++)
+                                                {
+                                                    pDest[3] = alpha ? pSrc[0 + size * 3] : (byte)255;
+                                                    pDest[2] = pSrc[0];
+                                                    pDest[1] = pSrc[0 + size];
+                                                    pDest[0] = pSrc[0 + size * 2];
+
+                                                    pSrc += 1;
+                                                    pDest += channel;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            default:
+                                throw new NotSupportedException($"Unsupported number of channels: ${channel}.");
                         }
 
                         break;
                     default:
-                        throw new NotSupportedException("This object is not supported.");
+                        throw new NotSupportedException($"Unsupported pixel depth: ${pixel}.");
                 }
             }
             finally
