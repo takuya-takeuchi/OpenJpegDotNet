@@ -147,7 +147,7 @@ namespace OpenJpegDotNet.IO
             unsafe
             {
                 var buf = (Buffer*)userData;
-                var bytesToRead = (int)Math.Min((ulong)buf->Length, bytes);
+                var bytesToRead = (int)Math.Min((ulong)(buf->Length - buf->Position), bytes);
                 if (bytesToRead > 0)
                 {
                     NativeMethods.cstd_memcpy(buffer, IntPtr.Add(buf->Data, buf->Position), bytesToRead);
