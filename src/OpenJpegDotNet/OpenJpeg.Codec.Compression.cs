@@ -101,10 +101,10 @@ namespace OpenJpegDotNet
         }
 
         /// <summary>
-        /// Setup the decoder with decompression parameters provided by the user and with the message handler provided by the user.
+        /// Setup the encoder with compression parameters provided by the user and with the message handler provided by the user.
         /// </summary>
         /// <param name="codec">The <see cref="Codec"/> to compress image.</param>
-        /// <param name="parameters">The <see cref="CompressionParameters"/> to ccompress image.</param>
+        /// <param name="parameters">The <see cref="CompressionParameters"/> for image compression.</param>
         /// <param name="image">Input filled image.</param>
         /// <returns><code>true</code> if the decoder is correctly set; otherwise, <code>false</code>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="codec"/>, <paramref name="parameters"/> or <paramref name="image"/> is null.</exception>
