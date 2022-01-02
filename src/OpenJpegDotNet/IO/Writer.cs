@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
 namespace OpenJpegDotNet.IO
@@ -16,8 +14,6 @@ namespace OpenJpegDotNet.IO
 
         private readonly IntPtr _UserData;
 
-        private readonly DelegateHandler<StreamRead> _ReadCallback;
-
         private readonly DelegateHandler<StreamWrite> _WriteCallback;
 
         private readonly DelegateHandler<StreamSeek> _SeekCallback;
@@ -28,7 +24,7 @@ namespace OpenJpegDotNet.IO
 
         private CompressionParameters _CompressionParameters;
 
-        private Image _Image;
+        private OpenJpegDotNet.Image _Image;
 
         private readonly Stream _Stream;
 
@@ -36,44 +32,46 @@ namespace OpenJpegDotNet.IO
 
         #region Constructors
 
-        public Writer(byte[] data)
+        public Writer(Bitmap bitmap)
         {
+            _Image = ImageHelper.FromBitmap(bitmap);
+            int datalen = (int)(_Image.X1 * _Image.Y1 * _Image.NumberOfComponents + 1024);
+
             this._Buffer = new Buffer
             {
-                Data = Marshal.AllocHGlobal(data.Length),
-                Length = data.Length,
+                Data = Marshal.AllocHGlobal(datalen),
+                Length = datalen,
                 Position = 0
             };
-
-            Marshal.Copy(data, 0, this._Buffer.Data, this._Buffer.Length);
 
             var size = Marshal.SizeOf(this._Buffer);
             this._UserData = Marshal.AllocHGlobal(size);
             Marshal.StructureToPtr(this._Buffer, this._UserData, false);
 
             this._WriteCallback = new DelegateHandler<StreamWrite>(Write);
-            this._ReadCallback = new DelegateHandler<StreamRead>(Read);
             this._SeekCallback = new DelegateHandler<StreamSeek>(Seek);
             this._SkipCallback = new DelegateHandler<StreamSkip>(Skip);
 
-            this._Stream = OpenJpeg.StreamDefaultCreate(true);
+            this._Stream = OpenJpeg.StreamCreate((ulong)_Buffer.Length, false);
             OpenJpeg.StreamSetUserData(this._Stream, this._UserData);
             OpenJpeg.StreamSetUserDataLength(this._Stream, this._Buffer.Length);
-            OpenJpeg.StreamSetReadFunction(this._Stream, this._ReadCallback);
             OpenJpeg.StreamSetWriteFunction(this._Stream, this._WriteCallback);
             OpenJpeg.StreamSetSeekFunction(this._Stream, this._SeekCallback);
             OpenJpeg.StreamSetSkipFunction(this._Stream, this._SkipCallback);
+
+            _Codec = OpenJpeg.CreateCompress(CodecFormat.J2k);
+
+            this._CompressionParameters = new CompressionParameters();
+            OpenJpeg.SetDefaultEncoderParameters(this._CompressionParameters);
+            this._CompressionParameters.TcpNumLayers = 1;
+            this._CompressionParameters.CodingParameterDistortionAllocation = 1;
+
+            OpenJpeg.SetupEncoder(_Codec, _CompressionParameters, _Image);
         }
 
         #endregion
 
         #region Properties
-
-        public int Height
-        {
-            get;
-            private set;
-        }
 
         /// <summary>
         /// Gets a value indicating whether this instance has been disposed.
@@ -85,164 +83,38 @@ namespace OpenJpegDotNet.IO
             private set;
         }
 
-        public int Width
-        {
-            get;
-            private set;
-        }
-
         #endregion
 
         #region Methods
 
-        public bool WriteHeader(Parameter parameter)
+        public byte[] Encode()
         {
-            if (parameter == null)
-                throw new ArgumentNullException(nameof(parameter));
+            if (_Codec == null || _Codec.IsDisposed || _Image == null || _Image.IsDisposed
+                || _Stream == null || _Stream.IsDisposed) { throw new InvalidOperationException(); }
 
-            this._Codec?.Dispose();
-            this._CompressionParameters?.Dispose();
-            this._Image?.Dispose();
+            if (!OpenJpeg.StartCompress(_Codec, _Image, _Stream)) { throw new InvalidOperationException(); }
+            if (!OpenJpeg.Encode(_Codec, _Stream)) { throw new InvalidOperationException(); }
+            if (!OpenJpeg.EndCompress(_Codec, _Stream)) { throw new InvalidOperationException(); }
 
-            this._Codec = null;
-            this._CompressionParameters = null;
-            this._Image = null;
+            var data_st = Marshal.PtrToStructure<Buffer>(_UserData);
+            var output = new byte[data_st.Position];
+            Marshal.Copy(_Buffer.Data, output, 0, output.Length);
 
-            // ToDo: Support to change format?
-            this._Codec = OpenJpeg.CreateDecompress(CodecFormat.J2k);
-            //this._Codec = OpenJpeg.CreateDecompress(CodecFormat.Jp2);
-            this._CompressionParameters = this.SetupEncoderParameters(parameter);
-
-            return true;
-        }
-
-        public Bitmap ReadData()
-        {
-            if (this._Image == null || this._Image.IsDisposed)
-                throw new InvalidOperationException();
-
-            if (!OpenJpeg.Decode(this._Codec, this._Stream, this._Image))
-                throw new InvalidOperationException();
-
-            return this._Image.ToBitmap();
-        }
-
-        public byte[] Write(Bitmap bitmap)
-        {
-            if (bitmap == null)
-                throw new ArgumentNullException(nameof(bitmap));
-
-            this._Codec?.Dispose();
-            this._CompressionParameters?.Dispose();
-            this._Image?.Dispose();
-
-            var channels = 0;
-            var outPrecision = 0u;
-            var colorSpace = ColorSpace.Gray;
-            var format = bitmap.PixelFormat;
-            var width = bitmap.Width;
-            var height = bitmap.Height;
-            switch (format)
-            {
-                case PixelFormat.Format24bppRgb:
-                    channels = 3;
-                    outPrecision = 24u / (uint)channels;
-                    colorSpace = ColorSpace.Srgb;
-                    break;
-            }
-
-            var componentParametersArray = new ImageComponentParameters[channels];
-            for (var i = 0; i < channels; i++)
-            {
-                componentParametersArray[i].Precision = outPrecision;
-                componentParametersArray[i].Bpp = outPrecision;
-                componentParametersArray[i].Signed = false;
-                componentParametersArray[i].Dx = (uint)this._CompressionParameters.SubsamplingDx;
-                componentParametersArray[i].Dy = (uint)this._CompressionParameters.SubsamplingDy;
-                componentParametersArray[i].Width = (uint)width;
-                componentParametersArray[i].Height = (uint)height;
-            }
-
-            Image image = null;
-
-            try
-            {
-                // ToDo: throw proper exception
-                image = OpenJpeg.ImageCreate((uint) channels, componentParametersArray, colorSpace);
-                if (image == null)
-                    throw new ArgumentException();
-
-                // ToDo: support alpha components
-                //switch (channels)
-                //{
-                //    case 2:
-                //    case 4:
-                //        image.Components[(int)(channels - 1)].Alpha = 1;
-                //        break;
-                //}
-
-                image.X0 = 0;
-                image.Y0 = 0;
-                image.X1 = componentParametersArray[0].Dx * componentParametersArray[0].Width;
-                image.Y1 = componentParametersArray[0].Dy * componentParametersArray[0].Height;
-
-                
-                //std::vector<OPJ_INT32*> outcomps(channels, nullptr);
-                //switch (channels)
-                //{
-                //    case 1:
-                //        outcomps.assign({ image.Components[0].data });
-                //        break;
-                //    // Reversed order for BGR -> RGB conversion
-                //    case 2:
-                //        outcomps.assign({ image.Components[0].data, image.Components[1].data });
-                //        break;
-                //    case 3:
-                //        outcomps.assign({ image.Components[2].data, image.Components[1].data, image.Components[0].data });
-                //        break;
-                //    case 4:
-                //        outcomps.assign({
-                //        image.Components[2].data, image.Components[1].data, image.Components[0].data,
-                //        image.Components[3].data });
-                //        break;
-                //}
-            }
-            finally
-            {
-                image?.Dispose();
-            }
-
-            return null;
+            return output;
         }
 
         #region Event Handlers
-
-        private static ulong Read(IntPtr buffer, ulong bytes, IntPtr userData)
-        {
-            unsafe
-            {
-                var buf = (Buffer*)userData;
-                var bytesToRead = (int)Math.Min((ulong)buf->Length, bytes);
-                if (bytesToRead > 0)
-                {
-                    NativeMethods.cstd_memcpy(buffer, IntPtr.Add(buf->Data, buf->Position), bytesToRead);
-                    buf->Position += bytesToRead;
-                    return (ulong)bytesToRead;
-                }
-                else
-                {
-                    return unchecked((ulong)-1);
-                }
-            }
-        }
 
         private static int Seek(ulong bytes, IntPtr userData)
         {
             unsafe
             {
                 var buf = (Buffer*)userData;
-                var position = Math.Min((ulong)buf->Length, bytes);
-                buf->Position = (int)position;
+                if (buf == null || buf->Data == IntPtr.Zero || buf->Length == 0)
+                    return 0;
+
+                buf->Position = (int)Math.Min(bytes, (ulong)buf->Length);
+
                 return 1;
             }
         }
@@ -252,16 +124,12 @@ namespace OpenJpegDotNet.IO
             unsafe
             {
                 var buf = (Buffer*)userData;
-                var bytesToSkip = (int)Math.Min((ulong)buf->Length, bytes);
-                if (bytesToSkip > 0)
-                {
-                    buf->Position += bytesToSkip;
-                    return bytesToSkip;
-                }
-                else
-                {
-                    return unchecked(-1);
-                }
+                if (buf == null || buf->Data == IntPtr.Zero || buf->Length == 0)
+                    return -1;
+
+                buf->Position = (int)Math.Min((ulong)buf->Position + bytes, (ulong)buf->Length);
+
+                return (long)bytes;
             }
         }
 
@@ -270,17 +138,19 @@ namespace OpenJpegDotNet.IO
             unsafe
             {
                 var buf = (Buffer*)userData;
-                var bytesToRead = (int)Math.Min((ulong)buf->Length, bytes);
-                if (bytesToRead > 0)
-                {
-                    NativeMethods.cstd_memcpy(buffer, IntPtr.Add(buf->Data, buf->Position), bytesToRead);
-                    buf->Position += bytesToRead;
-                    return (ulong)bytesToRead;
-                }
-                else
-                {
+                if (buf == null || buf->Data == IntPtr.Zero || buf->Length == 0)
                     return unchecked((ulong)-1);
-                }
+
+                if (buf->Position >= buf->Length)
+                    return unchecked((ulong)-1);
+
+                var bufLength = (ulong)(buf->Length - buf->Position);
+                var writeLength = bytes < bufLength ? bytes : bufLength;
+
+                System.Buffer.MemoryCopy((void*)buffer, (void*)IntPtr.Add(buf->Data, buf->Position), writeLength, writeLength);
+                buf->Position += (int)writeLength;
+
+                return (ulong)writeLength;
             }
         }
 
@@ -288,21 +158,14 @@ namespace OpenJpegDotNet.IO
 
         #region Helpers
 
-        private CompressionParameters SetupEncoderParameters(Parameter parameter)
+        public bool SetupEncoderParameters(CompressionParameters cparameters)
         {
-            var compressionParameters = new CompressionParameters();
-            OpenJpeg.SetDefaultEncoderParameters(compressionParameters);
+            if (cparameters == null) { throw new ArgumentNullException(); }
 
-            if (parameter.Compression.HasValue)
-                compressionParameters.TcpRates[0] = 1000f / Math.Min(Math.Max(parameter.Compression.Value, 1), 1000);
+            _CompressionParameters?.Dispose();
 
-            compressionParameters.TcpNumLayers = 1;
-            compressionParameters.CodingParameterDistortionAllocation = 1;
-
-            if (!parameter.Compression.HasValue)
-                compressionParameters.TcpRates[0] = 4;
-
-            return compressionParameters;
+            _CompressionParameters = cparameters;
+            return OpenJpeg.SetupEncoder(_Codec, _CompressionParameters, _Image);
         }
 
         #endregion
@@ -317,7 +180,6 @@ namespace OpenJpegDotNet.IO
         public void Dispose()
         {
             this.Dispose(true);
-            //GC.SuppressFinalize(this);
         }
 
         /// <summary>
