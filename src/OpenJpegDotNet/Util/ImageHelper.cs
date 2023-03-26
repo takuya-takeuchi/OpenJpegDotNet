@@ -133,7 +133,7 @@ namespace OpenJpegDotNet
                     break;
                 case PixelFormat.Format8bppIndexed:
                     channels = 1;
-                    colorSpace = ColorSpace.Srgb;
+                    colorSpace = ColorSpace.Gray;
                     byteAllocated = 1;
                     break;
                 default:
@@ -189,7 +189,22 @@ namespace OpenJpegDotNet
                         {
                             for (var i = 0; i < channels; i++)
                             {
-                                var target = image.Components[i].Data;
+                                // need to fix the colorspace
+                                IntPtr target;
+                                if (channels >= 3) {
+                                    if (i == 0) {
+                                        target = image.Components[2].Data; // B-R
+                                    } else if (i == 1) {
+                                        target = image.Components[1].Data; // G-G
+                                    } else if (i == 2) {
+                                        target = image.Components[0].Data; // R-B
+                                    } else {
+                                        target = image.Components[i].Data;
+                                    }
+                                } else {
+                                    target = image.Components[i].Data;
+                                }
+
                                 var pTarget = (int*)target;
                                 var source = (byte*)scan0;
                                 source += i;
