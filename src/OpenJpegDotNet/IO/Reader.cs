@@ -89,7 +89,12 @@ namespace OpenJpegDotNet.IO
 
         #region Methods
 
-        public bool ReadHeader()
+        /// <summary>
+        /// Reads the header of the image stream and initializes the decoder with the specified codec format.
+        /// </summary>
+        /// <param name="codecFormat">The codec format to use for decompression. Default is <see cref="CodecFormat.Jp2"/>.</param>
+        /// <returns><c>true</c> if the header was read successfully; otherwise, <c>false</c>.</returns>
+        public bool ReadHeader(CodecFormat codecFormat = CodecFormat.Jp2)
         {
             this._Codec?.Dispose();
             this._DecompressionParameters?.Dispose();
@@ -99,9 +104,9 @@ namespace OpenJpegDotNet.IO
             this._DecompressionParameters = null;
             this._Image = null;
 
-            // ToDo: Support to change format?
-            this._Codec = OpenJpeg.CreateDecompress(CodecFormat.J2k);
-            //this._Codec = OpenJpeg.CreateDecompress(CodecFormat.Jp2);
+            // Set codec format
+            this._Codec = OpenJpeg.CreateDecompress(codecFormat);
+
             this._DecompressionParameters = new DecompressionParameters();
             OpenJpeg.SetDefaultDecoderParameters(this._DecompressionParameters);
 
